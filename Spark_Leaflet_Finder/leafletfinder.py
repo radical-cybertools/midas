@@ -46,7 +46,7 @@ if __name__="__main__":
     edge_list = list()
     for i,val in enumerate(a):
         for j in range(i+1,len(a)):
-            if sinartisi(a[i],a[j])==1:
+            if distance(a[i],a[j])==1:
                 edge_list.append([i+1,j+1])
 
     e = sqlContext.createDataFrame(edge_list, ['src', 'dst'])

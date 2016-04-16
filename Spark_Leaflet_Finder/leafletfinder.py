@@ -8,13 +8,12 @@ import scipy.spatial
 from pyspark  import  SparkContext
 from pyspark.sql  import SQLContext, Row
 from graphframes import GraphFrame
-from pyspark import SparkFiles
-
+from time import time
 
 #NUMBER_OF_EXECUTORS = 2
-
-def find_edges((vector,counter), cutoff=16.0, size=matrix_size):
+def find_edges((vector,counter), size=0, cutoff=16.0):
     import scipy.spatial #executors do not know about the imports
+    size = matrix_size
     frame_list = list()
     for i in range(counter,size-1):
         if scipy.spatial.distance.euclidean(vector,coord_matrix_broadcast.value[i+1])  < cutoff:
@@ -28,14 +27,14 @@ if __name__=="__main__":
 
 
     if len(sys.argv) != 2:
-        print("Usage: Leaflet Finder <file>", file=sys.stderr)
+        print "Usage: Leaflet Finder <file>"
         exit(-1)
-    
+    start_time = time() 
     sc = SparkContext(appName="PythonLeafletFinder")    
     
-    filepath = sc.textFile(sys.argv[1], 1)
-    filename = SparkFiles.get(filepath)
-
+    filename = str(sys.argv[1])
+    #filename = '/home/user/leaflet-spark/atom_position_frame_1.npz.npy'
+    
     coord_matrix = np.load(filename)
     coord_matrix_broadcast = sc.broadcast(coord_matrix)
     matrix_size = len(coord_matrix)
@@ -53,10 +52,14 @@ if __name__=="__main__":
     # e.take(10)
     v = sqlContext.createDataFrame(sc.parallelize(xrange(matrix_size)).map(lambda i:Row(id=i+1)))
     # v.show()
-
+    
     # create the graph
     g = GraphFrame(v, e)
     #g.vertices.show()
     #g.edges.show()
-   cc = g.connectedComponents()
-   cc.select("id", "component").orderBy("component").show()
+    total_time = time() - start_time
+    cc = g.connectedComponents()
+    print cc.select("id", "component").orderBy("component").show()
+    print 'Total time to create the Graphframe: %i sec'  % (total_time)
+    print 'Time to calculate the connected components: %i sec ' % (time() - total_time) 
+    

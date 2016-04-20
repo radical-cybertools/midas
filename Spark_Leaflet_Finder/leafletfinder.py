@@ -4,19 +4,17 @@
 
 import sys
 import numpy as np
-import scipy.spatial
 from pyspark  import  SparkContext
 from pyspark.sql  import SQLContext, Row
 from graphframes import GraphFrame
 from time import time
 
 #NUMBER_OF_EXECUTORS = 2
-def find_edges((vector,counter), size=0, cutoff=16.0):
-    import scipy.spatial #executors do not know about the imports
+def find_edges((vector,counter), size=0, cutoff=256.00):
     size = matrix_size
     frame_list = list()
     for i in range(counter,size-1):
-        if scipy.spatial.distance.euclidean(vector,coord_matrix_broadcast.value[i+1])  < cutoff:
+        if sum(( vector - coord_matrix_broadcast.value[i+1] )**2)  < cutoff:
             frame_list.append([counter+1,i+2])
     if frame_list:
         return frame_list
@@ -61,5 +59,5 @@ if __name__=="__main__":
     cc = g.connectedComponents()
     print cc.select("id", "component").orderBy("component").show()
     print 'Total time to create the Graphframe: %i sec'  % (total_time)
-    print 'Time to calculate the connected components: %i sec ' % (time() - total_time) 
+    print 'Time to calculate the connected components: %i sec ' % (time() - total_time-start_time)
     

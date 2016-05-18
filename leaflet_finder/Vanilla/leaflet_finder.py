@@ -8,9 +8,11 @@ import sys
 import radical.pilot as rp
 import copy
 import networkx as nx
+import MDAnalysis as mda
+from datetime import datetime
 
 
-SHARED_INPUT_FILE = 'input.txt'
+#SHARED_INPUT_FILE = 'input.txt'
 MY_STAGING_AREA = 'staging:///'
 
 # READ: The RADICAL-Pilot documentation: 
@@ -50,30 +52,44 @@ def unit_state_cb (unit, state):
 #
 if __name__ == "__main__":
 
+        # Read the number of the divisions you want to create
     args = sys.argv[1:]
-    if len(args) < 1:
-        cutoff = 16 #default value
-    else:
-        cutoff = int(sys.argv[1])  # cutoff value of edges between atoms
+    if len(args) < 5:
+        print "Usage: "
+        print "python leaflet_finder.py  <window size> #cores <uni filename> <traj filename> <report file name>"
+        sys.exit(-1)
+    win_size = int(sys.argv[1])
+    CPUs = int(sys.argv[2]) # number of cores
+    uni_filename=sys.argv[3]
+    traj_filename = sys.argv[4]
+    report_name = sys.argv[5]
 
     try:
-        data = open(SHARED_INPUT_FILE,'r')
+        universe=mda.Universe(uni_filename, traj_filename)
     except IOError:
-        print "Missing data-set. file! Check the name of the dataset"
+        print "Missing data-set files! Check the name of the dataset"
         sys.exit(-1)
-    total_file_lines =  sum(1 for _ in data)
+
+    selection = universe.select_atoms('name P*')
+    coord = selection.positions
+    data=open('input.txt','w')
+    #for i in range(0,100):
+    for coordinates in coord:
+        data.write('%s,%s,%s\n'%(coordinates.tolist()[0],coordinates.tolist()[1],coordinates.tolist()[2]))
+        #data.write('%s,%s,%s\n'%(coord[i].tolist()[0],coord[i].tolist()[1],coord[i].tolist()[2]))
+
     data.close()
 
-    # Create a new session.
-    session = rp.Session()
-    print "session id: %s" % session.uid
+    total_file_lines = coord.shape[0]
+    cutoff=15.0
 
     try:
-
-        # ----- CHANGE THIS -- CHANGE THIS -- CHANGE THIS -- CHANGE THIS ------
-        #c = rp.Context('ssh')
-        #c.user_id = "username"
-        #session.add_context(c)
+        # Create a new session.
+        session = rp.Session()
+        print "session id: %s" % session.uid
+        c = rp.Context('ssh')
+        c.user_id = "tg824689"
+        session.add_context(c)
 
         # Add a Pilot Manager. Pilot managers manage one or more ComputePilots.
         print "Initializing Pilot Manager ..."
@@ -84,18 +100,22 @@ if __name__ == "__main__":
         # ----- CHANGE THIS -- CHANGE THIS -- CHANGE THIS -- CHANGE THIS ------
         # 
         pdesc = rp.ComputePilotDescription ()
-        pdesc.resource = "local.localhost" # NOTE: This is a "label", not a hostname
-        pdesc.runtime  = 10 # minutes
-        pdesc.cores    = 2
-        #pdesc.cleanup  = True
+        pdesc.resource = "xsede.stampede" # NOTE: This is a "label", not a hostname
+        pdesc.runtime  = 120 # minutes
+        pdesc.cores    = CPUs
+        pdesc.cleanup  = False
+        pdesc.queue    = 'development'
+        pdesc.project  = 'TG-MCB090174'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."
         pilot = pmgr.submit_pilots(pdesc)
 
+        cu_full_list=list()
+
         # Define the url of the local file in the local directory
-        shared_input_file_url = 'file://%s/%s' % (os.getcwd(), SHARED_INPUT_FILE)
-        staged_file = "%s%s" % (MY_STAGING_AREA, SHARED_INPUT_FILE)
+        shared_input_file_url = 'file://%s/%s' % (os.getcwd(), 'input.txt')
+        staged_file = "%s%s" % (MY_STAGING_AREA, 'input.txt')
 
          # Configure the staging directive for to insert the shared file into
         # the pilot staging directory.
@@ -108,7 +128,7 @@ if __name__ == "__main__":
 
         # Configure the staging directive for shared input file.
         sd_shared = {'source': staged_file, 
-                     'target': SHARED_INPUT_FILE,
+                     'target': 'input.txt',
                      'action': rp.LINK
         }
 
@@ -116,7 +136,7 @@ if __name__ == "__main__":
         # a UnitManager object.
         print "Initializing Unit Manager ..."
         umgr = rp.UnitManager (session=session,
-                               scheduler=rp.SCHED_BACKFILLING)
+                               scheduler=rp.SCHED_DIRECT)
 
         umgr.register_callback(unit_state_cb)
         # Add the created ComputePilot to the UnitManager.
@@ -124,7 +144,7 @@ if __name__ == "__main__":
         umgr.add_pilots(pilot)
 
         NUMBER_OF_TRAJECTORIES = total_file_lines
-        WINDOW_SIZE = 3  # i should define a "good" window based on division rules. in respect to the NUMBER_OF_TRAJECTORIES
+        WINDOW_SIZE =  win_size # i should define a "good" window based on division rules. in respect to the NUMBER_OF_TRAJECTORIES
         
 
         # submit CUs to pilot job
@@ -133,7 +153,7 @@ if __name__ == "__main__":
         for i in range(1,NUMBER_OF_TRAJECTORIES+1,WINDOW_SIZE):
             for j in range(i,NUMBER_OF_TRAJECTORIES,WINDOW_SIZE):
                     # I save here the results of each cu (matrix of all pairs) and stage it to create the graph
-                INTERMEDIATE_FILE = "distances_%d_%d.data" % (i-1,j-1)
+                INTERMEDIATE_FILE = "distances_%d_%d.npz.npy" % (i-1,j-1)
                 sd_inter_out = {
                 'source': INTERMEDIATE_FILE,
                 # Note the triple slash, because of URL peculiarities
@@ -142,6 +162,8 @@ if __name__ == "__main__":
                 }
                 # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
                 cudesc = rp.ComputeUnitDescription()
+                cudesc.name='Euclidean_dist_%d_%d'%(i,j)
+                cudesc.pre_exec=['module load python/2.7.3-epd-7.3.2']
                 cudesc.executable  = "python"
                 cudesc.arguments   = ['atom_distances.py', WINDOW_SIZE, i, j, total_file_lines,cutoff] # each CU should compute window size distances 
                                                                         # I use i to calculate from which element I start calculating distances in each cu
@@ -162,6 +184,7 @@ if __name__ == "__main__":
         # Submit the previously created ComputeUnit descriptions to the
         print "Submit Compute Units to Unit Manager ..."
         cu_set = umgr.submit_units (cudesc_list)
+        cu_full_list.extend(cu_set)
         print "Waiting for CUs to complete ..."
         umgr.wait_units()
         print "All CUs completed successfully!"
@@ -171,18 +194,65 @@ if __name__ == "__main__":
         sd_inter_in_list.append('find_connencted_components.py')
         # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
         cudesc = rp.ComputeUnitDescription()
+        cudesc.name='ConnComp'
         cudesc.executable = "python"
-        #cudesc.pre_exec = ['module load python'] # futuregrid machine 
+        cudesc.pre_exec=['module load python/2.7.3-epd-7.3.2']
+        #cudesc.pre_exec = ['module load python/'] # futuregrid machine 
         cudesc.arguments = ['find_connencted_components.py',NUMBER_OF_TRAJECTORIES,WINDOW_SIZE]
         cudesc.input_staging = sd_inter_in_list
+        cudesc.output_staging = [{'source':'components.npz.npy',
+                                  'target':'components.npz.npy',
+                                  'action':rp.TRANSFER}]
         # -------- END USER DEFINED CU DESCRIPTION --------- #
         print "Submit subgraph task"
         cuset = umgr.submit_units(cudesc)
         umgr.wait_units()
         print "Task completed successfully!"
 
-        print "Results"
-        print cuset.stdout
+        cu_full_list.append(cuset)
+        #How the output should be
+
+        ## Input topology/trajectory: md_prod_12x12_lastframe.pdb md_prod_12x12_everymicroS_pbcmolcenter.xtc
+        ## Head group atom selection: name P*
+        ## Number of lipids:          39024
+        ## Number of phosphates (P):  44784
+        ## [time(ps)] [N_leaflets] [N_lipids for the top 5 leaflets]
+        #1000000.0   2 21456 17568
+        #2000000.0   3 21455 17568     1
+        #3000000.0   6 21449 17567     4     2     1
+        #4000000.0  12 21448 17534    30     2     2
+        #5000000.0  10 21451 17562     2     3     1
+        #6000000.0   4 21452 17567     4     1
+        #7000000.0  15 21450 17458    87    15     3
+        #8000000.0  12 21451 17561     2     2     1
+        #9000000.0  18 21446 17439   114     6     3
+        #10000000.0  11 21441 17396   168     6     5
+        #11000000.0   9 21454 17563     1     1     1
+
+        print "Creating Profile"
+        ProfFile = open('{1}-{0}.csv'.format(CPUs,report_name),'w')
+        ProfFile.write('CU,Name,New,StageIn,Allocate,Exec,StageOut,Done\n')
+        for cu in cu_full_list:
+            timing_str=[cu.uid,cu.name,'N/A','N/A','N/A','N/A','N/A','N/A']
+            for states in cu.state_history:
+                if states.as_dict()['state']=='Scheduling':
+                    timing_str[2]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                elif states.as_dict()['state']=='AgentStagingInput':
+                    timing_str[3]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                elif states.as_dict()['state']=='Allocating':
+                    timing_str[4]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                elif states.as_dict()['state']=='Executing':
+                    timing_str[5]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                elif states.as_dict()['state']=='AgentStagingOutput':
+                    timing_str[6]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                elif states.as_dict()['state']=='Done':
+                    timing_str[7]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+
+            ProfFile.write(timing_str[0]+','+timing_str[1]+','+
+                           timing_str[2]+','+timing_str[3]+','+
+                           timing_str[4]+','+timing_str[5]+','+
+                           timing_str[6]+','+timing_str[7]+'\n')
+        ProfFile.close()
 
 
     except Exception as e:

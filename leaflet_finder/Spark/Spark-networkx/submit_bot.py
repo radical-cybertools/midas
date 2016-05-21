@@ -112,7 +112,7 @@ if __name__ == "__main__":
         pdesc.cores    = cores
         pdesc.runtime  = 30  # minutes
         #pdesc.cleanup  = True  # clean pilot sandbox and database entries
-	pdesc.project = "TG-MCB090174"
+        pdesc.project = "TG-MCB090174"
         #pdesc.queue = 'development'
 
         # submit the pilot.

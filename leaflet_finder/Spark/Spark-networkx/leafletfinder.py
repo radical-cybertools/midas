@@ -4,11 +4,11 @@ import networkx as nx
 from pyspark  import  SparkContext
 from time import time
 
-def find_edges((vector,counter), size=0, cutoff=256.00):
+def find_edges((vector,counter), size=0, cutoff=15.00):
     size = matrix_size
     frame_list = np.zeros(size, dtype=bool)
     for i in range(counter,size-1):
-        if sum(( vector - coord_matrix_broadcast.value[i+1] )**2)  < cutoff:
+        if np.sqrt(sum(( vector - coord_matrix_broadcast.value[i+1] )**2))  < cutoff:
             frame_list[i+1] = True
 
     return frame_list
@@ -17,7 +17,7 @@ if __name__=="__main__":
 
 
     if len(sys.argv) != 3:
-        print "Usage: Leaflet Finder: enter <partitions>   <atom_filename>"
+        print "Usage: Leaflet Finder: enter <partitions> <atom_filename>"
         exit(-1)
     else:
         partitions = int(sys.argv[1])

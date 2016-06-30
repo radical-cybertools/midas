@@ -44,7 +44,7 @@ if __name__=="__main__":
     ##
     graph = nx.Graph(arr)
     subgraphs = nx.connected_components(graph)
-    indices = [np.sort(g) for g in subgraphs]
+    indices = [np.sort(list(g)) for g in subgraphs]
     np.save('components.npz.npy',indices)
 
     print 'Total time to create the Adjacency Matrix: %i sec'  % (time_to_create_adj_matrix - start_time)

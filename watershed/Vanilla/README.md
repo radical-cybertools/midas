@@ -5,7 +5,7 @@ used for image segmentation (especially "tuned" for tissue images).
 ___
 You can run the code after you have installed the necessary dependancies by typing in a terminal:
 
-python RP_watershed.py arg1 arg2 arg3 arg4 arg5
+python watershed.py arg1 arg2 arg3 arg4 arg5
 
 where 
       

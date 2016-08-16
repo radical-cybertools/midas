@@ -41,15 +41,15 @@ while read_from <= read_until:
 	
 	image = path_for_input + str(read_from) + '.BMP'
 	
-	img = io.imread(image)							  # read image as a 2D numpy array
+	img = io.imread(image)			    	        # read image as a 2D numpy array
 	img_gray = rgb2gray(img)
 
-	thresh = threshold_otsu(img_gray)				  # return threshold value based on on otsu's method
+	thresh = threshold_otsu(img_gray)		        # return threshold value based on on otsu's method
 
 	if bright_backround:
-		foreground_mask = img_gray <= thresh          # for bright backround
+		foreground_mask = img_gray <= thresh            # for bright backround
 	else:
-		foreground_mask = img_gray > thressh 		  # for dark backround
+		foreground_mask = img_gray > thressh 	        # for dark backround
 
 
 	# compute the Euclidean distance from every binary pixel to the nearest zero pixel 
@@ -80,7 +80,7 @@ while read_from <= read_until:
 		if label != 0:
 
 			mask = np.zeros(img_gray.shape, dtype="uint8")       # create a black mask	
-			mask[labels == label] = 255						 	 # it make the pixels tha correspond to the label-object white
+			mask[labels == label] = 255	        # it make the pixels tha correspond to the label-object white
 
 			# compute the sobel transform of the mask to detect the label's-object's edges
 			edge_sobel = sobel(mask)

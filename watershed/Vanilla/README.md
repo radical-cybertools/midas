@@ -15,6 +15,6 @@ where
       
     arg3 = number of images to segment  
       
-    arg4 = report name 
+    arg4 = report name (for example comet_run1-48)
       
     arg5 = resource (optionally)

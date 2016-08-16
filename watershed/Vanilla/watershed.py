@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-import commands
 import radical.pilot as rp
 
 

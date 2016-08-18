@@ -17,4 +17,4 @@ where
       
     arg4 = report name (for example comet_run1-48)
       
-    arg5 = resource (optionally)
+    arg5 = resource (optional)

@@ -3,7 +3,7 @@ In this folder there is the Vanilla RP implementation of the Watershed algorithm
 used for image segmentation (especially "tuned" for tissue images).
 
 ___
-You can run the code after you have installed the necessary dependancies by typing in a terminal:
+You can run the code after you have installed the necessary dependencies by typing in a terminal:
 
 python watershed.py arg1 arg2 arg3 arg4 arg5
 

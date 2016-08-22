@@ -80,7 +80,7 @@ while read_from <= read_until:
 		if label != 0:
 
 			mask = np.zeros(img_gray.shape, dtype="uint8")       # create a black mask	
-			mask[labels == label] = 255	        # it make the pixels tha correspond to the label-object white
+			mask[labels == label] = 255	        # it make the pixels that correspond to the label-object white
 
 			# compute the sobel transform of the mask to detect the label's-object's edges
 			edge_sobel = sobel(mask)

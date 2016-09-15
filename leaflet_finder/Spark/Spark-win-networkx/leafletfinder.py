@@ -40,7 +40,12 @@ if __name__=="__main__":
     arraged_coord = list()
     for i in range(1,matrix_size+1,part_size):
         for j in range(i,matrix_size,part_size):
-            arraged_coord.append([coord_matrix[i-1:i-1+part_size],coord_matrix[j-1:j-1+part_size]])
+            # The arranged_elem contains a tuple with the data needed to calculate
+            # in a window. The first part of the tuple is a list that contains
+            # two numpy arrays. The second element has indices of the first element
+            # of both arrays.
+            arranged_elem = ([coord_matrix[i-1:i-1+part_size],coord_matrix[j-1:j-1+part_size]],[i,j])
+            arranged_coord.append(arranged_elem)
 
     partition_matrix = np.zeros((matrix_size/part_size,matrix_size/part_size))
     step = 0
@@ -49,8 +54,8 @@ if __name__=="__main__":
             partition_matrix[i,j] =  step + (j - i)
         step = step + (matrix_size/part_size) - i
 
-    print len(arraged_coord)
-    dist_Matrix = sc.parallelize(arraged_coord,len(arraged_coord))
+    print len(arranged_coord)
+    dist_Matrix = sc.parallelize(arranged_coord,len(arranged_coord))
 
     # if this RDD is use in a function keep in mind that the pair
     # (value,index) will be passed. As a result it is collected

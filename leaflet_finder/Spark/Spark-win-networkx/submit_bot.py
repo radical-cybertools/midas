@@ -116,7 +116,7 @@ if __name__ == "__main__":
             cudesc = rp.ComputeUnitDescription()
             #cudesc.pre_exec=['export PYSPARK_PYTHON=/home/iparask/radical.pilot.sandbox/ve_comet/bin/python']
             cudesc.executable  = "spark-submit"
-            cudesc.arguments =  ['leafletfinder.py %d %s' % (partitions,atom_file_name)]
+            cudesc.arguments =  ['--conf spark.driver.maxResultSize=30g --executor-memory 60g --driver-memory  60g  leafletfinder.py %d %s' % (partitions,atom_file_name)]
             cudesc.input_staging = ['leafletfinder.py', atom_file_name]
             cudesc.cores       = cores
             # -------- END USER DEFINED CU DESCRIPTION --------- #

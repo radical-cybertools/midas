@@ -5,22 +5,24 @@ from time import time
 
 def HausdorffDist(data):
 
-    def dH((P, Q)):
+    def dH(P, Q):
         def vsqnorm(v, axis=None):
             return np.sum(v*v, axis=axis)
         Ni = 3./P.shape[1]
         d = np.array([vsqnorm(pt - Q, axis=1) for pt in P])
         return ( max(d.min(axis=0).max(), d.min(axis=1).max())*Ni )**0.5
     
-    P,Q = data[0]
+    P = data[0][0]
+    Q = data[0][1]
+
     i_traj = data[1][0]
     j_traj = data[1][1]
 
-    dist=np.zeros((P.shape[0],Q.shape[0]))
+    dist=np.zeros((len(P),len(Q)))
 
-    for i in range(0,P.shape[0]):
-        for j in range(0,Q.shape[0]):
-          dist[i,j]=dH(P[i],Q[i])
+    for i in range(0,len(P)):
+        for j in range(0,len(Q)):
+          dist[i,j]=dH(P[i],Q[j])
     
     return (dist,[i_traj,j_traj])
 
@@ -28,7 +30,7 @@ def HausdorffDist(data):
 if __name__=="__main__":
 
 
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 5:
         print "Usage: hausdorff.py <NumOfTrj> <Sel> <Size> <WindowSize>"
         exit(-1)
     else:
@@ -41,19 +43,19 @@ if __name__=="__main__":
     sc = SparkContext(appName="PythonHausdorffDistance")    
     
     trajectories = list()
-    if Size = 'long':
+    if Size == 'long':
         for i in range(1,NumOfTrj+1):
-            trajectories.append(np.hstack(np.load(trj_%s_%03i.npz.npy) \
-                                          np.load(trj_%s_%03i.npz.npy) \
-                                          np.load(trj_%s_%03i.npz.npy) \
-                                          np.load(trj_%s_%03i.npz.npy)))
-    elif Size = 'med':
+            trajectories.append(np.hstack(np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
+                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
+                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
+                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i))))
+    elif Size == 'med':
         for i in range(1,NumOfTrj+1):
-            trajectories.append(np.hstack(np.load(trj_%s_%03i.npz.npy) \
-                                          np.load(trj_%s_%03i.npz.npy)))
+            trajectories.append(np.hstack(np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
+                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i))))
     else:
         for i in range(1,NumOfTrj+1):
-            trajectories.append(np.load(trj_%s_%03i.npz.npy))
+            trajectories.append(np.load('trj_%s_%03i.npz.npy'%(Sel,i)))
 
     arranged_traj = list()
     for i in range(1,NumOfTrj+1,WindowSize):
@@ -62,12 +64,12 @@ if __name__=="__main__":
             # in a window. The first part of the tuple is a list that contains
             # two numpy arrays. The second element has indices of the first element
             # of both arrays.
-            arranged_elem = ([trajectories[i-1:i-1+part_size],trajectories[j-1:j-1+part_size]],[i,j])
-            arranged_coord.append(arranged_elem)
+            arranged_elem = ([trajectories[i-1:i-1+WindowSize],trajectories[j-1:j-1+WindowSize]],[i,j])
+            arranged_traj.append(arranged_elem)
 
 
-    print len(arranged_coord)
-    traj_par = sc.parallelize(arranged_coord,len(arranged_coord))
+    print arranged_traj
+    traj_par = sc.parallelize(arranged_traj,len(arranged_traj))
 
     # if this RDD is use in a function keep in mind that the pair
     # (value,index) will be passed. As a result it is collected
@@ -80,7 +82,8 @@ if __name__=="__main__":
 
     dist_Matrix = np.zeros((NumOfTrj,NumOfTrj), dtype=float)
     for element in dist.collect():
-        dist_Matrix[element[1][0]+WindowSize,element[1][1]+WindowSize] = element[0]
+        print element[1][0],element[1][1], element[0]
+        dist_Matrix[element[1][0]-1:element[1][0]-1+WindowSize,element[1][1]-1:element[1][1]-1+WindowSize] = element[0]
 
     np.save('hausdorff_distances.npz.npy',dist_Matrix)
 

@@ -8,13 +8,18 @@ import radical.pilot as rp
 #----------------------------------------------------------------------------
 if __name__ == "__main__":
     
-    NUMBER_OF_TRAJECTORIES = 192
-    ATOM_SEL = 'ca'
-    TRAJ_SIZE='short'
-    MY_STAGING_AREA = 'staging:///'
-    TRJ_LOCATION = '' #Path that points to the folder the trajectories are
-    SHARED_HAUSDORFF = 'hausdorff_opt.py'
-    WINDOW_SIZE = 24
+    args = sys.argv[1:]
+    if len(args) < 5:
+        print "Usage: "
+        print "python rp_hausdorff_sp.py  <cores> <NumOfTrj> <Sel> <Size> <WindowSize> <TrjLocation>"
+        sys.exit(-1)
+    
+    cores = int(sys.argv[1]) # number of cores
+    NumOfTrj = int(sys.argv[2])
+    Sel = sys.argv[3]
+    Size = sys.argv[4]
+    WindowSize = int(sys.argv[5])
+    TrjLocation = sys.argv[6] #Path that points to the folder the trajectories are
 
     try:
         session   = rp.Session ()
@@ -28,145 +33,36 @@ if __name__ == "__main__":
 
         pdesc = rp.ComputePilotDescription ()
         pdesc.resource = "xsede.stampede"
-        pdesc.runtime  = 30 # minutes
-        pdesc.cores    = 32
+        pdesc.runtime  = 60 # minutes
+        pdesc.cores    = cores
         pdesc.project  = "" #Project allocation
         pdesc.cleanup  = False
 
         # submit the pilot.
-        print "submit pilot ..."
         pilot = pmgr.submit_pilots (pdesc)
 
-        print "initialize unit manager ..."
-        umgr = rp.UnitManager  (session=session, scheduler=rp.SCHED_BACKFILLING)
-        umgr.register_callback (unit_state_cb)
-
-        print "add pilot to unit manager ..."
+        umgr = rp.UnitManager  (session=session, scheduler=rp.SCHED_DIRECT_SUBMISSION)
         umgr.add_pilots(pilot)
 
-        print "stage shared data ..."
-        fshared_list   = list()
-        
-              
-        fname_stage = []
-        # stage all files to the staging area
-        src_url = 'file://%s/%s' % (os.getcwd(), SHARED_HAUSDORFF)
+       
+        InputFiles = [{'source': 'file://%s/trj_%s_%03i.npz.npy' % (TrjLocation,Sel,k),
+                   'target' : 'trj_%s_%03i.npz.npy' % (Sel,k),
+                   'action' : rp.LINK} for k in range(1,1+NumOfTrj)]
 
-        print src_url
-
-        sd_pilot = {'source': src_url,
-                    'target': os.path.join(MY_STAGING_AREA, SHARED_HAUSDORFF),
-                    'action': rp.TRANSFER,
-        }
-        fname_stage.append (sd_pilot)
-           
-        # Synchronously stage the data to the pilot
-        pilot.stage_in(fname_stage)
-
-        print "describe compute units ..."
-
-        print "all pairs: "
-        # we create one CU for each unique pair of trajectories
-        cudesc_list = []
-
-        pairs = all_pairs (NUMBER_OF_TRAJECTORIES)
-
-        
-        for i in range(1,NUMBER_OF_TRAJECTORIES+1,WINDOW_SIZE):
-            for j in range(i,NUMBER_OF_TRAJECTORIES+1,WINDOW_SIZE):
-                fshared = list()
-                shared = {'source': os.path.join(MY_STAGING_AREA, SHARED_HAUSDORFF),
-                         'target': SHARED_HAUSDORFF,
-                         'action': rp.LINK}
-                fshared.append(shared)
-
-                if i == j:
-                    shared = [{'source': 'file://%s/trj_%s_%03i.npz.npy' % (TRJ_LOCATION,ATOM_SEL,k),
-                              'target' : 'trj_%s_%03i.npz.npy' % (ATOM_SEL,k),
-                              'action' : rp.LINK} for k in range(i,i+WINDOW_SIZE)]
-                    fshared.extend(shared)
-                else:
-                    shared = [{'source': 'file://%s/trj_%s_%03i.npz.npy' % (TRJ_LOCATION,ATOM_SEL,k),
-                              'target' : 'trj_%s_%03i.npz.npy' % (ATOM_SEL,k),
-                              'action' : rp.LINK} for k in range(i,i+WINDOW_SIZE)]
-                    fshared.extend(shared)
-                    shared = [{'source': 'file://%s/trj_%s_%03i.npz.npy' % (TRJ_LOCATION,ATOM_SEL,k),
-                              'target' : 'trj_%s_%03i.npz.npy' % (ATOM_SEL,k),
-                              'action' : rp.LINK} for k in range(j,j+WINDOW_SIZE)]
-                    fshared.extend(shared)
-
-            # define the compute unit, to compute over the trajectory pair
-                cudesc = rp.ComputeUnitDescription()
-                cudesc.executable    = "python"
-                #cudesc.pre_exec      = ["module load python/2.7.3-epd-7.3.2"] #Only for Stampede
-                cudesc.input_staging = fshared
-                cudesc.arguments     = ['hausdorff_opt.py', range(i,i+WINDOW_SIZE), range(j,j+WINDOW_SIZE), ATOM_SEL, TRAJ_SIZE]
-                cudesc.cores         = 1
-
-                cudesc_list.append (cudesc)
-
-                print "Computing All-Pair for ", range(i,i+WINDOW_SIZE), "and ",range(j,j+WINDOW_SIZE)
+        InputFiles.append('hausdorff.py')
+        # define the compute unit, to compute over the trajectory pair
+        cudesc = rp.ComputeUnitDescription()
+        cudesc.executable    = "spark-submit"
+        cudesc.input_staging = InputFiles
+        cudesc.arguments     = ['--conf', 'spark.driver.maxResultSize=5g', \
+                                '--executor-memory 60g --driver-memory 30g',\
+                                'hausdorff.py %d %s %s %d' % (NumOfTrj,Sel,Size,WindowSize)]
+        cudesc.cores         = cores
 
         # submit, run and wait and...
-        print "submit units to unit manager ..."
-        units = umgr.submit_units (cudesc_list)
+        units = umgr.submit_units (cudesc)
 
-        print "wait for units ..."
-        starting_time = datetime.now()
         umgr.wait_units()
-        ending_time = datetime.now()
-
-        units_total_time = timedelta(0)
-
-        fp=open('output_{0}_{2}_{3}_traj_stampede_{1}cores.log'.format(NUMBER_OF_TRAJECTORIES,pdesc.cores,ATOM_SEL,TRAJ_SIZE),'w')
-        comp_starting_time = list()
-        comp_ending_time = list()
-        dists = np.zeros((NUMBER_OF_TRAJECTORIES,NUMBER_OF_TRAJECTORIES))
-        #... voila!
-        for unit in units :
-            lines=unit.stdout.splitlines()
-            for line in lines:
-                parts = line.split(':')
-                pos = ast.literal_eval(parts[0])
-                dists[pos[0]-1][pos[1]-1]=float(parts[1])
-                dists[pos[1]-1][pos[0]-1]=float(parts[1])
-            print "* Unit %s @ %s \n"      \
-                  "\t   state    : %s\n"   \
-                  "\t   exit code: %s\n"   \
-                  "\t   started  : %s\n"   \
-                  "\t   finished : %s\n"   \
-                  "\t   output   : %s\n"   \
-                  "\t   error    : %s\n\n" \
-                % (unit.uid,       unit.execution_locations, unit.state, 
-                   unit.exit_code, unit.start_time,          unit.stop_time,
-                   unit.stdout,    unit.stderr)
-            comp_starting_time.append(unit.start_time)
-            comp_ending_time.append(unit.stop_time)
-            fp.write("* Unit %s @ %s \n"   \
-                  "\t   state    : %s\n"   \
-                  "\t   exit code: %s\n"   \
-                  "\t   started  : %s\n"   \
-                  "\t   finished : %s\n"   \
-                  "\t   output   : %s\n"   \
-                  "\t   error    : %s\n\n" \
-                % (unit.uid,       unit.execution_locations, unit.state, 
-                   unit.exit_code, unit.start_time,          unit.stop_time,
-                   unit.stdout,    unit.stderr))
-            units_total_time = units_total_time + unit.stop_time - unit.start_time
-        np.save('starting_times_{0}_{2}_{3}_traj_stampede_{1}cores.npz.npy'.format(NUMBER_OF_TRAJECTORIES,pdesc.cores,ATOM_SEL,TRAJ_SIZE),np.array(comp_starting_time))
-        np.save('ending_times_{0}_{2}_{3}_traj_stampede_{1}cores.npz.npy'.format(NUMBER_OF_TRAJECTORIES,pdesc.cores,ATOM_SEL,TRAJ_SIZE),np.array(comp_ending_time))
-        np.save('rp_hausdorff_distances.npz.npy',dists)
-        comp_ending_time.sort()
-        comp_starting_time.sort()
-        print "Time To Completion with queue time (in secs) is ",(ending_time-starting_time).total_seconds()
-        print "Total Time to Completion (in secs) is ",(comp_ending_time[-1]-comp_starting_time[0]).total_seconds()
-        print "Summation of Units Execution Time (in secs) is ", units_total_time.total_seconds()
-        fp.write("Time To Completion with queue time (in secs) is  %f\n"%(ending_time-starting_time).total_seconds())
-        fp.write("Total Time to Completion (in secs) is %f\n"%(comp_ending_time[-1]-comp_starting_time[0]).total_seconds())
-        fp.write("Summation of Units Execution Time (in secs) is %f\n"%units_total_time.total_seconds())
-        fp.write("First CU started @ %s\n"%comp_starting_time[0])
-        fp.write("Last CU ended @ %s\n"%comp_ending_time[-1])
-        fp.close()
     except Exception as e:
         import traceback
         traceback.print_exc ()
@@ -178,7 +74,5 @@ if __name__ == "__main__":
         sys.exit (-1)
 
     finally :
-        print "Closing session, exiting now ..."
-        session.close()
-        print datetime.now()
+        session.close(cleanup=False)
 

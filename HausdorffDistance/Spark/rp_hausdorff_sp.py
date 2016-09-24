@@ -63,6 +63,7 @@ if __name__ == "__main__":
         units = umgr.submit_units (cudesc)
 
         umgr.wait_units()
+
     except Exception as e:
         import traceback
         traceback.print_exc ()

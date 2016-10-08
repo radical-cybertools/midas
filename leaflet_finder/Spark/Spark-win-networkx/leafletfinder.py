@@ -104,7 +104,7 @@ if __name__=="__main__":
 
     
 
-    indices = [np.sort(list(g)) for g in subgraphs]
+    indices = [np.sort(list(g)) for g in connected_components]
     np.save('components.npz.npy',indices)
 
     stop_time = time()

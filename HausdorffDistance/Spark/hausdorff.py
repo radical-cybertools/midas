@@ -45,14 +45,14 @@ if __name__=="__main__":
     trajectories = list()
     if Size == 'long':
         for i in range(1,NumOfTrj+1):
-            trajectories.append(np.hstack(np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
+            trajectories.append(np.hstack((np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
                                           np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
                                           np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
-                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i))))
+                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)))))
     elif Size == 'med':
         for i in range(1,NumOfTrj+1):
-            trajectories.append(np.hstack(np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
-                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i))))
+            trajectories.append(np.hstack((np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
+                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)))))
     else:
         for i in range(1,NumOfTrj+1):
             trajectories.append(np.load('trj_%s_%03i.npz.npy'%(Sel,i)))

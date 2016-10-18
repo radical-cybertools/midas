@@ -1,0 +1,18 @@
+24rp.session.Seans-Laptop.sean.016992.0001.csv: time for CU to complete = 2756.20000005 seconds
+Average TTC for experiments on comet using 24 cores: 2756.20000005sec
+
+48rp.session.Seans-Laptop.sean.016990.0006.csv: time for CU to complete = 1442.47000003 seconds
+48rp.session.Seans-Laptop.sean.016990.0005.csv: time for CU to complete = 1441.51999998 seconds
+48rp.session.Seans-Laptop.sean.016990.0003.csv: time for CU to complete = 1424.34000015 seconds
+Average TTC for experiments on comet using 48 cores: 1436.11000005sec
+
+96rp.session.Seans-Laptop.sean.016989.0012.csv: time for CU to complete = 791.439999819 seconds
+96rp.session.Seans-Laptop.sean.016989.0013.csv: time for CU to complete = 768.369999886 seconds
+96rp.session.Seans-Laptop.sean.016989.0010.csv: time for CU to complete = 850.5 seconds
+Average TTC for experiments on comet using 96 cores: 803.436666568sec
+
+192rp.session.Seans-Laptop.sean.016989.0017.csv: time for CU to complete = 462.0 seconds
+192rp.session.Seans-Laptop.sean.016989.0015.csv: time for CU to complete = 457.630000114 seconds
+192rp.session.Seans-Laptop.sean.016989.0016.csv: time for CU to complete = 487.49000001 seconds
+Average TTC for experiments on comet using 192 cores: 469.040000041sec
+

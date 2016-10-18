@@ -1,0 +1,20 @@
+24rp.session.Seans-Laptop.sean.017008.0010.prof: time for CU to complete = 2016.7448 seconds, 
+24rp.session.Seans-Laptop.sean.017009.0001.prof: time for CU to complete = 1997.5866 seconds, 
+24rp.session.Seans-Laptop.sean.017008.0001.prof: time for CU to complete = 1995.9144 seconds, 
+Average TTC, adj_matrix, conn_comp on comet using 24 cores: 2003.41526667, 1933.91086667, 69.5044 sec
+
+48rp.session.Seans-Laptop.sean.017008.0003.prof: time for CU to complete = 1097.6678 seconds, 
+48rp.session.Seans-Laptop.sean.017008.0009.prof: time for CU to complete = 1135.5749 seconds, 
+48rp.session.Seans-Laptop.sean.017009.0003.prof: time for CU to complete = 1066.8766 seconds, 
+Average TTC, adj_matrix, conn_comp on comet using 48 cores: 1100.03976667, 1032.86576667, 67.174 sec
+
+96rp.session.Seans-Laptop.sean.017009.0006.prof: time for CU to complete = 624.014 seconds, 
+96rp.session.Seans-Laptop.sean.017008.0004.prof: time for CU to complete = 800.1054 seconds, 
+96rp.session.Seans-Laptop.sean.017008.0008.prof: time for CU to complete = 792.6696 seconds, 
+Average TTC, adj_matrix, conn_comp on comet using 96 cores: 738.929666667, 673.2798, 65.6498666667 sec
+
+192rp.session.Seans-Laptop.sean.017008.0005.prof: time for CU to complete = 643.0689 seconds, 
+192rp.session.Seans-Laptop.sean.017009.0010.prof: time for CU to complete = 434.8006 seconds, 
+192rp.session.Seans-Laptop.sean.017008.0007.prof: time for CU to complete = 823.0414 seconds, 
+Average TTC, adj_matrix, conn_comp on comet using 192 cores: 633.636966667, 564.9407, 68.6962666667 sec
+

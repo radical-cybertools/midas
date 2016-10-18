@@ -1,0 +1,21 @@
+48rp.session.Seans-Laptop.sean.016992.0000.csv: time for CU to complete = 3610.04999995 seconds
+48rp.session.Seans-Laptop.sean.016990.0010.csv: time for CU to complete = 3595.00999999 seconds
+48rp.session.Seans-Laptop.sean.016990.0011.csv: time for CU to complete = 3573.4599998 seconds
+Average TTC for experiments on wrangler using 48 cores: 3592.83999991sec
+
+96rp.session.Seans-Laptop.sean.016990.0000.csv: time for CU to complete = 1928.0999999 seconds
+96rp.session.Seans-Laptop.sean.016990.0007.csv: time for CU to complete = 1930.74000001 seconds
+96rp.session.Seans-Laptop.sean.016990.0009.csv: time for CU to complete = 1889.60000014 seconds
+Average TTC for experiments on wrangler using 96 cores: 1916.14666669sec
+
+192rp+.session.Seans-Laptop.sean.016995.0004.csv: time for CU to complete = 1054.38999987 seconds
+192rp+.session.Seans-Laptop.sean.016995.0007.csv: time for CU to complete = 1038.8900001 seconds
+192rp+.session.Seans-Laptop.sean.016996.0000.csv: time for CU to complete = 1064.70000005 seconds
+192rp+.session.Seans-Laptop.sean.016995.0005.csv: time for CU to complete = 1067.43999982 seconds
+Average TTC for experiments on wrangler using 192 cores: 1056.35499996sec
+
+384rp.session.Seans-Laptop.sean.016995.0000.csv: time for CU to complete = 702.099999905 seconds
+384rp.session.Seans-Laptop.sean.016995.0003.csv: time for CU to complete = 688.779999971 seconds
+384rp.session.Seans-Laptop.sean.016995.0002.csv: time for CU to complete = 716.350000143 seconds
+Average TTC for experiments on wrangler using 384 cores: 702.410000006sec
+

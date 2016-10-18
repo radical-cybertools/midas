@@ -1,0 +1,288 @@
+2016-07-07 16:15:53,818: radical.pilot       : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,819: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,819: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,819: radical.pilot       : MainProcess                     : MainThread     : INFO    : radical.pilot        version: v0.40.1-38-ga1e892c@feature-spark
+2016-07-07 16:15:53,964: radical.entk.Engine : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,965: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,965: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,965: radical.entk.Engine : MainProcess                     : MainThread     : INFO    : Loading execution plug-ins...
+2016-07-07 16:15:53,966: radical.entk.pipeline.static.default: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,966: radical.entk.pipeline.static.default: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,966: radical.entk.pipeline.static.default: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,966: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'pipeline.static.default' from radical.ensemblemd.exec_plugins.pipeline.static
+2016-07-07 16:15:53,967: radical.entk.simulation_analysis_loop.static.default: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,967: radical.entk.simulation_analysis_loop.static.default: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,967: radical.entk.simulation_analysis_loop.static.default: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,967: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'simulation_analysis_loop.static.default' from radical.ensemblemd.exec_plugins.simulation_analysis_loop.static
+2016-07-07 16:15:53,968: radical.entk.replica_exchange.static_pattern_1: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,968: radical.entk.replica_exchange.static_pattern_1: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,968: radical.entk.replica_exchange.static_pattern_1: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,968: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'replica_exchange.static_pattern_1' from radical.ensemblemd.exec_plugins.replica_exchange.static_pattern_1
+2016-07-07 16:15:53,969: radical.entk.replica_exchange.static_pattern_2: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,969: radical.entk.replica_exchange.static_pattern_2: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,969: radical.entk.replica_exchange.static_pattern_2: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,969: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'replica_exchange.static_pattern_2' from radical.ensemblemd.exec_plugins.replica_exchange.static_pattern_2
+2016-07-07 16:15:53,969: radical.entk.replica_exchange.static_pattern_3: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,970: radical.entk.replica_exchange.static_pattern_3: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,970: radical.entk.replica_exchange.static_pattern_3: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,970: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'replica_exchange.static_pattern_3' from radical.ensemblemd.exec_plugins.replica_exchange.static_pattern_3
+2016-07-07 16:15:53,972: radical.entk.allpairs.static.default: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,972: radical.entk.allpairs.static.default: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,972: radical.entk.allpairs.static.default: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,972: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'allpairs.static.default' from radical.ensemblemd.exec_plugins.allpairs.static
+2016-07-07 16:15:53,973: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,973: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,973: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:53,973: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded execution plug-in 'bag_of_tasks.static.default' from radical.ensemblemd.exec_plugins.bag_of_tasks.static
+2016-07-07 16:15:53,973: radical.entk.Engine : MainProcess                     : MainThread     : INFO    : Loading kernel plug-ins...
+2016-07-07 16:15:53,973: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.pre_coam_loop' from radical.ensemblemd.kernel_plugins.md.pre_coam_loop
+2016-07-07 16:15:53,974: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.amber' from radical.ensemblemd.kernel_plugins.md.amber
+2016-07-07 16:15:53,974: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.coco' from radical.ensemblemd.kernel_plugins.md.coco
+2016-07-07 16:15:53,974: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.tleap' from radical.ensemblemd.kernel_plugins.md.tleap
+2016-07-07 16:15:53,974: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.mmpbsa' from radical.ensemblemd.kernel_plugins.md.mmpbsa
+2016-07-07 16:15:53,975: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.namd' from radical.ensemblemd.kernel_plugins.md.namd
+2016-07-07 16:15:53,975: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.re_exchange' from radical.ensemblemd.kernel_plugins.md.re_exchange
+2016-07-07 16:15:53,975: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.pre_grlsd_loop' from radical.ensemblemd.kernel_plugins.md.pre_grlsd_loop
+2016-07-07 16:15:53,975: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.gromacs' from radical.ensemblemd.kernel_plugins.md.gromacs
+2016-07-07 16:15:53,975: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.pre_lsdmap' from radical.ensemblemd.kernel_plugins.md.pre_lsdmap
+2016-07-07 16:15:53,976: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.lsdmap' from radical.ensemblemd.kernel_plugins.md.lsdmap
+2016-07-07 16:15:53,976: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'md.post_lsdmap' from radical.ensemblemd.kernel_plugins.md.post_lsdmap
+2016-07-07 16:15:53,976: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.nop' from radical.ensemblemd.kernel_plugins.misc.nop
+2016-07-07 16:15:53,976: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.idle' from radical.ensemblemd.kernel_plugins.misc.idle
+2016-07-07 16:15:53,977: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.mkfile' from radical.ensemblemd.kernel_plugins.misc.mkfile
+2016-07-07 16:15:53,977: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.hello' from radical.ensemblemd.kernel_plugins.misc.hello
+2016-07-07 16:15:53,977: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.cat' from radical.ensemblemd.kernel_plugins.misc.cat
+2016-07-07 16:15:53,977: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.ccount' from radical.ensemblemd.kernel_plugins.misc.ccount
+2016-07-07 16:15:53,977: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.chksum' from radical.ensemblemd.kernel_plugins.misc.chksum
+2016-07-07 16:15:53,978: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.levenshtein' from radical.ensemblemd.kernel_plugins.misc.levenshtein
+2016-07-07 16:15:53,978: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.diff' from radical.ensemblemd.kernel_plugins.misc.diff
+2016-07-07 16:15:53,978: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.randval' from radical.ensemblemd.kernel_plugins.misc.randval
+2016-07-07 16:15:53,978: radical.entk.Engine : MainProcess                     : MainThread     : INFO    :  > Loaded kernel plug-in 'misc.randval_2' from radical.ensemblemd.kernel_plugins.misc.randval_2
+2016-07-07 16:15:53,978: radical.entk.Engine : MainProcess                     : MainThread     : INFO    : Loaded user-provided kernel plug-in 'spark'.
+2016-07-07 16:15:53,978: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 16:15:53,979: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    :                      pid: 11232
+2016-07-07 16:15:53,979: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 16:15:54,023: radical.pilot       : MainProcess                     : MainThread     : INFO    : using database mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test
+2016-07-07 16:15:54,345: radical.pilot       : MainProcess                     : MainThread     : INFO    : New Session created: {'database_url': 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test', 'connected': 1467922554.302698, 'uid': 'rp.session.Seans-Laptop.sean.016989.0013', 'closed': None, 'created': 1467922554.302698}.
+2016-07-07 16:15:54,345: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_das4.json
+2016-07-07 16:15:54,347: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for das4.fs2
+2016-07-07 16:15:54,347: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_yale.json
+2016-07-07 16:15:54,348: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for yale.grace
+2016-07-07 16:15:54,349: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_futuregrid.json
+2016-07-07 16:15:54,355: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray
+2016-07-07 16:15:54,355: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.echo
+2016-07-07 16:15:54,356: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.india
+2016-07-07 16:15:54,356: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.bravo
+2016-07-07 16:15:54,356: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray_ccm
+2016-07-07 16:15:54,356: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.delta
+2016-07-07 16:15:54,357: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_osg.json
+2016-07-07 16:15:54,359: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.xsede-virt-clust
+2016-07-07 16:15:54,360: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.connect
+2016-07-07 16:15:54,360: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_xsede.json
+2016-07-07 16:15:54,377: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.blacklight
+2016-07-07 16:15:54,377: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_yarn
+2016-07-07 16:15:54,377: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.supermic
+2016-07-07 16:15:54,378: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_spark
+2016-07-07 16:15:54,378: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet
+2016-07-07 16:15:54,378: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_yarn
+2016-07-07 16:15:54,379: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.lonestar
+2016-07-07 16:15:54,379: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede
+2016-07-07 16:15:54,380: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_spark
+2016-07-07 16:15:54,380: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.trestles
+2016-07-07 16:15:54,380: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_spark
+2016-07-07 16:15:54,381: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_orte
+2016-07-07 16:15:54,381: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.gordon
+2016-07-07 16:15:54,381: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler
+2016-07-07 16:15:54,382: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_nersc.json
+2016-07-07 16:15:54,389: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison
+2016-07-07 16:15:54,390: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_aprun
+2016-07-07 16:15:54,390: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_ccm
+2016-07-07 16:15:54,390: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_aprun
+2016-07-07 16:15:54,391: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_ccm
+2016-07-07 16:15:54,391: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper
+2016-07-07 16:15:54,392: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_lrz.json
+2016-07-07 16:15:54,393: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for lrz.supermuc
+2016-07-07 16:15:54,393: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ornl.json
+2016-07-07 16:15:54,395: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ornl.titan
+2016-07-07 16:15:54,395: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_chameleon.json
+2016-07-07 16:15:54,396: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for chameleon.cloud_vm_yarn
+2016-07-07 16:15:54,397: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_rice.json
+2016-07-07 16:15:54,399: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.biou
+2016-07-07 16:15:54,399: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.davinci
+2016-07-07 16:15:54,400: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_radical.json
+2016-07-07 16:15:54,401: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for radical.tutorial
+2016-07-07 16:15:54,401: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_aliases.json
+2016-07-07 16:15:54,401: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_iu.json
+2016-07-07 16:15:54,404: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2
+2016-07-07 16:15:54,404: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2_ccm
+2016-07-07 16:15:54,404: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_epsrc.json
+2016-07-07 16:15:54,407: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer
+2016-07-07 16:15:54,407: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer_orte
+2016-07-07 16:15:54,408: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_local.json
+2016-07-07 16:15:54,413: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_anaconda
+2016-07-07 16:15:54,413: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark
+2016-07-07 16:15:54,414: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark_ana
+2016-07-07 16:15:54,414: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_yarn
+2016-07-07 16:15:54,414: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost
+2016-07-07 16:15:54,415: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_stfc.json
+2016-07-07 16:15:54,416: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for stfc.joule
+2016-07-07 16:15:54,416: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncsa.json
+2016-07-07 16:15:54,420: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_ccm
+2016-07-07 16:15:54,420: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_aprun
+2016-07-07 16:15:54,420: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw
+2016-07-07 16:15:54,421: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncar.json
+2016-07-07 16:15:54,422: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncar.yellowstone
+2016-07-07 16:15:54,446: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Connected to MongoDB. Serving requests for PilotManager pmgr.0000.
+2016-07-07 16:15:54,447: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : Worker thread (ID: Thread-1[139700586895104]) for PilotManager pmgr.0000 started.
+2016-07-07 16:15:54,448: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    : Requesting resources on xsede.comet_spark
+2016-07-07 16:15:54,448: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : saga.utils.PTYShell ('ssh://comet.sdsc.xsede.org/')
+2016-07-07 16:15:57,066: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Determined remote working directory for ssh://comet.sdsc.xsede.org/: '/home/solejar'
+2016-07-07 16:15:57,189: radical.pilot       : MainProcess                     : MainThread     : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingLaunch.
+2016-07-07 16:15:57,189: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    : Resource xsede.comet_spark state has changed to PendingLaunch
+2016-07-07 16:15:57,190: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    : Launched 120-core pilot on xsede.comet_spark.
+2016-07-07 16:15:57,211: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : Starting InputFileTransferWorker
+2016-07-07 16:15:57,211: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 16:15:57,212: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: INFO    : Starting InputFileTransferWorker
+2016-07-07 16:15:57,212: radical.pilot       : MainProcess                     : OutputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 16:15:57,212: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 16:15:57,212: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 16:15:57,213: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : Worker thread (ID: Thread-3[139700538443520]) for UnitManager umgr.0000 started.
+2016-07-07 16:15:57,213: radical.pilot       : MainProcess                     : MainThread     : INFO    : Loaded scheduler: DirectSubmissionScheduler.
+2016-07-07 16:15:57,515: radical.entk.Engine : MainProcess                     : MainThread     : INFO    : Selected execution plug-in 'bag_of_tasks.static.default' for pattern 'BagofTasks' and context type 'Static'.
+2016-07-07 16:15:57,515: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    : Verifying pattern...
+2016-07-07 16:15:57,515: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    : Executing 1 instances of 1 stages on 120 allocated core(s) on 'xsede.comet_spark'
+2016-07-07 16:15:57,516: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    : Waiting for pilot on xsede.comet_spark to go Active
+2016-07-07 16:15:57,535: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Launching ComputePilot pilot.0000
+2016-07-07 16:15:57,535: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Read agent config file: /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/../configs/agent_default.json
+2016-07-07 16:15:57,661: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingLaunch' to 'Launching'.
+2016-07-07 16:15:57,662: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Launching.
+2016-07-07 16:15:57,662: radical.entk.SingleClusterEnvironment: MainProcess                     : Thread-1       : INFO    : Resource xsede.comet_spark state has changed to Launching
+2016-07-07 16:15:58,502: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Using bootstrapper /home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh
+2016-07-07 16:15:58,502: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying bootstrapper 'file://localhost/home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh' to agent sandbox (<saga.filesystem.directory.Directory object at 0x7f0e94606a90>).
+2016-07-07 16:15:59,864: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/utils/radical.utils-0.41.1.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000/).
+2016-07-07 16:16:00,897: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/saga-python-0.41.1.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000/).
+2016-07-07 16:16:02,149: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/..//radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000/).
+2016-07-07 16:16:03,087: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Writing agent configuration to file '/tmp/rp_agent_cfg_direuvcTx/agent_0.cfg'.
+2016-07-07 16:16:03,088: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying agent configuration file 'file://localhost/tmp/rp_agent_cfg_direuvcTx/agent_0.cfg' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000/).
+2016-07-07 16:16:03,808: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : saga.job.Service ('slurm+ssh://comet.sdsc.xsede.org/')
+2016-07-07 16:16:05,628: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Bootstrap command line: /bin/bash ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016989.0013' -v '/home/solejar/radical.pilot.sandbox/ve_comet' -b 'default' -a 'multicore' -e 'module load python' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"]
+2016-07-07 16:16:05,629: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Submitting SAGA job with description: {'Project': 'unc100', 'Executable': '/bin/bash', 'TotalPhysicalMemory': None, 'WorkingDirectory': '/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000/', 'Queue': 'compute', 'Environment': {}, 'WallTimeLimit': 30, 'Arguments': ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016989.0013' -v '/home/solejar/radical.pilot.sandbox/ve_comet' -b 'default' -a 'multicore' -e 'module load python' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"], 'ProcessesPerHost': 24, 'Error': 'bootstrap_1.err', 'Output': 'bootstrap_1.out', 'CandidateHosts': None, 'TotalCPUCount': 120}
+2016-07-07 16:16:14,332: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : SAGA job submitted with job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337]
+2016-07-07 16:16:15,074: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'Launching' to 'PendingActive'.
+2016-07-07 16:16:15,074: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingActive.
+2016-07-07 16:16:15,074: radical.entk.SingleClusterEnvironment: MainProcess                     : Thread-1       : INFO    : Resource xsede.comet_spark state has changed to PendingActive
+2016-07-07 16:16:55,275: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:16:58,524: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:17:09,308: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingActive' to 'Active'.
+2016-07-07 16:17:09,308: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Active.
+2016-07-07 16:17:09,308: radical.entk.SingleClusterEnvironment: MainProcess                     : Thread-1       : INFO    : Resource xsede.comet_spark state has changed to Active
+2016-07-07 16:17:09,308: radical.pilot       : MainProcess                     : Thread-1       : INFO    : pilot pilot.0000 is active: {u'FORK': {u'version': u'0.42', u'version_detail': u'There is no spoon'}} [spark://comet-28-09.sdsc.edu:7077]
+2016-07-07 16:17:09,625: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : DEBUG   : Created stage_1 CU: {'kernel': None, 'executable': 'spark-submit', 'name': 'stage_1', 'restartable': False, 'output_staging': [], 'stdout': None, 'pre_exec': [], 'mpi': False, 'environment': None, 'cleanup': False, 'arguments': ['--conf spark.driver.maxResultSize=25g', '--executor-memory 60g', '--driver-memory 30g', 'leafletfinder.py', '378', 'traj_positions.npy'], 'stderr': None, 'cores': 1, 'post_exec': None, 'input_staging': [{'source': 'leafletfinder.py', 'target': 'leafletfinder.py'}, {'source': 'traj_positions.npy', 'target': 'traj_positions.npy'}]}.
+2016-07-07 16:17:09,626: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    : Submitted tasks for stage_1.
+2016-07-07 16:17:09,632: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Completing entry '{'action': 'Transfer', 'source': 'leafletfinder.py', 'flags': ['CreateParents', 'SkipFailed'], 'target': 'leafletfinder.py', 'priority': 0}'
+2016-07-07 16:17:09,632: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Completing entry '{'action': 'Transfer', 'source': 'traj_positions.npy', 'flags': ['CreateParents', 'SkipFailed'], 'target': 'traj_positions.npy', 'priority': 0}'
+2016-07-07 16:17:09,746: radical.pilot       : MainProcess                     : MainThread     : INFO    : Scheduled ComputeUnits [unit.000000 (Scheduling     : spark-submit ['--conf spark.driver.maxResultSize=25g', '--executor-memory 60g', '--driver-memory 30g', 'leafletfinder.py', '378', 'traj_positions.npy']) (139700529847184)] on ComputePilot 'pilot.0000'.
+2016-07-07 16:17:09,747: radical.pilot       : MainProcess                     : MainThread     : INFO    : 0 units remain unscheduled
+2016-07-07 16:17:09,825: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: unit found: unit.000000
+2016-07-07 16:17:09,825: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : InputStagingController: Creating ComputeUnit sandbox directory sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000//unit.000000.
+2016-07-07 16:17:09,825: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : saga.fs.Directory ('sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000//unit.000000')
+2016-07-07 16:17:10,036: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : InputStagingController: Processing input file transfers for ComputeUnit unit.000000
+2016-07-07 16:17:10,036: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: sd: unit.000000 : {u'target': u'leafletfinder.py', u'priority': 0, u'source': u'leafletfinder.py', u'state': u'Pending', u'flags': [u'CreateParents', u'SkipFailed'], u'action': u'Transfer'}
+2016-07-07 16:17:10,057: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Transferring input file file://localhost/home/sean/midas/leaflet_finder/Spark/Spark-networkx/leafletfinder.py -> sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000//unit.000000/leafletfinder.py
+2016-07-07 16:17:10,074: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: StagingInput.
+2016-07-07 16:17:10,986: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: sd: unit.000000 : {u'target': u'traj_positions.npy', u'priority': 0, u'source': u'traj_positions.npy', u'state': u'Pending', u'flags': [u'CreateParents', u'SkipFailed'], u'action': u'Transfer'}
+2016-07-07 16:17:11,007: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Transferring input file file://localhost/home/sean/midas/leaflet_finder/Spark/Spark-networkx/traj_positions.npy -> sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000//unit.000000/traj_positions.npy
+2016-07-07 16:17:12,727: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: unit.000000 : push to agent
+2016-07-07 16:17:13,099: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: AgentStagingInputPending.
+2016-07-07 16:17:16,124: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: Executing.
+2016-07-07 16:17:55,793: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:17:57,728: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:18:56,040: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:18:56,502: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:19:56,835: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:20:03,390: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:20:57,632: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:20:58,102: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:21:58,518: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:21:59,266: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:22:58,690: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:23:01,856: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:23:59,177: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:23:59,656: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:25:00,098: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:25:02,451: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:26:00,780: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:26:01,239: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:27:01,629: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:27:02,328: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:28:01,687: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:28:02,205: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:29:02,652: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:29:03,110: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:30:02,062: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: PendingOutputStaging.
+2016-07-07 16:30:02,111: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: INFO    : OFTW CU found, progressing ...
+2016-07-07 16:30:02,112: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: DEBUG   : OutputStagingController: unit found: unit.000000
+2016-07-07 16:30:02,112: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: INFO    : OutputStagingController: Processing output file transfers for ComputeUnit unit.000000
+2016-07-07 16:30:03,641: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:30:04,099: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:30:05,087: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: Done.
+2016-07-07 16:30:05,382: radical.entk.bag_of_tasks.static.default: MainProcess                     : MainThread     : INFO    : stage_1/kernel spark: completed.
+2016-07-07 16:30:05,383: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : INFO    : Deallocating Cluster
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016989.0013 closing
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016989.0013 closes   pmgr   pmgr.0000
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 closing
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancel   launcher Thread-1
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 disables launcher PilotLauncherWorker-1
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 disabling
+2016-07-07 16:30:05,384: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 disabled
+2016-07-07 16:30:05,385: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 disabled launcher PilotLauncherWorker-1
+2016-07-07 16:30:05,385: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 canceled launcher Thread-1
+2016-07-07 16:30:05,385: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Reconnected to existing ComputePilot {'uid': 'pilot.0000', 'stdout': None, 'start_time': 1467922628.372928, 'resource_detail': {'cores_per_node': None, 'nodes': None, 'lm_detail': u'spark://comet-28-09.sdsc.edu:7077'}, 'submission_time': 1467922557.067015, 'logfile': None, 'resource': u'xsede.comet_spark', 'log': [<radical.pilot.logentry.Logentry object at 0x7f0e90747090>, <radical.pilot.logentry.Logentry object at 0x7f0e907475d0>, <radical.pilot.logentry.Logentry object at 0x7f0e9077cc90>, <radical.pilot.logentry.Logentry object at 0x7f0e9077ca50>, <radical.pilot.logentry.Logentry object at 0x7f0e9077c610>, <radical.pilot.logentry.Logentry object at 0x7f0e9077ce50>, <radical.pilot.logentry.Logentry object at 0x7f0e9077c450>, <radical.pilot.logentry.Logentry object at 0x7f0e9077cc10>, <radical.pilot.logentry.Logentry object at 0x7f0e9077cb50>], 'sandbox': u'sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0013-pilot.0000/', 'state': u'Active', 'stop_time': None, 'stderr': None}
+2016-07-07 16:30:05,385: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancels  pilot  pilot.0000
+2016-07-07 16:30:05,428: radical.pilot       : MainProcess                     : MainThread     : INFO    : Sent 'COMMAND_CANCEL_PILOT' command to pilots ['pilot.0000'].
+2016-07-07 16:30:05,428: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : delay to actively cancel pilot pilot.0000: state Active
+2016-07-07 16:30:07,274: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:30:07,998: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:30:08,112: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   itransfer InputFileTransferWorker-1
+2016-07-07 16:30:08,112: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-1 stopping
+2016-07-07 16:30:08,113: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-1 stopped
+2016-07-07 16:30:08,113: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped itransfer InputFileTransferWorker-1
+2016-07-07 16:30:08,113: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   itransfer InputFileTransferWorker-2
+2016-07-07 16:30:08,113: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-2 stopping
+2016-07-07 16:30:08,113: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-2 stopped
+2016-07-07 16:30:08,114: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped itransfer InputFileTransferWorker-2
+2016-07-07 16:30:08,114: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   otransfer OutputFileTransferWorker-1
+2016-07-07 16:30:08,114: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-1 stopping
+2016-07-07 16:30:08,114: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-1 stopped
+2016-07-07 16:30:08,114: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped otransfer OutputFileTransferWorker-1
+2016-07-07 16:30:08,114: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   otransfer OutputFileTransferWorker-2
+2016-07-07 16:30:08,115: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-2 stopping
+2016-07-07 16:30:08,115: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-2 stopped
+2016-07-07 16:30:08,115: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped otransfer OutputFileTransferWorker-2
+2016-07-07 16:30:10,348: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://comet.sdsc.xsede.org/]-[3325337])
+2016-07-07 16:30:11,061: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'Active' to 'Canceled'.
+2016-07-07 16:30:11,061: radical.entk.SingleClusterEnvironment: MainProcess                     : Thread-1       : INFO    : Resource xsede.comet_spark state has changed to Canceled
+2016-07-07 16:30:11,061: radical.entk.SingleClusterEnvironment: MainProcess                     : Thread-1       : INFO    : Resource allocation cancelled.
+2016-07-07 16:30:11,439: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancel   worker Thread-1
+2016-07-07 16:30:11,439: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 stops   launcher PilotLauncherWorker-1
+2016-07-07 16:30:11,439: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 stopping
+2016-07-07 16:30:14,532: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-07 16:30:15,672: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 stopped
+2016-07-07 16:30:15,672: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 stopped launcher PilotLauncherWorker-1
+2016-07-07 16:30:15,672: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 canceled worker Thread-1
+2016-07-07 16:30:15,672: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 stops    worker Thread-1
+2016-07-07 16:30:15,673: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 stopping
+2016-07-07 16:30:16,210: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : pworker Thread-1 stops   launcher PilotLauncherWorker-1
+2016-07-07 16:30:16,210: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : launcher PilotLauncherWorker-1 stopping
+2016-07-07 16:30:16,210: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : launcher PilotLauncherWorker-1 stopped
+2016-07-07 16:30:16,210: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : pworker Thread-1 stopped launcher PilotLauncherWorker-1
+2016-07-07 16:30:16,210: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 stopped
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 stopped  worker Thread-1
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 closed
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016989.0013 closed   pmgr   pmgr.0000
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016989.0013 closes   umgr   umgr.0000
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : uworker  Thread-3 stopping
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : uworker  Thread-3 stopped
+2016-07-07 16:30:16,211: radical.pilot       : MainProcess                     : MainThread     : INFO    : Closed UnitManager umgr.0000.
+2016-07-07 16:30:16,212: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016989.0013 closed   umgr   umgr.0000
+2016-07-07 16:30:16,212: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016989.0013 closed

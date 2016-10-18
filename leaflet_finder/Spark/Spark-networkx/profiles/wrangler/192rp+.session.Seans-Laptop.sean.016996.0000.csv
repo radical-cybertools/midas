@@ -1,0 +1,3 @@
+uid, stage, Scheduling, StagingInput, AgentStagingInputPending, AgentStagingInput, AllocatingPending, Allocating, ExecutingPending, Executing, AgentStagingOutputPending, AgentStagingOutput, PendingOutputStaging, StagingOutput, Done
+
+unit.000000, stage_1, 1468520867.2, 1468520867.6, 1468520867.6, 1468520871.06, 1468520871.06, 1468520871.06, 1468520871.06,1468520871.07, 1468521934.09, 1468521934.14, 1468521934.14, 1468521935.73, 1468521935.77

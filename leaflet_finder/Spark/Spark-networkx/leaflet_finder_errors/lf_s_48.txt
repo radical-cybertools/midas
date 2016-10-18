@@ -1,0 +1,110 @@
+2016-07-07 12:46:01,547: radical.pilot       : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-07 12:46:01,548: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      pid: 8076
+2016-07-07 12:46:01,548: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-07 12:46:01,548: radical.pilot       : MainProcess                     : MainThread     : INFO    : radical.pilot        version: v0.40.1-38-ga1e892c@feature-spark
+2016-07-07 12:46:01,744: radical.pilot       : MainProcess                     : MainThread     : INFO    : using database mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test
+2016-07-07 12:46:02,137: radical.pilot       : MainProcess                     : MainThread     : INFO    : New Session created: {'database_url': 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test', 'connected': 1467909962.099313, 'uid': 'rp.session.Seans-Laptop.sean.016989.0001', 'closed': None, 'created': 1467909962.099313}.
+2016-07-07 12:46:02,138: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_das4.json
+2016-07-07 12:46:02,139: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for das4.fs2
+2016-07-07 12:46:02,140: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_yale.json
+2016-07-07 12:46:02,141: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for yale.grace
+2016-07-07 12:46:02,141: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_futuregrid.json
+2016-07-07 12:46:02,147: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray
+2016-07-07 12:46:02,148: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.echo
+2016-07-07 12:46:02,148: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.india
+2016-07-07 12:46:02,148: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.bravo
+2016-07-07 12:46:02,149: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray_ccm
+2016-07-07 12:46:02,149: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.delta
+2016-07-07 12:46:02,149: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_osg.json
+2016-07-07 12:46:02,152: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.xsede-virt-clust
+2016-07-07 12:46:02,152: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.connect
+2016-07-07 12:46:02,153: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_xsede.json
+2016-07-07 12:46:02,169: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.blacklight
+2016-07-07 12:46:02,170: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_yarn
+2016-07-07 12:46:02,170: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.supermic
+2016-07-07 12:46:02,171: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_spark
+2016-07-07 12:46:02,171: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet
+2016-07-07 12:46:02,171: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_yarn
+2016-07-07 12:46:02,172: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.lonestar
+2016-07-07 12:46:02,172: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede
+2016-07-07 12:46:02,172: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_spark
+2016-07-07 12:46:02,173: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.trestles
+2016-07-07 12:46:02,173: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_spark
+2016-07-07 12:46:02,173: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_orte
+2016-07-07 12:46:02,174: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.gordon
+2016-07-07 12:46:02,174: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler
+2016-07-07 12:46:02,174: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_nersc.json
+2016-07-07 12:46:02,183: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison
+2016-07-07 12:46:02,183: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_aprun
+2016-07-07 12:46:02,184: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_ccm
+2016-07-07 12:46:02,184: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_aprun
+2016-07-07 12:46:02,184: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_ccm
+2016-07-07 12:46:02,185: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper
+2016-07-07 12:46:02,185: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_lrz.json
+2016-07-07 12:46:02,186: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for lrz.supermuc
+2016-07-07 12:46:02,187: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ornl.json
+2016-07-07 12:46:02,188: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ornl.titan
+2016-07-07 12:46:02,189: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_chameleon.json
+2016-07-07 12:46:02,190: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for chameleon.cloud_vm_yarn
+2016-07-07 12:46:02,190: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_rice.json
+2016-07-07 12:46:02,192: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.biou
+2016-07-07 12:46:02,193: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.davinci
+2016-07-07 12:46:02,193: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_radical.json
+2016-07-07 12:46:02,195: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for radical.tutorial
+2016-07-07 12:46:02,195: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_aliases.json
+2016-07-07 12:46:02,195: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_iu.json
+2016-07-07 12:46:02,197: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2
+2016-07-07 12:46:02,198: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2_ccm
+2016-07-07 12:46:02,198: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_epsrc.json
+2016-07-07 12:46:02,201: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer
+2016-07-07 12:46:02,201: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer_orte
+2016-07-07 12:46:02,201: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_local.json
+2016-07-07 12:46:02,207: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_anaconda
+2016-07-07 12:46:02,207: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark
+2016-07-07 12:46:02,207: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark_ana
+2016-07-07 12:46:02,208: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_yarn
+2016-07-07 12:46:02,208: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost
+2016-07-07 12:46:02,208: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_stfc.json
+2016-07-07 12:46:02,210: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for stfc.joule
+2016-07-07 12:46:02,210: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncsa.json
+2016-07-07 12:46:02,214: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_ccm
+2016-07-07 12:46:02,214: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_aprun
+2016-07-07 12:46:02,214: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw
+2016-07-07 12:46:02,215: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncar.json
+2016-07-07 12:46:02,216: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncar.yellowstone
+2016-07-07 12:46:02,239: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : Worker thread (ID: Thread-1[139933868648192]) for PilotManager pmgr.0000 started.
+2016-07-07 12:46:02,239: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Connected to MongoDB. Serving requests for PilotManager pmgr.0000.
+2016-07-07 12:46:02,241: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : saga.utils.PTYShell ('ssh://comet.sdsc.xsede.org/')
+2016-07-07 12:46:08,251: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Determined remote working directory for ssh://comet.sdsc.xsede.org/: '/home/solejar'
+2016-07-07 12:46:08,381: radical.pilot       : MainProcess                     : MainThread     : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingLaunch.
+2016-07-07 12:46:08,524: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : Starting InputFileTransferWorker
+2016-07-07 12:46:08,524: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 12:46:08,524: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: INFO    : Starting InputFileTransferWorker
+2016-07-07 12:46:08,525: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 12:46:08,525: radical.pilot       : MainProcess                     : OutputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 12:46:08,526: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-07 12:46:08,526: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : Worker thread (ID: Thread-3[139933752538880]) for UnitManager umgr.0000 started.
+2016-07-07 12:46:08,527: radical.pilot       : MainProcess                     : MainThread     : INFO    : Loaded scheduler: DirectSubmissionScheduler.
+Traceback (most recent call last):
+  File "leaflet_finder_spark_comet.py", line 58, in <module>
+    leaflet = LeafletFind(steps=1,instances=1)
+  File "leaflet_finder_spark_comet.py", line 20, in __init__
+    Pipeline.__init__(self, steps,instances)
+NameError: global name 'Pipeline' is not defined
+2016-07-07 12:46:09,211: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Launching ComputePilot pilot.0000
+2016-07-07 12:46:09,211: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingLaunch' to 'Launching'.
+2016-07-07 12:46:09,212: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Read agent config file: /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/../configs/agent_default.json
+2016-07-07 12:46:09,212: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Launching.
+2016-07-07 12:46:10,329: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Using bootstrapper /home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh
+2016-07-07 12:46:10,330: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying bootstrapper 'file://localhost/home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh' to agent sandbox (<saga.filesystem.directory.Directory object at 0x7f44e50ee710>).
+2016-07-07 12:46:12,158: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/utils/radical.utils-0.41.1.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0001-pilot.0000/).
+2016-07-07 12:46:13,519: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/saga-python-0.41.1.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0001-pilot.0000/).
+2016-07-07 12:46:16,470: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/..//radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0001-pilot.0000/).
+2016-07-07 12:46:17,818: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Writing agent configuration to file '/tmp/rp_agent_cfg_dirm4_HFa/agent_0.cfg'.
+2016-07-07 12:46:17,820: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying agent configuration file 'file://localhost/tmp/rp_agent_cfg_dirm4_HFa/agent_0.cfg' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0001-pilot.0000/).
+2016-07-07 12:46:18,489: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : saga.job.Service ('slurm+ssh://comet.sdsc.xsede.org/')
+2016-07-07 12:46:20,193: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Bootstrap command line: /bin/bash ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016989.0001' -v '/home/solejar/radical.pilot.sandbox/ve_comet' -b 'default' -a 'multicore' -e 'module load python' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"]
+2016-07-07 12:46:20,193: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Submitting SAGA job with description: {'Project': 'unc100', 'Executable': '/bin/bash', 'TotalPhysicalMemory': None, 'WorkingDirectory': '/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016989.0001-pilot.0000/', 'Queue': 'compute', 'Environment': {}, 'WallTimeLimit': 30, 'Arguments': ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016989.0001' -v '/home/solejar/radical.pilot.sandbox/ve_comet' -b 'default' -a 'multicore' -e 'module load python' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"], 'ProcessesPerHost': 24, 'Error': 'bootstrap_1.err', 'Output': 'bootstrap_1.out', 'CandidateHosts': None, 'TotalCPUCount': 120}
+2016-07-07 12:46:24,544: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : SAGA job submitted with job id [slurm+ssh://comet.sdsc.xsede.org/]-[3322102]
+2016-07-07 12:46:24,617: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'Launching' to 'PendingActive'.
+2016-07-07 12:46:24,617: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingActive.

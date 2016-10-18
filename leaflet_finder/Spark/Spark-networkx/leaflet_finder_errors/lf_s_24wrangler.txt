@@ -1,0 +1,275 @@
+2016-07-01 15:16:23,549: radical.pilot       : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-07-01 15:16:23,549: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      pid: 11532
+2016-07-01 15:16:23,549: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-07-01 15:16:23,550: radical.pilot       : MainProcess                     : MainThread     : INFO    : radical.pilot        version: v0.40.1-38-ga1e892c@feature-spark
+2016-07-01 15:16:23,746: radical.pilot       : MainProcess                     : MainThread     : INFO    : using database mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test
+2016-07-01 15:16:24,151: radical.pilot       : MainProcess                     : MainThread     : INFO    : New Session created: {'database_url': 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test', 'connected': 1467400584.095909, 'uid': 'rp.session.Seans-Laptop.sean.016983.0001', 'closed': None, 'created': 1467400584.095909}.
+2016-07-01 15:16:24,152: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_das4.json
+2016-07-01 15:16:24,153: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for das4.fs2
+2016-07-01 15:16:24,154: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_yale.json
+2016-07-01 15:16:24,155: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for yale.grace
+2016-07-01 15:16:24,155: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_futuregrid.json
+2016-07-01 15:16:24,162: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray
+2016-07-01 15:16:24,162: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.echo
+2016-07-01 15:16:24,163: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.india
+2016-07-01 15:16:24,163: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.bravo
+2016-07-01 15:16:24,163: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray_ccm
+2016-07-01 15:16:24,164: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.delta
+2016-07-01 15:16:24,164: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_osg.json
+2016-07-01 15:16:24,166: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.xsede-virt-clust
+2016-07-01 15:16:24,167: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.connect
+2016-07-01 15:16:24,168: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_xsede.json
+2016-07-01 15:16:24,185: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.blacklight
+2016-07-01 15:16:24,186: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_yarn
+2016-07-01 15:16:24,186: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.supermic
+2016-07-01 15:16:24,187: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_spark
+2016-07-01 15:16:24,187: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet
+2016-07-01 15:16:24,187: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_yarn
+2016-07-01 15:16:24,188: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.lonestar
+2016-07-01 15:16:24,188: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede
+2016-07-01 15:16:24,188: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_spark
+2016-07-01 15:16:24,189: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.trestles
+2016-07-01 15:16:24,189: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_spark
+2016-07-01 15:16:24,190: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_orte
+2016-07-01 15:16:24,191: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.gordon
+2016-07-01 15:16:24,191: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler
+2016-07-01 15:16:24,191: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_nersc.json
+2016-07-01 15:16:24,200: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison
+2016-07-01 15:16:24,200: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_aprun
+2016-07-01 15:16:24,201: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_ccm
+2016-07-01 15:16:24,201: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_aprun
+2016-07-01 15:16:24,201: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_ccm
+2016-07-01 15:16:24,202: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper
+2016-07-01 15:16:24,202: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_lrz.json
+2016-07-01 15:16:24,204: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for lrz.supermuc
+2016-07-01 15:16:24,204: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ornl.json
+2016-07-01 15:16:24,205: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ornl.titan
+2016-07-01 15:16:24,206: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_chameleon.json
+2016-07-01 15:16:24,208: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for chameleon.cloud_vm_yarn
+2016-07-01 15:16:24,208: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_rice.json
+2016-07-01 15:16:24,210: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.biou
+2016-07-01 15:16:24,211: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.davinci
+2016-07-01 15:16:24,211: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_radical.json
+2016-07-01 15:16:24,212: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for radical.tutorial
+2016-07-01 15:16:24,213: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_aliases.json
+2016-07-01 15:16:24,213: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_iu.json
+2016-07-01 15:16:24,215: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2
+2016-07-01 15:16:24,216: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2_ccm
+2016-07-01 15:16:24,216: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_epsrc.json
+2016-07-01 15:16:24,219: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer
+2016-07-01 15:16:24,219: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer_orte
+2016-07-01 15:16:24,220: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_local.json
+2016-07-01 15:16:24,225: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_anaconda
+2016-07-01 15:16:24,226: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark
+2016-07-01 15:16:24,226: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark_ana
+2016-07-01 15:16:24,226: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_yarn
+2016-07-01 15:16:24,227: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost
+2016-07-01 15:16:24,227: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_stfc.json
+2016-07-01 15:16:24,228: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for stfc.joule
+2016-07-01 15:16:24,229: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncsa.json
+2016-07-01 15:16:24,233: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_ccm
+2016-07-01 15:16:24,233: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_aprun
+2016-07-01 15:16:24,233: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw
+2016-07-01 15:16:24,234: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncar.json
+2016-07-01 15:16:24,235: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncar.yellowstone
+2016-07-01 15:16:24,257: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : Worker thread (ID: Thread-1[139756889749248]) for PilotManager pmgr.0000 started.
+2016-07-01 15:16:24,260: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : saga.utils.PTYShell ('ssh://wrangler.tacc.utexas.edu/')
+2016-07-01 15:16:24,260: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Connected to MongoDB. Serving requests for PilotManager pmgr.0000.
+2016-07-01 15:16:27,993: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Determined remote working directory for ssh://wrangler.tacc.utexas.edu/: '/work/04059/tg833588/wrangler'
+2016-07-01 15:16:28,146: radical.pilot       : MainProcess                     : MainThread     : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingLaunch.
+2016-07-01 15:16:28,161: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : Starting InputFileTransferWorker
+2016-07-01 15:16:28,161: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-01 15:16:28,162: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: INFO    : Starting InputFileTransferWorker
+2016-07-01 15:16:28,162: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-01 15:16:28,162: radical.pilot       : MainProcess                     : OutputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-01 15:16:28,163: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-07-01 15:16:28,163: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : Worker thread (ID: Thread-3[139756841297664]) for UnitManager umgr.0000 started.
+2016-07-01 15:16:28,164: radical.pilot       : MainProcess                     : MainThread     : INFO    : Loaded scheduler: DirectSubmissionScheduler.
+2016-07-01 15:16:28,467: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Launching ComputePilot pilot.0000
+2016-07-01 15:16:28,467: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Read agent config file: /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/../configs/agent_default.json
+2016-07-01 15:16:29,374: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingLaunch' to 'Launching'.
+2016-07-01 15:16:29,375: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Launching.
+2016-07-01 15:16:29,376: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Using bootstrapper /home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh
+2016-07-01 15:16:29,376: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying bootstrapper 'file://localhost/home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh' to agent sandbox (<saga.filesystem.directory.Directory object at 0x7f1bb04bb050>).
+2016-07-01 15:16:31,102: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/utils/radical.utils-0.41.1.tar.gz' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000/).
+2016-07-01 15:16:32,096: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/saga-python-0.41.1.tar.gz' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000/).
+2016-07-01 15:16:35,964: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/..//radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000/).
+2016-07-01 15:16:37,872: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Writing agent configuration to file '/tmp/rp_agent_cfg_dirvUxYah/agent_0.cfg'.
+2016-07-01 15:16:37,873: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying agent configuration file 'file://localhost/tmp/rp_agent_cfg_dirvUxYah/agent_0.cfg' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000/).
+2016-07-01 15:16:38,439: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : saga.job.Service ('slurm+ssh://wrangler.tacc.utexas.edu/')
+2016-07-01 15:16:39,988: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Bootstrap command line: /bin/bash ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016983.0001' -v '/work/04059/tg833588/wrangler/radical.pilot.sandbox/ve_wrangler' -b 'default' -a 'multicore' -e 'module purge' -e 'module load TACC' -e 'module load python/2.7.9' -e 'export TACC_DELETE_FILES=TRUE' -e 'module load jdk64/1.8.0' -e 'module unload xalt' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"]
+2016-07-01 15:16:39,989: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Submitting SAGA job with description: {'Project': 'TG-MCB090174', 'Executable': '/bin/bash', 'TotalPhysicalMemory': None, 'WorkingDirectory': '/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000/', 'Queue': 'debug', 'Environment': {}, 'WallTimeLimit': 60, 'Arguments': ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016983.0001' -v '/work/04059/tg833588/wrangler/radical.pilot.sandbox/ve_wrangler' -b 'default' -a 'multicore' -e 'module purge' -e 'module load TACC' -e 'module load python/2.7.9' -e 'export TACC_DELETE_FILES=TRUE' -e 'module load jdk64/1.8.0' -e 'module unload xalt' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"], 'ProcessesPerHost': None, 'Error': 'bootstrap_1.err', 'Output': 'bootstrap_1.out', 'CandidateHosts': None, 'TotalCPUCount': 96}
+2016-07-01 15:16:41,533: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : SAGA job submitted with job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791]
+2016-07-01 15:16:42,237: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'Launching' to 'PendingActive'.
+2016-07-01 15:16:42,237: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingActive.
+2016-07-01 15:17:24,432: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:17:29,949: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:17:43,082: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingActive' to 'Active'.
+2016-07-01 15:17:43,083: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Active.
+2016-07-01 15:17:43,083: radical.pilot       : MainProcess                     : Thread-1       : INFO    : pilot pilot.0000 is active: None [spark://c252-135.wrangler.tacc.utexas.edu:7077]
+2016-07-01 15:17:43,563: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Completing entry '{'action': 'Transfer', 'source': 'leafletfinder.py', 'flags': ['CreateParents', 'SkipFailed'], 'target': 'leafletfinder.py', 'priority': 0}'
+2016-07-01 15:17:43,564: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Completing entry '{'action': 'Transfer', 'source': 'traj_positions.npy', 'flags': ['CreateParents', 'SkipFailed'], 'target': 'traj_positions.npy', 'priority': 0}'
+2016-07-01 15:17:43,693: radical.pilot       : MainProcess                     : MainThread     : INFO    : Scheduled ComputeUnits [unit.000000 (Scheduling     : spark-submit ['--conf spark.driver.maxResultSize=25g', '--executor-memory 60g', '--driver-memory 60g', 'leafletfinder.py', '378', 'traj_positions.npy']) (139756832893328)] on ComputePilot 'pilot.0000'.
+2016-07-01 15:17:43,693: radical.pilot       : MainProcess                     : MainThread     : INFO    : 0 units remain unscheduled
+2016-07-01 15:17:44,035: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: unit found: unit.000000
+2016-07-01 15:17:44,035: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : InputStagingController: Creating ComputeUnit sandbox directory sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000//unit.000000.
+2016-07-01 15:17:44,035: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : saga.fs.Directory ('sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000//unit.000000')
+2016-07-01 15:17:44,205: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : InputStagingController: Processing input file transfers for ComputeUnit unit.000000
+2016-07-01 15:17:44,205: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: sd: unit.000000 : {u'target': u'leafletfinder.py', u'priority': 0, u'source': u'leafletfinder.py', u'state': u'Pending', u'flags': [u'CreateParents', u'SkipFailed'], u'action': u'Transfer'}
+2016-07-01 15:17:44,247: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Transferring input file file://localhost/home/sean/midas/leaflet_finder/Spark/Spark-networkx/leafletfinder.py -> sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000//unit.000000/leafletfinder.py
+2016-07-01 15:17:44,953: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: sd: unit.000000 : {u'target': u'traj_positions.npy', u'priority': 0, u'source': u'traj_positions.npy', u'state': u'Pending', u'flags': [u'CreateParents', u'SkipFailed'], u'action': u'Transfer'}
+2016-07-01 15:17:44,963: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Transferring input file file://localhost/home/sean/midas/leaflet_finder/Spark/Spark-networkx/traj_positions.npy -> sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000//unit.000000/traj_positions.npy
+2016-07-01 15:17:45,569: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: StagingInput.
+2016-07-01 15:17:52,197: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : InputStagingController: unit.000000 : push to agent
+2016-07-01 15:17:54,676: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: Executing.
+2016-07-01 15:18:24,949: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:18:25,299: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:19:25,585: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:19:25,916: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:20:25,563: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:20:25,893: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:21:25,961: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:21:27,013: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:22:25,996: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:22:26,350: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:23:26,896: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:23:27,261: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:24:27,815: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:24:28,144: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:25:28,780: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:25:29,131: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:26:29,185: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:26:29,532: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:27:30,077: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:27:30,837: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:28:30,995: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:28:31,317: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:29:31,593: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:29:31,929: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:30:31,761: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:30:32,647: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:31:32,761: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:31:33,098: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:32:33,726: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:32:34,373: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:33:34,261: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:33:34,687: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:34:34,458: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:34:34,799: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:35:35,068: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:35:35,422: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:36:36,142: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:36:36,535: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:37:36,288: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:37:36,661: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:38:36,620: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:38:36,974: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:39:38,006: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:39:38,412: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:40:38,818: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:40:39,160: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:41:39,112: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:41:39,446: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:42:39,609: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:42:40,442: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:43:39,713: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:43:40,082: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:44:40,764: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:44:41,274: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:45:40,955: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:45:41,280: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:46:41,562: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:46:41,945: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:47:41,713: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:47:42,054: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:48:42,949: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:48:43,291: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:49:43,072: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:49:43,406: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:50:43,762: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:50:44,156: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:51:45,153: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:51:45,492: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:52:45,098: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:52:45,426: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:53:45,317: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:53:45,823: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:54:46,163: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:54:47,382: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:55:47,174: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:55:47,769: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:56:47,402: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:56:48,071: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:57:48,714: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:57:49,043: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:58:49,000: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:58:50,987: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 15:59:49,995: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 15:59:50,323: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:00:50,808: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:00:51,169: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:01:51,333: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:01:51,682: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:02:51,782: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:02:52,144: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:03:52,073: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:03:52,861: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:04:52,260: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:04:52,644: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:05:52,378: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:05:52,733: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:06:53,427: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:06:53,778: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-07-01 16:09:33,514: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15791])
+2016-07-01 16:13:23,322: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: WARNING : pilot state check failed: Error getting the job state for job 15791:
+read from process failed '[Errno 5] Input/output error' : (6983.0001-pilot.0000//bootstrap_1.err
+   StdIn=/dev/null
+   StdOut=/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000//bootstrap_1.out
+
+PROMPT-0->Timeout, server wrangler.tacc.utexas.edu not responding.
+) (/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/utils/pty_process.py +679 (read)  :  % (e, self.tail))) (/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/adaptors/slurm/slurm_job.py +1042 (_job_get_state)  :  "job %s:\n%s"%(pid,ex)))
+2016-07-01 16:14:33,366: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : ERROR   : Fatal error during execution: .
+2016-07-01 16:14:33,366: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : ERROR   : Fatal error during execution: .
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/ensemblemd/single_cluster_environment.py", line 312, in run
+    plugin.execute_pattern(pattern, self)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/ensemblemd/exec_plugins/pipeline/static.py", line 402, in execute_pattern
+    resource._umgr.wait_units()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/unit_manager.py", line 698, in wait_units
+    time.sleep (0.5)
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016983.0001 closing
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016983.0001 closes   pmgr   pmgr.0000
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 closing
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancel   launcher Thread-1
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 disables launcher PilotLauncherWorker-1
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 disabling
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 disabled
+2016-07-01 16:14:33,367: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 disabled launcher PilotLauncherWorker-1
+2016-07-01 16:14:33,368: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 canceled launcher Thread-1
+2016-07-01 16:14:33,368: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Reconnected to existing ComputePilot {'uid': 'pilot.0000', 'stdout': None, 'start_time': 1467400662.192579, 'resource_detail': {'cores_per_node': None, 'nodes': None, 'lm_detail': u'spark://c252-135.wrangler.tacc.utexas.edu:7077'}, 'submission_time': 1467400587.994322, 'logfile': None, 'resource': u'xsede.wrangler_spark', 'log': [<radical.pilot.logentry.Logentry object at 0x7f1bac588590>, <radical.pilot.logentry.Logentry object at 0x7f1bac588610>, <radical.pilot.logentry.Logentry object at 0x7f1bac588650>, <radical.pilot.logentry.Logentry object at 0x7f1bac588690>, <radical.pilot.logentry.Logentry object at 0x7f1bac5886d0>, <radical.pilot.logentry.Logentry object at 0x7f1bac588710>, <radical.pilot.logentry.Logentry object at 0x7f1bac588750>, <radical.pilot.logentry.Logentry object at 0x7f1bac588790>, <radical.pilot.logentry.Logentry object at 0x7f1bac5887d0>], 'sandbox': u'sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016983.0001-pilot.0000/', 'state': u'Active', 'stop_time': None, 'stderr': None}
+2016-07-01 16:14:33,368: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancels  pilot  pilot.0000
+Traceback (most recent call last):
+  File "leaflet_finder_spark_wrangler.py", line 62, in <module>
+    cluster.deallocate()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/ensemblemd/single_cluster_environment.py", line 117, in deallocate
+    self._session.close(cleanup=self._cleanup)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/session.py", line 304, in close
+    pmgr.close (terminate=terminate)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/pilot_manager.py", line 175, in close
+    self.cancel_pilots()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/pilot_manager.py", line 579, in cancel_pilots
+    self._worker.register_cancel_pilots_request(pilot_ids=pilot_ids)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/pilot_manager_controller.py", line 531, in register_cancel_pilots_request
+    for pilot in self._dbs.get_pilots(pilot_manager_id=self._pm_id) :
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/db/database.py", line 348, in get_pilots
+    for obj in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1199, in _send_message_with_response
+    sock_info = self.__socket(member)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 928, in __socket
+    "%s %s" % (host_details, str(why)))
+pymongo.errors.AutoReconnect: could not connect to ds019678.mlab.com:19678: [Errno -2] Name or service not known

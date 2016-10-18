@@ -1,0 +1,12 @@
+48rp.session.Seans-Laptop.sean.017009.0005.prof: time for CU to complete = 3474.8219 seconds, 
+Average TTC, adj_matrix, conn_comp on wrangler using 48 cores: 3474.8219, 3395.172, 79.6499 sec
+
+96rp.session.Seans-Laptop.sean.017009.0004.prof: time for CU to complete = 1813.5771 seconds, 
+Average TTC, adj_matrix, conn_comp on wrangler using 96 cores: 1813.5771, 1736.1023, 77.4748 sec
+
+192rp.session.Seans-Laptop.sean.017009.0000.prof: time for CU to complete = 1136.0585 seconds, 
+Average TTC, adj_matrix, conn_comp on wrangler using 192 cores: 1136.0585, 1054.026, 82.0325 sec
+
+384rp.session.Seans-Laptop.sean.017010.0001.prof: time for CU to complete = 804.02 seconds, 
+Average TTC, adj_matrix, conn_comp on wrangler using 384 cores: 804.02, 711.1802, 92.8398 sec
+

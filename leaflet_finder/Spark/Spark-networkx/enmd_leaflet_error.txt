@@ -1,0 +1,323 @@
+2016-06-29 16:06:34,354: radical.pilot       : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-06-29 16:06:34,355: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      pid: 4087
+2016-06-29 16:06:34,355: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-06-29 16:06:34,355: radical.pilot       : MainProcess                     : MainThread     : INFO    : radical.pilot        version: v0.40.1-38-ga1e892c@feature-spark
+2016-06-29 16:06:34,579: radical.pilot       : MainProcess                     : MainThread     : INFO    : using database mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test
+2016-06-29 16:06:34,813: radical.pilot       : MainProcess                     : MainThread     : INFO    : New Session created: {'database_url': 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test', 'connected': 1467230794.790455, 'uid': 'rp.session.Seans-Laptop.sean.016981.0005', 'closed': None, 'created': 1467230794.790455}.
+2016-06-29 16:06:34,813: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_das4.json
+2016-06-29 16:06:34,815: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for das4.fs2
+2016-06-29 16:06:34,815: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_yale.json
+2016-06-29 16:06:34,817: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for yale.grace
+2016-06-29 16:06:34,817: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_futuregrid.json
+2016-06-29 16:06:34,824: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray
+2016-06-29 16:06:34,824: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.echo
+2016-06-29 16:06:34,824: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.india
+2016-06-29 16:06:34,825: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.bravo
+2016-06-29 16:06:34,825: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.xray_ccm
+2016-06-29 16:06:34,825: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for futuregrid.delta
+2016-06-29 16:06:34,826: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_osg.json
+2016-06-29 16:06:34,829: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.xsede-virt-clust
+2016-06-29 16:06:34,829: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for osg.connect
+2016-06-29 16:06:34,830: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_xsede.json
+2016-06-29 16:06:34,847: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.blacklight
+2016-06-29 16:06:34,848: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_yarn
+2016-06-29 16:06:34,848: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.supermic
+2016-06-29 16:06:34,849: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_spark
+2016-06-29 16:06:34,849: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet
+2016-06-29 16:06:34,849: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler_yarn
+2016-06-29 16:06:34,850: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.lonestar
+2016-06-29 16:06:34,850: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede
+2016-06-29 16:06:34,850: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_spark
+2016-06-29 16:06:34,851: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.trestles
+2016-06-29 16:06:34,851: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.stampede_spark
+2016-06-29 16:06:34,852: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.comet_orte
+2016-06-29 16:06:34,852: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.gordon
+2016-06-29 16:06:34,852: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for xsede.wrangler
+2016-06-29 16:06:34,853: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_nersc.json
+2016-06-29 16:06:34,861: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison
+2016-06-29 16:06:34,862: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_aprun
+2016-06-29 16:06:34,862: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_ccm
+2016-06-29 16:06:34,863: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper_aprun
+2016-06-29 16:06:34,863: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.edison_ccm
+2016-06-29 16:06:34,863: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for nersc.hopper
+2016-06-29 16:06:34,864: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_lrz.json
+2016-06-29 16:06:34,865: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for lrz.supermuc
+2016-06-29 16:06:34,866: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ornl.json
+2016-06-29 16:06:34,867: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ornl.titan
+2016-06-29 16:06:34,868: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_chameleon.json
+2016-06-29 16:06:34,869: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for chameleon.cloud_vm_yarn
+2016-06-29 16:06:34,869: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_rice.json
+2016-06-29 16:06:34,872: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.biou
+2016-06-29 16:06:34,872: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for rice.davinci
+2016-06-29 16:06:34,872: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_radical.json
+2016-06-29 16:06:34,874: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for radical.tutorial
+2016-06-29 16:06:34,874: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_aliases.json
+2016-06-29 16:06:34,874: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_iu.json
+2016-06-29 16:06:34,877: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2
+2016-06-29 16:06:34,877: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for iu.bigred2_ccm
+2016-06-29 16:06:34,878: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_epsrc.json
+2016-06-29 16:06:34,881: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer
+2016-06-29 16:06:34,881: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for epsrc.archer_orte
+2016-06-29 16:06:34,881: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_local.json
+2016-06-29 16:06:34,887: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_anaconda
+2016-06-29 16:06:34,887: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark
+2016-06-29 16:06:34,888: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_spark_ana
+2016-06-29 16:06:34,888: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost_yarn
+2016-06-29 16:06:34,888: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for local.localhost
+2016-06-29 16:06:34,888: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_stfc.json
+2016-06-29 16:06:34,890: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for stfc.joule
+2016-06-29 16:06:34,890: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncsa.json
+2016-06-29 16:06:34,894: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_ccm
+2016-06-29 16:06:34,895: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw_aprun
+2016-06-29 16:06:34,895: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncsa.bw
+2016-06-29 16:06:34,896: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations from /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/configs/resource_ncar.json
+2016-06-29 16:06:34,897: radical.pilot       : MainProcess                     : MainThread     : INFO    : Load resource configurations for ncar.yellowstone
+2016-06-29 16:06:34,911: radical.pilot       : MainProcess                     : Thread-1       : DEBUG   : Worker thread (ID: Thread-1[139886310921984]) for PilotManager pmgr.0000 started.
+2016-06-29 16:06:34,913: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : saga.utils.PTYShell ('ssh://wrangler.tacc.utexas.edu/')
+2016-06-29 16:06:34,913: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Connected to MongoDB. Serving requests for PilotManager pmgr.0000.
+2016-06-29 16:06:39,319: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Determined remote working directory for ssh://wrangler.tacc.utexas.edu/: '/work/04059/tg833588/wrangler'
+2016-06-29 16:06:39,434: radical.pilot       : MainProcess                     : MainThread     : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingLaunch.
+2016-06-29 16:06:39,545: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: INFO    : Starting InputFileTransferWorker
+2016-06-29 16:06:39,545: radical.pilot       : MainProcess                     : InputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-06-29 16:06:39,545: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: INFO    : Starting InputFileTransferWorker
+2016-06-29 16:06:39,546: radical.pilot       : MainProcess                     : OutputFileTransferWorker-1: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-06-29 16:06:39,546: radical.pilot       : MainProcess                     : OutputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-06-29 16:06:39,546: radical.pilot       : MainProcess                     : MainThread     : INFO    : Loaded scheduler: DirectSubmissionScheduler.
+2016-06-29 16:06:39,546: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : Worker thread (ID: Thread-3[139886053017344]) for UnitManager umgr.0000 started.
+2016-06-29 16:06:39,547: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : Connected to MongoDB. Serving requests for UnitManager umgr.0000.
+2016-06-29 16:06:40,310: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Launching ComputePilot pilot.0000
+2016-06-29 16:06:40,310: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Read agent config file: /home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/../configs/agent_default.json
+2016-06-29 16:06:40,324: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingLaunch' to 'Launching'.
+2016-06-29 16:06:40,324: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Launching.
+2016-06-29 16:06:41,349: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Using bootstrapper /home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh
+2016-06-29 16:06:41,349: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying bootstrapper 'file://localhost/home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh' to agent sandbox (<saga.filesystem.directory.Directory object at 0x7f39d26596d0>).
+2016-06-29 16:06:42,834: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/utils/radical.utils-0.41.1.tar.gz' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000/).
+2016-06-29 16:06:44,061: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/saga-python-0.41.1.tar.gz' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000/).
+2016-06-29 16:06:46,459: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/..//radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000/).
+2016-06-29 16:06:47,457: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Writing agent configuration to file '/tmp/rp_agent_cfg_dirlDa4CS/agent_0.cfg'.
+2016-06-29 16:06:47,459: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Copying agent configuration file 'file://localhost/tmp/rp_agent_cfg_dirlDa4CS/agent_0.cfg' to sandbox (sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000/).
+2016-06-29 16:06:48,024: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : saga.job.Service ('slurm+ssh://wrangler.tacc.utexas.edu/')
+2016-06-29 16:06:50,018: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Bootstrap command line: /bin/bash ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016981.0005' -v '/work/04059/tg833588/wrangler/radical.pilot.sandbox/ve_wrangler' -b 'default' -a 'multicore' -e 'module purge' -e 'module load TACC' -e 'module load python/2.7.9' -e 'export TACC_DELETE_FILES=TRUE' -e 'module load jdk64/1.8.0' -e 'module unload xalt' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"]
+2016-06-29 16:06:50,018: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : Submitting SAGA job with description: {'Project': 'TG-MCB090174', 'Executable': '/bin/bash', 'TotalPhysicalMemory': None, 'WorkingDirectory': '/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000/', 'Queue': 'debug', 'Environment': {}, 'WallTimeLimit': 60, 'Arguments': ['-l bootstrap_1.sh', " -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016981.0005' -v '/work/04059/tg833588/wrangler/radical.pilot.sandbox/ve_wrangler' -b 'default' -a 'multicore' -e 'module purge' -e 'module load TACC' -e 'module load python/2.7.9' -e 'export TACC_DELETE_FILES=TRUE' -e 'module load jdk64/1.8.0' -e 'module unload xalt' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"], 'ProcessesPerHost': None, 'Error': 'bootstrap_1.err', 'Output': 'bootstrap_1.out', 'CandidateHosts': None, 'TotalCPUCount': 96}
+2016-06-29 16:06:51,820: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: DEBUG   : SAGA job submitted with job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653]
+2016-06-29 16:06:52,862: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'Launching' to 'PendingActive'.
+2016-06-29 16:06:52,863: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: PendingActive.
+2016-06-29 16:07:35,868: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653])
+2016-06-29 16:07:36,908: radical.pilot       : MainProcess                     : Thread-1       : INFO    : ComputePilot 'pilot.0000' state changed from 'PendingActive' to 'Active'.
+2016-06-29 16:07:36,908: radical.pilot       : MainProcess                     : Thread-1       : INFO    : [Callback]: ComputePilot 'pilot.0000' state: Active.
+2016-06-29 16:07:36,909: radical.pilot       : MainProcess                     : Thread-1       : INFO    : pilot pilot.0000 is active: None [spark://c252-135.wrangler.tacc.utexas.edu:7077]
+2016-06-29 16:07:37,038: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Completing entry '{'action': 'Transfer', 'source': 'leafletfinder.py', 'flags': ['CreateParents', 'SkipFailed'], 'target': 'leafletfinder.py', 'priority': 0}'
+2016-06-29 16:07:37,038: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Completing entry '{'action': 'Transfer', 'source': 'traj_positions.npy', 'flags': ['CreateParents', 'SkipFailed'], 'target': 'traj_positions.npy', 'priority': 0}'
+2016-06-29 16:07:37,126: radical.pilot       : MainProcess                     : MainThread     : INFO    : Scheduled ComputeUnits [unit.000000 (Scheduling     : spark-submit ['--conf spark.driver.maxResultSize=25g', '--executor-memory 60g', '--driver-memory 60g', 'leafletfinder.py', '48', 'traj_positions.npy']) (139886287443472)] on ComputePilot 'pilot.0000'.
+2016-06-29 16:07:37,126: radical.pilot       : MainProcess                     : MainThread     : INFO    : 0 units remain unscheduled
+2016-06-29 16:07:37,508: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : InputStagingController: unit found: unit.000000
+2016-06-29 16:07:37,508: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: INFO    : InputStagingController: Creating ComputeUnit sandbox directory sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000//unit.000000.
+2016-06-29 16:07:37,509: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : saga.fs.Directory ('sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000//unit.000000')
+2016-06-29 16:07:37,671: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: INFO    : InputStagingController: Processing input file transfers for ComputeUnit unit.000000
+2016-06-29 16:07:37,671: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : InputStagingController: sd: unit.000000 : {u'target': u'leafletfinder.py', u'priority': 0, u'source': u'leafletfinder.py', u'state': u'Pending', u'flags': [u'CreateParents', u'SkipFailed'], u'action': u'Transfer'}
+2016-06-29 16:07:37,687: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : Transferring input file file://localhost/home/sean/midas/leaflet_finder/Spark/Spark-networkx/leafletfinder.py -> sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000//unit.000000/leafletfinder.py
+2016-06-29 16:07:38,381: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : InputStagingController: sd: unit.000000 : {u'target': u'traj_positions.npy', u'priority': 0, u'source': u'traj_positions.npy', u'state': u'Pending', u'flags': [u'CreateParents', u'SkipFailed'], u'action': u'Transfer'}
+2016-06-29 16:07:38,397: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : Transferring input file file://localhost/home/sean/midas/leaflet_finder/Spark/Spark-networkx/traj_positions.npy -> sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000//unit.000000/traj_positions.npy
+2016-06-29 16:07:39,014: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: StagingInput.
+2016-06-29 16:07:40,000: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-06-29 16:07:43,270: radical.pilot       : MainProcess                     : InputFileTransferWorker-2: DEBUG   : InputStagingController: unit.000000 : push to agent
+2016-06-29 16:07:45,044: radical.pilot       : MainProcess                     : Thread-3       : INFO    : [Callback]: unit unit.000000 state on pilot pilot.0000: Executing.
+2016-06-29 16:08:36,396: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653])
+2016-06-29 16:08:37,476: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-06-29 16:09:37,325: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653])
+2016-06-29 16:09:37,791: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-06-29 16:10:37,499: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653])
+2016-06-29 16:10:38,004: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-06-29 16:11:38,430: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653])
+2016-06-29 16:11:38,762: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : pilot pilot.0000 seems alive and well
+2016-06-29 16:13:50,456: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: INFO    : Performing periodical health check for pilot.0000 (SAGA job id [slurm+ssh://wrangler.tacc.utexas.edu/]-[15653])
+2016-06-29 16:15:10,623: radical.pilot       : MainProcess                     : PilotLauncherWorker-1: WARNING : pilot state check failed: Error getting the job state for job 15653:
+read from process failed '[Errno 5] Input/output error' : (6981.0005-pilot.0000//bootstrap_1.err
+   StdIn=/dev/null
+   StdOut=/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000//bootstrap_1.out
+
+PROMPT-0->Timeout, server wrangler.tacc.utexas.edu not responding.
+) (/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/utils/pty_process.py +679 (read)  :  % (e, self.tail))) (/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/adaptors/slurm/slurm_job.py +1042 (_job_get_state)  :  "job %s:\n%s"%(pid,ex)))
+Exception in thread OutputFileTransferWorker-2:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/output_file_transfer_worker.py", line 90, in run
+    "timestamp": ts}
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/collection.py", line 1738, in find_and_modify
+    **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 439, in command
+    uuid_subtype, compile_re, **kwargs)[0]
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 338, in _command
+    for doc in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1217, in _send_message_with_response
+    raise AutoReconnect(str(e))
+AutoReconnect: [Errno 104] Connection reset by peer
+
+2016-06-29 16:26:14,700: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   itransfer InputFileTransferWorker-1
+2016-06-29 16:26:14,700: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-1 stopping
+Exception in thread InputFileTransferWorker-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/input_file_transfer_worker.py", line 92, in run
+    "$push": {"statehistory": {"state": STAGING_INPUT, "timestamp": ts}}}
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/collection.py", line 1738, in find_and_modify
+    **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 439, in command
+    uuid_subtype, compile_re, **kwargs)[0]
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 338, in _command
+    for doc in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1217, in _send_message_with_response
+    raise AutoReconnect(str(e))
+AutoReconnect: [Errno 104] Connection reset by peer
+
+Exception in thread InputFileTransferWorker-2:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/input_file_transfer_worker.py", line 92, in run
+    "$push": {"statehistory": {"state": STAGING_INPUT, "timestamp": ts}}}
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/collection.py", line 1738, in find_and_modify
+    **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 439, in command
+    uuid_subtype, compile_re, **kwargs)[0]
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 338, in _command
+    for doc in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1217, in _send_message_with_response
+    raise AutoReconnect(str(e))
+AutoReconnect: [Errno 104] Connection reset by peer
+
+2016-06-29 16:26:14,701: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-1 stopped
+2016-06-29 16:26:14,701: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped itransfer InputFileTransferWorker-1
+Exception in thread OutputFileTransferWorker-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/output_file_transfer_worker.py", line 90, in run
+    "timestamp": ts}
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/collection.py", line 1738, in find_and_modify
+    **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 439, in command
+    uuid_subtype, compile_re, **kwargs)[0]
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/database.py", line 338, in _command
+    for doc in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1217, in _send_message_with_response
+    raise AutoReconnect(str(e))
+AutoReconnect: [Errno 104] Connection reset by peer
+
+2016-06-29 16:26:14,701: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   itransfer InputFileTransferWorker-2
+2016-06-29 16:26:14,701: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-2 stopping
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : itransfer InputFileTransferWorker-2 stopped
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped itransfer InputFileTransferWorker-2
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   otransfer OutputFileTransferWorker-1
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-1 stopping
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-1 stopped
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped otransfer OutputFileTransferWorker-1
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stops   otransfer OutputFileTransferWorker-2
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-2 stopping
+2016-06-29 16:26:14,702: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : otransfer OutputFileTransferWorker-2 stopped
+2016-06-29 16:26:14,703: radical.pilot       : MainProcess                     : Thread-3       : DEBUG   : uworker Thread-3 stopped otransfer OutputFileTransferWorker-2
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/unit_manager_controller.py", line 236, in run
+    unit_list = self._dbs.get_compute_units(unit_manager_id=self.uid)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/db/database.py", line 428, in get_compute_units
+    for obj in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1217, in _send_message_with_response
+    raise AutoReconnect(str(e))
+AutoReconnect: [Errno 104] Connection reset by peer
+
+Exception in thread PilotLauncherWorker-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/pilot_launcher_worker.py", line 307, in run
+    self.check_pilot_states (pilot_col)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/pilot_launcher_worker.py", line 227, in check_pilot_states
+    "timestamp" : ts
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/collection.py", line 551, in update
+    docs, check_keys, self.uuid_subtype, client)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1138, in _send_message
+    raise AutoReconnect(str(e))
+AutoReconnect: [Errno 104] Connection reset by peer
+
+2016-06-29 16:30:08,818: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : ERROR   : Fatal error during execution: .
+2016-06-29 16:30:08,819: radical.entk.SingleClusterEnvironment: MainProcess                     : MainThread     : ERROR   : Fatal error during execution: .
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/ensemblemd/single_cluster_environment.py", line 312, in run
+    plugin.execute_pattern(pattern, self)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/ensemblemd/exec_plugins/pipeline/static.py", line 402, in execute_pattern
+    resource._umgr.wait_units()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/unit_manager.py", line 698, in wait_units
+    time.sleep (0.5)
+2016-06-29 16:30:08,820: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016981.0005 closing
+2016-06-29 16:30:08,820: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : session rp.session.Seans-Laptop.sean.016981.0005 closes   pmgr   pmgr.0000
+2016-06-29 16:30:08,820: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 closing
+2016-06-29 16:30:08,820: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancel   launcher Thread-1
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 disables launcher PilotLauncherWorker-1
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 disabling
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : launcher PilotLauncherWorker-1 disabled
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pworker Thread-1 disabled launcher PilotLauncherWorker-1
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 canceled launcher Thread-1
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : Reconnected to existing ComputePilot {'uid': 'pilot.0000', 'stdout': None, 'start_time': 1467230856.807666, 'resource_detail': {'cores_per_node': None, 'nodes': None, 'lm_detail': u'spark://c252-135.wrangler.tacc.utexas.edu:7077'}, 'submission_time': 1467230799.319765, 'logfile': None, 'resource': u'xsede.wrangler_spark', 'log': [<radical.pilot.logentry.Logentry object at 0x7f39d06aca50>, <radical.pilot.logentry.Logentry object at 0x7f39d06acad0>, <radical.pilot.logentry.Logentry object at 0x7f39d06acb10>, <radical.pilot.logentry.Logentry object at 0x7f39d06acb50>, <radical.pilot.logentry.Logentry object at 0x7f39d06acb90>, <radical.pilot.logentry.Logentry object at 0x7f39d06acbd0>, <radical.pilot.logentry.Logentry object at 0x7f39d06acc10>, <radical.pilot.logentry.Logentry object at 0x7f39d06acc50>, <radical.pilot.logentry.Logentry object at 0x7f39d06acc90>], 'sandbox': u'sftp://wrangler.tacc.utexas.edu/work/04059/tg833588/wrangler/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016981.0005-pilot.0000/', 'state': u'Active', 'stop_time': None, 'stderr': None}
+2016-06-29 16:30:08,821: radical.pilot       : MainProcess                     : MainThread     : DEBUG   : pmgr    pmgr.0000 cancels  pilot  pilot.0000
+Traceback (most recent call last):
+  File "leaflet_finder_spark_wrangler.py", line 62, in <module>
+    cluster.deallocate()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/ensemblemd/single_cluster_environment.py", line 117, in deallocate
+    self._session.close(cleanup=self._cleanup)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/session.py", line 304, in close
+    pmgr.close (terminate=terminate)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/pilot_manager.py", line 175, in close
+    self.cancel_pilots()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/pilot_manager.py", line 579, in cancel_pilots
+    self._worker.register_cancel_pilots_request(pilot_ids=pilot_ids)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/pilot_manager_controller.py", line 531, in register_cancel_pilots_request
+    for pilot in self._dbs.get_pilots(pilot_manager_id=self._pm_id) :
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/db/database.py", line 348, in get_pilots
+    for obj in cursor:
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1076, in next
+    if len(self.__data) or self._refresh():
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 1020, in _refresh
+    self.__uuid_subtype))
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/cursor.py", line 933, in __send_message
+    res = client._send_message_with_response(message, **kwargs)
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 1198, in _send_message_with_response
+    member = self.__ensure_member()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 813, in __ensure_member
+    member, nodes = self.__find_node()
+  File "/home/sean/enTKEnv/local/lib/python2.7/site-packages/pymongo/mongo_client.py", line 904, in __find_node
+    raise AutoReconnect(', '.join(errors))
+pymongo.errors.AutoReconnect: [Errno -2] Name or service not known

@@ -9,7 +9,9 @@ import radical.pilot as rp
 import MDAnalysis as mda
 import numpy as np
 
-
+os.environ['RADICAL_PILOT_DBURL']= 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test'
+#os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
+os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
 
 """ DESCRIPTION: Tutorial 1: A Simple Workload consisting of a Bag-of-Tasks
 """
@@ -54,6 +56,10 @@ def unit_state_cb (unit, state):
 #
 if __name__ == "__main__":
 
+    #adding this for debugging
+    #import resource 
+    #print "This is the resouce usage before partition: \n" 
+    #print resource.getrusage(resource.RUSAGE_SELF)
 
     partitions = 100
     if len(sys.argv)!=3:
@@ -62,6 +68,7 @@ if __name__ == "__main__":
     else:
         cores = int(sys.argv[1])
         partitions = int(sys.argv[2])
+        #report_name = sys.argv[3]
 
     uni_filename =  "vesicle_1_5M_373.tpr"
     traj_filename = "vesicle_1_5M_373_stride1000.xtc"
@@ -75,14 +82,23 @@ if __name__ == "__main__":
     atom_file_name = 'traj_positions.npy'
     np.save(atom_file_name,selection.positions)
 
+    #adding this for debugging
+    #import resource
+    #print "This is the resouce usage after partition: \n"  
+    #print resource.getrusage(resource.RUSAGE_SELF)
 
     # Create a new session. No need to try/except this: if session creation
     # fails, there is not much we can do anyways...
-    session = rp.Session(database_url=os.environ.get('RADICAL_PILOT_DBURL'))
+    #session = rp.Session(database_url=os.environ.get('RADICAL_PILOT_DBURL'))
+    #JUST FOR CONVENIENCE
+
+    print "Creating a session"
+    session = rp.Session()
     print "session id: %s" % session.uid
 
     c = rp.Context('ssh')
-    c.user_id = "tg829618"
+    c.user_id = "tg833588"
+    #c.user_id = "solejar"
     session.add_context(c)
     # all other pilot code is now tried/excepted.  If an exception is caught, we
     # can rely on the session object to exist and be valid, and we can thus tear
@@ -108,10 +124,12 @@ if __name__ == "__main__":
         # http://radicalpilot.readthedocs.org/en/latest/machconf.html#preconfigured-resources
         # 
         pdesc = rp.ComputePilotDescription ()
+	
         pdesc.resource = "xsede.wrangler_spark"  # this is a "label", not a hostname
+        #pdesc.resource = "xsede.comet_spark"  # this is a "label", not a hostname
         pdesc.cores    = cores
-        pdesc.runtime  = 30  # minutes
-        #pdesc.cleanup  = True  # clean pilot sandbox and database entries
+        pdesc.runtime  = 60  # minutes
+        pdesc.cleanup  = True  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
         #pdesc.queue = 'development'
 
@@ -147,6 +165,13 @@ if __name__ == "__main__":
             cudesc.cores       = cores
             # -------- END USER DEFINED CU DESCRIPTION --------- #
 
+            #doing this for testing
+            #cudesc = rp.ComputeUnitDescription()
+            #cudesc.executable = "spark-submit"
+            #cudesc.arguments = ['--conf spark.driver.maxResultSize=5g --executor-memory 60g --driver-memory 30g']
+            #cudesc.input_staging = ['sleep.py']
+            #cudesc.cores = cores 
+
             cudesc_list.append(cudesc)
 
         # Submit the previously created ComputeUnit descriptions to the
@@ -179,6 +204,30 @@ if __name__ == "__main__":
     finally:
         # always clean up the session, no matter if we caught an exception or
         # not.
+         #print "Creating Profile"
+        #ProfFile = open('{1}-{0}.csv'.format(cores,report_name),'w')
+        #ProfFile.write('CU,Name,StageIn,Allocate,Exec,StageOut,Done\n')
+        #for cu in cu_set:
+       	    #extra one???
+            #timing_str=[cu.uid,cu.name,'N/A','N/A','N/A','N/A','N/A','N/A']
+            #for states in cu.state_history:
+                #if states.as_dict()['state']=='AgentStagingInput':
+                    #timing_str[3]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='Allocating':
+                    #timing_str[4]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='Executing':
+                    #timing_str[5]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='AgentStagingOutput':
+                    #timing_str[6]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='Done':
+                    #timing_str[7]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+
+            #ProfFile.write(timing_str[0]+','+timing_str[1]+','+
+             #              timing_str[2]+','+timing_str[3]+','+
+              #             timing_str[4]+','+timing_str[5]+','+
+               #            timing_str[6]+','+timing_str[7]+'\n')
+       # ProfFile.close()
+
         print "closing session"
         session.close ()
 
@@ -188,6 +237,8 @@ if __name__ == "__main__":
         #
         # it will thus both clean out the session's database record, and kill
         # all remaining pilots.
+
+
 
 
 #-------------------------------------------------------------------------------

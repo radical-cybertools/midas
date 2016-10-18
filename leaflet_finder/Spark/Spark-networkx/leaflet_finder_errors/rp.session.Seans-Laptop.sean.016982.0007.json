@@ -1,0 +1,459 @@
+{
+    "pilot": [
+        {
+            "_id": "pilot.0000", 
+            "agent_config": {
+                "agent_launch_method": "FORK", 
+                "agent_layout": {
+                    "agent_0": {
+                        "bridges": [
+                            "agent_staging_input_queue", 
+                            "agent_scheduling_queue", 
+                            "agent_executing_queue", 
+                            "agent_staging_output_queue", 
+                            "agent_unschedule_pubsub", 
+                            "agent_reschedule_pubsub", 
+                            "agent_command_pubsub", 
+                            "agent_state_pubsub"
+                        ], 
+                        "components": {
+                            "AgentExecutingComponent": 1, 
+                            "AgentSchedulingComponent": 1, 
+                            "AgentStagingInputComponent": 1, 
+                            "AgentStagingOutputComponent": 1
+                        }, 
+                        "pull_units": true, 
+                        "sub_agents": [], 
+                        "target": "local"
+                    }
+                }, 
+                "bulk_collection_time": 1.0, 
+                "clone": {
+                    "AgentExecutingComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentSchedulingComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentStagingInputComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentStagingOutputComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentWorker": {
+                        "input": 1, 
+                        "output": 1
+                    }
+                }, 
+                "cores": 48, 
+                "cores_per_node": 24, 
+                "db_poll_sleeptime": 0.1, 
+                "debug": 10, 
+                "drop": {
+                    "AgentExecutingComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentSchedulingComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentStagingInputComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentStagingOutputComponent": {
+                        "input": 1, 
+                        "output": 1
+                    }, 
+                    "AgentWorker": {
+                        "input": 1, 
+                        "output": 1
+                    }
+                }, 
+                "heartbeat_interval": 10, 
+                "lrms": "SLURM", 
+                "max_io_loglength": 1024, 
+                "mongodb_url": "mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test", 
+                "mpi_launch_method": "MPIRUN_RSH", 
+                "pilot_id": "pilot.0000", 
+                "resource_cfg": {
+                    "agent_launch_method": "FORK", 
+                    "agent_scheduler": "CONTINUOUS", 
+                    "agent_spawner": "POPEN", 
+                    "agent_type": "multicore", 
+                    "cores_per_node": "24", 
+                    "default_queue": "compute", 
+                    "description": "The Comet HPC resource at SDSC 'HPC for the 99%' (http://www.sdsc.edu/services/hpc/hpc_systems.html#comet).", 
+                    "filesystem_endpoint": "sftp://comet.sdsc.xsede.org/", 
+                    "gsissh": {
+                        "filesystem_endpoint": "gsisftp://comet.sdsc.xsede.org/", 
+                        "job_manager_endpoint": "slurm+gsissh://comet.sdsc.xsede.org/"
+                    }, 
+                    "job_manager_endpoint": "slurm+ssh://comet.sdsc.xsede.org/", 
+                    "label": "xsede.comet_spark", 
+                    "lrms": "SLURM", 
+                    "mandatory_args": [
+                        "project"
+                    ], 
+                    "mpi_launch_method": "MPIRUN_RSH", 
+                    "notes": "Always set the ``project`` attribute in the ComputePilotDescription or the pilot will fail.", 
+                    "pre_bootstrap_1": [
+                        "module load python"
+                    ], 
+                    "pre_bootstrap_2": [
+                        "export PATH=$PATH", 
+                        "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+                    ], 
+                    "rp_version": "local", 
+                    "schemas": [
+                        "ssh", 
+                        "gsissh"
+                    ], 
+                    "ssh": {
+                        "filesystem_endpoint": "sftp://comet.sdsc.xsede.org/", 
+                        "job_manager_endpoint": "slurm+ssh://comet.sdsc.xsede.org/"
+                    }, 
+                    "task_launch_method": "SPARK", 
+                    "valid_roots": [
+                        "/home"
+                    ], 
+                    "virtenv": "%(global_sandbox)s/ve_comet", 
+                    "virtenv_mode": "create"
+                }, 
+                "runtime": 50, 
+                "scheduler": "CONTINUOUS", 
+                "session_id": "rp.session.Seans-Laptop.sean.016982.0007", 
+                "spawner": "POPEN", 
+                "staging_area": "staging_area", 
+                "staging_scheme": "staging", 
+                "task_launch_method": "SPARK"
+            }, 
+            "callbackhistory": [
+                {
+                    "state": "PendingLaunch", 
+                    "timestamp": 1467330189.598682
+                }, 
+                {
+                    "state": "Launching", 
+                    "timestamp": 1467330191.035713
+                }, 
+                {
+                    "state": "PendingActive", 
+                    "timestamp": 1467330211.750738
+                }, 
+                {
+                    "state": "Active", 
+                    "timestamp": 1467330276.550636
+                }, 
+                {
+                    "state": "Canceled", 
+                    "timestamp": 1467333247.711148
+                }
+            ], 
+            "commands": [
+                {
+                    "arg": null, 
+                    "time": 1467333320.770251, 
+                    "type": "Cancel_Pilot"
+                }
+            ], 
+            "cores_per_node": null, 
+            "description": {
+                "_config": null, 
+                "access_schema": null, 
+                "candidate_hosts": null, 
+                "cleanup": false, 
+                "cores": 48, 
+                "exit_on_error": false, 
+                "memory": null, 
+                "project": "unc100", 
+                "queue": null, 
+                "resource": "xsede.comet_spark", 
+                "runtime": 50, 
+                "sandbox": null
+            }, 
+            "finished": 1467333246.890148, 
+            "global_sandbox": "/home/solejar/radical.pilot.sandbox", 
+            "health_check_enabled": true, 
+            "heartbeat": null, 
+            "input_transfer_finished": null, 
+            "input_transfer_started": null, 
+            "lm_detail": "spark://comet-05-26.sdsc.edu:7077", 
+            "lm_info": {
+                "FORK": {
+                    "version": "0.42", 
+                    "version_detail": "There is no spoon"
+                }
+            }, 
+            "log": [
+                {
+                    "message": "Using bootstrapper /home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh", 
+                    "timestamp": 1467330191.185679
+                }, 
+                {
+                    "message": "Copying bootstrapper 'file://localhost/home/sean/enTKEnv/lib/python2.7/site-packages/radical/pilot/bootstrapper/bootstrap_1.sh' to agent sandbox (<saga.filesystem.directory.Directory object at 0x7fa1063bf390>).", 
+                    "timestamp": 1467330191.185953
+                }, 
+                {
+                    "message": "Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/utils/radical.utils-0.41.1.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/).", 
+                    "timestamp": 1467330193.419287
+                }, 
+                {
+                    "message": "Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/saga/saga-python-0.41.1.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/).", 
+                    "timestamp": 1467330194.36367
+                }, 
+                {
+                    "message": "Copying sdist 'file://localhost/home/sean/enTKEnv/local/lib/python2.7/site-packages/radical/pilot/controller/..//radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/).", 
+                    "timestamp": 1467330195.561349
+                }, 
+                {
+                    "message": "Writing agent configuration to file '/tmp/rp_agent_cfg_dir5HzGlc/agent_0.cfg'.", 
+                    "timestamp": 1467330196.459629
+                }, 
+                {
+                    "message": "Copying agent configuration file 'file://localhost/tmp/rp_agent_cfg_dir5HzGlc/agent_0.cfg' to sandbox (sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/).", 
+                    "timestamp": 1467330196.460704
+                }, 
+                {
+                    "message": "Submitting SAGA job with description: {'Project': 'unc100', 'Executable': '/bin/bash', 'TotalPhysicalMemory': None, 'WorkingDirectory': '/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/', 'Queue': 'compute', 'Environment': {}, 'WallTimeLimit': 50, 'Arguments': ['-l bootstrap_1.sh', \" -d 'radical.utils-0.41.1.tar.gz:saga-python-0.41.1.tar.gz:radical.pilot-v0.40.1-38-ga1e892c-feature-spark.tar.gz' -m 'create' -p 'pilot.0000' -r 'local' -s 'rp.session.Seans-Laptop.sean.016982.0007' -v '/home/solejar/radical.pilot.sandbox/ve_comet' -b 'default' -a 'multicore' -e 'module load python' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'\"], 'ProcessesPerHost': 24, 'Error': 'bootstrap_1.err', 'Output': 'bootstrap_1.out', 'CandidateHosts': None, 'TotalCPUCount': 48}", 
+                    "timestamp": 1467330198.811917
+                }, 
+                {
+                    "message": "SAGA job submitted with job id [slurm+ssh://comet.sdsc.xsede.org/]-[3218841]", 
+                    "timestamp": 1467330210.812025
+                }, 
+                {
+                    "message": "EXIT received. Terminating.", 
+                    "timestamp": 1467333246.890148
+                }, 
+                {
+                    "message": "real 1467333246.914316 sec | user 22.409 sec | system 5.780 sec | mem 46640.00 kB", 
+                    "timestamp": 1467333246.890148
+                }
+            ], 
+            "logfile": null, 
+            "nodes": null, 
+            "output_transfer_finished": null, 
+            "output_transfer_started": null, 
+            "pilotmanager": "pmgr.0000", 
+            "saga_job_id": "[slurm+ssh://comet.sdsc.xsede.org/]-[3218841]", 
+            "sagajobid": null, 
+            "sandbox": "sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/", 
+            "started": 1467330276.103171, 
+            "state": "Canceled", 
+            "statehistory": [
+                {
+                    "state": "PendingLaunch", 
+                    "timestamp": 1467330189.475681
+                }, 
+                {
+                    "state": "Launching", 
+                    "timestamp": 1467330189.98533
+                }, 
+                {
+                    "state": "PendingActive", 
+                    "timestamp": 1467330210.812238
+                }, 
+                {
+                    "state": "Active", 
+                    "timestamp": 1467330276.103171
+                }, 
+                {
+                    "state": "Canceled", 
+                    "timestamp": 1467333246.890148
+                }
+            ], 
+            "stderr": null, 
+            "stdout": null, 
+            "submitted": 1467330189.475681, 
+            "unit_ids": [
+                "unit.000000"
+            ], 
+            "unitmanager": "umgr.0000"
+        }
+    ], 
+    "pmgr": [
+        {
+            "_id": "pmgr.0000", 
+            "data": {}, 
+            "pilot_launcher_workers": 1
+        }
+    ], 
+    "session": {
+        "_id": "rp.session.Seans-Laptop.sean.016982.0007", 
+        "connected": 1467330177.846462, 
+        "created": 1467330177.846462, 
+        "name": null
+    }, 
+    "umgr": [
+        {
+            "_id": "umgr.0000", 
+            "input_transfer_workers": 2, 
+            "output_transfer_workers": 2, 
+            "scheduler": "direct_submission"
+        }
+    ], 
+    "unit": [
+        {
+            "Agent_Input_Directives": [], 
+            "Agent_Input_Status": null, 
+            "Agent_Output_Directives": [], 
+            "Agent_Output_Status": null, 
+            "FTW_Input_Directives": [
+                {
+                    "action": "Transfer", 
+                    "flags": [
+                        "CreateParents", 
+                        "SkipFailed"
+                    ], 
+                    "priority": 0, 
+                    "source": "leafletfinder.py", 
+                    "state": "Pending", 
+                    "target": "leafletfinder.py"
+                }, 
+                {
+                    "action": "Transfer", 
+                    "flags": [
+                        "CreateParents", 
+                        "SkipFailed"
+                    ], 
+                    "priority": 0, 
+                    "source": "traj_positions.npy", 
+                    "state": "Pending", 
+                    "target": "traj_positions.npy"
+                }
+            ], 
+            "FTW_Input_Status": "Pending", 
+            "FTW_Output_Directives": [], 
+            "FTW_Output_Status": null, 
+            "_id": "unit.000000", 
+            "callbackhistory": [
+                {
+                    "state": "StagingInput", 
+                    "timestamp": 1467330279.701181
+                }, 
+                {
+                    "state": "Executing", 
+                    "timestamp": 1467330296.267119
+                }, 
+                {
+                    "state": "Canceled", 
+                    "timestamp": 1467333250.675248
+                }
+            ], 
+            "control": "agent", 
+            "description": {
+                "arguments": [
+                    "--conf spark.driver.maxResultSize=25g", 
+                    "--executor-memory 60g", 
+                    "--driver-memory 30g", 
+                    "leafletfinder.py", 
+                    "48", 
+                    "traj_positions.npy"
+                ], 
+                "cleanup": false, 
+                "cores": 1, 
+                "environment": null, 
+                "executable": "spark-submit", 
+                "input_staging": [
+                    {
+                        "action": "Transfer", 
+                        "flags": [
+                            "CreateParents", 
+                            "SkipFailed"
+                        ], 
+                        "priority": 0, 
+                        "source": "leafletfinder.py", 
+                        "target": "leafletfinder.py"
+                    }, 
+                    {
+                        "action": "Transfer", 
+                        "flags": [
+                            "CreateParents", 
+                            "SkipFailed"
+                        ], 
+                        "priority": 0, 
+                        "source": "traj_positions.npy", 
+                        "target": "traj_positions.npy"
+                    }
+                ], 
+                "kernel": null, 
+                "mpi": false, 
+                "name": "stage-1-task-1", 
+                "output_staging": [], 
+                "post_exec": null, 
+                "pre_exec": [], 
+                "restartable": false, 
+                "stderr": null, 
+                "stdout": null
+            }, 
+            "exec_locs": null, 
+            "exit_code": null, 
+            "finished": null, 
+            "log": [
+                {
+                    "message": "Scheduled for data transfer to ComputePilot pilot.0000.", 
+                    "timestamp": 1467330277.85567
+                }, 
+                {
+                    "message": "push unit to agent after ftw staging", 
+                    "timestamp": 1467330293.32928
+                }, 
+                {
+                    "message": "Pilot 'pilot.0000' has terminated with state 'Canceled'. CU canceled.", 
+                    "timestamp": 1467333247.761899
+                }
+            ], 
+            "pilot": "pilot.0000", 
+            "pilot_sandbox": "sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000/", 
+            "restartable": false, 
+            "sandbox": "sftp://comet.sdsc.xsede.org/home/solejar/radical.pilot.sandbox/rp.session.Seans-Laptop.sean.016982.0007-pilot.0000//unit.000000", 
+            "started": null, 
+            "state": "Canceled", 
+            "statehistory": [
+                {
+                    "state": "Scheduling", 
+                    "timestamp": 1467330276.695502
+                }, 
+                {
+                    "state": "StagingInput", 
+                    "timestamp": 1467330275.454019
+                }, 
+                {
+                    "state": "AgentStagingInputPending", 
+                    "timestamp": 1467330275.454019
+                }, 
+                {
+                    "state": "AgentStagingInput", 
+                    "timestamp": 1467330293.586731
+                }, 
+                {
+                    "state": "AllocatingPending", 
+                    "timestamp": 1467330293.590253
+                }, 
+                {
+                    "state": "Allocating", 
+                    "timestamp": 1467330293.592896
+                }, 
+                {
+                    "state": "ExecutingPending", 
+                    "timestamp": 1467330293.595
+                }, 
+                {
+                    "state": "Executing", 
+                    "timestamp": 1467330293.597036
+                }
+            ], 
+            "stderr": null, 
+            "stdout": null, 
+            "submitted": 1467330276.695502, 
+            "unitmanager": "umgr.0000"
+        }
+    ]
+}

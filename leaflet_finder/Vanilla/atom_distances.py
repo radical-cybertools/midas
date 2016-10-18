@@ -6,7 +6,6 @@ __license__   = "MIT"
 import sys
 import numpy as np
 
-
 def get_distance(Atom1, Atom2):
     # Calculate Euclidean distance. 1-D and 3-D in the future
     return np.sqrt(sum((Atom1 - Atom2) ** 2))
@@ -15,6 +14,7 @@ def n_dim_input_to_numpy_array(temp):
     temp = temp.split(',')
     temp = map(float,temp)
     return np.asfarray(temp)
+    calc_count = calc_count +1
 
 if __name__ == '__main__':
 
@@ -71,3 +71,4 @@ if __name__ == '__main__':
                     distances[i][j]=False
 
     np.save("distances_%d_%d.npz.npy" % (reading_start_point_i,j_dim),distances)
+

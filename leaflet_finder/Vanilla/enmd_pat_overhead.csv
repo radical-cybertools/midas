@@ -1,0 +1,6 @@
+stage,probe,timestamp
+
+stage_1,start_time,2016-07-25 12:21:56.924808
+stage_1,wait_time,2016-07-25 12:21:56.930288
+stage_1,res_time,2016-07-25 12:22:25.344414
+stage_1,stop_time,2016-07-25 12:22:27.148711

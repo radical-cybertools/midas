@@ -1,0 +1,22 @@
+2016-08-02 16:03:06,926: radical.pilot       : MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.6 (default, Jun 22 2015, 17:58:13) [GCC 4.8.2]
+2016-08-02 16:03:06,926: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      pid: 5190
+2016-08-02 16:03:06,926: radical.pilot       : MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2016-08-02 16:03:06,926: radical.pilot       : MainProcess                     : MainThread     : INFO    : radical.pilot        version: 0.40.1
+Traceback (most recent call last):
+  File "lf_finder_enMD_wrangler.py", line 1, in <module>
+    from radical.ensemblemd import Kernel
+  File "/usr/local/lib/python2.7/dist-packages/radical/ensemblemd/__init__.py", line 27, in <module>
+    from radical.ensemblemd.single_cluster_environment import SingleClusterEnvironment
+  File "/usr/local/lib/python2.7/dist-packages/radical/ensemblemd/single_cluster_environment.py", line 14, in <module>
+    import radical.pilot
+  File "/usr/local/lib/python2.7/dist-packages/radical/pilot/__init__.py", line 11, in <module>
+    from .scheduler  import *
+  File "/usr/local/lib/python2.7/dist-packages/radical/pilot/scheduler/__init__.py", line 14, in <module>
+    from direct_submission import DirectSubmissionScheduler
+  File "/usr/local/lib/python2.7/dist-packages/radical/pilot/scheduler/direct_submission.py", line 16, in <module>
+    from ..utils    import logger
+  File "/usr/local/lib/python2.7/dist-packages/radical/pilot/utils/__init__.py", line 17, in <module>
+    from queue              import *
+  File "/usr/local/lib/python2.7/dist-packages/radical/pilot/utils/queue.py", line 3, in <module>
+    import zmq
+ImportError: No module named zmq

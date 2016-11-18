@@ -1,4 +1,5 @@
 import sys
+import os
 import numpy as np
 from pyspark import SparkContext
 from time import time
@@ -11,20 +12,49 @@ def HausdorffDist(data):
         Ni = 3./P.shape[1]
         d = np.array([vsqnorm(pt - Q, axis=1) for pt in P])
         return ( max(d.min(axis=0).max(), d.min(axis=1).max())*Ni )**0.5
-    
+
+    task_start = time()
+
     P = data[0][0]
     Q = data[0][1]
 
-    i_traj = data[1][0]
-    j_traj = data[1][1]
+    P_list = list()
+    for filename in P:
+        if TrajSize == 'long':
+            P_list.append(np.hstack((np.load(TrajSize), \
+                                     np.load(TrajSize), \
+                                     np.load(TrajSize), \
+                                     np.load(TrajSize))))
+        elif TrajSize == 'med':
+            P_list.append(np.hstack((np.load(TrajSize), \
+                                     np.load(TrajSize))))
+        else:
+            P_list.append(np.load(TrajSize))
 
-    dist=np.zeros((len(P),len(Q)))
-
-    for i in range(0,len(P)):
-        for j in range(0,len(Q)):
-          dist[i,j]=dH(P[i],Q[j])
+    Q_list = list()
+    for filename in Q:
+        if TrajSize == 'long':
+            Q_list.append(np.hstack((np.load(TrajSize), \
+                                     np.load(TrajSize), \
+                                     np.load(TrajSize), \
+                                     np.load(TrajSize))))
+        elif TrajSize == 'med':
+            Q_list.append(np.hstack((np.load(TrajSize), \
+                                     np.load(TrajSize))))
+        else:
+            Q_list.append(np.load(TrajSize))
     
-    return (dist,[i_traj,j_traj])
+    data_read = time()
+
+    dist=np.zeros((len(P_list),len(Q_list)))
+
+    for i in range(0,len(P_list)):
+        for j in range(0,len(Q_list)):
+          dist[i,j]=dH(P_list[i],Q_list[j])
+    
+    exec_time = time()
+
+    return (dist,[data[1][0],data[1][1]],task_start,data_read,exec_time)
 
 
 if __name__=="__main__":
@@ -39,24 +69,10 @@ if __name__=="__main__":
         Size = sys.argv[3]
         WindowSize = int(sys.argv[4])
 
-    start_time = time() 
-    sc = SparkContext(appName="PythonHausdorffDistance")    
-    
-    trajectories = list()
-    if Size == 'long':
-        for i in range(1,NumOfTrj+1):
-            trajectories.append(np.hstack((np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
-                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
-                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
-                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)))))
-    elif Size == 'med':
-        for i in range(1,NumOfTrj+1):
-            trajectories.append(np.hstack((np.load('trj_%s_%03i.npz.npy'%(Sel,i)), \
-                                          np.load('trj_%s_%03i.npz.npy'%(Sel,i)))))
-    else:
-        for i in range(1,NumOfTrj+1):
-            trajectories.append(np.load('trj_%s_%03i.npz.npy'%(Sel,i)))
+    start_time = time()   
 
+    trajectories = ['trj_%s_%03i.npz.npy'%(Sel,i) for i in range(1,NumOfTrj+1)]
+    
     arranged_traj = list()
     for i in range(1,NumOfTrj+1,WindowSize):
         for j in range(i,NumOfTrj,WindowSize):
@@ -67,8 +83,13 @@ if __name__=="__main__":
             arranged_elem = ([trajectories[i-1:i-1+WindowSize],trajectories[j-1:j-1+WindowSize]],[i,j])
             arranged_traj.append(arranged_elem)
 
+    data_init = time()
+    
+    sc = SparkContext(appName="PythonHausdorffDistance")
 
-    print arranged_traj
+    TrajSize = sc.broadcast(Size)
+
+   
     traj_par = sc.parallelize(arranged_traj,len(arranged_traj))
 
     # if this RDD is use in a function keep in mind that the pair
@@ -79,16 +100,18 @@ if __name__=="__main__":
     # [('a', 0), ('b', 1), ('c', 2), ('d', 3)]
 
     dist = traj_par.map(HausdorffDist)
-
     dist_Matrix = np.zeros((NumOfTrj,NumOfTrj), dtype=float)
-    for element in dist.collect():
-        print element[1][0],element[1][1], element[0]
-        dist_Matrix[element[1][0]-1:element[1][0]-1+WindowSize,element[1][1]-1:element[1][1]-1+WindowSize] = element[0]
+    timing = np.empty(shape=(0,3),dtype=float)
 
+    for element in dist.collect():
+        dist_Matrix[element[1][0]-1:element[1][0]-1+WindowSize,element[1][1]-1:element[1][1]-1+WindowSize] = element[0]
+        timing = np.vstack((timing,np.array([element[2],element[3],element[4]])))
+    
+    write_time = time()
     np.save('hausdorff_distances.npz.npy',dist_Matrix)
 
     stop_time = time()
-
-
-    print 'Total Time of execution is : %i sec ' % (stop_time - start_time)
+    np.save('timing.npz.npy',timing)
+    print 'start,%d,dataInit,%d,write,%d,stop,%d'%(start_time*1000,data_init*1000,write_time*1000,stop_time*1000)
     
+

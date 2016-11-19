@@ -3,6 +3,7 @@
 import sys, getopt,ast
 import numpy as np
 import argparse
+from time import time
 
 def dH((P, Q)):
     def vsqnorm(v, axis=None):
@@ -24,6 +25,7 @@ if __name__ == "__main__":
     set2 = ast.literal_eval(args.element_set2)
     sel = args.sel
     size = args.size
+    start_time = time()
     if size == 'med':
         trj_list1 = [np.hstack( ( np.load('trj_%s_%03i.npz.npy' % (sel, i)),    \
                                  np.load('trj_%s_%03i.npz.npy' % (sel, i)) ) ) \
@@ -53,8 +55,16 @@ if __name__ == "__main__":
     else:
         trj_list2 = trj_list1
 
+    data_init = time()
+
+    comp = np.zeros((len(set1),len(set2)))
 
     for i in range(1,len(set1)+1):
         for j in range(1,len(set2)+1):
-            comp=dH((trj_list1[i-1],trj_list2[j-1]))
-            print '[{0},{1}]'.format(set1[i-1],set2[j-1]),':',comp
+            comp[i-1,j-1]=dH((trj_list1[i-1],trj_list2[j-1]))
+    exec_time = time()     
+    np.save('distances.npz.npy',comp)
+    total_time = time()
+    print 'Data Read: %f sec, Exec: %f'%(data_init-start_time,exec_time-data_init)
+    print 'Total Time of execution is : %f sec ' % (total_time - start_time)
+

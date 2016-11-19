@@ -1,5 +1,5 @@
 import os
-
+import time
 os.environ['RADICAL_PILOT_VERBOSE']='DEBUG'
 
 import sys
@@ -7,16 +7,19 @@ import radical.pilot as rp
 
 #----------------------------------------------------------------------------
 if __name__ == "__main__":
-    NUMBER_OF_TRAJECTORIES = 192
-    ATOM_SEL = 'ca'
-    TRAJ_SIZE='short'
+
+    NUMBER_OF_TRAJECTORIES = 
+    ATOM_SEL = 
+    TRAJ_SIZE=
     MY_STAGING_AREA = 'staging:///'
-    TRJ_LOCATION = '' #Path that points to the folder the trajectories are
+    TRJ_LOCATION =  #Path that points to the folder the trajectories are
     SHARED_HAUSDORFF = 'hausdorff_opt.py'
-    WINDOW_SIZE = 12
+    WINDOW_SIZE = int(sys.argv[1])
+    cores = int(sys.argv[2])
+    session_name = sys.argv[3]
 
     try:
-        session   = rp.Session (name='')
+        session   = rp.Session (name=session_name)
         c         = rp.Context ('ssh')
         session.add_context (c)
 
@@ -25,12 +28,11 @@ if __name__ == "__main__":
         #pmgr.register_callback (pilot_state_cb)
 
         pdesc = rp.ComputePilotDescription ()
-        pdesc.resource = "xsede.stampede"
-        pdesc.runtime  = 60 # minutes
-        pdesc.cores    = 16
+        pdesc.resource = ""
+        pdesc.runtime  = 20 # minutes
+        pdesc.cores    = cores
         pdesc.project  = "" #Project allocation
         pdesc.cleanup  = False
-        pdesc.queue    = 'development'
 
         # submit the pilot.
         pilot = pmgr.submit_pilots (pdesc)
@@ -86,7 +88,7 @@ if __name__ == "__main__":
             # define the compute unit, to compute over the trajectory pair
                 cudesc = rp.ComputeUnitDescription()
                 cudesc.executable    = "python"
-                cudesc.pre_exec      = ["module load python/2.7.12"] #Only for Stampede
+                cudesc.pre_exec      = ["module load python"] #Only for Stampede
                 cudesc.input_staging = fshared
                 cudesc.arguments     = ['hausdorff_opt.py', range(i,i+WINDOW_SIZE), range(j,j+WINDOW_SIZE), ATOM_SEL, TRAJ_SIZE]
                 cudesc.cores         = 1
@@ -101,28 +103,28 @@ if __name__ == "__main__":
         umgr.wait_units()
 
         print "Creating Profile"
-        ProfFile = open('{0}.csv'.format(session.name()),'w')
-        ProfFile.write('CU,Name,New,StageIn,Allocate,Exec,StageOut,Done\n')
-        for cu in cu_full_list:
-            timing_str=[cu.uid,cu.name,'N/A','N/A','N/A','N/A','N/A','N/A']
+        ProfFile = open('{0}.csv'.format(session.name),'w')
+        ProfFile.write('CU,New,StageIn,Allocate,Exec,StageOut,Done\n')
+        for cu in units:
+            timing_str=[cu.uid,'N/A','N/A','N/A','N/A','N/A','N/A']
             for states in cu.state_history:
                 if states.as_dict()['state']=='Scheduling':
-                    timing_str[2]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                    timing_str[1]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
                 elif states.as_dict()['state']=='AgentStagingInput':
-                    timing_str[3]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                    timing_str[2]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
                 elif states.as_dict()['state']=='Allocating':
-                    timing_str[4]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                    timing_str[3]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
                 elif states.as_dict()['state']=='Executing':
-                    timing_str[5]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                    timing_str[4]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
                 elif states.as_dict()['state']=='AgentStagingOutput':
-                    timing_str[6]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                    timing_str[5]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
                 elif states.as_dict()['state']=='Done':
-                    timing_str[7]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                    timing_str[6]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
 
             ProfFile.write(timing_str[0]+','+timing_str[1]+','+
                            timing_str[2]+','+timing_str[3]+','+
                            timing_str[4]+','+timing_str[5]+','+
-                           timing_str[6]+','+timing_str[7]+'\n')
+                           timing_str[6]+'\n')
         ProfFile.close()
 
 

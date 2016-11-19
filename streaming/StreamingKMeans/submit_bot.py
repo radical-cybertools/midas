@@ -166,6 +166,13 @@ if __name__ == "__main__":
             # -------- END USER DEFINED CU DESCRIPTION --------- #
 
 
+           #--------BEGEIN USER DEFINED SPARK-CU DESCRIPTION-------#
+           cudesc = rp.ComputeUnitDescription()
+           cudesc.executable = "spark-submit"
+           cudesc.arguments = [' --files  '] 
+
+
+
 
             #doing this for testing
             #cudesc = rp.ComputeUnitDescription()

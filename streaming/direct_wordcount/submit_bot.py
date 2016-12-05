@@ -55,35 +55,6 @@ def unit_state_cb (unit, state):
 #
 if __name__ == "__main__":
 
-    #adding this for debugging
-    #import resource 
-    #print "This is the resouce usage before partition: \n" 
-    #print resource.getrusage(resource.RUSAGE_SELF)
-
-    # partitions = 100
-    # if len(sys.argv)!=3:
-    #     print 'Usage: python submit_bot_Stampede.py <cores>  <partitions>'
-    #     sys.exit(-1)
-    # else:
-    #     cores = int(sys.argv[1])
-    #     partitions = int(sys.argv[2])
-    #     #report_name = sys.argv[3]
-
-    #uni_filename =  "vesicle_1_5M_373.tpr"
-    #traj_filename = "vesicle_1_5M_373_stride1000.xtc"
-
-    #
-    #adding this for debugging
-    #import resource
-    #print "This is the resouce usage after partition: \n"  
-    #print resource.getrusage(resource.RUSAGE_SELF)
-
-    # Create a new session. No need to try/except this: if session creation
-    # fails, there is not much we can do anyways...
-    #session = rp.Session(database_url=os.environ.get('RADICAL_PILOT_DBURL'))
-    #JUST FOR CONVENIENCE
-
-    print "Creating a session"
     session = rp.Session()
     print "session id: %s" % session.uid
 
@@ -143,47 +114,42 @@ if __name__ == "__main__":
 
         NUMBER_JOBS  = 1 # the total number of cus to run
         NUMBER_PARTITIONS = 2
-        TOPIC_NAME = 'KmeansList'
-
+        TOPIC_NAME = 'KmeansList'  
+        pilot_info = pilot.as_dict()
+        print pilot_info['resource_detail']['lm_detail']
         # create CU descriptions
         cudesc_list = []
-        for i in range(NUMBER_JOBS):
+ 
+        #----------BEGIN USER DEFINED KAFKA-CU DESCRIPTION-------------------#
+        cudesc = rp.ComputeUnitDescription()
+        cudesc.executable = 'kafka-topics.sh'
+        cudesc.arguments = [' --create --replication-factor 1 --partitions %d \
+                                --topic %s' % (NUMBER_PARTITIONS,TOPIC_NAME)]
+        cudesc.cores =2
+        #-----------END USER DEFINED KAFKA-CU DESCRIPTION--------------------#
+        
+        cu_set = umgr.submit_units(cudesc)
+        
+        umgr.wait_units()
+        pilot_info = pilot.as_dict()
+        zookeeper_url = pilot_info['resource_detail']['lm_detail']
+        broker = zookeeper_url + ':9092'
+        print broker
 
-            # # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
-            # cudesc = rp.ComputeUnitDescription()
-            # cudesc.executable  = "spark-submit"
-            # cudesc.arguments =  ['--conf spark.driver.maxResultSize=5g --executor-memory 60g --driver-memory 30g  leafletfinder.py %d %s' % (partitions,atom_file_name)]
-            # cudesc.input_staging = ['leafletfinder.py', atom_file_name]
-            # cudesc.cores       = cores
-            # # -------- END USER DEFINED CU DESCRIPTION --------- #
+        print "Creating a session"
+        #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
+        cudesc = rp.ComputeUnitDescription()
+        cudesc.executable = "spark-submit"
+        cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2, direct_kafka_wordcount.py', \
+                                            broker,'KmeansList', '--verbose']
+	cudesc.input_staging = ['direct_kafka_wordcount.py'] 
+	cudesc.cores = 4
+ 
+        #cudesc_list.append(cudesc)
 
-            # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
-            #cudesc = rp.ComputeUnitDescription()
-            #cudesc.executable  = "kafka-topics.sh"
-            #cudesc.arguments =  ["--create  --replication-factor 1 --partitions %d --topic %s" % (NUMBER_PARTITIONS, TOPIC_NAME)]
-            #cudesc.cores       = 2
-            # -------- END USER DEFINED CU DESCRIPTION --------- #
-
-
-           #--------BEGEIN USER DEFINED SPARK-CU DESCRIPTION-------#
-           cudesc = rp.ComputeUnitDescription()
-           cudesc.executable = "spark-submit"
-           cudesc.arguments = [' StreamingKMeans.py --verbose']
-           cudesc.input_staging = ['StreamingKMeans.py'] 
-           cudesc.cores = 4
-
-
-
-
-            #doing this for testing
-            #cudesc = rp.ComputeUnitDescription()
-            #cudesc.executable = "spark-submit"
-            #cudesc.arguments = ['--conf spark.driver.maxResultSize=5g --executor-memory 60g --driver-memory 30g']
-            #cudesc.input_staging = ['sleep.py']
-            #cudesc.cores = cores 
-
-        cudesc_list.append(cudesc)
-
+        cu_set2 = umgr.submit_units(cudesc)
+        umgr.wait_units()
+        print pilot.as_dict()
         # Submit the previously created ComputeUnit descriptions to the
         # PilotManager. This will trigger the selected scheduler to start
         # assigning ComputeUnits to the ComputePilots.

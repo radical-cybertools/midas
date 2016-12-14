@@ -116,7 +116,7 @@ if __name__ == "__main__":
         NUMBER_PARTITIONS = 2
         TOPIC_NAME = 'KmeansList'  
         pilot_info = pilot.as_dict()
-        print pilot_info['resource_detail']['lm_detail']
+        #print pilot_info['resource_detail']['lm_detail']['zk_url']
         # create CU descriptions
         cudesc_list = []
  
@@ -132,9 +132,11 @@ if __name__ == "__main__":
         
         umgr.wait_units()
         pilot_info = pilot.as_dict()
-        zookeeper_url = pilot_info['resource_detail']['lm_detail']
+        zookeeper_url = pilot_info['resource_detail']['lm_detail']['zk_url']
+        print pilot_info
         broker = zookeeper_url + ':9092'
         print broker
+        print pilot_info['resource_detail']['lm_detail']['brokers'][0]
 
         print "Creating a session"
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#

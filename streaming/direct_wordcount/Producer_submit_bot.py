@@ -7,6 +7,7 @@ import sys
 import os
 import radical.pilot as rp
 import numpy as np
+import time
 
 #os.environ['RADICAL_PILOT_DBURL']= 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test'
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
@@ -85,7 +86,7 @@ if __name__ == "__main__":
         # http://radicalpilot.readthedocs.org/en/latest/machconf.html#preconfigured-resources
         # 
         pdesc = rp.ComputePilotDescription ()
-	
+    
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
         pdesc.cores    = 16
         pdesc.runtime  = 15  # minutes
@@ -115,7 +116,6 @@ if __name__ == "__main__":
         NUMBER_PARTITIONS = 2
         TOPIC_NAME = 'KmeansList'  
         pilot_info = pilot.as_dict()
-        #print pilot_info['resource_detail']['lm_detail']['zk_url']
         # create CU descriptions
         cudesc_list = []
  
@@ -132,37 +132,45 @@ if __name__ == "__main__":
         umgr.wait_units()
         pilot_info = pilot.as_dict()
         zookeeper_url = pilot_info['resource_detail']['lm_detail']['zk_url']
+        zk = zookeeper_url
         print pilot_info
         broker = zookeeper_url + ':9092'
         print broker
+        print pilot_info['resource_detail']['lm_detail']['brokers'][0]
+        broker = pilot_info['resource_detail']['lm_detail']['brokers'][0] + ':9092'
 
         print "Creating a session"
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
         cudesc = rp.ComputeUnitDescription()
+        cudesc.executable = "python"
+        cudesc.arguments = ['producer.py',broker]
+        cudesc.input_staging = ['producer.py'] 
+        cudesc.cores = 4
+        #---------END USER DEFINED CU DESCRIPTION---------------#
+           
+        cudesc_list.append(cudesc)
+        #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
+        cudesc = rp.ComputeUnitDescription()
         cudesc.executable = "spark-submit"
-        cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2, direct_kafka_wordcount.py', \
-                                            broker,'KmeansList', '--verbose']
-	cudesc.input_staging = ['direct_kafka_wordcount.py'] 
-	cudesc.cores = 4
- 
-        #cudesc_list.append(cudesc)
+        cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2,\
+                             direct_kafka_wordcount.py',broker,'KmeansList', '--verbose']
+        cudesc.input_staging = ['direct_kafka_wordcount.py'] 
+        cudesc.cores = 4
+        #---------END USER DEFINED CU DESCRIPTION---------------#
+        cudesc_list.append(cudesc)
 
-        cu_set2 = umgr.submit_units(cudesc)
-        umgr.wait_units()
-        print pilot.as_dict()
         # Submit the previously created ComputeUnit descriptions to the
         # PilotManager. This will trigger the selected scheduler to start
         # assigning ComputeUnits to the ComputePilots.
         print "Submit Compute Units to Unit Manager ..."
-        cu_set = umgr.submit_units (cudesc_list)
+        cu_set2 = umgr.submit_units (cudesc_list)
 
         print "Waiting for CUs to complete ..."
         umgr.wait_units()
 
+        print pilot.as_dict()
+        
         print "All CUs completed:"
-        for unit in cu_set:
-            print "* CU %s, state %s, exit code: %s, stdout: %s" \
-                % (unit.uid, unit.state, unit.exit_code, unit.stdout.strip())
     
 
     except Exception as e:
@@ -184,7 +192,7 @@ if __name__ == "__main__":
         #ProfFile = open('{1}-{0}.csv'.format(cores,report_name),'w')
         #ProfFile.write('CU,Name,StageIn,Allocate,Exec,StageOut,Done\n')
         #for cu in cu_set:
-       	    #extra one???
+            #extra one???
             #timing_str=[cu.uid,cu.name,'N/A','N/A','N/A','N/A','N/A','N/A']
             #for states in cu.state_history:
                 #if states.as_dict()['state']=='AgentStagingInput':

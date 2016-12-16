@@ -1,6 +1,5 @@
 #!/bin/python
 #
-# /home/01131/tg804093/work/spark-2.0.2-bin-hadoop2.6/bin/spark-submit --master spark://c251-102.wrangler.tacc.utexas.edu:7077 --packages  org.apache.spark:spark-streaming-kafka-0-10_2.11:2.0.2 --files saga_hadoop_utils.py StreamingKMeans.py
 
 import os
 import sys
@@ -10,7 +9,6 @@ import datetime
 start = time.time()
 import logging
 logging.basicConfig(level=logging.WARN)
-sys.path.append("../util")
 from pyspark.mllib.linalg import Vectors
 from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.clustering import StreamingKMeans
@@ -22,7 +20,6 @@ import msgpack
 import msgpack_numpy as m
 import urllib, json
 import socket
-import saga_hadoop_utils
 import re
 from subprocess import check_output
 

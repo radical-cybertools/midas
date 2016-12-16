@@ -137,6 +137,8 @@ if __name__ == "__main__":
         broker = zookeeper_url + ':9092'
         print broker
         print pilot_info['resource_detail']['lm_detail']['brokers'][0]
+        broker = pilot_info['resource_detail']['lm_detail']['brokers'][0] + ':9092'
+        print broker
 
         print "Creating a session"
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#

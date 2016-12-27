@@ -17,5 +17,6 @@ if __name__ == "__main__":
     topic = client.topics['KmeansList']
     with topic.get_sync_producer() as producer:
         for i in xrange(100):
-            producer.produce('word number %d \n' % i)
+            print 'test'
+            producer.produce(str('word number 1 \n'))
 

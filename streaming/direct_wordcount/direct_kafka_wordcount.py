@@ -41,7 +41,7 @@ if __name__ == "__main__":
         exit(-1)
 
     sc = SparkContext(appName="PythonStreamingDirectKafkaWordCount")
-    ssc = StreamingContext(sc, 2)
+    ssc = StreamingContext(sc, 1)
 
     brokers = sys.argv[1]
     topic = sys.argv[2]

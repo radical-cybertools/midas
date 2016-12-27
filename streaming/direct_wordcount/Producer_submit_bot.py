@@ -88,8 +88,8 @@ if __name__ == "__main__":
         pdesc = rp.ComputePilotDescription ()
     
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 16
-        pdesc.runtime  = 15  # minutes
+        pdesc.cores    = 64
+        pdesc.runtime  = 3  # minutes
         pdesc.cleanup  = True  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
         pdesc.queue = 'development'
@@ -139,7 +139,6 @@ if __name__ == "__main__":
         print pilot_info['resource_detail']['lm_detail']['brokers'][0]
         broker = pilot_info['resource_detail']['lm_detail']['brokers'][0] + ':9092'
 
-        print "Creating a session"
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = "python"
@@ -163,7 +162,7 @@ if __name__ == "__main__":
         # PilotManager. This will trigger the selected scheduler to start
         # assigning ComputeUnits to the ComputePilots.
         print "Submit Compute Units to Unit Manager ..."
-        cu_set2 = umgr.submit_units (cudesc_list)
+        #cu_set2 = umgr.submit_units (cudesc_list)     TODO: remove to submit
 
         print "Waiting for CUs to complete ..."
         umgr.wait_units()
@@ -171,6 +170,18 @@ if __name__ == "__main__":
         print pilot.as_dict()
         
         print "All CUs completed:"
+
+        print 'Timings'
+        timers = pilot_info['resource_detail']['lm_detail']['startup_times']
+        print timers
+        spark = timers['spark']
+        kafka = timers['zk_kafka']
+        print 'kafka: '
+        print kafka
+        print 'spark'
+        print spark
+
+
     
 
     except Exception as e:

@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("file", help="Number of cores that will be requested")
+    parser.add_argument("file", help="File with the atoms positions")
     parser.add_argument("win_size", help="Dimension size of the submatrix")
     parser.add_argument("i_coord", help="i coordinate at the distance matrix")
     parser.add_argument("j_coord", help="j coordinate at the distance matrix")

@@ -141,7 +141,7 @@ if __name__ == "__main__":
                 cudesc.cores = 1
                 cudesc.pre_exec=['module load python']
                 cudesc.executable  = "python"
-                cudesc.arguments   = ['atom_distances.py','trajectories.npy', WINDOW_SIZE, i, j, total_file_lines,cutoff] # each CU should compute window size distances 
+                cudesc.arguments   = ['atom_distances.py','trajectories.npy', WINDOW_SIZE, i, j,cutoff] # each CU should compute window size distances 
                                                                         # I use i to calculate from which element I start calculating distances in each cu
                 cudesc.input_staging = ['atom_distances.py',sd_shared]
                 cudesc.output_staging = [sd_inter_out]

@@ -24,6 +24,8 @@ if __name__ == '__main__':
     #Adjacency matrix 
     adj_matrix = np.empty([NUMBER_OF_ATOMS,NUMBER_OF_ATOMS],dtype='bool')
 
+    #Based on the number of atoms and the submatrices size read all the data
+    # and put them to the correct position in the Distance matrix.
     for i in range(1,NUMBER_OF_ATOMS+1,WINDOW_SIZE):
         for j in range(i,NUMBER_OF_ATOMS,WINDOW_SIZE):
             data = np.load("distances_%d_%d.npz.npy" % (i-1,j-1))
@@ -31,8 +33,8 @@ if __name__ == '__main__':
     
     read_time = time()
 
+    # Create a graph that has as adjacency matrix the above and find its connected components.
     graph = nx.Graph(adj_matrix)
-    #nx.write_adjlist(graph, 'graph.adjlist')
     subgraphs = nx.connected_components(graph)
     exec_time = time()
     indices = [np.sort(list(g)) for g in subgraphs]

@@ -37,9 +37,10 @@ if __name__ == '__main__':
     atoms = np.load(filename)
 
     data_init = time()
-    # the difference is that in the Cus compute data that are in main diagonal compute half of the elements 
-    # because table is symmetric, so the second loop can be half in the first case 
+
     distances=np.empty((WINDOW_SIZE,WINDOW_SIZE),dtype='bool')
+    # In case the submatrix is on the diagonal of the distance matrix do not calculate
+    # everything, but just half of it.
     if reading_start_point_i == j_dim:
         for i in range(0,WINDOW_SIZE):
             for j in range(i+1,WINDOW_SIZE):
@@ -49,6 +50,8 @@ if __name__ == '__main__':
                 else:
                     distances[i][j]=False
     else:
+        # Otherwises, the atoms in the matrix are different. As a result the whole
+        # submatrix of size WINDOW_SIZE x WINDOW_SIZE should be calculated.
         for i in range(0,WINDOW_SIZE):
             for j in range(0,WINDOW_SIZE):
                 dist = get_distance(atoms[reading_start_point_i+i],atoms[j_dim+j])  
@@ -57,6 +60,9 @@ if __name__ == '__main__':
                 else:
                     distances[i][j]=False
     exec_time = time()
+
+    #save the result and indicate in the file name where the (i,j) of the first
+    # (0,0) elements of the submatrix should go.
     np.save("distances_%d_%d.npz.npy" % (reading_start_point_i,j_dim),distances)
 
     write_time = time()

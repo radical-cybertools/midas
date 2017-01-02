@@ -5,14 +5,13 @@ __license__   = "MIT"
 
 import sys
 import os
-
-os.environ['RADICAL_PILOT_VERBOSE'] = 'DEBUG'
-
 import radical.pilot as rp
-import argparse
-#import numpy as np
+import MDAnalysis as mda
+import numpy as np
 
-
+os.environ['RADICAL_PILOT_DBURL']= 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test'
+#os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
+os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
 
 """ DESCRIPTION: Tutorial 1: A Simple Workload consisting of a Bag-of-Tasks
 """
@@ -23,46 +22,83 @@ import argparse
 # Try running this example with RADICAL_PILOT_VERBOSE=debug set if 
 # you want to see what happens behind the scences!
 
+
+#------------------------------------------------------------------------------
+#
+def pilot_state_cb (pilot, state):
+
+    if not pilot:
+        return
+
+    print "[Callback]: ComputePilot '%s' state: %s." % (pilot.uid, state)
+
+    if state == rp.FAILED:
+        sys.exit (1)
+
+
+#------------------------------------------------------------------------------
+#
+def unit_state_cb (unit, state):
+
+    if not unit:
+        return
+
+    global CNT
+
+    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot_id, state)
+
+    if state == rp.FAILED:
+        print "stderr: %s" % unit.stderr
+        sys.exit(2)
+
+
 #------------------------------------------------------------------------------
 #
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("win_size", help="Dimension size of the submatrix")
-    parser.add_argument("cores", help="Number of cores that will be requested")
-    #parser.add_argument("uni", help="Universe File, extension tpr")
-    #parser.add_argument("trajs", help="Trajectory File, extension xtc")
-    parser.add_argument("atomFile",help="The numpy file that contains the positions of the atoms")
-    parser.add_argument("atomNum",help="The totatl number of atoms in the atomFile")
-    parser.add_argument("session", help="The RADICAL-Pilot Session name")
+    #adding this for debugging
+    #import resource 
+    #print "This is the resouce usage before partition: \n" 
+    #print resource.getrusage(resource.RUSAGE_SELF)
 
-    partitions = int(args.win_size)
-    CPUs = int(args.cores) # number of cores
-    session_name = args.session
+    partitions = 100
+    if len(sys.argv)!=3:
+        print 'Usage: python submit_bot_Stampede.py <cores>  <partitions>'
+        sys.exit(-1)
+    else:
+        cores = int(sys.argv[1])
+        partitions = int(sys.argv[2])
+        #report_name = sys.argv[3]
 
+    uni_filename =  "vesicle_1_5M_373.tpr"
+    traj_filename = "vesicle_1_5M_373_stride1000.xtc"
 
-    #uni_filename = args.uni
-    #traj_filename = args.trajs
+    try:
+        universe=mda.Universe(uni_filename, traj_filename)
+    except IOError:
+        print "Missing universe and trajectory file"
+        sys.exit(-1)
+    selection = universe.select_atoms('name P*')
+    atom_file_name = 'traj_positions.npy'
+    np.save(atom_file_name,selection.positions)
 
-    #try:
-    #    universe=mda.Universe(uni_filename, traj_filename)
-    #except IOError:
-    #    print "Missing universe and trajectory file"
-    #    sys.exit(-1)
-    #selection = universe.select_atoms('name P*')
-
-    # Numpy file that contains the atom positions
-    atom_file_name = args.atomFile
-    #np.save(atom_file_name,selection.positions)
-
+    #adding this for debugging
+    #import resource
+    #print "This is the resouce usage after partition: \n"  
+    #print resource.getrusage(resource.RUSAGE_SELF)
 
     # Create a new session. No need to try/except this: if session creation
     # fails, there is not much we can do anyways...
-    session = rp.Session(database_url=os.environ.get('RADICAL_PILOT_DBURL'),name = session_name)
+    #session = rp.Session(database_url=os.environ.get('RADICAL_PILOT_DBURL'))
+    #JUST FOR CONVENIENCE
+
+    print "Creating a session"
+    session = rp.Session()
     print "session id: %s" % session.uid
 
     c = rp.Context('ssh')
-    c.user_id = "iparask"
+    c.user_id = "tg833588"
+    #c.user_id = "solejar"
     session.add_context(c)
     # all other pilot code is now tried/excepted.  If an exception is caught, we
     # can rely on the session object to exist and be valid, and we can thus tear
@@ -76,7 +112,7 @@ if __name__ == "__main__":
         # Register our callback with the PilotManager. This callback will get
         # called every time any of the pilots managed by the PilotManager
         # change their state.
-        # pmgr.register_callback(pilot_state_cb)
+        pmgr.register_callback(pilot_state_cb)
 
         # ----- CHANGE THIS -- CHANGE THIS -- CHANGE THIS -- CHANGE THIS ------
         # 
@@ -88,11 +124,13 @@ if __name__ == "__main__":
         # http://radicalpilot.readthedocs.org/en/latest/machconf.html#preconfigured-resources
         # 
         pdesc = rp.ComputePilotDescription ()
-        pdesc.resource = "xsede.comet_spark"  # this is a "label", not a hostname
+	
+        pdesc.resource = "xsede.wrangler_spark"  # this is a "label", not a hostname
+        #pdesc.resource = "xsede.comet_spark"  # this is a "label", not a hostname
         pdesc.cores    = cores
         pdesc.runtime  = 60  # minutes
-        pdesc.cleanup  = False  # clean pilot sandbox and database entries
-        pdesc.project = "unc100"
+        pdesc.cleanup  = True  # clean pilot sandbox and database entries
+        pdesc.project = "TG-MCB090174"
         #pdesc.queue = 'development'
 
         # submit the pilot.
@@ -107,7 +145,7 @@ if __name__ == "__main__":
         # Register our callback with the UnitManager. This callback will get
         # called every time any of the units managed by the UnitManager
         # change their state.
-        #umgr.register_callback(unit_state_cb)
+        umgr.register_callback(unit_state_cb)
 
         # Add the created ComputePilot to the UnitManager.
         print "Registering Compute Pilot with Unit Manager ..."
@@ -121,18 +159,18 @@ if __name__ == "__main__":
 
             # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
             cudesc = rp.ComputeUnitDescription()
-            #cudesc.pre_exec=['export PYSPARK_PYTHON=/home/iparask/radical.pilot.sandbox/ve_comet/bin/python']
             cudesc.executable  = "spark-submit"
-            cudesc.arguments =  ['--conf','spark.eventLog.enabled=true',\
-                                 '--conf','spark.eventLog.dir=./', \
-                                 '--conf','spark.ui.port=4045',\
-                                 '--conf spark.driver.maxResultSize=30g', \
-                                 '--executor-memory 60g', \
-                                 '--driver-memory 60g',  \
-                                 'leafletfinder.py %d %s' % (partitions,atom_file_name)]
+            cudesc.arguments =  ['--conf spark.driver.maxResultSize=5g --executor-memory 60g --driver-memory 30g  leafletfinder.py %d %s' % (partitions,atom_file_name)]
             cudesc.input_staging = ['leafletfinder.py', atom_file_name]
             cudesc.cores       = cores
             # -------- END USER DEFINED CU DESCRIPTION --------- #
+
+            #doing this for testing
+            #cudesc = rp.ComputeUnitDescription()
+            #cudesc.executable = "spark-submit"
+            #cudesc.arguments = ['--conf spark.driver.maxResultSize=5g --executor-memory 60g --driver-memory 30g']
+            #cudesc.input_staging = ['sleep.py']
+            #cudesc.cores = cores 
 
             cudesc_list.append(cudesc)
 
@@ -166,9 +204,32 @@ if __name__ == "__main__":
     finally:
         # always clean up the session, no matter if we caught an exception or
         # not.
-        print pilot.as_dict()
+         #print "Creating Profile"
+        #ProfFile = open('{1}-{0}.csv'.format(cores,report_name),'w')
+        #ProfFile.write('CU,Name,StageIn,Allocate,Exec,StageOut,Done\n')
+        #for cu in cu_set:
+       	    #extra one???
+            #timing_str=[cu.uid,cu.name,'N/A','N/A','N/A','N/A','N/A','N/A']
+            #for states in cu.state_history:
+                #if states.as_dict()['state']=='AgentStagingInput':
+                    #timing_str[3]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='Allocating':
+                    #timing_str[4]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='Executing':
+                    #timing_str[5]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='AgentStagingOutput':
+                    #timing_str[6]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+                #elif states.as_dict()['state']=='Done':
+                    #timing_str[7]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
+
+            #ProfFile.write(timing_str[0]+','+timing_str[1]+','+
+             #              timing_str[2]+','+timing_str[3]+','+
+              #             timing_str[4]+','+timing_str[5]+','+
+               #            timing_str[6]+','+timing_str[7]+'\n')
+       # ProfFile.close()
+
         print "closing session"
-        session.close (cleanup=False)
+        session.close ()
 
         # the above is equivalent to
         #
@@ -176,6 +237,8 @@ if __name__ == "__main__":
         #
         # it will thus both clean out the session's database record, and kill
         # all remaining pilots.
+
+
 
 
 #-------------------------------------------------------------------------------

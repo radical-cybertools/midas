@@ -5,70 +5,65 @@ __license__   = "MIT"
 
 import sys
 import numpy as np
+from time import time
+import argparse
+
 
 def get_distance(Atom1, Atom2):
     # Calculate Euclidean distance. 1-D and 3-D in the future
     return np.sqrt(sum((Atom1 - Atom2) ** 2))
 
-def n_dim_input_to_numpy_array(temp):
-    temp = temp.split(',')
-    temp = map(float,temp)
-    return np.asfarray(temp)
-    calc_count = calc_count +1
 
 if __name__ == '__main__':
 
 
-    args = sys.argv[1:]
-    WINDOW_SIZE = int(sys.argv[1])
-    reading_start_point_i = int(sys.argv[2]) -1
-    j_dim = int(sys.argv[3]) -1
-    total_file_lines =  int(sys.argv[4])
-    cutoff = float(sys.argv[5])
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file", help="File with the atoms positions")
+    parser.add_argument("win_size", help="Dimension size of the submatrix")
+    parser.add_argument("i_coord", help="i coordinate at the distance matrix")
+    parser.add_argument("j_coord", help="j coordinate at the distance matrix")
+    parser.add_argument("cutoff", help="The cutoff value for the edge existence")
+    args = parser.parse_args()
+
+    filename = args.file
+    WINDOW_SIZE = int(args.win_size)
+    reading_start_point_i = int(args.i_coord) -1
+    j_dim = int(args.j_coord) -1
+    cutoff = float(args.cutoff)
 
     #----------------------Reading Input File-------------------------------#
+    start = time()
 
-    read_file = open('input.txt')
+    atoms = np.load(filename)
 
+    data_init = time()
 
-    atoms = list()
-    for count, line in enumerate(read_file):
-        if count == total_file_lines+1 or count >= reading_start_point_i+WINDOW_SIZE:
-            break
-        if count >= reading_start_point_i and count <reading_start_point_i+WINDOW_SIZE:
-            atoms.append(n_dim_input_to_numpy_array(line))
-
-    # That means that we are not calculating the elements of the main diagonal which are the same.
-    # We do calculate differnt atoms
-    if reading_start_point_i!=j_dim:
-        atomsY = list()
-        atomsY.append(n_dim_input_to_numpy_array(line)) # already read from previous for-loop
-        for countY, line in enumerate(read_file):
-            if countY > j_dim + WINDOW_SIZE-count-1:
-                break
-            if countY >= j_dim-count and countY < j_dim + WINDOW_SIZE-count-1:  #-1 because we already appended the first line 
-                atomsY.append(n_dim_input_to_numpy_array(line))
-    read_file.close()
-
-    # the difference is that in the Cus compute data that are in main diagonal compute half of the elements 
-    # because table is symmetric, so the second loop can be half in the first case 
     distances=np.empty((WINDOW_SIZE,WINDOW_SIZE),dtype='bool')
+    # In case the submatrix is on the diagonal of the distance matrix do not calculate
+    # everything, but just half of it.
     if reading_start_point_i == j_dim:
         for i in range(0,WINDOW_SIZE):
             for j in range(i+1,WINDOW_SIZE):
-                dist = get_distance(atoms[i],atoms[j])  
+                dist = get_distance(atoms[reading_start_point_i+i],atoms[reading_start_point_i+j])  
                 if dist<=cutoff:
                     distances[i][j]=True 
                 else:
                     distances[i][j]=False
     else:
+        # Otherwises, the atoms in the matrix are different. As a result the whole
+        # submatrix of size WINDOW_SIZE x WINDOW_SIZE should be calculated.
         for i in range(0,WINDOW_SIZE):
             for j in range(0,WINDOW_SIZE):
-                dist = get_distance(atoms[i],atomsY[j])  
+                dist = get_distance(atoms[reading_start_point_i+i],atoms[j_dim+j])  
                 if dist<=cutoff:
                     distances[i][j]=True
                 else:
                     distances[i][j]=False
+    exec_time = time()
 
+    #save the result and indicate in the file name where the (i,j) of the first
+    # (0,0) elements of the submatrix should go.
     np.save("distances_%d_%d.npz.npy" % (reading_start_point_i,j_dim),distances)
 
+    write_time = time()
+    print '%f,%f,%f'%(data_init - start, exec_time - data_init, write_time - exec_time)

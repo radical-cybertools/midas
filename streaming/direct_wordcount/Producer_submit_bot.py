@@ -60,7 +60,7 @@ if __name__ == "__main__":
     print "session id: %s" % session.uid
 
     c = rp.Context('ssh')
-    c.user_id = "tg829618"
+#    c.user_id = "tg829618"
     session.add_context(c)
     # all other pilot code is now tried/excepted.  If an exception is caught, we
     # can rely on the session object to exist and be valid, and we can thus tear
@@ -87,12 +87,12 @@ if __name__ == "__main__":
         # 
         pdesc = rp.ComputePilotDescription ()
     
-        pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 64
-        pdesc.runtime  = 3  # minutes
+        pdesc.resource = "xsede.comet_streaming"  # this is a "label", not a hostname
+        pdesc.cores    = 70
+        pdesc.runtime  = 5  # minutes
         pdesc.cleanup  = True  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
-        pdesc.queue = 'development'
+        #pdesc.queue = 'development'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."

@@ -8,15 +8,15 @@ import sys
 if __name__ == "__main__":
 
 
-    zookeeper_host = sys.argv[1]  
+    broker = sys.argv[1]  
+    print broker
     
 
-    client = KafkaClient(hosts=zookeeper_host)
+    client = KafkaClient(hosts=broker)
     print client.topics
 
     topic = client.topics['KmeansList']
     with topic.get_sync_producer() as producer:
-        for i in xrange(100):
-            print 'test'
-            producer.produce(str('word number 1 \n'))
+        for i in xrange(10000):
+            producer.produce('This is number %d \n' % i)
 

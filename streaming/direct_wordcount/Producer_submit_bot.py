@@ -56,11 +56,12 @@ def unit_state_cb (unit, state):
 #
 if __name__ == "__main__":
 
+
     session = rp.Session()
     print "session id: %s" % session.uid
 
     c = rp.Context('ssh')
-    c.user_id = "tg829618"
+#    c.user_id = "tg829618"
     session.add_context(c)
     # all other pilot code is now tried/excepted.  If an exception is caught, we
     # can rely on the session object to exist and be valid, and we can thus tear
@@ -87,12 +88,12 @@ if __name__ == "__main__":
         # 
         pdesc = rp.ComputePilotDescription ()
     
-        pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 64
-        pdesc.runtime  = 3  # minutes
+        pdesc.resource = "xsede.comet_streaming"  # this is a "label", not a hostname
+        pdesc.cores    = 70
+        pdesc.runtime  = 5  # minutes
         pdesc.cleanup  = True  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
-        pdesc.queue = 'development'
+        #pdesc.queue = 'development'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."
@@ -112,63 +113,97 @@ if __name__ == "__main__":
         print "Registering Compute Pilot with Unit Manager ..."
         umgr.add_pilots(pilot)
 
-        NUMBER_JOBS  = 1 # the total number of cus to run
-        NUMBER_PARTITIONS = 2
-        TOPIC_NAME = 'KmeansList'  
         pilot_info = pilot.as_dict()
+        
+        #----------BEGIN USER DEFINED TEST-CU DESCRIPTION-------------------#
+        cudesc = rp.ComputeUnitDescription()
+        cudesc.executable = 'python'
+        cudesc.arguments = ['test.py']
+        cudesc.input_staging = ['test.py']
+        cudesc.cores =1
+        #-----------END USER DEFINED TEST-CU DESCRIPTION--------------------#
+        cu_set = umgr.submit_units(cudesc)
+        umgr.wait_units()
+        print pilot_info
+
+        NUMBER_JOBS  = 1 # the total number of cus to run
+        NUMBER_PARTITIONS = 1
+        TOPIC_NAME = 'KmeansList'
+        pilot_info = pilot.as_dict()
+        ZK_URL = pilot_info['resource_detail']['lm_detail']['zk_url']
         # create CU descriptions
         cudesc_list = []
  
         #----------BEGIN USER DEFINED KAFKA-CU DESCRIPTION-------------------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'kafka-topics.sh'
-        cudesc.arguments = [' --create --replication-factor 1 --partitions %d \
-                                --topic %s' % (NUMBER_PARTITIONS,TOPIC_NAME)]
+        cudesc.arguments = [' --create --zookeeper %s  --replication-factor 1 --partitions %d \
+                                --topic %s' % (ZK_URL,NUMBER_PARTITIONS,TOPIC_NAME)]
         cudesc.cores =2
         #-----------END USER DEFINED KAFKA-CU DESCRIPTION--------------------#
         
         cu_set = umgr.submit_units(cudesc)
         
         umgr.wait_units()
+
         pilot_info = pilot.as_dict()
         zookeeper_url = pilot_info['resource_detail']['lm_detail']['zk_url']
         zk = zookeeper_url
         print pilot_info
-        broker = zookeeper_url + ':9092'
-        print broker
         print pilot_info['resource_detail']['lm_detail']['brokers'][0]
         broker = pilot_info['resource_detail']['lm_detail']['brokers'][0] + ':9092'
-
+        print broker
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = "python"
-        cudesc.arguments = ['producer.py',broker]
+        cudesc.arguments = ['producer.py  ',broker]
         cudesc.input_staging = ['producer.py'] 
-        cudesc.cores = 4
+        cudesc.cores = 2
         #---------END USER DEFINED CU DESCRIPTION---------------#
-           
-        cudesc_list.append(cudesc)
+        
+        cu_set = umgr.submit_units(cudesc)
+#        umgr.wait_units()
+
+        #------BEGIN USER DEFINED CONSUMER-CU DESCRIPTION-----#
+       # cudesc = rp.ComputeUnitDescription()
+       # cudesc.executable = "python"
+       # cudesc.arguments = ['consumer.py ',broker]
+       # cudesc.input_staging = ['consumer.py'] 
+       # cudesc.cores = 2
+        #---------END USER DEFINED CU DESCRIPTION---------------#
+
+
+        #------BEGIN USER DEFINED CONSUMER-CU DESCRIPTION-----#
+        cudesc = rp.ComputeUnitDescription()
+        cudesc.executable = "kafka-console-consumer.sh"
+        cudesc.arguments = [' --zookeeper %s --from-beginning --topic %s ' % (ZK_URL,TOPIC_NAME)]
+        cudesc.cores = 2
+        #---------END USER DEFINED CU DESCRIPTION---------------#
+
+      #  cu_set2 = umgr.submit_units(cudesc)
+      #  print 'Waiting for unit to complete'
+      #  umgr.wait_units()
+
+        #--conf spark.eventLog.enabled=true
+
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
         cudesc = rp.ComputeUnitDescription()
+        cudesc.pre_exec = ['mkdir /tmp/spark-events']
         cudesc.executable = "spark-submit"
         cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2,\
-                             direct_kafka_wordcount.py',broker,'KmeansList', '--verbose']
+          --conf spark.eventLog.enabled=true   direct_kafka_wordcount.py ',broker,TOPIC_NAME, '--verbose']
         cudesc.input_staging = ['direct_kafka_wordcount.py'] 
         cudesc.cores = 4
         #---------END USER DEFINED CU DESCRIPTION---------------#
-        cudesc_list.append(cudesc)
+        #cudesc_list.append(cudesc)
 
         # Submit the previously created ComputeUnit descriptions to the
         # PilotManager. This will trigger the selected scheduler to start
         # assigning ComputeUnits to the ComputePilots.
         print "Submit Compute Units to Unit Manager ..."
-        #cu_set2 = umgr.submit_units (cudesc_list)     TODO: remove to submit
-
-        print "Waiting for CUs to complete ..."
+        cu_set = umgr.submit_units(cudesc)
+        print "Waiting for spark"
         umgr.wait_units()
-
-        print pilot.as_dict()
-        
         print "All CUs completed:"
 
         print 'Timings'

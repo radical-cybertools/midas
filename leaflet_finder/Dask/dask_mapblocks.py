@@ -20,7 +20,7 @@ from distributed import Client, progress
 
 
 
-hostname = '198.202.119.139:8786'
+hostname = '198.202.118.111:8786'
 
 
 #from multiprocessing.pool import ThreadPool
@@ -30,7 +30,9 @@ HEADER_CSV="Scenario, Type, Time"
 #BASE_DIRECTORY=os.getcwd()
 # Dask has issues with NFS home directory on Comet
 # BASE_DIRECTORY='/scratch/luckow/7146882'
-BASE_DIRECTORY='/oasis/scratch/comet/luckow/temp_project'
+#BASE_DIRECTORY='/oasis/scratch/comet/luckow/temp_project'
+
+BASE_DIRECTORY='/scratch/luckow/7197185/'
 OUT_DIR=os.path.join(BASE_DIRECTORY, "npy_stack")
 
 FILENAMES=["../132k_dataset/atom_pos_132K.npy", "../145K_dataset/atom_pos_145K.npy", 
@@ -38,7 +40,7 @@ FILENAMES=["../132k_dataset/atom_pos_132K.npy", "../145K_dataset/atom_pos_145K.n
 
 scenario = FILENAMES[0]
 
-OUTPUT_DIRECTORY="/oasis/scratch/comet/luckow/temp_project/out"
+OUTPUT_DIRECTORY=os.path.join(BASE_DIRECTORY, "out")
 
 """Make sure point_array points to correct dataset"""
 global point_array
@@ -63,7 +65,7 @@ def map_block_distance(block,  block_id=None):
         #logging.debug("Source Idx: %d - %d Dest. Idx: %d - %d\n"%(source_start, source_end, dest_start, dest_end))
         #print "Source Points: " + str(source_points.compute())
         #print "Destination Points: " + str(dest_points.compute())
-        return cdist(source_points, dest_points)>cutoff
+        return cdist(source_points, dest_points)<cutoff
         #return np.array(block)
     else:
         return np.zeros(block.shape)
@@ -126,7 +128,7 @@ print str(dask_scenarios)
 # In[ ]:
 
 for s in dask_scenarios:
-    if "_8192" in s and '839K' not in s:
+    if "_8192" in s: # and '839K' not in s:
         print "Process: %s"%s
         benchmark_dask_map_block(s)
 

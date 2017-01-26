@@ -88,8 +88,8 @@ if __name__ == "__main__":
         cu_full_list=list()
 
         # Define the url of the local file in the local directory
-        shared_input_file_url = 'file://%s/%s' % (os.getcwd(), 'trajectories.npy')
-        #shared_input_file_url = 'file://%s/%s' % (os.getcwd(), atom_file)
+        #shared_input_file_url = 'file://%s/%s' % (os.getcwd(), 'trajectories.npy')
+        shared_input_file_url = 'file://%s/%s' % (os.getcwd(), atom_file)
         staged_file = "%s%s" % (MY_STAGING_AREA, 'trajectories.npy')
 
          # Configure the staging directive for to insert the shared file into

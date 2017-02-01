@@ -13,6 +13,7 @@ import copy
 import MDAnalysis as mda
 import numpy as np
 from datetime import datetime
+import argparse
 
 
 #SHARED_INPUT_FILE = 'input.txt'
@@ -74,11 +75,11 @@ if __name__ == "__main__":
         # ----- CHANGE THIS -- CHANGE THIS -- CHANGE THIS -- CHANGE THIS ------
         # 
         pdesc = rp.ComputePilotDescription ()
-        pdesc.resource = "xsede.comet" # NOTE: This is a "label", not a hostname
-        pdesc.runtime  = 120 # minutes
+        pdesc.resource = "" # NOTE: This is a "label", not a hostname
+        pdesc.runtime  =  # minutes
         pdesc.cores    = CPUs
         pdesc.cleanup  = False
-        pdesc.project  = 'unc100'
+        pdesc.project  = ''
 
         # submit the pilot.
         #print "Submitting Compute Pilot to Pilot Manager ..."

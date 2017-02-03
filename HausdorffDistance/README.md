@@ -16,9 +16,10 @@ python rp_hausdorff_opt.py <window_size> <cores> <session_name>
 ```
 #### Argument explanation:
 ```
-<window_size> 
-<cores> 
-<session_name>
+<window_size> : The number of trajectories that will be used for each independent calculation. 
+              This number must divide the total number of trajectories 
+<cores>       : The total number of cores RADICAL-Pilot will use
+<session_name>: The name of the RADICAL-Pilot session.
 ```
 
 ## RADICAL-Pilot Spark command:
@@ -34,7 +35,7 @@ python rp_hausdorff_sp.py <session_name> <cores> <NumOfTrj> <Sel> <Size> <Window
 <Sel>: Type of the Atom of the trajectories. Possible values so far 'ca', 'ha' and 'aa'
 <Size>: The size of the trajectory. It can be short,med or long
 <WindowSize>: The number of trajectories that will be used for each independent calculation. 
-              This number must divide the total number of trajecotries
+              This number must divide the total number of trajectories
 <TrjLocation>: The folder where the trajectory files are on the target resource.
 ```
 

@@ -10,7 +10,7 @@ Example:
 'Element_set 1': Files trj_ca_001.npz.npy, trj_ca_002.npz.npy
 'Element_set 2': Files trj_ca_010.npz.npy, trj_ca_011.npz.npy
 
-#### Command:
+## Command:
 ```
 python hausdorff_opt.py "element_set1" "element_set2" "sel" "size"
 ```
@@ -18,7 +18,9 @@ python hausdorff_opt.py "element_set1" "element_set2" "sel" "size"
 Example:
 ```
 python hausdorff_opt.py [1,2] [10,11] ca short
-#### Argument explanation:
+```
+
+## Argument explanation:
 ```
 <element_set1> : The first Set of trajectories that will be used
 <element_set2> : The second set of trajectories that will be used

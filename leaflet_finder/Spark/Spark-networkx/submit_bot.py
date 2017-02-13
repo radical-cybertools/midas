@@ -33,9 +33,9 @@ if __name__ == "__main__":
     #parser.add_argument("uni", help="Universe File, extension tpr")
     #parser.add_argument("trajs", help="Trajectory File, extension xtc")
     parser.add_argument("atomFile",help="The numpy file that contains the positions of the atoms")
-    parser.add_argument("atomNum",help="The totatl number of atoms in the atomFile")
     parser.add_argument("session", help="The RADICAL-Pilot Session name")
-
+    args = parser.parse_args()
+    
     partitions = int(args.win_size)
     CPUs = int(args.cores) # number of cores
     session_name = args.session

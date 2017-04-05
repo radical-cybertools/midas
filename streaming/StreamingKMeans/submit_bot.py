@@ -8,7 +8,6 @@ import os
 import radical.pilot as rp
 import numpy as np
 
-#os.environ['RADICAL_PILOT_DBURL']= 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test'
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
 os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
 
@@ -87,7 +86,7 @@ if __name__ == "__main__":
         pdesc = rp.ComputePilotDescription ()
 	
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 16
+        pdesc.cores    = 32
         pdesc.runtime  = 15  # minutes
         pdesc.cleanup  = True  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
@@ -111,45 +110,65 @@ if __name__ == "__main__":
         print "Registering Compute Pilot with Unit Manager ..."
         umgr.add_pilots(pilot)
 
-        NUMBER_JOBS  = 1 # the total number of cus to run
-        NUMBER_PARTITIONS = 2
-        TOPIC_NAME = 'KmeansList'  
+
+        #----------------------------DUMP CU---------------------------------#
+        cudesc = rp.ComputeUnitDescription()
+        cudesc.pre_exec = ['module load python']
+        cudesc.executable = 'python'
+        cudesc.arguments = ['test.py']
+        cudesc.input_staging = ['test.py']
+        cudesc.cores = 1
+        #---------------------------END DUMP CU------------------------------#
+        cu_set = umgr.submit_units(cudesc)
+        umgr.wait_units()
+
+        #----------------- APP SETTINGS -------------------------------------#
         pilot_info = pilot.as_dict()
-        #print pilot_info['resource_detail']['lm_detail']['zk_url']
-        # create CU descriptions
-        cudesc_list = []
- 
+        pilot_info = pilot_info['resource_detail']['lm_detail']
+        zk_url = pilot_info['zk_url']
+        broker = pilot_info['brokers'][0] +'.stampede.tacc.utexas.edu' + ':9092'
+
+        TOPIC_NAME = 'KmeansList'
+        number_of_partitions = 5
+
         #----------BEGIN USER DEFINED KAFKA-CU DESCRIPTION-------------------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'kafka-topics.sh'
-        cudesc.arguments = [' --create --replication-factor 1 --partitions %d \
-                                --topic %s' % (NUMBER_PARTITIONS,TOPIC_NAME)]
-        cudesc.cores =2
+        cudesc.arguments = [' --create --zookeeper %s  --replication-factor 1 --partitions %d \
+                                --topic %s' % (zk_url,number_of_partitions,TOPIC_NAME)]
+        cudesc.cores = 2
         #-----------END USER DEFINED KAFKA-CU DESCRIPTION--------------------#
         
         cu_set = umgr.submit_units(cudesc)
-        
         umgr.wait_units()
-        pilot_info = pilot.as_dict()
-        zookeeper_url = pilot_info['resource_detail']['lm_detail']['zk_url']
-        print pilot_info
-        broker = zookeeper_url + ':9092'
-        print broker
 
         print "Creating a session"
+        cudesc_list = []
+
+        #--------BEGIN USER DEFINED KAFKA-producer--------------------------#
+        cudesc = rp.ComputeUnitDescription()
+        #cudesc.pre_exec = ['module load python']
+        cudesc.pre_exec = ['module list','module load python', 'module list', 'which python']
+        cudesc.executable = 'python'
+        cudesc.arguments = ['StreamingProducer.py',broker]
+        cudesc.input_staging = ['StreamingProducer.py']
+        cudesc.cores = 4
+        #--------END USER DEFINED CU DESCRIPTION----------------------------#
+        cudesc_list.append(cudesc)
+
+
+
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
         cudesc = rp.ComputeUnitDescription()
+        cudesc.pre_exec = ['module load python']
         cudesc.executable = "spark-submit"
-        cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2, direct_kafka_wordcount.py', \
-                                            broker,'KmeansList', '--verbose']
-	cudesc.input_staging = ['direct_kafka_wordcount.py'] 
+        cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 ',
+                'StreamingKMeans.py', broker,'KmeansList', number_of_partitions ,'--verbose']
+	cudesc.input_staging = ['StreamingKMeans.py'] 
 	cudesc.cores = 4
- 
-        #cudesc_list.append(cudesc)
+        #------------ END USER DEFINED DESCRPITION---------------------------#
+        cudesc_list.append(cudesc)
 
-        cu_set2 = umgr.submit_units(cudesc)
-        umgr.wait_units()
-        print pilot.as_dict()
         # Submit the previously created ComputeUnit descriptions to the
         # PilotManager. This will trigger the selected scheduler to start
         # assigning ComputeUnits to the ComputePilots.
@@ -178,43 +197,7 @@ if __name__ == "__main__":
         print "need to exit now: %s" % e
 
     finally:
-        # always clean up the session, no matter if we caught an exception or
-        # not.
-         #print "Creating Profile"
-        #ProfFile = open('{1}-{0}.csv'.format(cores,report_name),'w')
-        #ProfFile.write('CU,Name,StageIn,Allocate,Exec,StageOut,Done\n')
-        #for cu in cu_set:
-       	    #extra one???
-            #timing_str=[cu.uid,cu.name,'N/A','N/A','N/A','N/A','N/A','N/A']
-            #for states in cu.state_history:
-                #if states.as_dict()['state']=='AgentStagingInput':
-                    #timing_str[3]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
-                #elif states.as_dict()['state']=='Allocating':
-                    #timing_str[4]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
-                #elif states.as_dict()['state']=='Executing':
-                    #timing_str[5]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
-                #elif states.as_dict()['state']=='AgentStagingOutput':
-                    #timing_str[6]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
-                #elif states.as_dict()['state']=='Done':
-                    #timing_str[7]= (states.as_dict()['timestamp']-pilot.start_time).__str__()
-
-            #ProfFile.write(timing_str[0]+','+timing_str[1]+','+
-             #              timing_str[2]+','+timing_str[3]+','+
-              #             timing_str[4]+','+timing_str[5]+','+
-               #            timing_str[6]+','+timing_str[7]+'\n')
-       # ProfFile.close()
-
         print "closing session"
         session.close ()
-
-        # the above is equivalent to
-        #
-        #   session.close (cleanup=True, terminate=True)
-        #
-        # it will thus both clean out the session's database record, and kill
-        # all remaining pilots.
-
-
-
 
 #-------------------------------------------------------------------------------

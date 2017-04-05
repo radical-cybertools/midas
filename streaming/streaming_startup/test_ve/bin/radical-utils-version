@@ -1,0 +1,6 @@
+#!/home/georgeha/repos/midas/streaming/spark_startup/test_ve/bin/python
+
+import radical.utils as ru
+
+print ru.version_detail
+

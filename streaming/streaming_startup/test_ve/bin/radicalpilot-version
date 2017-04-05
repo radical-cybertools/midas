@@ -1,0 +1,5 @@
+#!/home/georgeha/repos/midas/streaming/spark_startup/test_ve/bin/python
+
+import radical.pilot
+print  radical.pilot.version_detail
+

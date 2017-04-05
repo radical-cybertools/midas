@@ -152,9 +152,9 @@ if __name__ == "__main__":
         a_str = '%s        ,     %s        ,    %s          ,    %s     , %s   ,stampede\n' \
         % (info['spark_download'], info['cluster_startup'], info['zk_download'], info['zk_startup'], str(pdesc.cores/16))
 
-        fo = open('/home/georgeha/repos/midas_exps/streaming/rp-streaming_startup.csv','a')
+        #fo = open('/home/georgeha/repos/midas_exps/streaming/rp-streaming_startup.csv','a')
         #fo.write(a_str)
-        fo.close()
+        #fo.close()
 
         
     except Exception as e:

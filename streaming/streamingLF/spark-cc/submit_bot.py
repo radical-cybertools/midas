@@ -127,6 +127,7 @@ if __name__ == "__main__":
         umgr.wait_units()
 
         #--------------- KAFKA SETTINGS ------------------------------------#
+        atom_file_name = 'atom_pos_132K.npy'
         number_of_partitions = 24
         number_of_points = 132*1000  # 132K scenario
         TOPIC_NAME = 'atoms'

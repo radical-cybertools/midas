@@ -6,7 +6,7 @@ __license__   = "MIT"
 import sys
 import os
 
-#os.environ['RADICAL_PILOT_VERBOSE'] = 'DEBUG'
+#os.environ['RADICAL__VERBOSE'] = 'DEBUG'
 
 import radical.pilot as rp
 import numpy as np
@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
 
     if len(sys.argv)!=3:
-        print 'Usage: python submit_bot.py <cores> <window_size> <universe> <traj_filename> <session_name>'
+        print 'Usage: python submit_bot.py <cores> <partition_size>'# <universe> <traj_filename> <session_name>'
         sys.exit(-1)
     else:
         cores = int(sys.argv[1])
@@ -47,14 +47,14 @@ if __name__ == "__main__":
 
    # atom_file_name = 'traj_positions.npy'
    # np.save(atom_file_name,selection.positions)
-    atom_file_name = 'atom_pos_132K.npy'
+    atom_file_name = 'atom_pos_145K.npy'
 
 
 
 
     # Create a new session. No need to try/except this: if session creation
     # fails, there is not much we can do anyways...
-    session = rp.Session(database_url=os.environ.get('RADICAL_PILOT_DBURL'))
+    session = rp.Session()
     print "session id: %s" % session.uid
 
     c = rp.Context('ssh')
@@ -86,10 +86,11 @@ if __name__ == "__main__":
         pdesc = rp.ComputePilotDescription ()
         pdesc.resource = "xsede.stampede_spark"  # this is a "label", not a hostname
         pdesc.cores    = cores
-        pdesc.runtime  = 40  # minutes
+        pdesc.runtime  = 15  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
-        #pdesc.queue = 'development'
+        pdesc.access_schema = 'gsissh'
+        pdesc.queue = 'development'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."
@@ -97,8 +98,7 @@ if __name__ == "__main__":
 
         # create a UnitManager which schedules ComputeUnits over pilots.
         print "Initializing Unit Manager ..."
-        umgr = rp.UnitManager (session=session,
-                               scheduler=rp.SCHED_DIRECT_SUBMISSION)
+        umgr = rp.UnitManager (session=session)
 
         # Register our callback with the UnitManager. This callback will get
         # called every time any of the units managed by the UnitManager
@@ -116,20 +116,19 @@ if __name__ == "__main__":
         for i in range(NUMBER_JOBS):
 
             # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
-            cudesc = rp.ComputeUnitDescription() 
+            cudesc = rp.ComputeUnitDescription()
             #cudesc.pre_exec = ['module load python',\
             #        'export PYSPARK_PYTHON=/opt/apps/intel15/python/2.7.12/bin/python']
             cudesc.executable  = "spark-submit"
-            cudesc.arguments =  ['--conf spark.driver.maxResultSize=22g --executor-memory 20g --driver-memory  20g  leaflet-finder-parallel-cc.py %d %s' % (partitions,atom_file_name)]
+            cudesc.arguments =  ['--conf spark.driver.maxResultSize=22g \
+                    --executor-memory 20g --driver-memory  20g \
+                    leaflet-finder-parallel-cc.py %d %s' % (partitions,atom_file_name)]
             cudesc.input_staging = ['leaflet-finder-parallel-cc.py', atom_file_name]
             cudesc.cores       = cores
             # -------- END USER DEFINED CU DESCRIPTION --------- #
 
             cudesc_list.append(cudesc)
 
-        # Submit the previously created ComputeUnit descriptions to the
-        # PilotManager. This will trigger the selected scheduler to start
-        # assigning ComputeUnits to the ComputePilots.
         print "Submit Compute Units to Unit Manager ..."
         cu_set = umgr.submit_units (cudesc_list)
 
@@ -137,10 +136,11 @@ if __name__ == "__main__":
         umgr.wait_units()
 
         print "All CUs completed:"
-       # for unit in cu_set:
-       #     print "* CU %s, state %s, exit code: %s, stdout: %s" \
-       #         % (unit.uid, unit.state, unit.exit_code, unit.stdout.strip())
-    
+        for unit in cu_set:
+            print "* CU %s, state %s, exit code: %s, stdout: %s" \
+                % (unit.uid, unit.state, unit.exit_code, unit.stdout.strip())
+
+        print ' Total time to completion: %s ',
 
     except Exception as e:
         # Something unexpected happened in the pilot code above
@@ -159,7 +159,7 @@ if __name__ == "__main__":
         # not.
         print pilot.as_dict()
         print "closing session"
-        session.close (cleanup=False)
+        session.close (cleanup=False, delete=False)
 
         # the above is equivalent to
         #

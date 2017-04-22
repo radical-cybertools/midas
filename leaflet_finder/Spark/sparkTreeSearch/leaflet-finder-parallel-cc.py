@@ -13,7 +13,6 @@ def find_partial_connected_components(data,cutoff=15.00):
     import numpy as np
     from sklearn.neighbors import BallTree
     ## pairwise distances
-    
     tree = BallTree(data, leaf_size=40)
 
     edges = tree.query_radius(data, cutoff)
@@ -76,13 +75,4 @@ if __name__=="__main__":
 
     print 'Total time of completion is: %d minutes'  % (total_time_min)
     print 'Total time of completion is: %0.2f seconds' % (total_time)
-
-
-
-
-
-
-
-
-
 

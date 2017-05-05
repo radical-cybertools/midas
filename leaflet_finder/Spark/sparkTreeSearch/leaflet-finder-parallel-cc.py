@@ -7,14 +7,13 @@ import networkx as nx
 
 
 
-def find_partial_connected_components(data,cutoff=15.00):
+def find_partial_connected_components(data,cutoff=15.0):
 
     import networkx as nx
     import numpy as np
     from sklearn.neighbors import BallTree
-    ## pairwise distances
+    
     tree = BallTree(data, leaf_size=40)
-
     edges = tree.query_radius(data, cutoff)
     edge_list=[list(zip(np.repeat(idx, len(dest_list)), \
             dest_list)) for idx, dest_list in enumerate(edges)]
@@ -64,7 +63,12 @@ if __name__=="__main__":
     matrix_size = coord_matrix.shape[0]
     #partition_length = matrix_size/20   # Fix this: task size
 
-    dist_Matrix = sc.parallelize(coord_matrix,partition_length)
+    arranged_coord = list()
+    for i in range(0,matrix_size,partition_length):
+        arranged_elem = coord_matrix[i:i+partition_length,:]
+        arranged_coord.append(arranged_elem)
+
+    dist_Matrix = sc.parallelize(arranged_coord,len(arranged_coord))
     connected_components = dist_Matrix.flatMap(find_partial_connected_components).reduce(merge_spanning_trees)
 
     stop_time = time()

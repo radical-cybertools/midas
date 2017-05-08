@@ -11,7 +11,7 @@ import time
 
 #os.environ['RADICAL_PILOT_DBURL']= 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test'
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
-os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
+#os.environ['RADICAL_VERBOSE']= 'DEBUG'
 
 """ DESCRIPTION: Tutorial 1: A Simple Workload consisting of a Bag-of-Tasks
 """
@@ -45,7 +45,7 @@ def unit_state_cb (unit, state):
 
     global CNT
 
-    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot_id, state)
+    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot, state)
 
     if state == rp.FAILED:
         print "stderr: %s" % unit.stderr
@@ -88,14 +88,14 @@ if __name__ == "__main__":
         # http://radicalpilot.readthedocs.org/en/latest/machconf.html#preconfigured-resources
         # 
         pdesc = rp.ComputePilotDescription ()
-    
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
         pdesc.cores    = 32
         pdesc.runtime  = 8  # minutes
-        pdesc.cleanup  = True  # clean pilot sandbox and database entries
+        pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
         pdesc.queue = 'development'
         #pdesc.queue = 'debug'
+        pdesc.access_schema = 'gsissh'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."
@@ -104,7 +104,6 @@ if __name__ == "__main__":
         # create a UnitManager which schedules ComputeUnits over pilots.
         print "Initializing Unit Manager ..."
         umgr = rp.UnitManager (session=session,)
-                               #scheduler=rp.SCHED_DIRECT_SUBMISSION)
 
         # Register our callback with the UnitManager. This callback will get
         # called every time any of the units managed by the UnitManager
@@ -134,7 +133,7 @@ if __name__ == "__main__":
         # PilotManager. This will trigger the selected scheduler to start
         # assigning ComputeUnits to the ComputePilots.
         print "Submit Compute Units to Unit Manager ..."
-        cu_set = umgr.submit_units (cudesc)
+        cu_set = umgr.submit_units ([cudesc])
 
         print "Waiting for CUs to complete ..."
         umgr.wait_units()
@@ -143,7 +142,7 @@ if __name__ == "__main__":
         print "All CUs completed:"
 
         info = pilot.as_dict()
-        info = info['resource_detail']['lm_detail']
+        info = info['resource_details']['lm_detail']
 
         print 'Spark download   ,    Spark startup   ,   kafka download      ,      kafka startup, nodes,  system'
         print ' %s        ,     %s        ,    %s          ,    %s     , %s   , stampede' \
@@ -156,7 +155,6 @@ if __name__ == "__main__":
         #fo.write(a_str)
         #fo.close()
 
-        
     except Exception as e:
         # Something unexpected happened in the pilot code above
         print "caught Exception: %s" % e

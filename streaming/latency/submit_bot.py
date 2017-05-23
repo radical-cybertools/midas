@@ -91,8 +91,8 @@ if __name__ == "__main__":
         pdesc = rp.ComputePilotDescription ()
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
         #pdesc.resource = 'xsede.wrangler_streaming'
-        pdesc.cores    = 15
-        pdesc.runtime  = 15  # minutes
+        pdesc.cores    = 16
+        pdesc.runtime  = 10  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
         #pdesc.project = 'unc100'
@@ -134,7 +134,7 @@ if __name__ == "__main__":
         #--------------- KAFKA SETTINGS ------------------------------------#
         number_of_partitions = 1
         number_of_points = 1000
-        TOPIC_NAME = 'KmeansList'
+        TOPIC_NAME = 'KmeansListB'
         pilot_info = pilot.as_dict()
         pilot_info = pilot_info['resource_details']['lm_detail']
         ZK_URL = pilot_info['zk_url']
@@ -159,7 +159,7 @@ if __name__ == "__main__":
         #------BEGIN USER DEFINED PRODUCER-CU DESCRIPTION-----#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = "python"
-        cudesc.arguments = ['producer.py',broker]
+        cudesc.arguments = ['producer.py',broker,TOPIC_NAME]
         cudesc.input_staging = ['producer.py']
         cudesc.cores = 5
         #---------END USER DEFINED CU DESCRIPTION---------------#
@@ -168,10 +168,18 @@ if __name__ == "__main__":
         #------BEGIN USER DEFINED CONSUMER-CU DESCRIPTION-----#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = "python"
-        cudesc.arguments = ['consumer.py',broker]
+        cudesc.arguments = ['consumer.py',broker,TOPIC_NAME]
         cudesc.input_staging = ['consumer.py']
         cudesc.cores = 5
         #---------END USER DEFINED CU DESCRIPTION---------------#
+
+
+        ##---- consumer from command line-----------#
+        #cudesc = rp.ComputeUnitDescription()
+        #cudesc.executable = 'kafka-console-consumer.sh'
+        #cudesc.arguments = ['--bootstrap-server ',broker,' --from-beginning --topic',TOPIC_NAME]
+        #cudesc.cores = 5
+        ## ----end of consumer description-----#
 
         cudesc_list.append(cudesc)
         print 'Producer and Consumer units are submitted'

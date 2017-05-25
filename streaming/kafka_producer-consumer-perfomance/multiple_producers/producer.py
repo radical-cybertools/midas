@@ -18,12 +18,12 @@ if __name__ == "__main__":
     number_of_points = int(sys.argv[2])
     broker2 = sys.argv[3]
     brokers = str(broker)  + ',' + broker2
-    client = KafkaClient(hosts=broker)
+    client = KafkaClient(hosts=brokers)
     topic = client.topics['KmeansList']
 
     ttc = time()
     count = 0
-    size = 5
+    size = 20
     
     n_of_messages = number_of_points / size
     elements = list()
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     with topic.get_sync_producer(partitioner=hashing_partitioner) as producer:
         for i in xrange(n_of_messages):
-            producer.produce(el_str, partition_key='{}'.format(i))
+            producer.produce(el_str, partition_key='{}'.format(i % 2))
     ttc = time() - ttc
 
     print ttc

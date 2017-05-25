@@ -90,13 +90,14 @@ if __name__ == "__main__":
         #
         pdesc = rp.ComputePilotDescription ()
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 20
+        pdesc.cores    = 32
         pdesc.runtime  = 15  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
         #pdesc.project = 'unc100'
         pdesc.queue = 'development'
-        pdesc.queue = 'debug'
+        if pdesc.resource=='xsede.wrangler_streaming':
+            pdesc.queue = 'debug'
         pdesc.access_schema = 'gsissh'
 
         # submit the pilot.
@@ -124,32 +125,29 @@ if __name__ == "__main__":
         cudesc.input_staging = ['test.py']
         cudesc.cores =1
         #-----------END USER DEFINED TEST-CU DESCRIPTION--------------------#
-        print 'Submiting test CU'
         cu_set = umgr.submit_units([cudesc])
         umgr.wait_units()
-        print 'test'
+        print 'Kafka cluster is launched'
+
         #--------------- KAFKA SETTINGS ------------------------------------#
         number_of_partitions = 16
-        number_of_points = 100000
+        number_of_points = 100*1000
         TOPIC_NAME = 'KmeansList'
         pilot_info = pilot.as_dict()
         pilot_info = pilot_info['resource_details']['lm_detail']
         ZK_URL = pilot_info['zk_url']
-        #broker = pilot_info['brokers'][0] +'.stampede.tacc.utexas.edu' + ':9092'
-        broker = pilot_info['brokers'][0] +'.wrangler.tacc.utexas.edu' + ':9092'
+        broker = pilot_info['brokers'][0] +'.stampede.tacc.utexas.edu' + ':9092'
+        #broker = pilot_info['brokers'][0] +'.wrangler.tacc.utexas.edu' + ':9092'
         broker2 = 'empty'
-        #broker2 = pilot_info['brokers'][1] + '.stampede.tacc.utexas.edu' + ':9092'
+        broker2 = pilot_info['brokers'][1] + '.stampede.tacc.utexas.edu' + ':9092'
         print broker
-        #print broker2
+        print broker2
         #-------------------------------------------------------------------#
 
-        ##---------------- create consumer messages----------#
-        #os.system('python create_dataset_consumer.py %d' % number_of_points)
-        #--------------------#-------------------------------#
         #----------BEGIN USER DEFINED KAFKA-CU DESCRIPTION-------------------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'kafka-topics.sh'
-        cudesc.arguments = [' --create --zookeeper %s  --replication-factor 1  --partitions %d \
+        cudesc.arguments = [' --create --zookeeper %s  --replication-factor 2  --partitions %d \
                                 --topic %s' % (ZK_URL,number_of_partitions,TOPIC_NAME)]
         cudesc.cores =2
         #-----------END USER DEFINED KAFKA-CU DESCRIPTION--------------------#
@@ -164,7 +162,7 @@ if __name__ == "__main__":
         cudesc.executable = "python"
         cudesc.arguments = ['producer.py',broker,number_of_points,broker2]    # DO I need to change the repliaction factor if I use 2 producers?
         cudesc.input_staging = ['producer.py']
-        cudesc.cores = 5
+        cudesc.cores = 10
         #---------END USER DEFINED CU DESCRIPTION---------------#
         cudesc_list.append(cudesc)
 
@@ -173,11 +171,13 @@ if __name__ == "__main__":
         cudesc.executable = "python"
         cudesc.arguments = ['producer_2.py',broker,number_of_points,broker2]   # DO I need 2 brokers?
         cudesc.input_staging = ['producer_2.py']
-        cudesc.cores = 5
+        cudesc.cores = 10
         #---------END USER DEFINED CU DESCRIPTION---------------#
         cudesc_list.append(cudesc)
 
+        print 'Submiting 2 producers..'
         cu_set = umgr.submit_units(cudesc_list)
+        print 'Wating producers unit to finish'
         umgr.wait_units()
 
 
@@ -192,7 +192,7 @@ if __name__ == "__main__":
         ## Save experiment data to csv file ##
         #fo = open('/home/georgeha/repos/midas_exps/streaming/kafka_producer_throughput/kafka_producer_throughput_size_5.csv','a')
         #a_str = "%d,   %d   ,   %d   , %s, stampede\n" \
-                % (pdesc.cores/16,number_of_points,number_of_partitions,ttc)
+#                % (pdesc.cores/16,number_of_points,number_of_partitions,ttc)
 #        fo.write(a_str)
         #fo.close()
 

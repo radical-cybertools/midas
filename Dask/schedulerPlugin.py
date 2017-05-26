@@ -7,11 +7,11 @@ c=Client($SCHEDULER)
 
 c.run_on_scheduler(submitCustomProfiler,'Profile.txt')
 
-after the end of the execution
-
-do
+after the end of the execution do
 
 c.run_on_scheduler(removeCustomProfiler)
+
+In addition the Dask Scheduler should be started with --local-directory setup 
 
 """
 

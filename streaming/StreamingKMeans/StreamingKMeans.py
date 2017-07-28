@@ -1,5 +1,6 @@
 #!/bin/python
-#
+
+os.system('module load python')
 
 import os
 import sys
@@ -16,24 +17,25 @@ from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 from pyspark  import  SparkContext
 import numpy as np
-import msgpack
-import msgpack_numpy as m
+#import msgpack
+#import msgpack_numpy as m
 import urllib, json
 import socket
 import re
 from subprocess import check_output
 
+
 #######################################################################################
 # CONFIGURATIONS
 # Get current cluster setup from work directory                                  
-METABROKER_LIST=",".join(kafka_details[0])
-TOPIC='KmeansList'
+METABROKER_LIST= sys.argv[1]
+TOPIC= sys.argv[2]
 NUMBER_EXECUTORS=1
 STREAMING_WINDOW=60
+NUMBER_PARTITIONS = int(sys.argv[3])
 #######################################################################################
 
 
-NUMBER_PARTITIONS = 2
 
 print "Number Partitions: "   + NUMBER_PARTITIONS   #TODO: Fix this
 

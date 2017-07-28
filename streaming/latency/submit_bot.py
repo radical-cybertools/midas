@@ -7,11 +7,13 @@ import sys
 import os
 import radical.pilot as rp
 import numpy as np
+import time
 
+#os.environ['RADICAL_PILOT_DBURL']= 'mongodb://sean:1234@ds019678.mlab.com:19678/pilot_test'
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
-os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
+#os.environ['RADICAL_VERBOSE']= 'DEBUG'
 
-""" DESCRIPTION: Tutorial 1: A Simple Workload consisting of a Bag-of-Tasks
+""" DESCRIPTION: Experiment 1: Kafka producer throughput
 """
 
 # READ: The RADICAL-Pilot documentation: 
@@ -43,7 +45,7 @@ def unit_state_cb (unit, state):
 
     global CNT
 
-    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot_id, state)
+    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot, state)
 
     if state == rp.FAILED:
         print "stderr: %s" % unit.stderr
@@ -54,12 +56,15 @@ def unit_state_cb (unit, state):
 #
 if __name__ == "__main__":
 
+
     session = rp.Session()
     print "session id: %s" % session.uid
 
     c = rp.Context('ssh')
     c.user_id = "tg829618"
+    #c.user_id = 'georgeha'
     session.add_context(c)
+    
     # all other pilot code is now tried/excepted.  If an exception is caught, we
     # can rely on the session object to exist and be valid, and we can thus tear
     # the whole RP stack down via a 'session.close()' in the 'finally' clause.
@@ -82,15 +87,18 @@ if __name__ == "__main__":
         #
         # A list of preconfigured resources can be found at: 
         # http://radicalpilot.readthedocs.org/en/latest/machconf.html#preconfigured-resources
-        # 
+        #
         pdesc = rp.ComputePilotDescription ()
-	
         pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 32
-        pdesc.runtime  = 15  # minutes
-        pdesc.cleanup  = True  # clean pilot sandbox and database entries
+        #pdesc.resource = 'xsede.wrangler_streaming'
+        pdesc.cores    = 16
+        pdesc.runtime  = 10  # minutes
+        pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = "TG-MCB090174"
+        #pdesc.project = 'unc100'
         pdesc.queue = 'development'
+        #pdesc.queue = 'debug'
+        pdesc.access_schema = 'gsissh'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."
@@ -98,8 +106,7 @@ if __name__ == "__main__":
 
         # create a UnitManager which schedules ComputeUnits over pilots.
         print "Initializing Unit Manager ..."
-        umgr = rp.UnitManager (session=session,
-                               scheduler=rp.SCHED_DIRECT_SUBMISSION)
+        umgr = rp.UnitManager (session=session)
 
         # Register our callback with the UnitManager. This callback will get
         # called every time any of the units managed by the UnitManager
@@ -110,79 +117,93 @@ if __name__ == "__main__":
         print "Registering Compute Pilot with Unit Manager ..."
         umgr.add_pilots(pilot)
 
-
-        #----------------------------DUMP CU---------------------------------#
+        
+        #----------BEGIN USER DEFINED TEST-CU DESCRIPTION-------------------#
         cudesc = rp.ComputeUnitDescription()
-        cudesc.pre_exec = ['module load python']
         cudesc.executable = 'python'
         cudesc.arguments = ['test.py']
         cudesc.input_staging = ['test.py']
-        cudesc.cores = 1
-        #---------------------------END DUMP CU------------------------------#
-        cu_set = umgr.submit_units(cudesc)
+        cudesc.cores =1
+        #-----------END USER DEFINED TEST-CU DESCRIPTION--------------------#
+        print 'Submiting test CU'
+        cu_set = umgr.submit_units([cudesc])
         umgr.wait_units()
 
-        #----------------- APP SETTINGS -------------------------------------#
-        pilot_info = pilot.as_dict()
-        pilot_info = pilot_info['resource_detail']['lm_detail']
-        zk_url = pilot_info['zk_url']
-        broker = pilot_info['brokers'][0] +'.stampede.tacc.utexas.edu' + ':9092'
+        print 'Kafka cluster is running'
 
-        TOPIC_NAME = 'KmeansList'
-        number_of_partitions = 5
+        #--------------- KAFKA SETTINGS ------------------------------------#
+        number_of_partitions = 1
+        number_of_points = 1000
+        TOPIC_NAME = 'KmeansListB'
+        pilot_info = pilot.as_dict()
+        pilot_info = pilot_info['resource_details']['lm_detail']
+        ZK_URL = pilot_info['zk_url']
+        broker = pilot_info['brokers'][0] +'.stampede.tacc.utexas.edu' + ':9092'
+        #broker = pilot_info['brokers'][0] +'.wrangler.tacc.utexas.edu' + ':9092'
+        #broker = pilot_info['brokers'][0] + ':9092'
+        
+        print broker
 
         #----------BEGIN USER DEFINED KAFKA-CU DESCRIPTION-------------------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'kafka-topics.sh'
-        cudesc.arguments = [' --create --zookeeper %s  --replication-factor 1 --partitions %d \
-                                --topic %s' % (zk_url,number_of_partitions,TOPIC_NAME)]
-        cudesc.cores = 2
+        cudesc.arguments = [' --create --zookeeper %s  --replication-factor 1  --partitions %d \
+                                --topic %s' % (ZK_URL,number_of_partitions,TOPIC_NAME)]
+        cudesc.cores =2
         #-----------END USER DEFINED KAFKA-CU DESCRIPTION--------------------#
-        
         cu_set = umgr.submit_units(cudesc)
         umgr.wait_units()
 
-        print "Creating a session"
-        cudesc_list = []
+        cudesc_list = list()
 
-        #--------BEGIN USER DEFINED KAFKA-producer--------------------------#
+        #------BEGIN USER DEFINED PRODUCER-CU DESCRIPTION-----#
         cudesc = rp.ComputeUnitDescription()
-        #cudesc.pre_exec = ['module load python']
-        cudesc.pre_exec = ['module list','module load python', 'module list', 'which python']
-        cudesc.executable = 'python'
-        cudesc.arguments = ['StreamingProducer.py',broker]
-        cudesc.input_staging = ['StreamingProducer.py']
-        cudesc.cores = 4
-        #--------END USER DEFINED CU DESCRIPTION----------------------------#
+        cudesc.executable = "python"
+        cudesc.arguments = ['producer.py',broker,TOPIC_NAME]
+        cudesc.input_staging = ['producer.py']
+        cudesc.cores = 5
+        #---------END USER DEFINED CU DESCRIPTION---------------#
         cudesc_list.append(cudesc)
 
-
-
-        #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
+        #------BEGIN USER DEFINED CONSUMER-CU DESCRIPTION-----#
         cudesc = rp.ComputeUnitDescription()
-        cudesc.pre_exec = ['module load python']
-        cudesc.executable = "spark-submit"
-        cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 ',
-                'StreamingKMeans.py', broker,'KmeansList', number_of_partitions ,'--verbose']
-	cudesc.input_staging = ['StreamingKMeans.py'] 
-	cudesc.cores = 4
-        #------------ END USER DEFINED DESCRPITION---------------------------#
+        cudesc.executable = "python"
+        cudesc.arguments = ['consumer.py',broker,TOPIC_NAME]
+        cudesc.input_staging = ['consumer.py']
+        cudesc.cores = 5
+        #---------END USER DEFINED CU DESCRIPTION---------------#
+
+
+        ##---- consumer from command line-----------#
+        #cudesc = rp.ComputeUnitDescription()
+        #cudesc.executable = 'kafka-console-consumer.sh'
+        #cudesc.arguments = ['--bootstrap-server ',broker,' --from-beginning --topic',TOPIC_NAME]
+        #cudesc.cores = 5
+        ## ----end of consumer description-----#
+
         cudesc_list.append(cudesc)
+        print 'Producer and Consumer units are submitted'
 
-        # Submit the previously created ComputeUnit descriptions to the
-        # PilotManager. This will trigger the selected scheduler to start
-        # assigning ComputeUnits to the ComputePilots.
-        print "Submit Compute Units to Unit Manager ..."
-        cu_set = umgr.submit_units (cudesc_list)
-
-        print "Waiting for CUs to complete ..."
+        cu_set = umgr.submit_units(cudesc_list)
+        print 'Waiting for unit to complete'
         umgr.wait_units()
-
         print "All CUs completed:"
+
         for unit in cu_set:
             print "* CU %s, state %s, exit code: %s, stdout: %s" \
-                % (unit.uid, unit.state, unit.exit_code, unit.stdout.strip())
-    
+                 % (unit.uid, unit.state, unit.exit_code, unit.stdout)
+
+        #Nodes,Number_of_points,Number_of_partitions,ttc,system
+        #ttc = unit.stdout
+        #ttc = ttc.strip()
+        ## Save experiment data to csv file ##
+        #fo = open('/home/georgeha/repos/midas_exps/streaming/kafka_producer_throughput/kafka_producer_throughput.csv','a')
+        #a_str = "%d,   %d   ,   %d   , %s, stampede\n" \
+        #        % (pdesc.cores/16,number_of_points,number_of_partitions,ttc)
+        #fo.write(a_str)
+        #fo.close()
+
+
 
     except Exception as e:
         # Something unexpected happened in the pilot code above
@@ -197,7 +218,15 @@ if __name__ == "__main__":
         print "need to exit now: %s" % e
 
     finally:
-        print "closing session"
-        session.close ()
+        session.close()
+        # the above is equivalent to
+        #
+        #   session.close (cleanup=True, terminate=True)
+        #
+        # it will thus both clean out the session's database record, and kill
+        # all remaining pilots.
+
+
+
 
 #-------------------------------------------------------------------------------

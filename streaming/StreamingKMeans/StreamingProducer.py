@@ -7,7 +7,7 @@ from pykafka.partitioners import hashing_partitioner
 
 NUMBER_CLUSTER=[100, 100, 100, 100, 100]
 NUMBER_POINTS_PER_CLUSTER=[100, 1000, 10000, 100000, 1000000]
-NUMBER_DIM=3 
+NUMBER_DIM=3
 NUMBER_POINTS_PER_MESSAGE=5000
 INTERVAL=60
 NUMBER_OF_PRODUCES=10 # 10*60 = 10 minutes
@@ -15,22 +15,10 @@ NUMBER_PARTITIONS=96
 TOPIC_NAME="KmeansList"
 
 
-zkKafka=saga_hadoop_utils.get_kafka_config_details(os.path.expanduser('~'))[1]
-client = KafkaClient(zookeeper_hosts=zkKafka)
-cmd="%s/bin/kafka-topics.sh --delete --zookeeper %s --topic %s"%(KAFKA_HOME, zkKafka, TOPIC_NAME)
-print cmd
-os.system(cmd)
-
-cmd="%s/bin/kafka-topics.sh --create --zookeeper %s --replication-factor 1 --partitions %d --topic %s"%(KAFKA_HOME, zkKafka, NUMBER_PARTITIONS, TOPIC_NAME)
-print cmd
-os.system(cmd)
-
-cmd="%s/bin/kafka-topics.sh --describe --zookeeper %s --topic %s"%(KAFKA_HOME, zkKafka, TOPIC_NAME)
-print cmd
-os.system(cmd)
+broker = sys.argv[1]
 
 
-#client = KafkaClient(hosts='c251-142.wrangler.tacc.utexas.edu:9092')
+client = KafkaClient(hosts=broker)
 topic = client.topics[TOPIC_NAME]
 producer = topic.get_sync_producer(partitioner=hashing_partitioner)
 #consumer = topic.get_simple_consumer()

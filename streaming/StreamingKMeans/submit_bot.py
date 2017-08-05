@@ -43,7 +43,7 @@ def unit_state_cb (unit, state):
 
     global CNT
 
-    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot_id, state)
+    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot, state)
 
     if state == rp.FAILED:
         print "stderr: %s" % unit.stderr
@@ -85,12 +85,16 @@ if __name__ == "__main__":
         # 
         pdesc = rp.ComputePilotDescription ()
 	
-        pdesc.resource = "xsede.stampede_streaming"  # this is a "label", not a hostname
-        pdesc.cores    = 32
-        pdesc.runtime  = 15  # minutes
-        pdesc.cleanup  = True  # clean pilot sandbox and database entries
-        pdesc.project = "TG-MCB090174"
-        pdesc.queue = 'development'
+        pdesc.resource = "xsede.wrangler_streaming"  # this is a "label", not a hostname
+        pdesc.cores    = 50
+        pdesc.runtime  = 30  # minutes
+        pdesc.cleanup  = False  # clean pilot sandbox and database entries
+        #pdesc.project = 'TG-MCB090174'
+        pdesc.project = 'TG-MCB090174:dssd+TG-MCB090174+2345'
+
+        #pdesc.queue = 'development'
+        #if pdesc.resource =='xsede.wrangler_streaming':
+        #    pdesc.queue = 'debug'
 
         # submit the pilot.
         print "Submitting Compute Pilot to Pilot Manager ..."
@@ -98,8 +102,7 @@ if __name__ == "__main__":
 
         # create a UnitManager which schedules ComputeUnits over pilots.
         print "Initializing Unit Manager ..."
-        umgr = rp.UnitManager (session=session,
-                               scheduler=rp.SCHED_DIRECT_SUBMISSION)
+        umgr = rp.UnitManager (session=session)
 
         # Register our callback with the UnitManager. This callback will get
         # called every time any of the units managed by the UnitManager
@@ -113,7 +116,6 @@ if __name__ == "__main__":
 
         #----------------------------DUMP CU---------------------------------#
         cudesc = rp.ComputeUnitDescription()
-        cudesc.pre_exec = ['module load python']
         cudesc.executable = 'python'
         cudesc.arguments = ['test.py']
         cudesc.input_staging = ['test.py']
@@ -122,14 +124,27 @@ if __name__ == "__main__":
         cu_set = umgr.submit_units(cudesc)
         umgr.wait_units()
 
-        #----------------- APP SETTINGS -------------------------------------#
+        #----------------- KAFKA SETTINGS -------------------------------------#
         pilot_info = pilot.as_dict()
-        pilot_info = pilot_info['resource_detail']['lm_detail']
+        pilot_info = pilot_info['resource_details']['lm_detail']
         zk_url = pilot_info['zk_url']
-        broker = pilot_info['brokers'][0] +'.stampede.tacc.utexas.edu' + ':9092'
-
+        broker = pilot_info['brokers'][0] + ':9092'
         TOPIC_NAME = 'KmeansList'
-        number_of_partitions = 5
+        number_of_partitions = 48
+        broker_string = ''
+        brokers = pilot_info['brokers']
+        print pilot_info
+
+        print brokers
+
+        for br in brokers:
+            temp = br +':9092,'
+            temp = str(temp)
+            broker_string += temp
+
+        print broker_string
+        #---------------------------------------------------------------------#
+
 
         #----------BEGIN USER DEFINED KAFKA-CU DESCRIPTION-------------------#
         cudesc = rp.ComputeUnitDescription()
@@ -147,25 +162,21 @@ if __name__ == "__main__":
 
         #--------BEGIN USER DEFINED KAFKA-producer--------------------------#
         cudesc = rp.ComputeUnitDescription()
-        #cudesc.pre_exec = ['module load python']
-        cudesc.pre_exec = ['module list','module load python', 'module list', 'which python']
         cudesc.executable = 'python'
-        cudesc.arguments = ['StreamingProducer.py',broker]
+        cudesc.arguments = ['StreamingProducer.py',broker_string,TOPIC_NAME,number_of_partitions]
         cudesc.input_staging = ['StreamingProducer.py']
-        cudesc.cores = 4
+        cudesc.cores = 6
         #--------END USER DEFINED CU DESCRIPTION----------------------------#
         cudesc_list.append(cudesc)
 
-
-
         #--------BEGIN USER DEFINED SPARK-CU DESCRIPTION-------#
         cudesc = rp.ComputeUnitDescription()
-        cudesc.pre_exec = ['module load python']
         cudesc.executable = "spark-submit"
         cudesc.arguments = ['--packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 ',
-                'StreamingKMeans.py', broker,'KmeansList', number_of_partitions ,'--verbose']
-	cudesc.input_staging = ['StreamingKMeans.py'] 
-	cudesc.cores = 4
+                'StreamingKMeans.py', broker_string,TOPIC_NAME, number_of_partitions ,'--verbose ',
+                ' --conf spark.eventLog.enabled=true ', '--conf spark.eventLog.dir=./ ']
+	cudesc.input_staging = ['StreamingKMeans.py']
+	cudesc.cores = 15
         #------------ END USER DEFINED DESCRPITION---------------------------#
         cudesc_list.append(cudesc)
 
@@ -179,10 +190,6 @@ if __name__ == "__main__":
         umgr.wait_units()
 
         print "All CUs completed:"
-        for unit in cu_set:
-            print "* CU %s, state %s, exit code: %s, stdout: %s" \
-                % (unit.uid, unit.state, unit.exit_code, unit.stdout.strip())
-    
 
     except Exception as e:
         # Something unexpected happened in the pilot code above

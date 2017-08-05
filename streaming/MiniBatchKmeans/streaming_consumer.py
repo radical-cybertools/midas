@@ -60,8 +60,8 @@ umgr.add_pilots(pilot)
 #----------BEGIN USER DEFINED TEST-CU DESCRIPTION-------------------#
 cudesc = rp.ComputeUnitDescription()
 cudesc.executable = 'python'
-cudesc.arguments = ['test.py']
-cudesc.input_staging = ['test.py']
+cudesc.arguments = ['start_redis.py']
+cudesc.input_staging = ['start_redis.py']
 cudesc.cores =1
 #-----------END USER DEFINED TEST-CU DESCRIPTION--------------------#
 
@@ -84,6 +84,7 @@ repeats = 3
 def put_model(model):
     r.set('kmeans', pickle.dumps(model))
         
+
 def get_model():
     return pickle.loads(r.strget("kmeans"))
 
@@ -102,7 +103,7 @@ redis_URL = broker = pilot_info['brokers'][0]
 print "ZK_URL: %s " % ZK_URL
 
 r = redis.StrictRedis(host=redis_URL, port=6379, db=0)
-
+print 'redis  1'
 for i in range(number_cus):
     cudesc = rp.ComputeUnitDescription()
     cudesc.executable  = "python"
@@ -110,3 +111,4 @@ for i in range(number_cus):
     cudesc.cores       = 1
     cudesc_list.append(cudesc)
 
+print 'redis 2'

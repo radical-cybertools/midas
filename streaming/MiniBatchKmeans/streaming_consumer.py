@@ -103,12 +103,19 @@ redis_URL = broker = pilot_info['brokers'][0]
 print "ZK_URL: %s " % ZK_URL
 
 r = redis.StrictRedis(host=redis_URL, port=6379, db=0)
-print 'redis  1'
+
+print 'connected to redis'
+
 for i in range(number_cus):
     cudesc = rp.ComputeUnitDescription()
     cudesc.executable  = "python"
-    cudesc.arguments   = [os.path.join(os.getcwd(), 'rp_kmeans_streaming.py'), 100, 1, 1,ZK_URL,redis_URL]
-    cudesc.cores       = 1
+    cudesc.arguments   = ['rp_kmeans_streaming.py', 100, 1, 1,ZK_URL,redis_URL]
+    cudesc.input_staging = ['rp_kmeans_streaming.py']
+    cudesc.cores       = 10
     cudesc_list.append(cudesc)
 
-print 'redis 2'
+
+cu_set = umgr.submit_units([cudesc])
+
+print 'Waiting for CUs to complete'
+umgr.wait_units()

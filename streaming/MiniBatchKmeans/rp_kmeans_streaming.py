@@ -12,8 +12,6 @@ import redis
 
 
 
-#client = KafkaClient(zookeeper_hosts=zkKafka)
-#topic = client.topics['Throughput']
 
 def put_model(model):
     r.set('kmeans', pickle.dumps(model))
@@ -70,6 +68,9 @@ if __name__ == "__main__":
     total_number_cus = int(sys.argv[3])
     zkKafka = sys.argv[4]
     redis_host= sys.argv[5]
+
+    client = KafkaClient(zookeeper_hosts=zkKafka)
+    topic = client.topics['Throughput']
     consumer = topic.get_simple_consumer(reset_offset_on_start=True)
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
     print "CU: %d, Process %d messages from Kafka: %s"%(cu_id, number_of_messages, zkKafka)

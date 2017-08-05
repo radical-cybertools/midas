@@ -1,3 +1,5 @@
 import os
 
-os.system('redis-server')
+os.system('redis-server --daemonize yes')
+
+print 'testing'

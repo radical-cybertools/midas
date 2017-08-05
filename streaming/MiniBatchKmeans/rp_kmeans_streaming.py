@@ -57,6 +57,7 @@ def process_messages_kmeans_redis(number_messages=1, cu_id=0, total_number_cus=1
 
     
 if __name__ == "__main__":
+
     if len(sys.argv)!=6:
         print """Usage:
             python %s <number_messages> <cu_id> <total_number_cus> <zkKafka> <redis_host>
@@ -66,13 +67,19 @@ if __name__ == "__main__":
     number_of_messages = int(sys.argv[1])
     cu_id = int(sys.argv[2])
     total_number_cus = int(sys.argv[3])
-    zkKafka = sys.argv[4]
+    zkKafka = sys.argv[4] #broker
     redis_host= sys.argv[5]
 
-    client = KafkaClient(zookeeper_hosts=zkKafka)
+    client = KafkaClient(hosts=zkKafka)
     topic = client.topics['Throughput']
     consumer = topic.get_simple_consumer(reset_offset_on_start=True)
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
+    number_centroids = 10
+    number_dimensions = 3
+    centroids = np.random.randn(number_centroids, number_dimensions)
+    kmeans = sklearn.cluster.MiniBatchKMeans(n_clusters=len(centroids), init=centroids, n_init=1)
+    put_model(kmeans)
+
     print "CU: %d, Process %d messages from Kafka: %s"%(cu_id, number_of_messages, zkKafka)
     res = process_messages_kmeans_redis(number_of_messages, cu_id, total_number_cus)
     print res

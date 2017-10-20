@@ -5,8 +5,6 @@ able to get our data collection environment using:
 
 
 
-Data collection requires python 3.5
-
-To create a conda virtual environment with python3.5:
+Data collection requires python 3.5. To create a conda virtual environment with python3.5:
 
     conda create -n nslsve python==3.5

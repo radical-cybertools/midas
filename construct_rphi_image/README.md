@@ -1,3 +1,9 @@
+To install scikit-beam try the following command:
+
+    conda install -c conda-forge scikit-beam 
+
+
+
 All our software is available using conda or pip.   So in ‘theory’ you should be 
 able to get our data collection environment using:
 

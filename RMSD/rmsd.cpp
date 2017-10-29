@@ -13,21 +13,20 @@ double rmsd(double** xref){
 
     double **xmobile;
     double temp;
+    double *pointer = new double[9];
 
-    xmobile = new double*[146];
-    cout <<"Getting ready\n";
-    for (int i=0;i<146;i++){
-        xmobile[i] = new double[3];
-        for (int j=0;j<3;j++){
+    xmobile = new double*[3];
+    
+    for (int i=0;i<3;i++){
+        xmobile[i] = new double[146];
+        for (int j=0;j<146;j++){
             temp = rand();
             xmobile[i][j] = temp/RAND_MAX;
         }
     }
 
-    cout<<"Testing QCPROT\n";
-
-    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,NULL,NULL);
-    cout << "RMSD: "<<temp<<"\n";
+    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL);
+    
     return temp;
 };
 
@@ -43,7 +42,6 @@ double *block_rmsd(double **xref0, int start, int stop,int step){
 
     results = new double[stop-start];
     for (int i=start;i<stop;i+=step){
-        cout <<"Will call RMSD\n";
         results[i] = rmsd(xref0);
 
     }
@@ -81,14 +79,13 @@ int main(){
     start = rank*bsize;
     stop = (rank+1)*bsize;
 
-    xref0 = new double*[3341];
+    xref0 = new double*[3];
     results = new double[nframes];
-    cout << "RAND_MAX: "<< RAND_MAX<<"\n";
     double a = rand();
 
-    for (int i=0;i<3341;i++){
-        xref0[i] = new double[3];
-        for (int j=0;j<3;j++){
+    for (int i=0;i<3;i++){
+        xref0[i] = new double[3341];
+        for (int j=0;j<3341;j++){
             a = rand();
             xref0[i][j] = a/RAND_MAX;
         }
@@ -109,7 +106,7 @@ int main(){
     ofstream myfile;
     myfile.open ("example.txt");
     myfile << "Writing this to a file.\n";
-    cout << "Writing to exampe.txt\n";
+    cout << "Writing to example.txt\n";
     for(int count = 0; count < nframes; count ++){
         myfile << results[count]<< "\n" ;
     }

@@ -15,7 +15,7 @@ double rmsd(double** xref){
     double temp;
 
     xmobile = new double*[146];
-
+    cout <<"Getting ready\n";
     for (int i=0;i<146;i++){
         xmobile[i] = new double[3];
         for (int j=0;j<3;j++){
@@ -24,7 +24,11 @@ double rmsd(double** xref){
         }
     }
 
-    return  CalcRMSDRotationalMatrix(xref,xmobile,146,NULL,NULL);
+    cout<<"Testing QCPROT\n";
+
+    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,NULL,NULL);
+    cout << "RMSD: "<<temp<<"\n";
+    return temp;
 };
 
 double *block_rmsd(double **xref0, int start, int stop,int step){
@@ -39,6 +43,7 @@ double *block_rmsd(double **xref0, int start, int stop,int step){
 
     results = new double[stop-start];
     for (int i=start;i<stop;i+=step){
+        cout <<"Will call RMSD\n";
         results[i] = rmsd(xref0);
 
     }
@@ -49,7 +54,7 @@ double *block_rmsd(double **xref0, int start, int stop,int step){
 
 
 int main(){
-    int rank;
+    int rank=0;
     int ierr;
     int size=1;
     double wtime;

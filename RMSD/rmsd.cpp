@@ -1,5 +1,5 @@
 #include <stdio.h>
-//#include <mpi.h>
+#include <mpi.h>
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
@@ -52,27 +52,28 @@ double *block_rmsd(double **xref0, int start, int stop,int step){
 
 
 int main(){
-    int rank=0;
+    int rank;
     int ierr;
-    int size=1;
+    int size;
     double wtime;
-    int nframes=2;
+    int nframes=8;
     double bsize;
     double **xref0;
     int start,stop;
+    double *result;
     double *results;
 //
 //  Initialize MPI.
 //
-    //ierr = MPI_Init ( NULL, NULL );
+    ierr = MPI_Init ( NULL, NULL );
 //
 //  Get the number of processes.
 //
-    //ierr = MPI_Comm_size ( MPI_COMM_WORLD, &size );
+    ierr = MPI_Comm_size ( MPI_COMM_WORLD, &size );
 //
 //  Get the individual process ID.
 //
-    //ierr = MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
+    ierr = MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
 
     bsize = ceil(nframes/size);
 
@@ -91,26 +92,29 @@ int main(){
         }
     }
 
-    results = block_rmsd(xref0,start,stop,1);
+    result = new double[bsize]
+    result = block_rmsd(xref0,start,stop,1);
 
 //
 //  Process 0 prints an introductory message.
 //
 
-    //MPI_Gather(&result,sizeof(result)/sizeof(float),MPI_FLOAT,results,sizeof(result)/sizeof(float),MPI_FLOAT,0,MPI_COMM_WORLD);
+    MPI_Gather(result,bsize,MPI_FLOAT,results,bsize,MPI_FLOAT,0,MPI_COMM_WORLD);
     //if ( rank == 0 )
       //{
         //Gather the results and store them in file. No MPI IO
       //}
 
-    ofstream myfile;
-    myfile.open ("example.txt");
-    myfile << "Writing this to a file.\n";
-    cout << "Writing to example.txt\n";
-    for(int count = 0; count < nframes; count ++){
-        myfile << results[count]<< "\n" ;
+    if (rank==0){
+        ofstream myfile;
+        myfile.open ("example.txt");
+        myfile << "Writing this to a file.\n";
+        cout << "Writing to example.txt\n";
+        for(int count = 0; count < nframes; count ++){
+            myfile << results[count]<< "\n" ;
+        }
+        myfile.close();
     }
-    myfile.close();
 
     return 0;
     //MPI_Finalize ( );

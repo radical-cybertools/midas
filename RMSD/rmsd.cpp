@@ -21,12 +21,12 @@ double rmsd(double** xref){
         xmobile[i] = new double[146];
         for (int j=0;j<146;j++){
             temp = rand();
-            xmobile[i][j] = temp/RAND_MAX;
+            xmobile[i][j] = (temp/RAND_MAX)*15;
         }
     }
 
     temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL);
-    
+    cout <<temp<<"\n";
     return temp;
 };
 
@@ -57,10 +57,6 @@ int main(){
     int size;
     double wtime;
     int nframes=8;
-    double bsize;
-    double **xref0;
-    int start,stop;
-    double *result;
     double *results;
 //
 //  Initialize MPI.
@@ -75,36 +71,53 @@ int main(){
 //
     ierr = MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
 
+
+    int bsize;
+    double **xref0;
+    int start,stop;
+    double *result;
+
     bsize = ceil(nframes/size);
+
+    cout<<"Hello from rank "<<rank<<" with data size of "<<bsize<< "\n";
 
     start = rank*bsize;
     stop = (rank+1)*bsize;
 
     xref0 = new double*[3];
-    results = new double[nframes];
     double a = rand();
 
     for (int i=0;i<3;i++){
         xref0[i] = new double[3341];
         for (int j=0;j<3341;j++){
             a = rand();
-            xref0[i][j] = a/RAND_MAX;
+            xref0[i][j] = (a/RAND_MAX)*15;
         }
     }
 
-    result = new double[bsize]
+    result = new double[bsize];
     result = block_rmsd(xref0,start,stop,1);
 
+    for (int i=0;i<bsize;i++)
+        cout<<"RANK "<<rank<<"RMSD :"<<i<<","<<result[i]<<"\n";
 //
 //  Process 0 prints an introductory message.
 //
 
-    MPI_Gather(result,bsize,MPI_FLOAT,results,bsize,MPI_FLOAT,0,MPI_COMM_WORLD);
+    if (rank==0){
+        cout<<"Setting up the gathering variable\n";
+            results = new double[nframes];}
+
+    MPI_Barrier(MPI_COMM_WORLD);
+
+    MPI_Gather(result,4,MPI_REAL,results,4,MPI_REAL,0,MPI_COMM_WORLD);
     //if ( rank == 0 )
       //{
         //Gather the results and store them in file. No MPI IO
       //}
+    cout << "Bye from rank "<<rank<<"\n";
 
+    MPI_Finalize ( );
     if (rank==0){
         ofstream myfile;
         myfile.open ("example.txt");
@@ -115,7 +128,5 @@ int main(){
         }
         myfile.close();
     }
-
     return 0;
-    //MPI_Finalize ( );
 }

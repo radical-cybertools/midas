@@ -26,24 +26,22 @@ double rmsd(double** xref){
     }
 
     temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL);
-    cout <<temp<<"\n";
+
     return temp;
 };
 
-double *block_rmsd(double **xref0, int start, int stop,int step){
+double *block_rmsd(double **xref0, int start, int stop,int step,int rank){
 
     int bsize;
     double *results;
 
     double *t_comp;
 
-    cout << "BlockRMSD "<<start<<" "<<stop<<" "<<step<<"\n";
     bsize = stop - start;
 
     results = new double[stop-start];
-    for (int i=start;i<stop;i+=step){
+    for (int i=0;i<stop-start;i+=step){
         results[i] = rmsd(xref0);
-
     }
 
     return results;
@@ -51,13 +49,11 @@ double *block_rmsd(double **xref0, int start, int stop,int step){
 };
 
 
-int main(){
+int main (){
     int rank;
     int ierr;
     int size;
     double wtime;
-    int nframes=8;
-    double *results;
 //
 //  Initialize MPI.
 //
@@ -71,8 +67,9 @@ int main(){
 //
     ierr = MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
 
-
+    int nframes=128;
     int bsize;
+    double *results;
     double **xref0;
     int start,stop;
     double *result;
@@ -95,27 +92,22 @@ int main(){
         }
     }
 
+
     result = new double[bsize];
-    result = block_rmsd(xref0,start,stop,1);
+    result = block_rmsd(xref0,start,stop,1,rank);
 
-    for (int i=0;i<bsize;i++)
-        cout<<"RANK "<<rank<<"RMSD :"<<i<<","<<result[i]<<"\n";
-//
-//  Process 0 prints an introductory message.
-//
-
-    if (rank==0){
-        cout<<"Setting up the gathering variable\n";
-            results = new double[nframes];}
-
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    MPI_Gather(result,4,MPI_REAL,results,4,MPI_REAL,0,MPI_COMM_WORLD);
+        if (rank==0){
+        results = new double[size*bsize];
+        MPI_Gather(result,bsize,MPI_DOUBLE,results,bsize,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    }
+    else{
+        MPI_Gather(result,bsize,MPI_DOUBLE,NULL,0,MPI_DOUBLE,0,MPI_COMM_WORLD);
+    }
     //if ( rank == 0 )
       //{
         //Gather the results and store them in file. No MPI IO
       //}
-    cout << "Bye from rank "<<rank<<"\n";
+    //cout << "Bye from rank "<<rank<<"\n";
 
     MPI_Finalize ( );
     if (rank==0){

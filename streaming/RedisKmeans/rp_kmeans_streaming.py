@@ -10,14 +10,6 @@ import pickle
 import redis
 
 
-zkKafka='c251-122.wrangler.tacc.utexas.edu:2181'
-redis_host='c251-123'
-
-
-client = KafkaClient(zookeeper_hosts=zkKafka)
-topic = client.topics['Throughput']
-consumer = topic.get_simple_consumer(reset_offset_on_start=True)
-r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 
 def put_model(model):
     r.set('kmeans', pickle.dumps(model))
@@ -61,7 +53,6 @@ def process_messages_kmeans_redis(number_messages=1, cu_id=0, total_number_cus=1
     
     return res
 
-    
 if __name__ == "__main__":
     if len(sys.argv)!=6:
         print """Usage:
@@ -72,12 +63,14 @@ if __name__ == "__main__":
     number_of_messages = int(sys.argv[1])
     cu_id = int(sys.argv[2])
     total_number_cus = int(sys.argv[3])
+    zkKafka=  sys.argv[4]   
+    redis_host=  sys.argv[5]
+
+    client = KafkaClient(zookeeper_hosts=zkKafka)
+    topic = client.topics['Throughput']
+    consumer = topic.get_simple_consumer(reset_offset_on_start=True)
+    r = redis.StrictRedis(host=redis_host, port=6379, db=0)
+
     print "CU: %d, Process %d messages from Kafka: %s"%(cu_id, number_of_messages, zkKafka)
     res = process_messages_kmeans_redis(number_of_messages, cu_id, total_number_cus)
     print res
-    
-    
-    
-    
-    
-    

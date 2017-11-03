@@ -57,7 +57,7 @@ if __name__ == "__main__":
         ##----- create the kmeans model on redis ----------------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'python'
-        cudesc.arguments = ['setup_kmeans_model',redis_hostname]
+        cudesc.arguments = ['setup_kmeans_model.py',redis_hostname]
         cudesc.cores =1
         ##------- -----------------------------------------------#
         cu_set = umgr.submit_units(cudesc)

@@ -25,7 +25,7 @@ r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 
 
 centroids = np.random.randn(number_centroids, number_dimensions)
-kmeans = sklearn.cluster.MiniBatchKMeans(n_clusters=len(centroids), init=centroids, n_init=1)
+kmeans = sklearn.cluster.MiniBatchKMeans(n_clusters=len(centroids), init=centroids, n_init=1).fit(centroids)
 put_model(kmeans)
 
 

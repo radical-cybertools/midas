@@ -48,25 +48,23 @@ double *block_rmsd(double **xref0, int start, int stop,int step,int rank){
 
 };
 
+double current_time(){
+    struct timeval tp; //Time struct.
+    double cur_time;
+    gettimeofday(&tp, NULL);
+    cur_time = tp.tv_sec * 1000000 + tp.tv_usec;
+    return cur_time;
+}
+
 
 int main (){
     int rank;
     int ierr;
     int size;
-//
-//  Initialize MPI.
-//
-    ierr = MPI_Init ( NULL, NULL );
-//
-//  Get the number of processes.
-//
-    ierr = MPI_Comm_size ( MPI_COMM_WORLD, &size );
-//
-//  Get the individual process ID.
-//
-    ierr = MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
 
-
+    MPI_Init ( NULL, NULL );
+    MPI_Comm_size ( MPI_COMM_WORLD, &size );
+    MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
 
     int nframes=1024; //total number of frames
     int bsize; // number of frames of this process
@@ -74,17 +72,14 @@ int main (){
     double **xref0; //Reference Frame pointer. It is a 3 by 3341
     int start,stop; //first and last frame that will be used in this process
     double *result;  //pointer to RMSD result array per process.
-    long int tstart,tstop; // Variable that will hold timestamps for timing values.
-    struct timeval tp; //Time struct.
+    double tstart,tstop; // Variable that will hold timestamps for timing values.
+   
 
+    double *duration = new double[3]; //keeps track of durations for each process
+    double *durations = new double[size*3]; // Pointer that will gather all the information
 
-
-    int *duration = new int[3]; //keeps track of durations for each process
-    int *durations = new int[size*3]; // Pointer that will gather all the information
-
-    // Get timestamp and convert it to ms
-    gettimeofday(&tp, NULL);
-    tstart = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+    // Get timestamp and convert it to us
+    tstart = current_time();
 
     // Find the number of frames each process will calculate the RMSD.
     bsize = ceil(nframes/size);
@@ -106,19 +101,17 @@ int main (){
         }
     }
 
-
     result = new double[bsize];
     // Get init time 
-    gettimeofday(&tp, NULL);
-    tstop = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+    tstop = current_time();
     duration[0] = tstop-tstart;
     tstart = tstop;
     // Main computation function for each process. Gets an array.
     result = block_rmsd(xref0,start,stop,1,rank);
 
     // Compute duration
-    gettimeofday(&tp, NULL);
-    tstop = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+
+    tstop = current_time();
     duration[1] = tstop-tstart;
     tstart = tstop;
 
@@ -134,13 +127,12 @@ int main (){
     }*/
 
     // Gather duration
-    gettimeofday(&tp, NULL);
-    tstop = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+    tstop = current_time();
     duration[2] = tstop-tstart;
 
 
     // Gather duration timings from all processes
-    MPI_Gather(duration,3,MPI_INT,durations,3,MPI_INT,0,MPI_COMM_WORLD);
+    MPI_Gather(duration,3,MPI_DOUBLE,durations,3,MPI_DOUBLE,0,MPI_COMM_WORLD);
 
     //if ( rank == 0 )
       //{

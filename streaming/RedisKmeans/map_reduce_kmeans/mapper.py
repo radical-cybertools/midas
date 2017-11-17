@@ -10,7 +10,6 @@ import redis
 window = 60
 #--------------#
 
-
 #### consumer messages from kaka
 
 def get_data_from_kafka(kafka_messages,window, output_queue):
@@ -79,6 +78,13 @@ if __name__ == "__main__":
     topic = client.topics['Throughput']
     consumer = topic.get_simple_consumer(reset_offset_on_start=True)
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
+
+    # multiprocessing settings
+    data_batches = mp.Queue()
+    processes = [mp.Process(target=get_data, args=(output,)), mp.Process(target=data_consumer,args=(output,))]   #TODO: fix this
+    # Run processes
+    for p in processes:
+        p.start()
 
     centroids = get_clusters()
     dist = calculate_distances(elements,centroids)

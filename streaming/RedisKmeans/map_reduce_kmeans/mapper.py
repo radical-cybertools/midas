@@ -1,14 +1,39 @@
 from scipy.spatial  import distance
+import multiprocessing as mp
 from pykafka import KafkaClient
+import ast
+import time
 import numpy as np
 import redis
+
+## settings ##
+window = 60
+#--------------#
 
 
 #### consumer messages from kaka
 
+def get_data_from_kafka(kafka_messages,window, output_queue):
 
+
+    start_consumtion = time.time()
+    while time.time() - start_consumption<window:
+        message = consumer.consume(block=True)
+        data_np = np.array(ast.literal_eval(message.value))
+        output.put(data_np)   # make sure this is correct
+        
+    return
 
 ### return a np.array of the elments
+
+def elements_of_consumed_batch(input_queue):
+
+    while input_queue.empty():
+        pass
+    cur_data_batch = input_queue.get()
+
+    return cur_data_batch
+
 
 
 # mapper :

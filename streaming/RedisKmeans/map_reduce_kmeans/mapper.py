@@ -11,83 +11,100 @@ import redis
 
 #### consumer messages from kafka
 
-def get_data_from_kafka(kafka_messages, window, output_queue):
+def get_data_from_kafka(kafka_messages, window, output_queue,alock):
 
+    while True:
+        start_consumption = time.time()
+        Nmessages = 0
+        data = []
+        while time.time() - start_consumption < window:
+            message = consumer.consume(block=True)
+            data_np = np.array(ast.literal_eval(message.value))
+            data.append(data_np)
+            Nmessages+=1  # save that
+        # unlock to send
+        alock.acquire()
+        output_queue.put(data)
+        alock.release()
 
-    start_consumption = time.time()
-    Nmessages = 0
-    data = []
-    while time.time() - start_consumption < window:
-        message = consumer.consume(block=True)
-        data_np = np.array(ast.literal_eval(message.value))
-        data.append(data_np)
-        Nmessages+=1  # save that
-    
-    output_queue.put(data)
 
     return
 
 ### return a np.array of the elments
+def processing_process(data_batches,alock):
 
-def elements_of_consumed_batch(input_queue):
+    def elements_of_consumed_batch(input_queue,alock):
 
-    while input_queue.empty():
-        pass
+        while input_queue.empty():
+            pass
 
-    cur_data_batch = input_queue.get()
+        cur_data_batch = input_queue.get()
 
-    return cur_data_batch
-
-
-
-# mapper :
-# input : np array of elements:
-
-def get_clusters():
-
-    serialized_clusters =  r.get('means')
-
-    return pickle.loads(serialized_clusters)
+        return cur_data_batch
 
 
-def save_sums_to_redis():
 
-    return
+    # mapper :
+    # input : np array of elements:
 
+    def get_clusters():
 
-def calculate_distances(elements,centroids):      # np.array of 3-d data
+        serialized_clusters =  r.get('means')
 
-   
-    return distance.cdist(elements, centroids, 'euclidean') # row: elements , column :centroids 
-
-    
-def find_partial_sums(dist, centroids,elements):
-    """
-    Calculates the partial sums of each cluster
-
-    Parameters
-    ----------
+        return pickle.loads(serialized_clusters)
 
 
-    Returns
-    -------
+    def save_sums_to_redis():
 
-    """
-    #ncentroids = centroids.shape[0]
-    dtype = str(centroids.shape) + 'float64,' + str(centroids.shape[0]) + ',1)float32'
-    sum_centroids =  np.zeros(1, dtype=dtype)    # first column is the sum of centroids 2nd is the number of elements
-                                                 #access sum of centroids [0][0]
-                                                 # acess sum of elements: [0][1]
-    centroid_pos = np.argmin(dist, axis=1)  #  index: element id - value:  closest centroid_id
+        return
 
-    ## sum all distances of each cluster 
-    for i in  xrange(len(elements)):
-        centroid = centroid_pos[i]
-        sum_centroids[0][0][centroid] += elements[i]  # add also number of elements
-        sum_centroids[0][1][centroid] +=1  # added one element to that cluster
 
-    
-    return  sum_centroids
+    def calculate_distances(elements,centroids):      # np.array of 3-d data
+
+       
+        return distance.cdist(elements, centroids, 'euclidean') # row: elements , column :centroids 
+
+        
+    def find_partial_sums(dist, centroids,elements):
+        """
+        Calculates the partial sums of each cluster
+
+        Parameters
+        ----------
+
+
+        Returns
+        -------
+
+        """
+        #ncentroids = centroids.shape[0]
+        dtype = str(centroids.shape) + 'float64,' + str(centroids.shape[0]) + ',1)float32'
+        sum_centroids =  np.zeros(1, dtype=dtype)    # first column is the sum of centroids 2nd is the number of elements
+                                                     #access sum of centroids [0][0]
+                                                     # acess sum of elements: [0][1]
+        centroid_pos = np.argmin(dist, axis=1)  #  index: element id - value:  closest centroid_id
+
+        ## sum all distances of each cluster 
+        for i in  xrange(len(elements)):
+            centroid = centroid_pos[i]
+            sum_centroids[0][0][centroid] += elements[i]  # add also number of elements
+            sum_centroids[0][1][centroid] +=1  # added one element to that cluster
+
+        return  sum_centroids
+
+
+    centroids = get_clusters()
+    alock.acquire()
+    elements = elements_of_consumed_batch(data_batches)
+    dist = calculate_distances(elements, centroids)
+    partial_sums = find_partial_sums(dist, centroids, elements)
+    save_sums_to_redis(partial_sums)
+    # release the lock when processing is done
+
+
+    return 
+
+
 
 if __name__ == "__main__":
 
@@ -105,14 +122,15 @@ if __name__ == "__main__":
 
     # multiprocessing settings
     data_batches = mp.Queue()
-    processes = [mp.Process(target=get_data_from_kafka, args=(data_batches,)), 
-                    mp.Process(target=elements_of_consumed_batch, args=(data_batches,))]   #TODO: fix this
+    alock = mp.lock()
+    processes = [mp.Process(target=get_data_from_kafka, args=(window,data_batches,alock)), 
+            mp.Process(target=processing, args=(data_batches,alock)]   #TODO: fix this
+
+    
     # Run processes
     for p in processes:
         p.start()
 
-    centroids = get_clusters()
-    elements = elements_of_consumed_batch(data_batches)
-    dist = calculate_distances(elements, centroids)
-    partial_sums = find_partial_sums(dist, centroids, elements)
-    save_sums_to_redis(partial_sums)
+
+    for p in processes:
+        p.join()

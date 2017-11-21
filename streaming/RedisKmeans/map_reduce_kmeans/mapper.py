@@ -1,25 +1,26 @@
-from scipy.spatial  import distance
-import multiprocessing as mp
-from pykafka import KafkaClient
+import sys
 import ast
 import time
+import pickle
+import multiprocessing as mp
+from pykafka import KafkaClient
+from scipy.spatial  import distance
 import numpy as np
 import redis
 
-## settings ##
-window = 60
-#--------------#
 
-#### consumer messages from kaka
+#### consumer messages from kafka
 
-def get_data_from_kafka(kafka_messages,window, output_queue):
+def get_data_from_kafka(kafka_messages, window, output_queue):
 
 
-    start_consumtion = time.time()
-    while time.time() - start_consumption<window:
+    start_consumption = time.time()
+    Nmessages = 0
+    while time.time() - start_consumption < window:
         message = consumer.consume(block=True)
         data_np = np.array(ast.literal_eval(message.value))
-        output.put(data_np)   # make sure this is correct
+        output_queue.put(data_np)   # make sure this is correct
+        Nmessages+=1  # save that
         
     return
 
@@ -29,6 +30,7 @@ def elements_of_consumed_batch(input_queue):
 
     while input_queue.empty():
         pass
+
     cur_data_batch = input_queue.get()
 
     return cur_data_batch
@@ -40,7 +42,9 @@ def elements_of_consumed_batch(input_queue):
 
 def get_clusters():
 
-    return
+    serialized_clusters =  r.get('means')
+
+    return pickle.loads(serialized_clusters)
 
 
 def save_sums_to_redis():
@@ -54,24 +58,35 @@ def calculate_distances(elements,centroids):      # np.array of 3-d data
     return distance.cdist(elements, centroids, 'euclidean') # row: elements , column :centroids 
 
     
-def find_partial_sums(dist, centroids):
+def find_partial_sums(dist, centroids,elements):
+    """
+    Calculates the partial sums of each cluster
 
-    sum_centroids = np.zeros(((centroids.shape[0],2))    # first column is the sum of centroids 2nd is the number of elements
-    min_values = np.amin(dist, axis=1)     #  index: element_id  - value:  distance from closest centroid
-    centroid_pos = np.argmin(distances,axis=1)  #  index: element id - value:  closest centroid_id
+    Parameters
+    ----------
+
+
+    Returns
+    -------
+
+
+    """
+
+    sum_centroids = np.zeros(((centroids.shape[0],2)))    # first column is the sum of centroids 2nd is the number of elements
+    centroid_pos = np.argmin(dist, axis=1)  #  index: element id - value:  closest centroid_id
 
     ## sum all distances of each cluster 
-    for i in  xrange(len(centroid_pos)):
+    for i in  xrange(len(elements)):
         centroid = centroid_pos[i]
-        sum_centroids[centroid][0] = += min_values[i]  # add also number of elements
-        sum_centrods[centroid][1] +=1  # added one element to that cluster
+        sum_centroids[centroid][0]  += elements[i]  # add also number of elements
+        sum_centroids[centroid][1] +=1  # added one element to that cluster
 
     
-    return
+    return  sum_centroids
 
 if __name__ == "__main__":
 
-    zkKafka=  sys.argv[1]
+    zkKafka =  sys.argv[1]
     redis_host = redis_host=  sys.argv[2]
 
     client = KafkaClient(zookeeper_hosts=zkKafka)
@@ -79,9 +94,13 @@ if __name__ == "__main__":
     consumer = topic.get_simple_consumer(reset_offset_on_start=True)
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 
+    ## settings ##
+    window = 60
+    #--------------#
+
     # multiprocessing settings
     data_batches = mp.Queue()
-    processes = [mp.Process(target=get_data, args=(output,)), mp.Process(target=data_consumer,args=(output,))]   #TODO: fix this
+    processes = [mp.Process(target=get_data_from_kafka, args=(data_batches,)), mp.Process(target=elements_of_consumed_batch, args=(data_batches,))]   #TODO: fix this
     # Run processes
     for p in processes:
         p.start()

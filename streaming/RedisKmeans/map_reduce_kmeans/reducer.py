@@ -59,11 +59,11 @@ def check_status():
     - and the update step in this code begins and the variable is initialized 
     - to false for the next iteration 
     - if not, it status return False and the update waits.
+    - the flag is changed when the update is done, 
     """
 
     status = r.get('status')
     if status== 'True':
-        r.set('status', 'False')
         return True
     else:
         return False
@@ -81,6 +81,7 @@ if __name__ == '__main__':
             partial_sums = get_and_aggregate_partial_sums_from_redis(centroids)
             centroids = find_new_centers(partial_sums)
             save_clusters_to_redis(centroids)
+            r.set('status', 'False')  
         else:
             pass
 

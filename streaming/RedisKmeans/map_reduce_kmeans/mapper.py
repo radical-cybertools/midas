@@ -92,17 +92,21 @@ def processing_process(data_batches,alock):
 
         return  sum_centroids
 
+    while True:  # infinite loop because it is a streaming application
+        centroids = get_clusters()
+        alock.acquire()
+        elements = elements_of_consumed_batch(data_batches)
+        dist = calculate_distances(elements, centroids)
+        partial_sums = find_partial_sums(dist, centroids, elements)
+        save_sums_to_redis(partial_sums)
+        r.set('status', 'True') # change status to move to reduce step
+        
+        check_status = r.get('status'):  # when status is False again clusters are updated
+        while check_status==True:        # so the system can get the new data
+            pass
+        alock.release()
 
-    centroids = get_clusters()
-    alock.acquire()
-    elements = elements_of_consumed_batch(data_batches)
-    dist = calculate_distances(elements, centroids)
-    partial_sums = find_partial_sums(dist, centroids, elements)
-    save_sums_to_redis(partial_sums)
-    # release the lock when processing is done
-
-
-    return 
+    return
 
 
 

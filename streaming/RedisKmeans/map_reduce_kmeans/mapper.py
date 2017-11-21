@@ -70,7 +70,7 @@ def find_partial_sums(dist, centroids,elements):
     -------
 
     """
-    ncentroids = centroids.shape[0]
+    #ncentroids = centroids.shape[0]
     dtype = str(centroids.shape) + 'float64,' + str(centroids.shape[0]) + ',1)float32'
     sum_centroids =  np.zeros(1, dtype=dtype)    # first column is the sum of centroids 2nd is the number of elements
                                                  #access sum of centroids [0][0]
@@ -108,6 +108,7 @@ if __name__ == "__main__":
         p.start()
 
     centroids = get_clusters()
+    elements = elements_of_consumed_batch(data_batches)
     dist = calculate_distances(elements,centroids)
-    partial_sums = find_partial_sums(dist,centroids)
-    save_sums_to_redis()
+    partial_sums = find_partial_sums(dist,centroids,elements)
+    save_sums_to_redis(partial_sums)

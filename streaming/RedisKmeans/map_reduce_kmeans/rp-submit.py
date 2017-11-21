@@ -88,8 +88,9 @@ if __name__ == "__main__":
         for i in xrange(number_of_mappers):
             cudesc = rp.ComputeUnitDescription()
             cudesc.executable  = "python"
-            cudesc.arguments   = ['mapper.py', per_cu_messages,i, number_of_consumers, \
-                                    zk_kafka, redis_hostname ]   # number of msg, <cu_id>, <total_number_cus> <zkKafka> <redis>
+            #cudesc.arguments   = ['mapper.py', per_cu_messages,i, number_of_consumers, \
+            #                        zk_kafka, redis_hostname ]   # number of msg, <cu_id>, <total_number_cus> <zkKafka> <redis>
+            cudesc.arguments = ['mapper.py', zk_kafka, redis_hostname]
             cudesc.cores       = 2
             cudesc_list.append(cudesc)
 
@@ -108,7 +109,7 @@ if __name__ == "__main__":
         cu_set = umgr.submit_units(cudesc_list)
 
         print "Waiting for CUs to complete ..."
-        umgr.wait_units()
+        umgr.wait_units()   #TODO: add timeout or fix the number of messages
 
         print "All CUs completed:"
 

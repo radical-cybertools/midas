@@ -104,7 +104,7 @@ def processing_process(data_batches,alock):
         check_status = r.get('status'):  # when status is False again clusters are updated
         while check_status==True:        # so the system can get the new data
             pass
-        alock.release()
+        alock.release()   #status works with one map CU - FIXME: to work with multiple 
 
     return
 

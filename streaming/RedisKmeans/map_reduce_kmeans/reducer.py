@@ -9,38 +9,29 @@ def get_and_aggregate_partial_sums_from_redis(clusters):
     - Aggregate the partial sums from all the workers, in order to calculate the new centroids
 
     """
-    aggregated_sums = np.zeros(clusters.shape[1])  # agggregate sum for each centroid
+    aggregated_sums_of_elements = np.zeros(clusters.shape)  # agggregate sum for each centroid - shape[1] is dim of element
     n_elements_per_cluster = np.zeros((clusters.shape[0],1))   # number of elements that belongs to each centroid
     entries = r.llen('partial_sums')    # number of entries from workers
+
     for i in xrange(entries):
         serialized_value = r.lindex('partial_sums', i)
         apartial_sum = pickle.loads(serialized_value)
-        n_elements_per_cluster = apartial_sum[1]   # TODO: Fix dimensions, probably [:,1]
-        aggregated_sums+= apartial_sum[0]  ## adds up the element to all correct cluster  dim: [:,0]
+        n_elements_per_cluster = apartial_sum[0][0]   
+        aggregated_sums+= apartial_sum[0][1]  ## adds up the element to all correct cluster 
 
     # delete entries
     r.delete('partial_sums')
 
-    return  aggregated_sums
+    return  (aggregated_sum,n_elements_per_cluster)
 
 
 
-def find_new_centers(partial_sums):
+def find_new_centers(data,centroids):
     """
     Add docstring
     """
+    return   np.divide(data[0],data[1]) 
 
-    new_clusters = np.zeros(partial_sums.shape[0], dtype=float)
-    i = 0
-    for partial_sums, number_of_el in partial_sums:
-        if number_of_el != 0:
-            new_clusters[i] = float(partial_sums)/number_of_el
-        else:
-            new_clusters[i] = partial_sums # case where only the 
-                                           #cluster center belongs to that cluster
-        i += 1
-
-    return
 
 def save_clusters_to_redis(clusters):
     """

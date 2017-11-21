@@ -16,12 +16,15 @@ def get_data_from_kafka(kafka_messages, window, output_queue):
 
     start_consumption = time.time()
     Nmessages = 0
+    data = []
     while time.time() - start_consumption < window:
         message = consumer.consume(block=True)
         data_np = np.array(ast.literal_eval(message.value))
-        output_queue.put(data_np)   # make sure this is correct
+        data.append(data_np)
         Nmessages+=1  # save that
-        
+    
+    output_queue.put(data)
+
     return
 
 ### return a np.array of the elments
@@ -102,13 +105,14 @@ if __name__ == "__main__":
 
     # multiprocessing settings
     data_batches = mp.Queue()
-    processes = [mp.Process(target=get_data_from_kafka, args=(data_batches,)), mp.Process(target=elements_of_consumed_batch, args=(data_batches,))]   #TODO: fix this
+    processes = [mp.Process(target=get_data_from_kafka, args=(data_batches,)), 
+                    mp.Process(target=elements_of_consumed_batch, args=(data_batches,))]   #TODO: fix this
     # Run processes
     for p in processes:
         p.start()
 
     centroids = get_clusters()
     elements = elements_of_consumed_batch(data_batches)
-    dist = calculate_distances(elements,centroids)
-    partial_sums = find_partial_sums(dist,centroids,elements)
+    dist = calculate_distances(elements, centroids)
+    partial_sums = find_partial_sums(dist, centroids, elements)
     save_sums_to_redis(partial_sums)

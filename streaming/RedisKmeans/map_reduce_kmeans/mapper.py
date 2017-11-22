@@ -101,7 +101,7 @@ def processing_process(data_batches,alock):
         save_sums_to_redis(partial_sums)
         r.set('status', 'True') # change status to move to reduce step
         
-        check_status = r.get('status'):  # when status is False again clusters are updated
+        check_status = r.get('status')  # when status is False again clusters are updated
         while check_status==True:        # so the system can get the new data
             pass
         alock.release()   #status works with one map CU - FIXME: to work with multiple 
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     data_batches = mp.Queue()
     alock = mp.lock()
     processes = [mp.Process(target=get_data_from_kafka, args=(window,data_batches,alock)), 
-            mp.Process(target=processing, args=(data_batches,alock)]   #TODO: fix this
+            mp.Process(target=processing_process, args=(data_batches,alock))]   #TODO: fix this
 
     
     # Run processes

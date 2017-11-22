@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 __copyright__ = "Copyright 2013-2014, http://radical.rutgers.edu"
-__license__   = "MIT"
+__license__ = "MIT"
 
-import sys, os
+import sys
+import os
 import radical.pilot as rp
 import radical.utils as ru
-import numpy as np
 
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
-os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
+os.environ['RADICAL_PILOT_VERBOSE'] = 'DEBUG'
 
 #
 if __name__ == "__main__":
 
-    if len(sys.argv)==1:
+    if len(sys.argv) == 1:
         print 'Usage: <broker> <zkKafka> <redis>'
 
     session = rp.Session()
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         pdesc.cores    = 48
         pdesc.runtime  = 20  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
-        pdesc.project = 'TG-MCB090174'
+        pdesc.project  = 'TG-MCB090174'
         #pdesc.project = 'TG-MCB090174:dssd+TG-MCB090174+2397'
         pdesc.access_schema = 'gsissh'
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
         # create a UnitManager which schedules ComputeUnits over pilots.
         print "Initializing Unit Manager ..."
-        umgr = rp.UnitManager (session=session)
+        umgr = rp.UnitManager(session=session)
 
         # Add the created ComputePilot to the UnitManager.
         print "Registering Compute Pilot with Unit Manager ..."
@@ -57,8 +57,8 @@ if __name__ == "__main__":
         ##----- create the kmeans model on redis ----------------#
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'python'
-        cudesc.arguments = ['setup_kmeans_model.py',redis_hostname]
-        cudesc.cores =1
+        cudesc.arguments = ['setup_kmeans_model.py', redis_hostname]
+        cudesc.cores = 1
         ##------- -----------------------------------------------#
         cu_set = umgr.submit_units(cudesc)
         print 'kmeans model was created on redis sucessfuly'
@@ -69,15 +69,15 @@ if __name__ == "__main__":
         number_messages = 20000  #TODO: fix the number of messages 
         number_of_mappers = 1  # map-consumer CUs
         number_of_reducers = 1 # reduce-consumer CUs
-        per_cu_messages = number_messages/number_cus
+        per_cu_messages = number_messages/number_of_mappers
        #--------------------------------------------------------------------------------
         print ' Creating the producer CUS..'
-        cudesc_list =[]
+        cudesc_list = []
         for producer_id in xrange(NUMBER_OF_PRODUCERS):
             #--------KAFKA-producer--------------------------#
             cudesc = rp.ComputeUnitDescription()
             cudesc.executable = 'python'
-            cudesc.arguments = ['data_producer.py',broker_string]
+            cudesc.arguments = ['data_producer.py', broker_string]
             cudesc.input_staging = ['data_producer.py']
             cudesc.cores = 1   #TODO: fix it to make sure it takes only producers CUs
             cudesc_list.append(cudesc)
@@ -117,9 +117,10 @@ if __name__ == "__main__":
         print "caught Exception: %s" % e
         ru.print_exception_trace()
         raise
+
     except (KeyboardInterrupt, SystemExit) as e:
         print "need to exit now: %s" % e
         ru.print_exception_trace()
     finally:
         print "closing session"
-        session.close ()
+        session.close()

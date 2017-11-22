@@ -52,7 +52,7 @@ def get_clusters():
 
     return pickle.loads(serialized_clusters)
 
-def check_status():
+def check_map_status():
     """
     - the status of the assignment step is checked.
     - if the assignment step is completed the status changes to True 
@@ -63,7 +63,7 @@ def check_status():
     """
 
     status = r.get('status')
-    if status== 'True':
+    if status == 'True':
         return True
     else:
         return False
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 
     while True:
-        if check_reduce():
+        if check_map_status():
             centroids = get_clusters()
             partial_sums = get_and_aggregate_partial_sums_from_redis(centroids)
             centroids = find_new_centers(partial_sums)

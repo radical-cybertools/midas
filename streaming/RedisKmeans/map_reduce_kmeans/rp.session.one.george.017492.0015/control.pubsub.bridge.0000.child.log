@@ -1,0 +1,7 @@
+2017-11-23 00:24:45,485: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:24:45,486: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : INFO    :                      pid: 7778
+2017-11-23 00:24:45,486: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:24:45,486: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:24:45,486: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : INFO    : start bridge control.pubsub.bridge.0000.child on tcp://*:*
+2017-11-23 00:24:45,488: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : INFO    : bound bridge control.pubsub.bridge.0000.child to tcp://0.0.0.0:35455 : tcp://0.0.0.0:45361
+2017-11-23 00:45:40,160: control.pubsub.bridge.0000.child: control.pubsub.bridge.0000.child: MainThread     : WARNING : send failed ([Errno 9] Bad file descriptor) - terminate

@@ -33,7 +33,7 @@ def get_data_from_kafka(kafka_messages, window, output_queue,alock):
 ### return a np.array of the elments
 def processing_process(data_batches,alock):
 
-    def elements_of_consumed_batch(input_queue,alock):
+    def elements_of_consumed_batch(input_queue):
 
         while input_queue.empty():
             pass
@@ -113,7 +113,9 @@ def processing_process(data_batches,alock):
 if __name__ == "__main__":
 
     zkKafka =  sys.argv[1]
-    redis_host = redis_host=  sys.argv[2]
+    redis_host =   sys.argv[2]
+    #kafka_messages =  sys.argv[3]
+    kafka_messages = 10000
 
     client = KafkaClient(zookeeper_hosts=zkKafka)
     topic = client.topics['Throughput']
@@ -126,8 +128,8 @@ if __name__ == "__main__":
 
     # multiprocessing settings
     data_batches = mp.Queue()
-    alock = mp.lock()
-    processes = [mp.Process(target=get_data_from_kafka, args=(window,data_batches,alock)), 
+    alock = mp.Lock()
+    processes = [mp.Process(target=get_data_from_kafka, args=(kafka_messages,window,data_batches,alock)), 
             mp.Process(target=processing_process, args=(data_batches,alock))]   #TODO: fix this
 
     

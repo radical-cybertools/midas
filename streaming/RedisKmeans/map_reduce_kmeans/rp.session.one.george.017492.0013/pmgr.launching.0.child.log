@@ -1,0 +1,372 @@
+2017-11-23 00:13:26,382: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:13:26,383: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    :                      pid: 7105
+2017-11-23 00:13:26,383: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:13:26,383: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:13:26,383: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : initialize pmgr.launching.0.child
+2017-11-23 00:13:26,385: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : cfg: {'agents': {},
+ u'bridges': {u'control_pubsub': {'addr_in': 'tcp://144.76.72.175:45165',
+                                  'addr_out': 'tcp://144.76.72.175:46285',
+                                  u'bulk_size': 0,
+                                  u'log_level': u'debug',
+                                  u'stall_hwm': 1},
+              u'log_pubsub': {'addr_in': 'tcp://144.76.72.175:38678',
+                              'addr_out': 'tcp://144.76.72.175:44871',
+                              u'bulk_size': 0,
+                              u'log_level': u'debug',
+                              u'stall_hwm': 1},
+              u'pmgr_launching_queue': {'addr_in': 'tcp://144.76.72.175:46225',
+                                        'addr_out': 'tcp://144.76.72.175:38482',
+                                        u'bulk_size': 0,
+                                        u'log_level': u'debug',
+                                        u'stall_hwm': 1},
+              u'state_pubsub': {'addr_in': 'tcp://144.76.72.175:42382',
+                                'addr_out': 'tcp://144.76.72.175:38322',
+                                u'bulk_size': 0,
+                                u'log_level': u'debug',
+                                u'stall_hwm': 1}},
+ 'cname': u'PMGRLaunchingComponent',
+ u'components': {},
+ u'count': 1,
+ u'db_poll_sleeptime': 1.0,
+ 'number': 0,
+ 'owner': 'pmgr.0000',
+ 'uid': 'pmgr.0000'}
+2017-11-23 00:13:26,386: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : start components: {}
+2017-11-23 00:13:26,386: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,386: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register publisher log_pubsub
+2017-11-23 00:13:26,386: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : using addr tcp://144.76.72.175:38678 for pubsub log_pubsub
+2017-11-23 00:13:26,388: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : registered publisher : log_pubsub : log.pubsub.pub.0001
+2017-11-23 00:13:26,388: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,388: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register publisher state_pubsub
+2017-11-23 00:13:26,388: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : using addr tcp://144.76.72.175:42382 for pubsub state_pubsub
+2017-11-23 00:13:26,390: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : registered publisher : state_pubsub : state.pubsub.pub.0001
+2017-11-23 00:13:26,390: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,390: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register publisher control_pubsub
+2017-11-23 00:13:26,391: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : using addr tcp://144.76.72.175:45165 for pubsub control_pubsub
+2017-11-23 00:13:26,392: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : registered publisher : control_pubsub : control.pubsub.pub.0001
+2017-11-23 00:13:26,392: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,392: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register subscriber pmgr.launching.0.child.subscriber._cancel_monitor_cb
+2017-11-23 00:13:26,392: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : using addr tcp://144.76.72.175:46285 for pubsub control_pubsub
+2017-11-23 00:13:26,394: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : parent name: pmgr.launching.0.child.subscriber._cancel_monitor_cb
+2017-11-23 00:13:26,394: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : start thread
+2017-11-23 00:13:26,395: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: DEBUG   : child name: pmgr.launching.0.child.subscriber._cancel_monitor_cb.thread
+2017-11-23 00:13:26,395: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: INFO    : child (me) initializing
+2017-11-23 00:13:26,395: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,395: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: DEBUG   : ru_initialize_child (NOOP)
+2017-11-23 00:13:26,395: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: INFO    : send alive
+2017-11-23 00:13:26,395: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: INFO    : put message: [pmgr.launching.0.child.subscriber._cancel_monitor_cb.thread] alive
+2017-11-23 00:13:26,396: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : get msg: alive
+2017-11-23 00:13:26,396: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,396: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:13:26,396: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : child thread pmgr.launching.0.child.subscriber._cancel_monitor_cb started
+2017-11-23 00:13:26,396: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : pmgr.launching.0.child registered control_pubsub subscriber pmgr.launching.0.child.subscriber._cancel_monitor_cb
+2017-11-23 00:13:26,397: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,397: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : using addr tcp://144.76.72.175:38482 for input pmgr_launching_queue
+2017-11-23 00:13:26,419: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : registered input pmgr.launching.0.child.work.PMGR_LAUNCHING_PENDING
+2017-11-23 00:13:26,419: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register input PMGR_LAUNCHING_PENDING: pmgr.launching.0.child.work.PMGR_LAUNCHING_PENDING
+2017-11-23 00:13:26,419: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : registered worker work [PMGR_LAUNCHING_PENDING]
+2017-11-23 00:13:26,419: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,419: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register idler pmgr.launching.0.child.idler._pilot_watcher_cb
+2017-11-23 00:13:26,419: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : parent name: pmgr.launching.0.child.idler._pilot_watcher_cb
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : start thread
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: DEBUG   : child name: pmgr.launching.0.child.idler._pilot_watcher_cb.thread
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: INFO    : child (me) initializing
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: DEBUG   : ru_initialize_child (NOOP)
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: INFO    : send alive
+2017-11-23 00:13:26,420: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: INFO    : put message: [pmgr.launching.0.child.idler._pilot_watcher_cb.thread] alive
+2017-11-23 00:13:26,421: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : get msg: alive
+2017-11-23 00:13:26,421: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,421: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:13:26,421: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : child thread pmgr.launching.0.child.idler._pilot_watcher_cb started
+2017-11-23 00:13:26,422: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : pmgr.launching.0.child registered idler pmgr.launching.0.child.idler._pilot_watcher_cb
+2017-11-23 00:13:26,422: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : alive check in term
+2017-11-23 00:13:26,422: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : START: pmgr.launching.0.child register subscriber pmgr.launching.0.child.subscriber._pmgr_control_cb
+2017-11-23 00:13:26,422: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : using addr tcp://144.76.72.175:46285 for pubsub control_pubsub
+2017-11-23 00:13:26,425: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : parent name: pmgr.launching.0.child.subscriber._pmgr_control_cb
+2017-11-23 00:13:26,426: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : start thread
+2017-11-23 00:13:26,426: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: DEBUG   : child name: pmgr.launching.0.child.subscriber._pmgr_control_cb.thread
+2017-11-23 00:13:26,426: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: INFO    : child (me) initializing
+2017-11-23 00:13:26,426: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,426: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: DEBUG   : ru_initialize_child (NOOP)
+2017-11-23 00:13:26,426: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: INFO    : send alive
+2017-11-23 00:13:26,427: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: INFO    : put message: [pmgr.launching.0.child.subscriber._pmgr_control_cb.thread] alive
+2017-11-23 00:13:26,427: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : get msg: alive
+2017-11-23 00:13:26,427: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,428: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:13:26,428: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : child thread pmgr.launching.0.child.subscriber._pmgr_control_cb started
+2017-11-23 00:13:26,429: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : pmgr.launching.0.child registered control_pubsub subscriber pmgr.launching.0.child.subscriber._pmgr_control_cb
+2017-11-23 00:13:26,429: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : ('0.46.2', '0.46.2', None, None, 'radical.pilot-0.46.2.tar.gz', '/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/pmgr/launching/../..//radical.pilot-0.46.2.tar.gz')
+2017-11-23 00:13:26,429: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : child (me) initializing
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : parent name: pmgr.launching.0.child.watch
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : start thread
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: DEBUG   : child name: pmgr.launching.0.child.watch.thread
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: INFO    : child (me) initializing
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: DEBUG   : ru_initialize_child (NOOP)
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: INFO    : send alive
+2017-11-23 00:13:26,430: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: INFO    : put message: [pmgr.launching.0.child.watch.thread] alive
+2017-11-23 00:13:26,431: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : get msg: alive
+2017-11-23 00:13:26,431: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:26,431: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:13:26,432: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : child thread pmgr.launching.0.child.watch started
+2017-11-23 00:13:26,432: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : child (me) is alive
+2017-11-23 00:13:26,432: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : send alive
+2017-11-23 00:13:26,432: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : send message: [pmgr.launching.0.child] alive
+2017-11-23 00:13:31,251: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : got pilot (pilot.0000)
+2017-11-23 00:13:31,251: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk size: 1 [False, True]
+2017-11-23 00:13:31,251: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk: pilot.0000 [1]
+2017-11-23 00:13:31,252: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : Launching pilots on xsede.wrangler: ['pilot.0000']
+2017-11-23 00:13:33,092: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : Read agent config file: /home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/pmgr/launching/../..//configs/agent_default.json
+2017-11-23 00:13:33,094: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : Write agent cfg to '/tmp/rp.agent_cfg.Y2bpVP'.
+2017-11-23 00:13:33,102: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : {'agent_launch_method': 'SSH',
+ u'bridges': {u'agent_executing_queue': {u'bulk_size': 0,
+                                         u'log_level': u'debug',
+                                         u'stall_hwm': 1},
+              u'agent_reschedule_pubsub': {u'bulk_size': 0,
+                                           u'log_level': u'debug',
+                                           u'stall_hwm': 1},
+              u'agent_scheduling_queue': {u'bulk_size': 0,
+                                          u'log_level': u'debug',
+                                          u'stall_hwm': 1},
+              u'agent_staging_input_queue': {u'bulk_size': 0,
+                                             u'log_level': u'debug',
+                                             u'stall_hwm': 1},
+              u'agent_staging_output_queue': {u'bulk_size': 0,
+                                              u'log_level': u'debug',
+                                              u'stall_hwm': 1},
+              u'agent_unschedule_pubsub': {u'bulk_size': 0,
+                                           u'log_level': u'debug',
+                                           u'stall_hwm': 1},
+              u'control_pubsub': {u'bulk_size': 0,
+                                  u'log_level': u'debug',
+                                  u'stall_hwm': 1},
+              u'log_pubsub': {u'bulk_size': 0,
+                              u'log_level': u'debug',
+                              u'stall_hwm': 1},
+              u'state_pubsub': {u'bulk_size': 0,
+                                u'log_level': u'debug',
+                                u'stall_hwm': 1}},
+ u'bulk_collection_size': 100,
+ u'bulk_collection_time': 1.0,
+ u'components': {u'AgentExecutingComponent': {u'count': 1},
+                 u'AgentSchedulingComponent': {u'count': 1},
+                 u'AgentStagingInputComponent': {u'count': 1},
+                 u'AgentStagingOutputComponent': {u'count': 1},
+                 u'UpdateWorker': {u'count': 1}},
+ 'cores': 48,
+ 'cores_per_node': 0,
+ 'cu_post_exec': None,
+ 'cu_pre_exec': None,
+ 'cu_tmp': None,
+ u'db_poll_sleeptime': 1.0,
+ 'dburl': 'mongodb://giorgos:giorgos7@ds035385.mongolab.com:35385/giorgos-radical',
+ 'debug': 10,
+ 'export_to_cu': None,
+ 'logdir': '.',
+ 'lrms': 'SLURM',
+ u'max_io_loglength': 1024,
+ u'mode': u'shared',
+ 'mpi_launch_method': 'MPIRUN_RSH',
+ 'owner': 'agent_0',
+ 'pilot_id': 'pilot.0000',
+ 'pilot_sandbox': '/work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/pilot.0000/',
+ 'resource_cfg': {'agent_launch_method': 'SSH',
+                  'agent_scheduler': 'CONTINUOUS',
+                  'agent_spawner': 'POPEN',
+                  'agent_type': 'multicore',
+                  'default_queue': 'normal',
+                  'default_remote_workdir': '$WORK',
+                  'description': "The XSEDE 'Wrangler' cluster at TACC (https://www.tacc.utexas.edu/wrangler/).",
+                  'filesystem_endpoint': 'gsisftp://wrangler.tacc.utexas.edu:2222/',
+                  'go': {'filesystem_endpoint': 'go://xsede#wrangler/',
+                         'job_manager_endpoint': 'slurm+ssh://wrangler.tacc.utexas.edu/'},
+                  'gsissh': {'filesystem_endpoint': 'gsisftp://wrangler.tacc.utexas.edu:2222/',
+                             'job_manager_endpoint': 'slurm+gsissh://wrangler.tacc.utexas.edu:2222/'},
+                  'job_manager_endpoint': 'slurm+gsissh://wrangler.tacc.utexas.edu:2222/',
+                  'label': 'xsede.wrangler_ssh',
+                  'lrms': 'SLURM',
+                  'mandatory_args': ['project'],
+                  'mpi_launch_method': 'MPIRUN_RSH',
+                  'notes': 'Always set the ``project`` attribute in the ComputePilotDescription or the pilot will fail.',
+                  'pre_bootstrap_1': ['module load python',
+                                      'export TACC_DELETE_FILES=TRUE'],
+                  'pre_bootstrap_2': ['export PATH=$PATH',
+                                      'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'],
+                  'python_dist': 'default',
+                  'rp_version': 'local',
+                  'schemas': ['ssh', 'gsissh', 'go'],
+                  'ssh': {'filesystem_endpoint': 'sftp://wrangler.tacc.utexas.edu/',
+                          'job_manager_endpoint': 'slurm+ssh://wrangler.tacc.utexas.edu/'},
+                  'task_launch_method': 'SSH',
+                  'valid_roots': ['/work', '$WORK', '/data', '$DATA'],
+                  'virtenv_mode': 'create'},
+ 'resource_sandbox': '/work/03662/tg829618/wrangler/radical.pilot.sandbox',
+ 'runtime': 20,
+ 'scheduler': 'CONTINUOUS',
+ 'session_id': 'rp.session.one.george.017492.0013',
+ 'session_sandbox': '/work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013',
+ 'spawner': 'POPEN',
+ u'staging_area': u'staging_area',
+ u'staging_schema': u'staging',
+ u'target': u'local',
+ 'task_launch_method': 'SSH'}
+2017-11-23 00:13:33,104: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : use bootstrapper /home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/agent/bootstrap_1.sh
+2017-11-23 00:13:33,107: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : Bootstrap command line: /bin/bash ['-l /work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/bootstrap_1.sh', " -d 'radical.utils-0.47-v0.46-13-g3748ea3-devel.tar.gz:saga-python-0.46.1.tar.gz:radical.pilot-0.46.2.tar.gz' -p 'pilot.0000' -s 'rp.session.one.george.017492.0013' -m 'create' -r 'local' -b 'default' -g 'default' -v '/work/03662/tg829618/wrangler/radical.pilot.sandbox/ve.xsede.wrangler.0.46.2' -y '20' -e 'module load python' -e 'export TACC_DELETE_FILES=TRUE' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"]
+2017-11-23 00:13:33,108: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : cmd: cd /tmp/rp_agent_tar_dirLWvqlN && tar zchf /tmp/rp_agent_tar_dirLWvqlN/rp.session.one.george.017492.0013.pmgr.launching.0.child.tgz *
+2017-11-23 00:13:33,200: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : out: 
+2017-11-23 00:13:33,201: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : rs.file.Directory ('gsisftp://wrangler.tacc.utexas.edu:2222/')
+2017-11-23 00:13:41,849: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : tar cmd : tar zmxvf /work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/rp.session.one.george.017492.0013.pmgr.launching.0.child.tgz -C /work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013
+2017-11-23 00:13:42,331: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : tar done: Done, bootstrap_1.sh
+pilot.0000/
+pilot.0000/pilot.0000.log.tgz
+pilot.0000/agent_0.cfg
+radical.pilot-0.46.2.tar.gz
+radical.utils-0.47-v0.46-13-g3748ea3-devel.tar.gz
+saga-python-0.46.1.tar.gz
+, 
+2017-11-23 00:13:44,740: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : jd: {'Arguments': ['-l /work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/bootstrap_1.sh',
+               " -d 'radical.utils-0.47-v0.46-13-g3748ea3-devel.tar.gz:saga-python-0.46.1.tar.gz:radical.pilot-0.46.2.tar.gz' -p 'pilot.0000' -s 'rp.session.one.george.017492.0013' -m 'create' -r 'local' -b 'default' -g 'default' -v '/work/03662/tg829618/wrangler/radical.pilot.sandbox/ve.xsede.wrangler.0.46.2' -y '20' -e 'module load python' -e 'export TACC_DELETE_FILES=TRUE' -w 'export PATH=$PATH' -w 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH'"],
+ 'CandidateHosts': None,
+ 'Environment': {},
+ 'Error': 'bootstrap_1.err',
+ 'Executable': '/bin/bash',
+ 'FileTransfer': [],
+ 'Name': 'pilot.0000',
+ 'Output': 'bootstrap_1.out',
+ 'ProcessesPerHost': 0,
+ 'Project': 'TG-MCB090174',
+ 'Queue': 'normal',
+ 'SPMDVariation': None,
+ 'TotalCPUCount': 48,
+ 'TotalPhysicalMemory': None,
+ 'WallTimeLimit': 20,
+ 'WorkingDirectory': '/work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/pilot.0000/'}
+2017-11-23 00:13:49,780: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : pilot job: pilot.0000 : [slurm+gsissh://wrangler.tacc.utexas.edu:2222/]-[57644] : pilot.0000 : Running
+2017-11-23 00:13:49,780: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk size: 1 [False, True]
+2017-11-23 00:13:49,780: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk: pilot.0000 [1]
+2017-11-23 00:13:49,782: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: DEBUG   : launcher got {'cmd': 'add_pilots', 'arg': {'pilots': [{'resource_sandbox': 'gsisftp://wrangler.tacc.utexas.edu:2222/work/03662/tg829618/wrangler/radical.pilot.sandbox', 'resource_details': None, 'resource': 'xsede.wrangler', 'description': {'queue': None, 'resource': 'xsede.wrangler', 'exit_on_error': False, 'candidate_hosts': None, 'project': 'TG-MCB090174', 'sandbox': None, 'cleanup': False, 'access_schema': 'gsissh', 'memory': None, 'cores': 48, 'runtime': 20}, 'pmgr': 'pmgr.0000', 'stdout': None, 'state': 'PMGR_LAUNCHING', 'sandbox': 'gsisftp://wrangler.tacc.utexas.edu:2222/work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/pilot.0000/', 'session': 'rp.session.one.george.017492.0013', 'log': None, 'stderr': None, 'client_sandbox': '/home/george/repos/midas/streaming/RedisKmeans/map_reduce_kmeans', 'type': 'pilot', 'pilot_sandbox': 'gsisftp://wrangler.tacc.utexas.edu:2222/work/03662/tg829618/wrangler/radical.pilot.sandbox/rp.session.one.george.017492.0013/pilot.0000/', 'uid': 'pilot.0000'}], 'umgr': 'umgr.0000'}}
+2017-11-23 00:17:30,566: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : ERROR   : abort: KeyboardInterrupt()
+Traceback (most recent call last):
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/utils/process.py", line 608, in _run
+    if not self.work_cb():
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/component.py", line 1191, in work_cb
+    things = input.get_nowait(1000) # timeout in microseconds
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/queue.py", line 437, in get_nowait
+    if _uninterruptible(self._q.poll, flags=zmq.POLLIN, timeout=timeout):
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/queue.py", line 50, in _uninterruptible
+    return f(*args, **kwargs)
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/zmq/sugar/socket.py", line 558, in poll
+    evts = dict(p.poll(timeout))
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/zmq/sugar/poll.py", line 99, in poll
+    return zmq_poll(self.sockets, timeout=timeout)
+  File "zmq/backend/cython/_poll.pyx", line 116, in zmq.backend.cython._poll.zmq_poll (zmq/backend/cython/_poll.c:2036)
+  File "zmq/backend/cython/checkrc.pxd", line 12, in zmq.backend.cython.checkrc._check_rc (zmq/backend/cython/_poll.c:2418)
+    PyErr_CheckSignals()
+KeyboardInterrupt
+2017-11-23 00:17:30,568: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : send message: [pmgr.launching.0.child] abort: KeyboardInterrupt()
+2017-11-23 00:17:30,569: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister idler pmgr.launching.0.child.idler._pilot_watcher_cb
+2017-11-23 00:17:30,569: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:30,569: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2017-11-23 00:17:30,569: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_common (NOOP)
+2017-11-23 00:17:30,598: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: DEBUG   : ru_finalize_child (NOOP)
+2017-11-23 00:17:30,599: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: DEBUG   : ru_finalize_common (NOOP)
+2017-11-23 00:17:30,599: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.idler._pilot_watcher_cb: INFO    : put message: [pmgr.launching.0.child.idler._pilot_watcher_cb.thread] terminating
+2017-11-23 00:17:30,601: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregistered idler pmgr.launching.0.child.idler._pilot_watcher_cb
+2017-11-23 00:17:30,601: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister subscriber pmgr.launching.0.child.subscriber._pmgr_control_cb
+2017-11-23 00:17:30,601: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : unregistered subscriber pmgr.launching.0.child.subscriber._pmgr_control_cb
+2017-11-23 00:17:30,859: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk size: 1 [False, True]
+2017-11-23 00:17:30,859: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk: pilot.0000 [1]
+2017-11-23 00:17:30,861: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : close  js to slurm+gsissh://wrangler.tacc.utexas.edu:2222/
+2017-11-23 00:17:30,911: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: WARNING : %s died
+2017-11-23 00:17:30,911: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: INFO    : watcher closes
+2017-11-23 00:17:30,911: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: INFO    : put message: [pmgr.launching.0.child.watch.thread] work finished
+2017-11-23 00:17:30,912: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: DEBUG   : ru_finalize_child (NOOP)
+2017-11-23 00:17:30,912: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: DEBUG   : ru_finalize_common (NOOP)
+2017-11-23 00:17:30,912: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.watch: INFO    : put message: [pmgr.launching.0.child.watch.thread] terminating
+2017-11-23 00:17:30,961: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : closed js to slurm+gsissh://wrangler.tacc.utexas.edu:2222/
+2017-11-23 00:17:30,962: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : close  js to gsissh://wrangler.tacc.utexas.edu:2222/
+2017-11-23 00:17:31,163: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : closed js to gsissh://wrangler.tacc.utexas.edu:2222/
+2017-11-23 00:17:31,164: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : finalized child
+2017-11-23 00:17:31,164: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_common()
+2017-11-23 00:17:31,164: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : alive check: proc invalid - stop [False - True]
+2017-11-23 00:17:31,224: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : stop pmgr.launching.0.child (7105 : 7105 : MainThread) [radical.utils.process.Default.is_valid]
+2017-11-23 00:17:31,224: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,224: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister idler pmgr.launching.0.child.idler._pilot_watcher_cb
+2017-11-23 00:17:31,224: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : timed cb pmgr.launching.0.child.idler._pilot_watcher_cb is not registered
+2017-11-23 00:17:31,224: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister subscriber pmgr.launching.0.child.subscriber._pmgr_control_cb
+2017-11-23 00:17:31,225: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : subscriber _pmgr_control_cb is not registered
+2017-11-23 00:17:31,226: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : advance bulk size: 0 [False, True]
+2017-11-23 00:17:31,226: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : finalized child
+2017-11-23 00:17:31,226: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_common()
+2017-11-23 00:17:31,226: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister publisher log_pubsub
+2017-11-23 00:17:31,227: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : unregistered publisher log_pubsub
+2017-11-23 00:17:31,227: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister publisher state_pubsub
+2017-11-23 00:17:31,478: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : unregistered publisher state_pubsub
+2017-11-23 00:17:31,479: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : TERM : pmgr.launching.0.child unregister publisher control_pubsub
+2017-11-23 00:17:31,479: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : unregistered publisher control_pubsub
+2017-11-23 00:17:31,479: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : pmgr.launching.0.child close prof
+2017-11-23 00:17:31,480: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,480: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2017-11-23 00:17:31,480: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_common (NOOP)
+2017-11-23 00:17:31,480: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,480: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2017-11-23 00:17:31,480: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: ERROR   : abort: ZMQError('Socket operation on non-socket')
+Traceback (most recent call last):
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/utils/threads.py", line 375, in _run
+    if not self.work_cb():
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/component.py", line 1088, in work_cb
+    topic, msg = self._q.get_nowait(500)  # timout in ms
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/pubsub.py", line 352, in get_nowait
+    if _uninterruptible(self._q.poll, flags=zmq.POLLIN, timeout=timeout):
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/pubsub.py", line 50, in _uninterruptible
+    return f(*args, **kwargs)
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/zmq/sugar/socket.py", line 558, in poll
+    evts = dict(p.poll(timeout))
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/zmq/sugar/poll.py", line 99, in poll
+    return zmq_poll(self.sockets, timeout=timeout)
+  File "zmq/backend/cython/_poll.pyx", line 123, in zmq.backend.cython._poll.zmq_poll (zmq/backend/cython/_poll.c:2186)
+  File "zmq/backend/cython/_poll.pyx", line 116, in zmq.backend.cython._poll.zmq_poll (zmq/backend/cython/_poll.c:2036)
+  File "zmq/backend/cython/checkrc.pxd", line 25, in zmq.backend.cython.checkrc._check_rc (zmq/backend/cython/_poll.c:2811)
+    raise ZMQError(errno)
+ZMQError: Socket operation on non-socket
+2017-11-23 00:17:31,481: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: INFO    : put message: [pmgr.launching.0.child.subscriber._pmgr_control_cb.thread] ZMQError('Socket operation on non-socket')
+2017-11-23 00:17:31,481: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: DEBUG   : ru_finalize_child (NOOP)
+2017-11-23 00:17:31,482: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._pmgr_control_cb: INFO    : put message: [pmgr.launching.0.child.subscriber._pmgr_control_cb.thread] terminating
+2017-11-23 00:17:31,731: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,732: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,732: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2017-11-23 00:17:31,732: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: ERROR   : abort: ZMQError('Socket operation on non-socket')
+Traceback (most recent call last):
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/utils/threads.py", line 375, in _run
+    if not self.work_cb():
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/component.py", line 1088, in work_cb
+    topic, msg = self._q.get_nowait(500)  # timout in ms
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/pubsub.py", line 352, in get_nowait
+    if _uninterruptible(self._q.poll, flags=zmq.POLLIN, timeout=timeout):
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/radical/pilot/utils/pubsub.py", line 50, in _uninterruptible
+    return f(*args, **kwargs)
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/zmq/sugar/socket.py", line 558, in poll
+    evts = dict(p.poll(timeout))
+  File "/home/george/Stream_ve/local/lib/python2.7/site-packages/zmq/sugar/poll.py", line 99, in poll
+    return zmq_poll(self.sockets, timeout=timeout)
+  File "zmq/backend/cython/_poll.pyx", line 123, in zmq.backend.cython._poll.zmq_poll (zmq/backend/cython/_poll.c:2186)
+  File "zmq/backend/cython/_poll.pyx", line 116, in zmq.backend.cython._poll.zmq_poll (zmq/backend/cython/_poll.c:2036)
+  File "zmq/backend/cython/checkrc.pxd", line 25, in zmq.backend.cython.checkrc._check_rc (zmq/backend/cython/_poll.c:2811)
+    raise ZMQError(errno)
+ZMQError: Socket operation on non-socket
+2017-11-23 00:17:31,733: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: INFO    : put message: [pmgr.launching.0.child.subscriber._cancel_monitor_cb.thread] ZMQError('Socket operation on non-socket')
+2017-11-23 00:17:31,733: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: DEBUG   : ru_finalize_child (NOOP)
+2017-11-23 00:17:31,733: pmgr.launching.0.child: pmgr.launching.0                : pmgr.launching.0.child.subscriber._cancel_monitor_cb: INFO    : put message: [pmgr.launching.0.child.subscriber._cancel_monitor_cb.thread] terminating
+2017-11-23 00:17:31,983: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : super pmgr.launching.0.child is invalid
+2017-11-23 00:17:31,983: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : component pmgr.launching.0.child is invalid
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : stop pmgr.launching.0.child (7105 : 7105 : MainThread) [radical.pilot.utils.component.Default.is_valid]
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : publisher log_pubsub is not registered
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : publisher state_pubsub is not registered
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : publisher control_pubsub is not registered
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : DEBUG   : pmgr.launching.0.child close prof
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : send message: [pmgr.launching.0.child] terminating
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : WARNING : send failed ([Errno 9] Bad file descriptor) - terminate
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,985: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:31,986: pmgr.launching.0.child: pmgr.launching.0                : MainThread     : INFO    : parent stops child

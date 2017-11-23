@@ -1,0 +1,7 @@
+2017-11-23 00:24:51,317: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:24:51,317: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : INFO    :                      pid: 7882
+2017-11-23 00:24:51,317: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:24:51,318: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:24:51,318: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : INFO    : start bridge umgr.unschedule.pubsub.bridge.0000.child on tcp://*:*
+2017-11-23 00:24:51,319: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : INFO    : bound bridge umgr.unschedule.pubsub.bridge.0000.child to tcp://0.0.0.0:45642 : tcp://0.0.0.0:40359
+2017-11-23 00:45:36,611: umgr.unschedule.pubsub.bridge.0000.child: umgr.unschedule.pubsub.bridge.0000.child: MainThread     : WARNING : send failed ([Errno 9] Bad file descriptor) - terminate

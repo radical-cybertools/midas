@@ -1,5 +1,6 @@
-import os
 import sys
+import pickle
+import redis
 import numpy as np
 
 
@@ -23,6 +24,6 @@ r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 
 
 centroids = np.random.randn(number_centroids, number_dimensions)
-put_model(centroids)
+save_clusters_to_redis(centroids)
 
 

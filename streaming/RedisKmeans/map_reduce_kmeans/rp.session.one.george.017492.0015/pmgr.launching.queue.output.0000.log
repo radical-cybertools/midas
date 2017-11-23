@@ -1,0 +1,9 @@
+2017-11-23 00:24:46,113: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:24:46,113: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : INFO    :                      pid: 7824
+2017-11-23 00:24:46,114: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:24:46,114: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:24:46,114: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : INFO    : create pmgr_launching_queue - output - tcp://144.76.72.175:44845
+2017-11-23 00:24:46,126: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : DEBUG   : start process
+2017-11-23 00:24:46,126: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:24:46,126: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:24:46,126: pmgr.launching.queue.output.0000: pmgr.launching.0                : MainThread     : DEBUG   : process class started (no child)

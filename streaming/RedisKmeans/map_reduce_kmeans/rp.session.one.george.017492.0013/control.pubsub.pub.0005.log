@@ -1,0 +1,22 @@
+2017-11-23 00:13:31,574: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:13:31,574: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : INFO    :                      pid: 7214
+2017-11-23 00:13:31,574: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:13:31,574: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:13:31,574: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : INFO    : create control_pubsub - pub - tcp://144.76.72.175:45165
+2017-11-23 00:13:31,575: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : DEBUG   : start process
+2017-11-23 00:13:31,575: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:31,575: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:13:31,575: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : DEBUG   : process class started (no child)
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : INFO    :                      pid: 7046
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : INFO    : create control_pubsub - pub - tcp://144.76.72.175:45165
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : DEBUG   : start process
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2017-11-23 00:13:31,600: control.pubsub.pub.0005: MainProcess                     : MainThread     : DEBUG   : process class started (no child)
+2017-11-23 00:17:30,571: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:30,571: control.pubsub.pub.0005: umgr.scheduling.0               : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2017-11-23 00:17:30,945: control.pubsub.pub.0005: MainProcess                     : MainThread     : INFO    : parent stops child
+2017-11-23 00:17:30,945: control.pubsub.pub.0005: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)

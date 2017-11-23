@@ -1,0 +1,7 @@
+2017-11-23 00:13:26,366: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
+2017-11-23 00:13:26,366: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    :                      pid: 7099
+2017-11-23 00:13:26,366: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    :                      tid: MainThread
+2017-11-23 00:13:26,366: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : radical.pilot        version: 0.46.2
+2017-11-23 00:13:26,366: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : start bridge pmgr.launching.queue.bridge.0000.child on tcp://*:*
+2017-11-23 00:13:26,368: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : bound bridge pmgr.launching.queue.bridge.0000.child to tcp://0.0.0.0:46225 : tcp://0.0.0.0:38482
+2017-11-23 00:13:31,250: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : sent  1 [hwm: 1]

@@ -78,6 +78,7 @@ if __name__ == '__main__':
     while True:
         if check_map_status():
             centroids = get_clusters()
+            print "centroids: ", centroids
             partial_sums = get_and_aggregate_partial_sums_from_redis(centroids)
             centroids = find_new_centers(partial_sums)
             save_clusters_to_redis(centroids)

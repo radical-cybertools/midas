@@ -37,7 +37,7 @@ output_file=open(RESULT_FILE, "w")
 output_file.write("Number_Clusters,Number_Points_per_Cluster,Number_Dim,Number_Points_per_Message,Interval,Number_Partitions, Time\n")
 
 stdout_file = open(STDOUT_FILE, 'w')
-stdout_file.write('Produce_batch,Num_Messages,Number_APoints/Msg,KB_Transfered,KB/sec\n')
+stdout_file.write('Produce_batch_from,Produce_batch_until,Num_Messages,Number_Dim,Message_size_in_Bytes,APoints/Msg,Message_dim,KB_Transfered,KB/sec,TimeStamp\n')
 
 #stdout_loop_file = open(STDOUT_LOOP_FILE,'w')
 #stdout_loop_file.write("Number,x_points,Time_to_produce_x_points\n")
@@ -70,15 +70,20 @@ for num_points_per_message in NUMBER_POINTS_PER_MESSAGE:
             #print "Points Array Shape: %s, Number Batches: %.1f"%(points_np.shape, number_batches)
             last_index=0
             for i in range(number_batches):
-                stdout_file.write( "%d,%d,%d,%d,%.1f,%s\n"%\
+                run_timestamp=datetime.datetime.now()
+                ts = run_timestamp.strftime("%Y%m%d-%H%M%S")
+                points_batch = points_np[last_index:last_index+num_points_per_message]
+                points_strlist=str(points_batch.tolist())
+                message_size =  len(points_strlist)/1024  # in bytes
+                stdout_file.write( "%d,%d,%d,%d,%d,%.1f,%s,%s\n"%\
                                     (last_index,                                                                                           
                                      last_index+num_points_per_message, 
                                      num_messages,
                                      num_points_per_message,
+                                     NUMBER_DIM,
+                                     message_size_in_bytes,
                                      bytes/1024,
-                                     bytes/1024/(time.time()-global_start)))
-                points_batch = points_np[last_index:last_index+num_points_per_message]
-                points_strlist=str(points_batch.tolist())
+                                     bytes/1024/(time.time()-global_start),ts))
                 producer.produce(points_strlist, partition_key='{}'.format(count))
                 count = count + 1
                 last_index = last_index + num_points_per_message

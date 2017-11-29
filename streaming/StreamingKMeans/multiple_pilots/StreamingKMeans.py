@@ -38,8 +38,9 @@ class BatchInfoCollector(StreamingListener):
         info = batchCompleted.batchInfo()
         submissionTime = datetime.datetime.fromtimestamp(info.submissionTime()/1000).isoformat()
         
-        output_spark_metrics.write("%s, %s, %d, %d, %d,%s\n"%(str(info.batchTime()), submissionTime, \
-                                                         info.schedulingDelay(), info.totalDelay(), info.numRecords(), SCENARIO))
+        output_spark_metrics.write("%s, %s, %d, %d, %d, %d,%s\n"%(str(info.batchTime()), submissionTime, \
+                                                         info.schedulingDelay(), info.totalDelay(),\
+                                                         info.processingDelay() ,info.numRecords(), SCENARIO))
         output_spark_metrics.flush()
         self.batchInfosCompleted.append(batchCompleted.batchInfo())
 
@@ -111,8 +112,9 @@ def model_update(rdd):
     output_file.flush()
 
 appName="PythonSparkStreamingKafkaKMeans"
-conf = SparkConf().setAppName(appName).set('spark.metrics.conf.*.sink.csv.class','org.apache.spark.metrics.sink.CsvSink').set('spark.metrics.conf.*.sink.csv.directory','./')
-sc = SparkContext(conf=conf)
+#conf = SparkConf().setAppName(appName).set('spark.metrics.conf.*.sink.csv.class','org.apache.spark.metrics.sink.CsvSink').set('spark.metrics.conf.*.sink.csv.directory','./')
+#sc = SparkContext(conf=conf)
+sc = SparkContext()
 
 ssc_start = time.time()
 ssc = StreamingContext(sc, STREAMING_WINDOW)
@@ -138,9 +140,6 @@ try:
     ssc.start()
     ssc.awaitTermination()
     ssc.stop(stopSparkContext=True, stopGraceFully=True)
-    output_file.write('Time is: %d \n' % time.time() - start)
-    output_file.flush()
-    output_file.close()
 
 finally:
     ssc.stop(stopSparkContext=True, stopGraceFully=True)

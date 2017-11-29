@@ -26,11 +26,11 @@ if __name__ == "__main__":
 
         pdesc = rp.ComputePilotDescription()
         pdesc.resource = "xsede.wrangler"  # this is a "label", not a hostname
-        pdesc.cores    = 24
-        pdesc.runtime  = 20  # minutes
+        pdesc.cores    = 48
+        pdesc.runtime  = 30  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = 'TG-MCB090174'
-        pdesc.project = 'TG-MCB090174:dssd+TG-MCB090174+2397'
+        #pdesc.project = 'TG-MCB090174:dssd+TG-MCB090174+2432' 
         pdesc.access_schema = 'gsissh'
 
         # submit the pilot.
@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
         print "Creating a session"
         ## ------ EXPERIMENTAL CONFIGURATIONS------------------------------------------#
-        NUMBER_OF_PRODUCERS = 1
+        NUMBER_OF_PRODUCERS = 8
        #--------------------------------------------------------------------------------
 
         cudesc_list =[]

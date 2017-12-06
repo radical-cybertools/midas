@@ -5,6 +5,7 @@ __license__   = "MIT"
 import sys, os
 import radical.pilot as rp
 import radical.utils as ru
+import time
 import numpy as np
 
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
@@ -27,7 +28,7 @@ if __name__ == "__main__":
         pdesc = rp.ComputePilotDescription()
         pdesc.resource = "xsede.wrangler"  # this is a "label", not a hostname
         pdesc.cores    = 48
-        pdesc.runtime  = 30  # minutes
+        pdesc.runtime  = 45  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = 'TG-MCB090174'
         #pdesc.project = 'TG-MCB090174:dssd+TG-MCB090174+2432' 
@@ -48,7 +49,7 @@ if __name__ == "__main__":
 
         print "Creating a session"
         ## ------ EXPERIMENTAL CONFIGURATIONS------------------------------------------#
-        NUMBER_OF_PRODUCERS = 8
+        NUMBER_OF_PRODUCERS = 5
        #--------------------------------------------------------------------------------
 
         cudesc_list =[]
@@ -58,12 +59,16 @@ if __name__ == "__main__":
             cudesc.executable = 'python'
             cudesc.arguments = ['data_producer.py',broker_string]
             cudesc.input_staging = ['data_producer.py']
-            cudesc.cores = 1 
-            cudesc_list.append(cudesc)
+            cudesc.cores = 1
+            umgr.submit_units([cudesc])
+            umgr.submit_units([cudesc])
+            time.sleep(80)
+            #cudesc_list.append(cudesc)
+            
             #--------END USER DEFINED CU DESCRIPTION----------------------------#
 
         print "Submit Compute Units to Unit Manager ..."
-        cu_set = umgr.submit_units(cudesc_list)
+        #cu_set = umgr.submit_units(cudesc_list)
 
         print "Waiting for CUs to complete ..."
         umgr.wait_units()

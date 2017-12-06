@@ -16,7 +16,7 @@ NUMBER_POINTS_PER_MESSAGE=[5000] # 3-D Point == 304 KB
 #NUMBER_POINTS_PER_MESSAGE=[10000] # 3-D Point == 304 KB
 INTERVAL=120
 NUMBER_OF_PRODUCES=1 # 10*60 = 10 minutes
-NUMBER_PARTITIONS=384  # set 1 partition per core 
+NUMBER_PARTITIONS=48*4  # set 1 partition per core 
 TOPIC_NAME="Throughput"
 
 
@@ -34,10 +34,15 @@ STDOUT_FILE = "stdout-" + run_timestamp.strftime("%Y%m%d-%H%M%S") + ".csv"
 
 
 output_file=open(RESULT_FILE, "w")
-output_file.write("Number_Clusters,Number_Points_per_Cluster,Number_Dim,Number_Points_per_Message,Interval,Number_Partitions, Time\n")
+output_file.write("Number_Clusters,Number_Points_per_Cluster,\
+        Number_Dim,Number_Points_per_Message,Interval,\
+        Number_Partitions, Time\n")
 
 stdout_file = open(STDOUT_FILE, 'w')
-stdout_file.write('Produce_batch_from,Produce_batch_until,Num_Messages,Number_Dim,Message_size_in_Bytes,APoints/Msg,Message_dim,KB_Transfered,KB/sec,TimeStamp\n')
+stdout_file.write('Produce_batch_from,Produce_batch_until,\
+        Num_Messages,Number_of_points_per_Message,\
+        Number_Dim,Message_size_in_Bytes,\
+        APoints/Msg,KB_Transfered,KB/sec,TimeStamp\n')
 
 #stdout_loop_file = open(STDOUT_LOOP_FILE,'w')
 #stdout_loop_file.write("Number,x_points,Time_to_produce_x_points\n")
@@ -74,8 +79,8 @@ for num_points_per_message in NUMBER_POINTS_PER_MESSAGE:
                 ts = run_timestamp.strftime("%Y%m%d-%H%M%S")
                 points_batch = points_np[last_index:last_index+num_points_per_message]
                 points_strlist=str(points_batch.tolist())
-                message_size =  len(points_strlist)/1024  # in bytes
-                stdout_file.write( "%d,%d,%d,%d,%d,%.1f,%s,%s\n"%\
+                message_size_in_bytes =  len(points_strlist)/1024  # in bytes
+                stdout_file.write( "%d,%d,%d,%d,%d,%d, %.1f,%s,%s\n"%\
                                     (last_index,                                                                                           
                                      last_index+num_points_per_message, 
                                      num_messages,
@@ -83,7 +88,8 @@ for num_points_per_message in NUMBER_POINTS_PER_MESSAGE:
                                      NUMBER_DIM,
                                      message_size_in_bytes,
                                      bytes/1024,
-                                     bytes/1024/(time.time()-global_start),ts))
+                                     bytes/1024/(time.time()-global_start),
+                                     ts))
                 producer.produce(points_strlist, partition_key='{}'.format(count))
                 count = count + 1
                 last_index = last_index + num_points_per_message

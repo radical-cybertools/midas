@@ -26,7 +26,7 @@ double rmsd(double** xref){
         }
     }
 
-    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL);
+    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL,0);
 
     return temp;
 };

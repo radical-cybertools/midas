@@ -68,7 +68,7 @@ except:
 output_file=open(RESULT_FILE, "w")
 
 output_spark_metrics=open(SPARK_RESULT_FILE, "w")
-output_spark_metrics.write("BatchTime, SubmissionTime, SchedulingDelay, TotalDelay, NumberRecords, Scenario\n")
+output_spark_metrics.write("BatchTime, SubmissionTime, SchedulingDelay, TotalDelay, ProcessingDelay, NumberRecords, Scenario\n")
 start = time.time()
 
 #output_file.write("Measurement,Number_Partitions, Time\n")

@@ -156,7 +156,7 @@ double InnerProduct(double *A, double **coords1, double **coords2, const int len
 }
 
 
-int FastCalcRMSDAndRotation(double *rot, double *A, double *rmsd, double E0, int len, double minScore)
+int FastCalcRMSDAndRotation(double *rot, double *A, double *rmsd, double E0, int len, int rotate)
 {
     double Sxx, Sxy, Sxz, Syx, Syy, Syz, Szx, Szy, Szz;
     double Szz2, Syy2, Sxx2, Sxy2, Syz2, Sxz2, Syx2, Szy2, Szx2,
@@ -229,15 +229,14 @@ int FastCalcRMSDAndRotation(double *rot, double *A, double *rmsd, double E0, int
             break;
     }
 
-    if (i == 50) 
-       fprintf(stderr,"\nMore than %d iterations needed!\n", i);
+    /*if (i == 50) 
+       fprintf(stderr,"\nMore than %d iterations needed!\n", i);*/
 
     rms = sqrt(2.0 * (E0 - mxEigenV)/len);
     (*rmsd) = rms;
 
-    if (minScore > 0) 
-        if (rms < minScore)
-            return (-1); // Don't bother with rotation. 
+    if (rotate == 0) 
+        return (0); // Don't bother with rotation. 
 
     a11 = SxxpSyy + Szz-mxEigenV; a12 = SyzmSzy; a13 = - SxzmSzx; a14 = SxymSyx;
     a21 = SyzmSzy; a22 = SxxmSyy - Szz-mxEigenV; a23 = SxypSyx; a24= SxzpSzx;
@@ -329,66 +328,18 @@ int FastCalcRMSDAndRotation(double *rot, double *A, double *rmsd, double E0, int
     return (1);
 }
 
-
-void CenterCoords(double **coords, const int len, const double *weight)
-{
-    int             i;
-    double          xsum, ysum, zsum, wsum;
-    double         *x = coords[0], *y = coords[1], *z = coords[2];
-
-    xsum = ysum = zsum = 0.0;
-
-    if (weight != NULL)
-    {
-        wsum = 0.0;
-        for (i = 0; i < len; ++i)
-        {
-            xsum += weight[i] * x[i];
-            ysum += weight[i] * y[i];
-            zsum += weight[i] * z[i];
-            
-            wsum += weight[i];
-        }
-
-        xsum /= wsum;
-        ysum /= wsum;
-        zsum /= wsum;
-    }
-    else
-    {
-        for (i = 0; i < len; ++i)
-        {
-            xsum += x[i];
-            ysum += y[i];
-            zsum += z[i];
-        }
-
-        xsum /= len;
-        ysum /= len;
-        zsum /= len;
-    }
-
-    for (i = 0; i < len; ++i)
-    {
-        x[i] -= xsum;
-        y[i] -= ysum;
-        z[i] -= zsum;
-    }
-}
-
-
-double CalcRMSDRotationalMatrix(double **coords1, double **coords2, const int len, double *rot, const double *weight)
+double CalcRMSDRotationalMatrix(double **coords1, double **coords2, const int len, double *rot, const double *weight, int rotate)
 {
     double A[9], rmsd;
     /* center the structures */
-    CenterCoords(coords1, len, weight);
-    CenterCoords(coords2, len, weight);
+    //CenterCoords(coords1, len, weight);
+    //CenterCoords(coords2, len, weight);
 
     /* calculate the (weighted) inner product of two structures */
     double E0 = InnerProduct(A, coords1, coords2, len, weight);
 
     /* calculate the RMSD & rotational matrix */
-    FastCalcRMSDAndRotation(rot, A, &rmsd, E0, len, -1);
+    FastCalcRMSDAndRotation(rot, A, &rmsd, E0, len, rotate);
 
     return rmsd;
 }

@@ -91,7 +91,7 @@
                RMSD value
 
 */
-double CalcRMSDRotationalMatrix(double **coords1, double **coords2, const int len, double *rot, const double *weight);
+double CalcRMSDRotationalMatrix(double **coords1, double **coords2, const int len, double *rot, const double *weight, int rotate);
 
 /* Calculate the inner product of two structures.
    If weight array is not NULL, calculate the weighted inner product.
@@ -138,15 +138,5 @@ double InnerProduct(double *A, double **coords1, double **coords2, const int len
                 only the rmsd was calculated if < 0
                 both the RMSD & rotational matrix calculated if > 0
 */
-int FastCalcRMSDAndRotation(double *rot, double *A, double *rmsd, double E0, int len, double minScore);
-
-/* Center the coordinates.
-
-        Warning:
-            If you are doing a full superposition (the usual least squares way),
-            you MUST center each structure first. That is, you must translate
-            each structure so that its centroid is at the origin.
-            You can use CenterCoords() for this.
-*/
-void CenterCoords(double **coords, const int len);
+int FastCalcRMSDAndRotation(double *rot, double *A, double *rmsd, double E0, int len, int rotate);
 

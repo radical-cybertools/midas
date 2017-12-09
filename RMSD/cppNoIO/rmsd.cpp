@@ -6,6 +6,7 @@
 #include <math.h>
 #include <qcprot.h>
 #include <sys/time.h>
+#include <string>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ double rmsd(double** xref){
         }
     }
 
-    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL);
+    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL,0);
 
     return temp;
 };
@@ -57,16 +58,27 @@ double current_time(){
 }
 
 
-int main (){
+int main (int argc, char** argv){
     int rank;
     int ierr;
     int size;
+    int nframes; //total number of frames
 
     MPI_Init ( NULL, NULL );
     MPI_Comm_size ( MPI_COMM_WORLD, &size );
     MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
 
-    int nframes=1024; //total number of frames
+    if (argc!=2){
+        if (rank==0)
+            cout<<"Will use the default number of frames, 2512200\n";
+        nframes = 2512200;
+    }
+    else{
+        nframes = atoi(argv[1]);
+        if (rank==0)
+            cout<<"Will use "<<nframes<<"\n";
+    }
+
     int bsize; // number of frames of this process
     double *results; // pointer to the RMSD results array from all processes
     double **xref0; //Reference Frame pointer. It is a 3 by 3341
@@ -77,6 +89,8 @@ int main (){
 
     double *duration = new double[3]; //keeps track of durations for each process
     double *durations = new double[size*3]; // Pointer that will gather all the information
+
+    MPI_Barrier(MPI_COMM_WORLD);
 
     // Get timestamp and convert it to us
     tstart = current_time();

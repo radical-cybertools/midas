@@ -18,7 +18,7 @@ from pykafka.partitioners import hashing_partitioner
 
 def setup_kafka_producer(broker):
 
-    
+    TOPIC_NAME='Throughput'
     client = KafkaClient(hosts=broker)
     topic = client.topics[TOPIC_NAME]
     producer = topic.get_sync_producer(partitioner=hashing_partitioner)
@@ -90,7 +90,7 @@ def publish_messages(msg_number, msg_np, producer):
                                      last_index+MESSAGE_OF_POINTS_PER_MESSAGE, 
                                      msg_number,
                                      MESSAGE_OF_POINTS_PER_MESSAGE,
-                                     NUMBER_DIM,
+                                     NUMBER_OF_DIM,
                                      message_size_in_bytes,
                                      tbytes/1024,
                                      tbytes/1024/(time.time()-global_start),
@@ -106,10 +106,8 @@ if __name__ == '__main__':
     NUMBER_OF_DIM = 3
     MESSAGE_OF_POINTS_PER_MESSAGE = 5000
     
-    #broker = sys.argv[1]
-    #concurrent_producers = sys.argv[2]
-    broker = 'c251:9092'
-    concurrent_producers  = 4
+    broker = sys.argv[1]
+    concurrent_producers = int(sys.argv[2])
     
     
     

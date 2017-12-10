@@ -40,7 +40,8 @@ class BatchInfoCollector(StreamingListener):
         
         output_spark_metrics.write("%s, %s, %d, %d, %d, %d,%s\n"%(str(info.batchTime()), submissionTime, \
                                                          info.schedulingDelay(), info.totalDelay(),\
-                                                         info.processingDelay() ,info.numRecords(), SCENARIO))
+                                                         info.processingDelay() ,info.numRecords(),\
+                                                         SCENARIO,APPLICATION,CENTERS))
         output_spark_metrics.flush()
         self.batchInfosCompleted.append(batchCompleted.batchInfo())
 
@@ -52,7 +53,9 @@ METABROKER_LIST= sys.argv[1]
 TOPIC= sys.argv[2]
 NUMBER_PARTITIONS = int(sys.argv[3])
 STREAMING_WINDOW=60
-SCENARIO="1_Producer_Count"
+SCENARIO="3P-1B-1C"
+APPLICATION='kmeans'
+CENTERS='10'
 #######################################################################################
 
 run_timestamp=datetime.datetime.now()
@@ -68,7 +71,8 @@ except:
 output_file=open(RESULT_FILE, "w")
 
 output_spark_metrics=open(SPARK_RESULT_FILE, "w")
-output_spark_metrics.write("BatchTime, SubmissionTime, SchedulingDelay, TotalDelay, ProcessingDelay, NumberRecords, Scenario\n")
+output_spark_metrics.write("BatchTime, SubmissionTime, SchedulingDelay, TotalDelay, ProcessingDelay, NumberRecords,\
+ Scenario,Application,Centers\n")
 start = time.time()
 
 #output_file.write("Measurement,Number_Partitions, Time\n")
@@ -113,6 +117,8 @@ def model_update(rdd):
 
 appName="PythonSparkStreamingKafkaKMeans"
 #conf = SparkConf().setAppName(appName).set('spark.metrics.conf.*.sink.csv.class','org.apache.spark.metrics.sink.CsvSink').set('spark.metrics.conf.*.sink.csv.directory','./')
+#sc = SparkContext(conf=conf)
+conf = SparkConf().setAppName(appName).set("spark.streaming.backpressure.enabled","true")
 #sc = SparkContext(conf=conf)
 sc = SparkContext()
 

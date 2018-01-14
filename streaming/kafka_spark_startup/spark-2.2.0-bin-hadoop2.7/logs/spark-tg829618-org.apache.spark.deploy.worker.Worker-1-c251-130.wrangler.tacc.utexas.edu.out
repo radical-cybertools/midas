@@ -1,0 +1,60 @@
+Spark Command: /usr/java/jdk1.8.0_92/bin/java -cp /home/03662/tg829618/experiments-sbatch/spark-2.2.0-bin-hadoop2.7/conf/:/home/03662/tg829618/experiments-sbatch/spark-2.2.0-bin-hadoop2.7/jars/* -Xmx1g org.apache.spark.deploy.worker.Worker --webui-port 8081 spark://c251-130.wrangler.tacc.utexas.edu:7077
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+17/08/06 19:05:55 INFO Worker: Started daemon with process name: 123153@c251-130.wrangler.tacc.utexas.edu
+17/08/06 19:05:55 INFO SignalUtils: Registered signal handler for TERM
+17/08/06 19:05:55 INFO SignalUtils: Registered signal handler for HUP
+17/08/06 19:05:55 INFO SignalUtils: Registered signal handler for INT
+17/08/06 19:05:56 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/08/06 19:05:56 INFO SecurityManager: Changing view acls to: tg829618
+17/08/06 19:05:56 INFO SecurityManager: Changing modify acls to: tg829618
+17/08/06 19:05:56 INFO SecurityManager: Changing view acls groups to: 
+17/08/06 19:05:56 INFO SecurityManager: Changing modify acls groups to: 
+17/08/06 19:05:56 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(tg829618); groups with view permissions: Set(); users  with modify permissions: Set(tg829618); groups with modify permissions: Set()
+17/08/06 19:05:56 INFO Utils: Successfully started service 'sparkWorker' on port 39233.
+17/08/06 19:05:56 INFO Worker: Starting Spark worker 129.114.58.130:39233 with 48 cores, 124.5 GB RAM
+17/08/06 19:05:56 INFO Worker: Running Spark version 2.2.0
+17/08/06 19:05:56 INFO Worker: Spark home: /home/03662/tg829618/experiments-sbatch/spark-2.2.0-bin-hadoop2.7
+17/08/06 19:05:56 INFO Utils: Successfully started service 'WorkerUI' on port 8081.
+17/08/06 19:05:56 INFO WorkerWebUI: Bound WorkerWebUI to 0.0.0.0, and started at http://129.114.58.130:8081
+17/08/06 19:05:56 INFO Worker: Connecting to master c251-130.wrangler.tacc.utexas.edu:7077...
+17/08/06 19:05:56 INFO TransportClientFactory: Successfully created connection to c251-130.wrangler.tacc.utexas.edu/129.114.58.130:7077 after 22 ms (0 ms spent in bootstraps)
+17/08/06 19:05:56 INFO Worker: Successfully registered with master spark://c251-130.wrangler.tacc.utexas.edu:7077
+17/08/06 19:26:19 INFO Worker: c251-130.wrangler.tacc.utexas.edu:7077 Disassociated !
+17/08/06 19:26:19 ERROR Worker: Connection to master failed! Waiting for master to reconnect...
+17/08/06 19:26:19 INFO Worker: Connecting to master c251-130.wrangler.tacc.utexas.edu:7077...
+17/08/06 19:26:19 INFO Worker: c251-130.wrangler.tacc.utexas.edu:7077 Disassociated !
+17/08/06 19:26:19 ERROR Worker: Connection to master failed! Waiting for master to reconnect...
+17/08/06 19:26:19 INFO Worker: Not spawning another attempt to register with the master, since there is an attempt scheduled already.
+17/08/06 19:26:19 INFO TransportClientFactory: Found inactive connection to c251-130.wrangler.tacc.utexas.edu/129.114.58.130:7077, creating a new one.
+17/08/06 19:26:19 WARN Worker: Failed to connect to master c251-130.wrangler.tacc.utexas.edu:7077
+org.apache.spark.SparkException: Exception thrown in awaitResult: 
+	at org.apache.spark.util.ThreadUtils$.awaitResult(ThreadUtils.scala:205)
+	at org.apache.spark.rpc.RpcTimeout.awaitResult(RpcTimeout.scala:75)
+	at org.apache.spark.rpc.RpcEnv.setupEndpointRefByURI(RpcEnv.scala:100)
+	at org.apache.spark.rpc.RpcEnv.setupEndpointRef(RpcEnv.scala:108)
+	at org.apache.spark.deploy.worker.Worker$$anonfun$org$apache$spark$deploy$worker$Worker$$tryRegisterAllMasters$1$$anon$1.run(Worker.scala:241)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.io.IOException: Failed to connect to c251-130.wrangler.tacc.utexas.edu/129.114.58.130:7077
+	at org.apache.spark.network.client.TransportClientFactory.createClient(TransportClientFactory.java:232)
+	at org.apache.spark.network.client.TransportClientFactory.createClient(TransportClientFactory.java:182)
+	at org.apache.spark.rpc.netty.NettyRpcEnv.createClient(NettyRpcEnv.scala:197)
+	at org.apache.spark.rpc.netty.Outbox$$anon$1.call(Outbox.scala:194)
+	at org.apache.spark.rpc.netty.Outbox$$anon$1.call(Outbox.scala:190)
+	... 4 more
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: c251-130.wrangler.tacc.utexas.edu/129.114.58.130:7077
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:257)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:291)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:631)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:566)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:480)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:442)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:131)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	... 1 more

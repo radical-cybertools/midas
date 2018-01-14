@@ -105,10 +105,13 @@ if __name__ == '__main__':
     NUMBER_OF_MESSAGES =  2000  # duration expectation: 4 minutes
     NUMBER_OF_DIM = 3
     MESSAGE_OF_POINTS_PER_MESSAGE = 5000
-    NUMBER_OF_PARTITIONS = 12
+    NUMBER_OF_PARTITIONS = 48
+    wrangler_nodes = 2
+    nbrokers = 2
     
     broker = sys.argv[1]
-    concurrent_producers = 1  #int(sys.argv[2])
+    concurrent_producers = int(sys.argv[2])
+    producer_id = int(sys.argv[3])
     
     
     
@@ -118,10 +121,10 @@ if __name__ == '__main__':
     
     tbytes = 0
 
-    message_sizes = [2,20,200,2000]
+    message_sizes = [2000]
     #message_sizes = [2,2000]
     for NUMBER_OF_MESSAGES in message_sizes: 
-        for j in range(10):    
+        for j in range(8):    
 
 
             global_start = time.time()
@@ -138,10 +141,11 @@ if __name__ == '__main__':
 
             throuhghput_rate = NUMBER_OF_MESSAGES/ (end_time - start_time)
 
-            afile = open('producer_throughput.csv','a')
+            afile = open('producer_throughput_%d.csv'%producer_id,'a')
 
     #afile.write('Partitions,Message_size,Total_Messages,Throughput_Rate\n')
-            afile.write('%d, %d, %d, %d, %f\n' % (NUMBER_OF_PARTITIONS,MESSAGE_OF_POINTS_PER_MESSAGE,NUMBER_OF_DIM,NUMBER_OF_MESSAGES,throuhghput_rate))
+            afile.write('%d, %d, %d, %d, %f, %d, %d, %d\n' % (NUMBER_OF_PARTITIONS,MESSAGE_OF_POINTS_PER_MESSAGE,NUMBER_OF_DIM,\
+                    NUMBER_OF_MESSAGES,throuhghput_rate, concurrent_producers, wrangler_nodes, nbrokers))
             afile.close()
             time.sleep(10)
 

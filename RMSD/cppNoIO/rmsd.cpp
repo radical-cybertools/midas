@@ -17,7 +17,7 @@ double rmsd(double** xref){
     double *pointer = new double[9];
 
     xmobile = new double*[3];
-    
+
     for (int i=0;i<3;i++){
         xmobile[i] = new double[146];
         for (int j=0;j<146;j++){
@@ -85,7 +85,7 @@ int main (int argc, char** argv){
     int start,stop; //first and last frame that will be used in this process
     double *result;  //pointer to RMSD result array per process.
     double tstart,tstop; // Variable that will hold timestamps for timing values.
-   
+
 
     double *duration = new double[3]; //keeps track of durations for each process
     double *durations = new double[size*3]; // Pointer that will gather all the information
@@ -116,7 +116,7 @@ int main (int argc, char** argv){
     }
 
     result = new double[bsize];
-    // Get init time 
+    // Get init time
     tstop = current_time();
     duration[0] = tstop-tstart;
     tstart = tstop;
@@ -127,18 +127,20 @@ int main (int argc, char** argv){
 
     tstop = current_time();
     duration[1] = tstop-tstart;
+
+    MPI_Barrier(MPI_COMM_WORLD);
     tstart = tstop;
 
     // Gather all the results to rank 0. the 'if' statement is commented out to replicate
-    // the exact gather Mahzad executed in her code. There might be a redundancy since 
+    // the exact gather Mahzad executed in her code. There might be a redundancy since
     // all processes are allocating the space for the results.
-    /*if (rank==0){*/
+    if (rank==0){
     results = new double[size*bsize];
     MPI_Gather(result,bsize,MPI_DOUBLE,results,bsize,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    /*}
+    }
     else{
         MPI_Gather(result,bsize,MPI_DOUBLE,NULL,0,MPI_DOUBLE,0,MPI_COMM_WORLD);
-    }*/
+    }
 
     // Gather duration
     tstop = current_time();
@@ -159,7 +161,7 @@ int main (int argc, char** argv){
     // write results to a file as well as the durations. The reason for the write is in case
     // some optimization is done to the compiler, we need to make sure it will not discard
     // the calcualtions because the space with the results is not used.
-    
+
     if (rank==0){
         ofstream myfile;
         myfile.open ("example.txt");
@@ -172,7 +174,7 @@ int main (int argc, char** argv){
         myfile.open ("timings.csv");
         myfile << "Rank,Init,Execute,Gather\n";
         for (int i=0;i<size;i++)
-            myfile<<i<<","<<durations[i*3]<<","<<durations[i+3+1]<<","<<durations[i*3+2]<<"\n";
+            myfile<<i<<","<<durations[i*3]<<","<<durations[i*3+1]<<","<<durations[i*3+2]<<"\n";
         myfile.close();
 
     }

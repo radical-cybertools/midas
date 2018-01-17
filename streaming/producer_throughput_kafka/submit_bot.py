@@ -17,7 +17,7 @@ if __name__ == "__main__":
     session = rp.Session()
     print "session id: %s" % session.uid
     broker_string = sys.argv[1] + ':9092'
-    broker_string += ',' + sys.argv[2] + ':9092'
+    #broker_string += ',' + sys.argv[2] + ':9092'
 
     try:
 
@@ -32,7 +32,6 @@ if __name__ == "__main__":
         pdesc.runtime  = 40  # minutes
         pdesc.cleanup  = False  # clean pilot sandbox and database entries
         pdesc.project = 'TG-MCB090174'
-        #pdesc.project = 'TG-MCB090174:dssd+TG-MCB090174+2451' 
         pdesc.access_schema = 'gsissh'
 
         # submit the pilot.
@@ -50,7 +49,7 @@ if __name__ == "__main__":
 
         print "Creating a session"
         ## ------ EXPERIMENTAL CONFIGURATIONS------------------------------------------#
-        NUMBER_OF_PRODUCERS  =  8
+        NUMBER_OF_PRODUCERS  =  2
        #--------------------------------------------------------------------------------
         for i in xrange(1):
             print "Submitting 1st producing batch"
@@ -66,15 +65,30 @@ if __name__ == "__main__":
                 cudesc_list.append(cudesc)
                 
                 #--------END USER DEFINED CU DESCRIPTION----------------------------#
+            start_producing_time = time.time()
             umgr.submit_units(cudesc_list)
             print "Submit Compute Units to Unit Manager ..."
-
+           
             print "Waiting for CUs to complete ..."
             umgr.wait_units()
+            end_producing_time = time.time()
             
-            #NUMBER_OF_PRODUCERS +=1
 
             print "CUs batch completed:"
+            partitions =  48
+            msg_size_in_points = 5000
+            dim = 3
+            total_messages = 16000
+            it = 8
+            ttc = end_producing_time - start_producing_time 
+
+            afile = open('rp_producer_throughput.csv','a')
+            #afile.write('Partitions, Points_Per_Message,Dimensions,Iterations,ttc,Producers\n')
+            afile.write('%d, %d, %d, %d, %d, %f, %d'% (partitions,msg_size_in_points,\
+                    dim, total_messages,it,ttc,NUMBER_OF_PRODUCERS))
+            afile.close()
+
+
 
     except Exception as e:
         print "caught Exception: %s" % e

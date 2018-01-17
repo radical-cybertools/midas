@@ -1,0 +1,24 @@
+Spark Command: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.x86_64/jre/bin/java -cp /home/03662/tg829618/work/spark-2.0.0-bin-hadoop2.6/conf/:/home/03662/tg829618/experiments-sbatch/spark-2.2.0-bin-hadoop2.7/jars/* -Xmx1g org.apache.spark.deploy.master.Master --host c251-130.wrangler.tacc.utexas.edu --port 7077 --webui-port 8080
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+17/08/06 19:05:52 INFO Master: Started daemon with process name: 122875@c251-130.wrangler.tacc.utexas.edu
+17/08/06 19:05:52 INFO SignalUtils: Registered signal handler for TERM
+17/08/06 19:05:52 INFO SignalUtils: Registered signal handler for HUP
+17/08/06 19:05:52 INFO SignalUtils: Registered signal handler for INT
+17/08/06 19:05:52 WARN MasterArguments: SPARK_MASTER_IP is deprecated, please use SPARK_MASTER_HOST
+17/08/06 19:05:52 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/08/06 19:05:52 INFO SecurityManager: Changing view acls to: tg829618
+17/08/06 19:05:52 INFO SecurityManager: Changing modify acls to: tg829618
+17/08/06 19:05:52 INFO SecurityManager: Changing view acls groups to: 
+17/08/06 19:05:52 INFO SecurityManager: Changing modify acls groups to: 
+17/08/06 19:05:52 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(tg829618); groups with view permissions: Set(); users  with modify permissions: Set(tg829618); groups with modify permissions: Set()
+17/08/06 19:05:52 INFO Utils: Successfully started service 'sparkMaster' on port 7077.
+17/08/06 19:05:52 INFO Master: Starting Spark master at spark://c251-130.wrangler.tacc.utexas.edu:7077
+17/08/06 19:05:52 INFO Master: Running Spark version 2.2.0
+17/08/06 19:05:53 INFO Utils: Successfully started service 'MasterUI' on port 8080.
+17/08/06 19:05:53 INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://129.114.58.130:8080
+17/08/06 19:05:53 INFO Utils: Successfully started service on port 6066.
+17/08/06 19:05:53 INFO StandaloneRestServer: Started REST server for submitting applications on port 6066
+17/08/06 19:05:53 INFO Master: I have been elected leader! New state: ALIVE
+17/08/06 19:05:56 INFO Master: Registering worker 129.114.58.130:39233 with 48 cores, 124.5 GB RAM
+17/08/06 19:26:19 ERROR Master: RECEIVED SIGNAL TERM

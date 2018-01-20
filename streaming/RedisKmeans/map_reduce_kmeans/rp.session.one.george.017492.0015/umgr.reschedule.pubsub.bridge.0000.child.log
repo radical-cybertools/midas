@@ -1,7 +1,0 @@
-2017-11-23 00:24:51,249: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
-2017-11-23 00:24:51,249: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : INFO    :                      pid: 7863
-2017-11-23 00:24:51,249: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : INFO    :                      tid: MainThread
-2017-11-23 00:24:51,250: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : INFO    : radical.pilot        version: 0.46.2
-2017-11-23 00:24:51,250: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : INFO    : start bridge umgr.reschedule.pubsub.bridge.0000.child on tcp://*:*
-2017-11-23 00:24:51,251: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : INFO    : bound bridge umgr.reschedule.pubsub.bridge.0000.child to tcp://0.0.0.0:43039 : tcp://0.0.0.0:44224
-2017-11-23 00:45:34,550: umgr.reschedule.pubsub.bridge.0000.child: umgr.reschedule.pubsub.bridge.0000.child: MainThread     : WARNING : send failed ([Errno 9] Bad file descriptor) - terminate

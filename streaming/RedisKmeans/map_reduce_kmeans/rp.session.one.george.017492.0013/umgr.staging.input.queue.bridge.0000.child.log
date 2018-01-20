@@ -1,8 +1,0 @@
-2017-11-23 00:13:31,301: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : INFO    : python.interpreter   version: 2.7.13 (default, Jan 19 2017, 14:48:08) [GCC 6.3.0 20170118]
-2017-11-23 00:13:31,302: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : INFO    :                      pid: 7150
-2017-11-23 00:13:31,302: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : INFO    :                      tid: MainThread
-2017-11-23 00:13:31,302: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : INFO    : radical.pilot        version: 0.46.2
-2017-11-23 00:13:31,302: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : INFO    : start bridge umgr.staging.input.queue.bridge.0000.child on tcp://*:*
-2017-11-23 00:13:31,303: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : INFO    : bound bridge umgr.staging.input.queue.bridge.0000.child to tcp://0.0.0.0:35194 : tcp://0.0.0.0:37825
-2017-11-23 00:13:32,025: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : DEBUG   : sent  1 [hwm: 1]
-2017-11-23 00:13:35,719: umgr.staging.input.queue.bridge.0000.child: umgr.staging.input.queue.bridge.0000.child: MainThread     : DEBUG   : sent  1 [hwm: 1]

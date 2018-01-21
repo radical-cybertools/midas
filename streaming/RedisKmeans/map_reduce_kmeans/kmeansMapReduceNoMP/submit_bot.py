@@ -114,6 +114,7 @@ if __name__ == "__main__":
                 cudesc = rp.ComputeUnitDescription()
                 cudesc.executable = 'python'
                 cudesc.arguments = ['reducer.py',redis_hostname]
+                cudesc.input_staging = ['reducer.py']
                 cudesc.cores = 1
                 cudesc_list.append(cudesc)
 

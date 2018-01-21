@@ -55,7 +55,7 @@ def get_clusters():
 
 if __name__ == "__main__":
 
-
+    np.seterr(divide='ignore', invalid='ignore')
     redis_host = sys.argv[1]
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 

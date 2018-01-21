@@ -5,7 +5,7 @@ from pykafka.partitioners import hashing_partitioner
 from scipy.spatial import distance
 
 
-
+## consuming function
 def get_data_from_kafka(window):
 
     start_consumption = time.time()
@@ -22,6 +22,42 @@ def get_data_from_kafka(window):
             break
 
     return data
+
+# processing functions
+
+def get_clusters():
+
+    serialized_clusters =  r.get('means')
+    return pickle.loads(serialized_clusters)
+
+
+def save_sums_to_redis(partial_sums):
+    r.rpush('partial_sums',pickle.dumps(partial_sums))
+    return
+
+def calculate_distances(elements,centroids):      # np.array of 3-d data
+
+    return distance.cdist(elements, centroids, 'euclidean') # row: elements , column :centroids 
+
+
+def find_partial_sums(dist, centroids,elements):
+
+    #ncentroids = centroids.shape[0]
+    dtype = str(centroids.shape) + 'float64,(' + str(centroids.shape[0]) + ',1)float32'
+    sum_centroids =  np.zeros(1, dtype=dtype)    # first column is the sum of centroids 2nd is the number of elements
+                                                 #access sum of centroids [0][0]
+                                                 # acess sum of elements: [0][1]
+    centroid_pos = np.argmin(dist, axis=1)  #  index: element id - value:  closest centroid_id
+
+    ## sum all distances of each cluster 
+    for i in  xrange(len(elements)):
+        centroid = centroid_pos[i]
+        sum_centroids[0][0][centroid] += elements[i]  # add also number of elements
+        sum_centroids[0][1][centroid] +=1  # added one element to that cluster
+
+    return  sum_centroids
+
+
 
 
 

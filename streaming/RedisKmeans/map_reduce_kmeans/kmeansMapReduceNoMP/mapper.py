@@ -25,6 +25,8 @@ def get_data_from_kafka(window):
 
 
 
+
+
 if __name__ == "__main__":
 
     ## settings

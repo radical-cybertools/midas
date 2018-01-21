@@ -58,6 +58,7 @@ if __name__ == "__main__":
         cudesc = rp.ComputeUnitDescription()
         cudesc.executable = 'python'
         cudesc.arguments = ['setup_kmeans_model.py',redis_hostname]
+        cudesc.input_staging = ['setup_kmeans_model.py']
         cudesc.cores =1
         ##------- -----------------------------------------------#
         cu_set = umgr.submit_units(cudesc)
@@ -69,6 +70,7 @@ if __name__ == "__main__":
         number_messages = 1000  #TODO: fix the number of messages 
         number_of_mappers = 1  # map-consumer CUs
         number_of_reducers = 1 # reduce-consumer CUs
+        number_cus =1
         per_cu_messages = number_messages/number_cus
        #--------------------------------------------------------------------------------
         print ' Creating the producer CUS..'
@@ -91,6 +93,7 @@ if __name__ == "__main__":
             #cudesc.arguments   = ['mapper.py', per_cu_messages,i, number_of_consumers, \
             #                        zk_kafka, redis_hostname ]   # number of msg, <cu_id>, <total_number_cus> <zkKafka> <redis>
             cudesc.arguments = ['mapper.py',broker_string,redis_hostname]
+            cudesc.input_staging = ['mapper.py']
             cudesc.cores       = 1
             cudesc_list.append(cudesc)
 
@@ -106,7 +109,7 @@ if __name__ == "__main__":
         print 'Defining the reduce-consumer CUs'
         cudesc_list = []
         for i in xrange(number_of_reducers):
-            cudesc = rp.ComputePilotDescription()
+            cudesc = rp.ComputeUnitDescription()
             cudesc.executable = 'python'
             cudesc.arguments = ['reducer.py',redis_hostname]
             cudesc.cores = 1

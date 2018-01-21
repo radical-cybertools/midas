@@ -73,56 +73,58 @@ if __name__ == "__main__":
         number_cus =1
         per_cu_messages = number_messages/number_cus
        #--------------------------------------------------------------------------------
-        print ' Creating the producer CUS..'
-        cudesc_list =[]
-        for producer_id in xrange(NUMBER_OF_PRODUCERS):
-            #--------KAFKA-producer--------------------------#
-            cudesc = rp.ComputeUnitDescription()
-            cudesc.executable = 'python'
-            cudesc.arguments = ['data_producer.py',broker_string]
-            cudesc.input_staging = ['data_producer.py']
-            cudesc.cores = 1   
-            cudesc_list.append(cudesc)
-            #--------END USER DEFINED CU DESCRIPTION----------------------------#
 
-        print 'Defining the map-consumer CUs..'
+       while True:
+            print ' Creating the producer CUS..'
+            cudesc_list =[]
+            for producer_id in xrange(NUMBER_OF_PRODUCERS):
+                #--------KAFKA-producer--------------------------#
+                cudesc = rp.ComputeUnitDescription()
+                cudesc.executable = 'python'
+                cudesc.arguments = ['data_producer.py',broker_string]
+                cudesc.input_staging = ['data_producer.py']
+                cudesc.cores = 1   
+                cudesc_list.append(cudesc)
+                #--------END USER DEFINED CU DESCRIPTION----------------------------#
 
-        for i in xrange(number_of_mappers):
-            cudesc = rp.ComputeUnitDescription()
-            cudesc.executable  = "python"
-            #cudesc.arguments   = ['mapper.py', per_cu_messages,i, number_of_consumers, \
-            #                        zk_kafka, redis_hostname ]   # number of msg, <cu_id>, <total_number_cus> <zkKafka> <redis>
-            cudesc.arguments = ['mapper.py',broker_string,redis_hostname]
-            cudesc.input_staging = ['mapper.py']
-            cudesc.cores       = 1
-            cudesc_list.append(cudesc)
+            print 'Defining the map-consumer CUs..'
 
-
-        print 'Submitting mapper and data producer'
-        cu_set = umgr.submit_units(cudesc_list) #TODO: fix it to wait only the map-CU
-
-        print "Waiting for mapper and data-producer CUs to complete ..."
-        umgr.wait_units()
+            for i in xrange(number_of_mappers):
+                cudesc = rp.ComputeUnitDescription()
+                cudesc.executable  = "python"
+                #cudesc.arguments   = ['mapper.py', per_cu_messages,i, number_of_consumers, \
+                #                        zk_kafka, redis_hostname ]   # number of msg, <cu_id>, <total_number_cus> <zkKafka> <redis>
+                cudesc.arguments = ['mapper.py',broker_string,redis_hostname]
+                cudesc.input_staging = ['mapper.py']
+                cudesc.cores       = 1
+                cudesc_list.append(cudesc)
 
 
+            print 'Submitting mapper and data producer'
+            cu_set = umgr.submit_units(cudesc_list) #TODO: fix it to wait only the map-CU
 
-        print 'Defining the reduce-consumer CUs'
-        cudesc_list = []
-        for i in xrange(number_of_reducers):
-            cudesc = rp.ComputeUnitDescription()
-            cudesc.executable = 'python'
-            cudesc.arguments = ['reducer.py',redis_hostname]
-            cudesc.cores = 1
-            cudesc_list.append(cudesc)
+            print "Waiting for mapper and data-producer CUs to complete ..."
+            umgr.wait_units()
 
 
-        print "Submit reduce=CU to Unit Manager ..."
-        cu_set = umgr.submit_units(cudesc_list)
 
-        print "Waiting for reduce-CUs to complete ..."
-        umgr.wait_units()
+            print 'Defining the reduce-consumer CUs'
+            cudesc_list = []
+            for i in xrange(number_of_reducers):
+                cudesc = rp.ComputeUnitDescription()
+                cudesc.executable = 'python'
+                cudesc.arguments = ['reducer.py',redis_hostname]
+                cudesc.cores = 1
+                cudesc_list.append(cudesc)
 
-        print "All CUs completed:"
+
+            print "Submit reduce=CU to Unit Manager ..."
+            cu_set = umgr.submit_units(cudesc_list)
+
+            print "Waiting for reduce-CUs to complete ..."
+            umgr.wait_units()
+
+            print "All CUs completed:"
 
     except Exception as e:
         print "caught Exception: %s" % e

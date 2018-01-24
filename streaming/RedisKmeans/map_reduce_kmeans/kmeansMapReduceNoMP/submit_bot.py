@@ -6,7 +6,7 @@ import sys, os
 import radical.pilot as rp
 import radical.utils as ru
 import numpy as np
-
+import time
 #os.environ['RADICAL_PILOT_PROFILER']= 'TRUE'
 os.environ['RADICAL_PILOT_VERBOSE']= 'DEBUG'
 
@@ -66,36 +66,43 @@ if __name__ == "__main__":
 
 
         ## ------ EXPERIMENTAL CONFIGURATIONS------------------------------------------#
-        NUMBER_OF_PRODUCERS = 1  # producer cus
+        NUMBER_OF_PRODUCERS = 2    # producer cus
         number_messages = 1000  #TODO: fix the number of messages 
-        number_of_mappers = 1  # map-consumer CUs
+        number_of_mappers = 2  # map-consumer CUs
         number_of_reducers = 1 # reduce-consumer CUs
         number_cus =1
         per_cu_messages = number_messages/number_cus
-       #--------------------------------------------------------------------------------
-
-       while True:
+        Partitions = 48
+        #--------------------------------------------------------------------------------
+        filename = 'RpKmeansStreaming.csv'
+        afile = open(filename,'a')
+        afile.write('Action,Time,Partitions\n')
+        it = 3
+        while it>=0:
+            it -=1
             print ' Creating the producer CUS..'
             cudesc_list =[]
             for producer_id in xrange(NUMBER_OF_PRODUCERS):
                 #--------KAFKA-producer--------------------------#
                 cudesc = rp.ComputeUnitDescription()
                 cudesc.executable = 'python'
-                cudesc.arguments = ['data_producer.py',broker_string]
+                cudesc.arguments = ['data_producer.py',broker_string,producer_id]
                 cudesc.input_staging = ['data_producer.py']
+ #               cudesc.output_staging = ['producer_data_%d.csv'%producer_id]
                 cudesc.cores = 1   
                 cudesc_list.append(cudesc)
                 #--------END USER DEFINED CU DESCRIPTION----------------------------#
 
             print 'Defining the map-consumer CUs..'
 
-            for i in xrange(number_of_mappers):
+            for mapper_id in xrange(number_of_mappers):
                 cudesc = rp.ComputeUnitDescription()
                 cudesc.executable  = "python"
                 #cudesc.arguments   = ['mapper.py', per_cu_messages,i, number_of_consumers, \
                 #                        zk_kafka, redis_hostname ]   # number of msg, <cu_id>, <total_number_cus> <zkKafka> <redis>
-                cudesc.arguments = ['mapper.py',broker_string,redis_hostname]
+                cudesc.arguments = ['mapper.py',broker_string,redis_hostname,mapper_id,Partitions]
                 cudesc.input_staging = ['mapper.py']
+                cudesc.output_staging = ['mapper_data_%d.csv' % mapper_id]
                 cudesc.cores       = 1
                 cudesc_list.append(cudesc)
 
@@ -106,6 +113,20 @@ if __name__ == "__main__":
             print "Waiting for mapper and data-producer CUs to complete ..."
             umgr.wait_units()
 
+#            for producer_id in xrange(NUMBER_OF_PRODUCERS):
+#                f = open('producer_data_%d.csv'%producer_id,'r')
+#                temp = f.readline()
+#                afile.write(temp.strip())
+#                afile.flush()
+#                f.close()
+            
+            for i in xrange(number_of_mappers):
+                f = open('mapper_data_%d.csv' % i,'r')
+                temp = f.readlines()
+                afile.write(temp[0].strip())
+                afile.write(temp[1].strip())
+                afile.flush()
+                f.close()
 
 
             print 'Defining the reduce-consumer CUs'
@@ -113,14 +134,20 @@ if __name__ == "__main__":
             for i in xrange(number_of_reducers):
                 cudesc = rp.ComputeUnitDescription()
                 cudesc.executable = 'python'
-                cudesc.arguments = ['reducer.py',redis_hostname]
+                cudesc.arguments = ['reducer.py',redis_hostname,i]
                 cudesc.input_staging = ['reducer.py']
                 cudesc.cores = 1
                 cudesc_list.append(cudesc)
 
-
+            start_time = time.time()
             print "Submit reduce=CU to Unit Manager ..."
             cu_set = umgr.submit_units(cudesc_list)
+            end_reduce = time.time()
+            #astring = 'Time to collect and update the centroids %f ' % (end_reduce - start_time)
+            astring = 'Reduce, %f , %d' % (end_reduce - start_time, Partitions)
+            afile.write(astring)
+
+
 
             print "Waiting for reduce-CUs to complete ..."
             umgr.wait_units()
@@ -136,4 +163,6 @@ if __name__ == "__main__":
         ru.print_exception_trace()
     finally:
         print "closing session"
+        afile.close()
+        print 'file closed'
         session.close ()

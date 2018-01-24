@@ -59,9 +59,8 @@ if __name__ == "__main__":
     redis_host = sys.argv[1]
     r = redis.StrictRedis(host=redis_host, port=6379, db=0)
 
+
     centroids = get_clusters()
     par_sums = get_and_aggregate_partial_sums_from_redis(centroids)
     centroids = np.nan_to_num(find_new_centers(par_sums))
     save_clusters_to_redis(centroids)
-
-

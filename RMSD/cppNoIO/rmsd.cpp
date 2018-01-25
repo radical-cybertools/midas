@@ -8,6 +8,8 @@
 #include <sys/time.h>
 #include <string>
 
+#define ATOMS 146
+
 using namespace std;
 
 double rmsd(double** xref){
@@ -19,14 +21,14 @@ double rmsd(double** xref){
     xmobile = new double*[3];
 
     for (int i=0;i<3;i++){
-        xmobile[i] = new double[146];
-        for (int j=0;j<146;j++){
+        xmobile[i] = new double[ATOMS];
+        for (int j=0;j<ATOMS;j++){
             temp = rand();
             xmobile[i][j] = (temp/RAND_MAX)*15;
         }
     }
 
-    temp = CalcRMSDRotationalMatrix(xref,xmobile,146,pointer,NULL,0);
+    temp = CalcRMSDRotationalMatrix(xref,xmobile,ATOMS,pointer,NULL,0);
 
     return temp;
 };

@@ -15,12 +15,14 @@
 
 using namespace std;
 
+unsigned seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+mt19937 rnd_engine(seed);
+   
+
 double rmsd(double** xref){
 
     double **xmobile;
-    unsigned seed = chrono::high_resolution_clock::now().time_since_epoch().count();
     uniform_real_distribution<double> uni_real_dist(0.0,1.0); // get a random number between [0.0,15.0)
-    mt19937 rnd_engine(seed);
     double temp;
     double *pointer = new double[9];
 
@@ -72,10 +74,8 @@ int main (int argc, char** argv){
     int size;
     int nframes; //total number of frames
      // create inside the method you want a random instance
-    unsigned seed = chrono::high_resolution_clock::now().time_since_epoch().count();
     uniform_real_distribution<double> uni_real_dist(0.0,1.0); // get a random number between [0.0,15.0)
-    mt19937 rnd_engine(seed);
-
+  
     MPI_Init ( NULL, NULL );
     MPI_Comm_size ( MPI_COMM_WORLD, &size );
     MPI_Comm_rank ( MPI_COMM_WORLD, &rank );

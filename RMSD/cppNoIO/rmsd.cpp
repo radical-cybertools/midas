@@ -7,14 +7,22 @@
 #include <qcprot.h>
 #include <sys/time.h>
 #include <string>
+#include <random>
+#include <chrono>
 
+   
 #define ATOMS 146
 
 using namespace std;
 
+unsigned seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+mt19937 rnd_engine(seed);
+   
+
 double rmsd(double** xref){
 
     double **xmobile;
+    uniform_real_distribution<double> uni_real_dist(0.0,1.0); // get a random number between [0.0,15.0)
     double temp;
     double *pointer = new double[9];
 
@@ -23,8 +31,8 @@ double rmsd(double** xref){
     for (int i=0;i<3;i++){
         xmobile[i] = new double[ATOMS];
         for (int j=0;j<ATOMS;j++){
-            temp = rand();
-            xmobile[i][j] = (temp/RAND_MAX)*15;
+            temp = uni_real_dist(rnd_engine);
+            xmobile[i][j] = temp*15;
         }
     }
 
@@ -65,7 +73,9 @@ int main (int argc, char** argv){
     int ierr;
     int size;
     int nframes; //total number of frames
-
+     // create inside the method you want a random instance
+    uniform_real_distribution<double> uni_real_dist(0.0,1.0); // get a random number between [0.0,15.0)
+  
     MPI_Init ( NULL, NULL );
     MPI_Comm_size ( MPI_COMM_WORLD, &size );
     MPI_Comm_rank ( MPI_COMM_WORLD, &rank );
@@ -107,13 +117,13 @@ int main (int argc, char** argv){
 
      // Generation of the random reference frame
     xref0 = new double*[3];
-    double a = rand();
+    double a = uni_real_dist(rnd_engine);
 
     for (int i=0;i<3;i++){
         xref0[i] = new double[3341];
         for (int j=0;j<3341;j++){
-            a = rand();
-            xref0[i][j] = (a/RAND_MAX)*15;
+            a = uni_real_dist(rnd_engine);
+            xref0[i][j] = a*15;
         }
     }
 

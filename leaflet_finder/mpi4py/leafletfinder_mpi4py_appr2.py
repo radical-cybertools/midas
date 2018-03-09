@@ -34,42 +34,60 @@ if __name__ == '__main__':
     parser.add_argument('window', help="i coordinate at the distance matrix")
     args = parser.parse_args()
     cutoff = int(args.cutoff)
-    atoms = int(agrs.atoms)
+    atoms = int(args.atoms)
     window = int(args.window)
 
+    start_time = MPI.Wtime()
     comm = MPI.COMM_WORLD
     world_size = comm.Get_size()
     proc_rank = comm.Get_rank()
 
     # Responsible for these number of tasks only:
-    side_length = atom / window
+    side_length = atoms / window
     t_tasks = side_length ** 2
     n_tasks = t_tasks / world_size
-    r_tasks = range(rank * n_tasks, (rank + 1) * n_tasks)
+    r_tasks = range(proc_rank * n_tasks, (proc_rank + 1) * n_tasks)
+    atoms = np.load(args.file)
+    setup_time = MPI.Wtime()
 
     proc_adj_list = list()
-
+    compute_times = list()
     # Iterate over the 'tasks'
     for task_id in r_tasks:
+        comp_start_time = MPI.Wtime()
         indx_i_start = (task_id / side_length) * window
         indx_j_start = (task_id % side_length) * window
 
         temp_adj_list = find_edges([atoms[indx_i_start:indx_i_start + window, :],
-                               atoms[indx_j_start:indx_j_start + window, :]],
-                              [int(indx_i_start), int(indx_j_start)])
+                                    atoms[indx_j_start:indx_j_start + window, :]],
+                                   [int(indx_i_start), int(indx_j_start)])
         proc_adj_list.append(temp_adj_list)
+        compute_times.append((task_id, comp_start_time, MPI.Wtime()))
 
+    comm_str = MPI.Wtime()
     adj_lists = comm.gather(proc_adj_list, root=0)
+    comm_end = MPI.Wtime()
 
     if proc_rank == 0:
+        adj_list_flat = [item for a_list in adj_lists for item in a_list]
         print('Calculating Connected Components')
-        adj_list = np.hstack(adj_lists)
+        adj_list = np.hstack(adj_list_flat)
         edges = [(adj_list[0, k], adj_list[1, k])
                  for k in range(0, adj_list.shape[1])]
         graph = nx.Graph(edges)
         subgraphs = nx.connected_components(graph)
         indices = [np.sort(list(g)) for g in subgraphs]
-        connComp = time()
+        connComp = MPI.Wtime()
         np.save('components.npz.npy', indices)
 
         print("Connected Components Calculated")
+
+    prof_file = open('profile_rank_%d.txt' % proc_rank, 'w')
+    prof_file.write('%f\n' % (start_time))
+    prof_file.write('%f\n' % (setup_time))
+    prof_file.write('{}\n'.format(compute_times))
+    prof_file.write('%f\n' % (comm_str))
+    prof_file.write('%f\n' % (comm_end))
+    if proc_rank == 0:
+        prof_file.write('%f\n' % (connComp))
+    prof_file.close()

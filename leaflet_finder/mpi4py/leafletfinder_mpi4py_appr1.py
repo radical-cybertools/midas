@@ -17,7 +17,6 @@ def find_edges(atoms, index, cutoff=15.0):
     adj_list = np.where(par_list == True)
     adj_list = np.vstack(adj_list)
     adj_list[0] = adj_list[0] + index[0]
-    adj_list[1] = adj_list[1] + index[1]
     if adj_list.shape[1] == 0:
         adj_list = np.zeros((2, 1))
 
@@ -89,9 +88,9 @@ if __name__ == '__main__':
         print("Connected Components Calculated")
 
     prof_file = open('profile_rank_%d.txt'%proc_rank,'w')
-    prof_file.write('%f\n'.%(start_time))
-    prof_file.write('%f\n'.%(setup_time))
-    prof_file.write('%f\n'.%(broadcast_time))
+    prof_file.write('%f\n'%(start_time))
+    prof_file.write('%f\n'%(setup_time))
+    prof_file.write('%f\n'%(broadcast_time))
     prof_file.write('{}\n'.format(compute_times))
     prof_file.write('%f\n'%(comm_str))
     prof_file.write('%f\n'%(comm_end))

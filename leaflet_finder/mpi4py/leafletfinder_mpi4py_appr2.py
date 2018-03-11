@@ -16,8 +16,8 @@ def find_edges(windows, index, cutoff=15.0):
     par_list = (cdist(windows[0], windows[1]) < cutoff)
     adj_list = np.where(par_list == True)
     adj_list = np.vstack(adj_list)
-    adj_list[0] = adj_list[0] + index[0] - 1
-    adj_list[1] = adj_list[1] + index[1] - 1
+    adj_list[0] = adj_list[0] + index[0]
+    adj_list[1] = adj_list[1] + index[1]
     if adj_list.shape[1] == 0:
         adj_list = np.zeros((2, 1))
 

@@ -87,13 +87,13 @@ if __name__ == '__main__':
 
         print("Connected Components Calculated")
 
-    prof_file = open('profile_rank_%d.txt'%proc_rank,'w')
-    prof_file.write('%f\n'%(start_time))
-    prof_file.write('%f\n'%(setup_time))
-    prof_file.write('%f\n'%(broadcast_time))
+    prof_file = open('profile_rank_%d.txt' % proc_rank, 'w')
+    prof_file.write('%f\n' % (start_time))
+    prof_file.write('%f\n' % (setup_time))
+    prof_file.write('%f\n' % (broadcast_time))
     prof_file.write('{}\n'.format(compute_times))
-    prof_file.write('%f\n'%(comm_str))
-    prof_file.write('%f\n'%(comm_end))
+    prof_file.write('%f\n' % (comm_str))
+    prof_file.write('%f\n' % (comm_end))
     if proc_rank == 0:
-        prof_file.write('%f\n'%(connComp))
+        prof_file.write('%f\n' % (connComp))
     prof_file.close()

@@ -17,6 +17,8 @@ def find_parcc(windows, index, cutoff=15.0):
     i_index = index[0]
     j_index = index[1]
 
+    # if this is from the diagonal, used the first input as the train dataset
+    # and the second as the testing. Else merge them.
     if i_index == j_index:
         train = windows[0]
         test = windows[1]
@@ -24,6 +26,8 @@ def find_parcc(windows, index, cutoff=15.0):
         train = np.vstack([windows[0], windows[1]])
         test = np.vstack([windows[0], windows[1]])
 
+    # Create a BallTree and query it over all the atoms. It returns the
+    # nearest neighbors based on the cutoff.
     tree = BallTree(train, leaf_size=40)
     edges = tree.query_radius(test, cutoff)
     edge_list = [list(zip(np.repeat(idx, len(dest_list)),
@@ -31,29 +35,37 @@ def find_parcc(windows, index, cutoff=15.0):
 
     edge_list_flat = np.array([list(item)
                                for sublist in edge_list for item in sublist])
+
+    # There is a need to curate the list. Each entry of the list should be
+    # (m,n), where m<n. This way we ensure that there are no doubles and that 
+    # the index adjust is correct.
     if i_index == j_index:
         res = edge_list_flat.transpose()
+        # Adjust the index of based on where the executing window lies.
         res[0] = res[0] + i_index
         res[1] = res[1] + j_index
     else:
         removed_elements = list()
         for i in range(edge_list_flat.shape[0]):
             if (edge_list_flat[i, 0] >= 0 and edge_list_flat[i, 0] <= num - 1) \
-            and (edge_list_flat[i, 1] >= 0 and edge_list_flat[i, 1] <= num - 1) or\
+                and (edge_list_flat[i, 1] >= 0 and edge_list_flat[i, 1] <= num - 1) or\
                (edge_list_flat[i, 0] >= num and edge_list_flat[i, 0] <= 2 * num - 1) \
                and (edge_list_flat[i, 1] >= num and edge_list_flat[i, 1] <= 2 * num - 1) or\
                edge_list_flat[i, 0] > edge_list_flat[i, 1]:
                 removed_elements.append(i)
         res = np.delete(edge_list_flat, removed_elements, axis=0).transpose()
+        
+        # Adjust the index of based on where the executing window lies.
         res[0] = res[0] + i_index
         res[1] = res[1] - num + j_index
 
     if res.shape[1] == 0:
         res = np.zeros((2, 1))
 
+    # Flatten the adj_list to pass it in a networkx Graph object. Return the
+    # connected components of the subgraph.
     edges = [(res[0, k], res[1, k]) for k in range(0, res.shape[1])]
     graph = nx.Graph(edges)
-    # partial connected components
     subgraphs = nx.connected_components(graph)
     comp = [g for g in subgraphs]
     return comp
@@ -77,7 +89,8 @@ if __name__ == '__main__':
     world_size = comm.Get_size()
     proc_rank = comm.Get_rank()
 
-    # Responsible for these number of tasks only:
+    # Setup the part of the trajectory that each process is responsible to operate
+    # upon.
     side_length = atoms / window
     t_tasks = side_length ** 2
     n_tasks = t_tasks / world_size
@@ -87,7 +100,9 @@ if __name__ == '__main__':
 
     proc_comp = list()
     compute_times = list()
-    # Iterate over the 'tasks'
+
+    # Iterate over the 'tasks'. Each iteration is the equivalent of a task from
+    # the task-parallel implementations.
     for task_id in r_tasks:
         comp_start_time = MPI.Wtime()
         indx_i_start = (task_id / side_length) * window
@@ -95,15 +110,21 @@ if __name__ == '__main__':
 
         temp_comp = find_parcc([atoms[indx_i_start:indx_i_start + window, :],
                                 atoms[indx_j_start:indx_j_start + window, :]],
-                               [int(indx_i_start), int(indx_j_start)])
+                               [int(indx_i_start), int(indx_j_start)], cutoff=cutoff)
         proc_comp.append(temp_comp)
         compute_times.append((task_id, comp_start_time, MPI.Wtime()))
 
+    # Communicate to rank 0 all the results, through a collective gather.
     comm_str = MPI.Wtime()
     comp_lists = comm.gather(proc_comp, root=0)
     comm_end = MPI.Wtime()
 
+    # Only Rank 0 is responsible to calculate the connected components of the graph.
+    # After completion the result is saved to a file
+    # TODO: Make the filename configurable.
     if proc_rank == 0:
+        # comp_lists is a list of lists of lists of sets. It need to be flatten
+        # to a list of sets.
         comp_list_flat = [
             item for a_list in comp_lists for another_list in a_list for item in another_list]
         print('Calculating Connected Components')
@@ -126,6 +147,8 @@ if __name__ == '__main__':
 
         print("Connected Components Calculated")
 
+    # All processes write profile files including all compute times for each
+    # task.
     prof_file = open('profile_rank_%d.txt' % proc_rank, 'w')
     prof_file.write('%f\n' % (start_time))
     prof_file.write('%f\n' % (setup_time))

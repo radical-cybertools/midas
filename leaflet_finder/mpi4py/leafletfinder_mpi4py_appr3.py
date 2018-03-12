@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     # All processes write profile files including all compute times for each
     # task.
-    pprof_file = open('profile_rank_%d.txt' % proc_rank, 'w')
+    prof_file = open('profile_rank_%d.txt' % proc_rank, 'w')
     prof_file.write('%f\n' % (start_time))
     prof_file.write('%f\n' % (setup_time))
     prof_file.write('{}\n'.format(compute_times))

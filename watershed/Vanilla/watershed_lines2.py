@@ -12,40 +12,43 @@ from skimage.morphology import watershed
 from skimage import io
 io.use_plugin('pil')
 
+import matplotlib
+import matplotlib.pyplot as plt
 
 
 #-------------------------------------------------------------------------------
 
-if (len(sys.argv)<3) or (len(sys.argv)>4):
-	print "Usage: python %s <index of first image to process> <index of last image to process> \
-				<backround> - default bright (use 'd' for 'dark')." % __file__ 
-	print "Please run the script again!"
-	sys.exit(-1)
+# if (len(sys.argv)<3) or (len(sys.argv)>4):
+# 	print "Usage: python %s <index of first image to process> <index of last image to process> \
+# 				<backround> - default bright (use 'd' for 'dark')." % __file__ 
+# 	print "Please run the script again!"
+# 	sys.exit(-1)
 
-elif (len(sys.argv)==4) and (sys.argv[3]=='d'):
-	bright_backround = 0
+# elif (len(sys.argv)==4) and (sys.argv[3]=='d'):
+# 	bright_backround = 0
 
-else:
-	bright_backround = 1
+# else:
+# 	bright_backround = 1
 
+# FIXME: I don't want to keep entering in 4 parameters
+bright_backround = 0
+read_from = 0
+read_until = 1
 
-# path = '/oasis/scratch/comet/statho/temp_project/Dataset_16GB/'
-# FIXME
-# Use for testing on Will's local linux VM
 path = '/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/'
-
-# FIXME
-# use os.path.join
 path_for_input = os.path.join(path, 'inputs/')
 path_for_output =  os.path.join(path, 'outputs/')
 
-read_from = int(sys.argv[1])
-read_until = int(sys.argv[2])  
+# read_from = int(sys.argv[1])
+# read_until = int(sys.argv[2])  
 
 
 while read_from <= read_until:
 	
-	image = path_for_input + str(read_from) + '.jpg'
+	image = os.path.join(path_for_input, 'file_'+ str(read_from)+ '.jpg')
+	print image
+	# read_from+=1
+	# continue;
 	
 	img = io.imread(image)			    	        # read image as a 2D numpy array
 	img_gray = rgb2gray(img)
@@ -55,7 +58,7 @@ while read_from <= read_until:
 	if bright_backround:
 		foreground_mask = img_gray <= thresh            # for bright backround
 	else:
-		foreground_mask = img_gray > thressh 	        # for dark backround
+		foreground_mask = img_gray > thresh 	        # for dark backround
 
 
 	# compute the Euclidean distance from every binary pixel to the nearest zero pixel 
@@ -93,7 +96,9 @@ while read_from <= read_until:
 			# make all the pixel, which correspond to label's edges, green in the image					
 			img[edge_sobel > 0] = [0,255,0]
 
-	io.imsave(path_for_output + str(read_from) + '.jpg', img)
+
+	plt.imshow(img)
+	plt.show()
 
 	read_from += 1
 

@@ -32,7 +32,7 @@ else:
 # path = '/oasis/scratch/comet/statho/temp_project/Dataset_16GB/'
 # FIXME
 # Use for testing on Will's local linux VM
-path = '/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/'
+path = '/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla'
 
 # FIXME
 # use os.path.join

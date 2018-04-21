@@ -3,35 +3,6 @@ import sys
 import time
 import radical.pilot as rp
 
-
-#------------------------------------------------------------------------------
-#
-def pilot_state_cb (pilot, state):
-
-    if not pilot:
-        return
-
-    print "[Callback]: ComputePilot '%s' state: %s." % (pilot.uid, state)
-
-    if state == rp.FAILED:
-        sys.exit (1)
-
-
-#------------------------------------------------------------------------------
-#
-def unit_state_cb (unit, state):
-
-    if not unit:
-        return
-
-    print "[Callback]: unit %s on %s: %s." % (unit.uid, unit.pilot_id, state)
-
-    if state == rp.FAILED:
-        print "stderr: %s" % unit.stderr
-        # do not exit
-
-
-
 #------------------------------------------------------------------------------
 #
 if __name__ == "__main__":
@@ -47,8 +18,6 @@ if __name__ == "__main__":
     # 
     try:
 
-        start_time = time.time()
-
         if len(sys.argv) == 5:
 
             pilot_cores = int(sys.argv[1])
@@ -58,7 +27,6 @@ if __name__ == "__main__":
             # FIXME:
             # fix localhost
             resource = "local.localhost_anaconda"
-            # resource = "localhost"
         
         elif len(sys.argv) == 6:
             
@@ -67,18 +35,6 @@ if __name__ == "__main__":
             number_of_images = int(sys.argv[3])
             report_name = sys.argv[4]
             resource = sys.argv[5]
-    
-            # FIXME
-            # do we need to init and add the context to session?
-            # add_contextnot in Session class
-
-            # init the saga.Context
-            #c = rp.Context('ssh')
-            #c.user_id = "tg835489"            # for Stampede/Wrangler
-            #c.user_id = "statho"               # for Comet/Gordon
-
-           # session.add_context(c)
-            #path = '/oasis/scratch/comet/$USER/temp_project/Dataset_16GB/inputs/'
 
         else:
             
@@ -94,13 +50,6 @@ if __name__ == "__main__":
         # Add a Pilot Manager
         print "Initiliazing Pilot Manager..."
         pmgr = rp.PilotManager(session=session)
-
-        # Register our callback with our Pilot Manager. This callback will get
-        # called every time the pilot managed by the PilotManager changes its state
-        #
-        # FIXME
-        # Why do we need to register callback?
-        #pmgr.register_callback(pilot_state_cb)
 
         # Provide the Pilot Description
         #
@@ -119,15 +68,7 @@ if __name__ == "__main__":
         print "Initiliazing Unit Manager"
 
         # Combine the ComputePilot, the ComputeUnits and a scheduler via a UnitManager object.
-        # FIXME: scheduler does not have a flag rp.SCHED_DIRECT_SUBMISSION
         umgr = rp.UnitManager(session=session)
-         # umgr = rp.UnitManager(session=session, scheduler=rp.SCHED_DIRECT_SUBMISSION)
-
-        # Register our callback with the UnitManager. This callback will get
-        # called every time any of the units managed by the UnitManager change their state.
-        #
-        #print 'Registering the callbacks so we can keep an eye on the CUs'
-        #umgr.register_callback(unit_state_cb)
 
         print "Registering Compute Pilot with Unit Manager"
         umgr.add_pilots(pilot) 
@@ -158,32 +99,16 @@ if __name__ == "__main__":
                 step += images_in_each_CU + 1
                 additional_load -= 1
 
-            """
-            # FIXME: 
-            # Does input_staging need to be a dictionary?
-            # Does it need to follow this format:
-            
-            staging_directive = {
-                'source'  : 'client://watershed_lines.py', # see 'Location' below
-                'target'  : 'unit://watershed_lines.py', # see 'Location' below
-                'action'  : rp.TRANSFER, # See 'Action operators' below
-                'flags'   : None, # See 'Flags' below
-                'priority': 0     # Control ordering of actions (unused)
-
-            }
-
-            cudesc.input_staging = staging_directive
-            """
             cudesc.input_staging = ['watershed_lines.py']
 
-            staging_directive = {
-                'source'  : 'client://watershed_lines.py', # see 'Location' below
-                'target'  : 'unit://watershed_lines.py', # see 'Location' below
-                'action'  : rp.TRANSFER, # See 'Action operators' below
-                'flags'   : None, # See 'Flags' below
-                'priority': 0     # Control ordering of actions (unused)
+            # staging_directive = {
+            #     'source'  : 'client://watershed_lines.py', # see 'Location' below
+            #     'target'  : 'unit://watershed_lines.py', # see 'Location' below
+            #     'action'  : rp.TRANSFER, # See 'Action operators' below
+            #     'flags'   : None, # See 'Flags' below
+            #     'priority': 0     # Control ordering of actions (unused)
 
-            }
+            # }
 
             #cudesc.input_staging = [staging_directive]
 
@@ -198,55 +123,7 @@ if __name__ == "__main__":
         cu_list.extend(cu_set)
 
         # wait for all units to finish
-        # FIXME
-        # maybe need states so do this
-        states = umgr.wait_units()
-        # umgr.wait_units()
-
-        # FIXME: 
-        # cu does not have state_history attr
-        # print "Creating Profile"
-        # profiling = open('{}.csv'.format(report_name), 'w')
-        # profiling.write('CU, New, StageIn, Allocate, Exec, StageOut, Done\n')
-        
-        # for cu in cu_list:
-            
-        #     cu_info = [cu.uid, '', '', '', '', '', '']
-            
-        #     for states in cu.state_history:
-
-        #         if states.as_dict()['state'] == 'Scheduling':
-        #             cu_info[1] = str((states.as_dict()['timestamp'] - pilot.start_time))
-                
-        #         elif states.as_dict()['state'] == 'AgentStagingInput':
-        #             cu_info[2] = str((states.as_dict()['timestamp'] - pilot.start_time))
-                
-        #         elif states.as_dict()['state'] == 'Allocating':
-        #             cu_info[3] = str((states.as_dict()['timestamp'] - pilot.start_time))
-                
-        #         elif states.as_dict()['state'] == 'Executing':
-        #             cu_info[4] = str((states.as_dict()['timestamp'] - pilot.start_time))
-                
-        #         elif states.as_dict()['state'] == 'AgentStagingOutput':
-        #             cu_info[5] = str((states.as_dict()['timestamp'] - pilot.start_time))
-                
-        #         elif states.as_dict()['state'] == 'Done':
-        #             cu_info[6] = str((states.as_dict()['timestamp'] - pilot.start_time))
-
-        #     profiling.write(cu_info[0] + ',' + cu_info[1] + ',' + cu_info[2] + ',' + cu_info[3] 
-        #                         + ',' + cu_info[4] + ',' + cu_info[5] + ',' + cu_info[6] + '\n')
-
-        # finish_time = time.time()
-        # total_time = (finish_time - start_time) / 60.0  # total execution time
-        # profiling.write("\nTTC," + str(total_time))
-
-        # profiling.close()
- 
-        finish_time = time.time()
-        total_time = (finish_time - start_time) / 60.0  # total execution time
-         
-        print 'The total execution time is: %f minutes' % total_time
-        
+        states = umgr.wait_units()      
 
     except Exception as e:
         # Something unexpected happened in the pilot code above

@@ -1,6 +1,0 @@
-2018-04-22 16:41:38,707: log.pubsub.bridge.0000.child: log.pubsub.bridge.0000.child    : MainThread     : INFO    : python.interpreter   version: 2.7.14 |Anaconda, Inc.| (default, Mar 27 2018, 12:28:59) [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
-2018-04-22 16:41:38,707: log.pubsub.bridge.0000.child: log.pubsub.bridge.0000.child    : MainThread     : INFO    :                      pid: 2584
-2018-04-22 16:41:38,708: log.pubsub.bridge.0000.child: log.pubsub.bridge.0000.child    : MainThread     : INFO    :                      tid: MainThread
-2018-04-22 16:41:38,709: log.pubsub.bridge.0000.child: log.pubsub.bridge.0000.child    : MainThread     : INFO    : radical.pilot        version: 0.47.5-v0.47.5-153-g5bd2455@devel
-2018-04-22 16:41:38,709: log.pubsub.bridge.0000.child: log.pubsub.bridge.0000.child    : MainThread     : INFO    : start bridge log.pubsub.bridge.0000.child on tcp://*:*
-2018-04-22 16:41:38,710: log.pubsub.bridge.0000.child: log.pubsub.bridge.0000.child    : MainThread     : INFO    : bound bridge log.pubsub.bridge.0000.child to tcp://0.0.0.0:51563 : tcp://0.0.0.0:51564

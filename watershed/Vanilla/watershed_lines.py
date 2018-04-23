@@ -29,15 +29,9 @@ else:
 	bright_backround = 1
 
 
-# path = '/oasis/scratch/comet/statho/temp_project/Dataset_16GB/'
-# FIXME
-# Use for testing on Will's local linux VM
-path = '/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla'
-
-# FIXME
-# use os.path.join
-path_for_input = os.path.join(path, 'inputs/')
-path_for_output =  os.path.join(path, 'outputs/')
+path = '/oasis/scratch/comet/statho/temp_project/Dataset_16GB/'
+path_for_input = path + 'inputs/'
+path_for_output =  path + 'outputs/'
 
 read_from = int(sys.argv[1])
 read_until = int(sys.argv[2])  
@@ -45,7 +39,7 @@ read_until = int(sys.argv[2])
 
 while read_from <= read_until:
 	
-	image = path_for_input + str(read_from) + '.jpg'
+	image = path_for_input + str(read_from) + '.BMP'
 	
 	img = io.imread(image)			    	        # read image as a 2D numpy array
 	img_gray = rgb2gray(img)
@@ -93,7 +87,7 @@ while read_from <= read_until:
 			# make all the pixel, which correspond to label's edges, green in the image					
 			img[edge_sobel > 0] = [0,255,0]
 
-	io.imsave(path_for_output + str(read_from) + '.jpg', img)
+	io.imsave(path_for_output + str(read_from) + '.BMP', img)
 
 	read_from += 1
 

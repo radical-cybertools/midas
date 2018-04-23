@@ -12,52 +12,73 @@ from skimage.morphology import watershed
 from skimage import io
 io.use_plugin('pil')
 
+import argparse
+import pprint
+pp = pprint.PrettyPrinter().pprint
 
 
 #-------------------------------------------------------------------------------
+parser = argparse.ArgumentParser()
 
-if (len(sys.argv)<3) or (len(sys.argv)>4):
-	print "Usage: python %s <index of first image to process> <index of last image to process> \
-				<backround> - default bright (use 'd' for 'dark')." % __file__ 
-	print "Please run the script again!"
-	sys.exit(-1)
+# pilot cores
+parser.add_argument('from_image',			type=int,
+                    help='start from this image number')
+# num compute units
+parser.add_argument('to_image',				type=int,
+                    help='go until this image number')
+# background brightness
+parser.add_argument('brightness', 			nargs='?', default=0, choices=[0, 1],
+                    help='set brightness of image background')
+# verbosity
+parser.add_argument('-v', '--verbosity',    action='count', default=0,
+                    help='increase output verbosity')
 
-elif (len(sys.argv)==4) and (sys.argv[3]=='d'):
-	bright_backround = 0
+# retrieve arguments
+args = parser.parse_args()
 
-else:
-	bright_backround = 1
+read_from 			= args.from_image
+read_until 			= args.to_image
+bright_background   = args.brightness
 
 
-# path = '/oasis/scratch/comet/statho/temp_project/Dataset_16GB/'
-# FIXME
+if args.verbosity >= 2:
+    print('Input Arguments')
+    pp([   ['read_from        ' , read_from],
+           ['read_to   		  ' , read_to],
+           ['bright_background' , bright_background]
+       ])
+if args.verbosity >= 1:
+    print 'Arguments are valid'
+
 # Use for testing on Will's local linux VM
-path = '/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla'
+path = '/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Chocolate'
 
-# FIXME
-# use os.path.join
 inputs 	= ''
 outputs	= ''
 path_for_input = os.path.join(path, inputs)
 path_for_output =  os.path.join(path, outputs)
 
-read_from = int(sys.argv[1])
-read_until = int(sys.argv[2])  
-
 
 while read_from <= read_until:
 	
-	image = path_for_input + str(read_from) + '.jpg'
+	image = os.path.join(path_for_input, str(read_from) + '.jpg')
 	
-	img = io.imread(image)			    	        # read image as a 2D numpy array
+	# catch error when image does not exit
+	try:
+		img = io.imread(image)			    	        # read image as a 2D numpy array
+	except Exception as e:
+		print e
+		read_from += 1
+		continue
+
 	img_gray = rgb2gray(img)
 
 	thresh = threshold_otsu(img_gray)		        # return threshold value based on on otsu's method
 
-	if bright_backround:
-		foreground_mask = img_gray <= thresh            # for bright backround
+	if bright_background:
+		foreground_mask = img_gray <= thresh            # for bright background
 	else:
-		foreground_mask = img_gray > thressh 	        # for dark backround
+		foreground_mask = img_gray > thresh 	        # for dark background
 
 
 	# compute the Euclidean distance from every binary pixel to the nearest zero pixel 
@@ -69,13 +90,13 @@ while read_from <= read_until:
 	localMax = peak_local_max(distance, indices=False, min_distance=30, labels=foreground_mask)
 
 	# perform a connected component analysis on the local peaks using 8-connectivity 
-	#
 	markers = ndimage.label(localMax, structure=np.ones((3, 3)))[0]
 	
 	# apply the Watershed algorithm
 	labels = watershed(-distance, markers, mask=foreground_mask)
 
-	#print "In image {}, there are {} segments found!".format(image, len(np.unique(labels)) - 1)
+	print ' [x] In image %s' % (image)
+	print ' [x] there are %d segments found' % (len(np.unique(labels)) - 1)
 
 
 	# loop over the unique labels returned by the Watershed algorithm
@@ -95,7 +116,8 @@ while read_from <= read_until:
 			# make all the pixel, which correspond to label's edges, green in the image					
 			img[edge_sobel > 0] = [0,255,0]
 
-	io.imsave(path_for_output + 'out' + str(read_from) + '.jpg', img)
+	name_out_image = os.path.join(path_for_output, 'out' + str(read_from) + '.jpg')
+	io.imsave(name_out_image, img)
 
 	read_from += 1
 

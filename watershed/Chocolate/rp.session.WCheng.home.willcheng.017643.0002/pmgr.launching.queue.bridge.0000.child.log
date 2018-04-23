@@ -1,0 +1,7 @@
+2018-04-22 16:41:38,953: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : python.interpreter   version: 2.7.14 |Anaconda, Inc.| (default, Mar 27 2018, 12:28:59) [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+2018-04-22 16:41:38,954: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    :                      pid: 2586
+2018-04-22 16:41:38,954: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    :                      tid: MainThread
+2018-04-22 16:41:38,955: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : radical.pilot        version: 0.47.5-v0.47.5-153-g5bd2455@devel
+2018-04-22 16:41:38,956: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : start bridge pmgr.launching.queue.bridge.0000.child on tcp://*:*
+2018-04-22 16:41:38,957: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : bound bridge pmgr.launching.queue.bridge.0000.child to tcp://0.0.0.0:51574 : tcp://0.0.0.0:51575
+2018-04-22 16:41:42,967: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child: MainThread     : WARNING : not alive anymore?

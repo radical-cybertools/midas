@@ -1,0 +1,74 @@
+2018-04-22 16:41:38,945: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.14 |Anaconda, Inc.| (default, Mar 27 2018, 12:28:59) [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+2018-04-22 16:41:38,945: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    :                      pid: 2571
+2018-04-22 16:41:38,945: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2018-04-22 16:41:38,946: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : radical.pilot        version: 0.47.5-v0.47.5-153-g5bd2455@devel
+2018-04-22 16:41:38,946: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : create pmgr_launching_queue - bridge - tcp://*:*
+2018-04-22 16:41:38,946: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : start process
+2018-04-22 16:41:38,952: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000: MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,958: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : child (me) initializing
+2018-04-22 16:41:38,958: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : parent name: pmgr.launching.queue.bridge.0000.child.watch
+2018-04-22 16:41:38,958: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : start thread
+2018-04-22 16:41:38,959: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: DEBUG   : child name: pmgr.launching.queue.bridge.0000.child.watch.thread
+2018-04-22 16:41:38,959: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : child (me) initializing
+2018-04-22 16:41:38,960: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,960: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: DEBUG   : ru_initialize_child (NOOP)
+2018-04-22 16:41:38,960: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : send alive
+2018-04-22 16:41:38,960: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : put message: [pmgr.launching.queue.bridge.0000.child.watch.thread] alive
+2018-04-22 16:41:38,963: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : get msg: alive
+2018-04-22 16:41:38,963: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,964: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:38,964: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : child thread pmgr.launching.queue.bridge.0000.child.watch started
+2018-04-22 16:41:38,964: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : child (me) is alive
+2018-04-22 16:41:38,964: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : send alive
+2018-04-22 16:41:38,964: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : send message: [pmgr.launching.queue.bridge.0000.child] alive
+2018-04-22 16:41:38,965: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : recv message: alive
+2018-04-22 16:41:38,966: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,966: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:38,966: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : parent name: pmgr.launching.queue.bridge.0000.watch
+2018-04-22 16:41:38,966: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : start thread
+2018-04-22 16:41:38,966: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: DEBUG   : child name: pmgr.launching.queue.bridge.0000.watch.thread
+2018-04-22 16:41:38,967: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : child (me) initializing
+2018-04-22 16:41:38,967: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,967: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: DEBUG   : ru_initialize_child (NOOP)
+2018-04-22 16:41:38,967: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : send alive
+2018-04-22 16:41:38,967: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : put message: [pmgr.launching.queue.bridge.0000.watch.thread] alive
+2018-04-22 16:41:38,968: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : get msg: alive
+2018-04-22 16:41:38,968: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,968: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:38,968: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : child thread pmgr.launching.queue.bridge.0000.watch started
+2018-04-22 16:41:38,968: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : child is alive
+2018-04-22 16:41:38,968: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : process class started child
+2018-04-22 16:41:42,283: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : parent stops child  2571 -> 2586 [pmgr.launching.queue.bridge.0000]
+2018-04-22 16:41:42,283: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : send message: [pmgr.launching.queue.bridge.0000] STOP
+2018-04-22 16:41:42,284: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2018-04-22 16:41:42,284: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : INFO    : parent stops child
+2018-04-22 16:41:42,284: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2018-04-22 16:41:42,284: pmgr.launching.queue.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_common (NOOP)
+2018-04-22 16:41:42,284: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : recv message: STOP
+2018-04-22 16:41:42,284: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : message received: STOP
+2018-04-22 16:41:42,285: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : STOP received: STOP
+2018-04-22 16:41:42,285: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : watcher closes
+2018-04-22 16:41:42,285: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : recv message: 
+2018-04-22 16:41:42,285: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : message received: 
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: WARNING : received empty string, parent closed ep
+2018-04-22 16:41:42,285: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : put message: [pmgr.launching.queue.bridge.0000.child.watch.thread] work finished
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : watcher closes
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: DEBUG   : ru_finalize_child (NOOP)
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: ERROR   : abort: error(57, 'Socket is not connected')
+Traceback (most recent call last):
+  File "/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla/myenv/lib/python2.7/site-packages/radical/utils/threads.py", line 375, in _run
+    if not self.work_cb():
+  File "/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla/myenv/lib/python2.7/site-packages/radical/utils/process.py", line 300, in _ru_watch
+    self._ru_endpoint.shutdown(socket.SHUT_RDWR)
+error: [Errno 57] Socket is not connected
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : put message: [pmgr.launching.queue.bridge.0000.watch.thread] error(57, 'Socket is not connected')
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: DEBUG   : ru_finalize_common (NOOP)
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: DEBUG   : ru_finalize_child (NOOP)
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: DEBUG   : ru_finalize_common (NOOP)
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: MainProcess                     : pmgr.launching.queue.bridge.0000.watch: INFO    : put message: [pmgr.launching.queue.bridge.0000.watch.thread] terminating
+2018-04-22 16:41:42,286: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: pmgr.launching.queue.bridge.0000.child.watch: INFO    : put message: [pmgr.launching.queue.bridge.0000.child.watch.thread] terminating
+2018-04-22 16:41:42,967: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : send message: [pmgr.launching.queue.bridge.0000.child] work finished
+2018-04-22 16:41:42,967: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : WARNING : send failed ([Errno 9] Bad file descriptor) - terminate
+2018-04-22 16:41:42,968: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : DEBUG   : ru_finalize_child (NOOP)
+2018-04-22 16:41:42,969: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : INFO    : send message: [pmgr.launching.queue.bridge.0000.child] terminating
+2018-04-22 16:41:42,970: pmgr.launching.queue.bridge.0000: pmgr.launching.queue.bridge.0000.child: MainThread     : WARNING : send failed ([Errno 9] Bad file descriptor) - terminate

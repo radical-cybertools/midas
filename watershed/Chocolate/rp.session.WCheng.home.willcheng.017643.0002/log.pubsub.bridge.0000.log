@@ -1,0 +1,67 @@
+2018-04-22 16:41:38,699: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.14 |Anaconda, Inc.| (default, Mar 27 2018, 12:28:59) [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+2018-04-22 16:41:38,699: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    :                      pid: 2571
+2018-04-22 16:41:38,699: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2018-04-22 16:41:38,700: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : radical.pilot        version: 0.47.5-v0.47.5-153-g5bd2455@devel
+2018-04-22 16:41:38,700: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : create log_pubsub - bridge - tcp://*:*
+2018-04-22 16:41:38,700: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : start process
+2018-04-22 16:41:38,705: log.pubsub.bridge.0000: log.pubsub.bridge.0000          : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,711: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : INFO    : child (me) initializing
+2018-04-22 16:41:38,711: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : DEBUG   : parent name: log.pubsub.bridge.0000.child.watch
+2018-04-22 16:41:38,712: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : DEBUG   : start thread
+2018-04-22 16:41:38,712: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: DEBUG   : child name: log.pubsub.bridge.0000.child.watch.thread
+2018-04-22 16:41:38,713: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : child (me) initializing
+2018-04-22 16:41:38,713: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,713: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: DEBUG   : ru_initialize_child (NOOP)
+2018-04-22 16:41:38,713: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : send alive
+2018-04-22 16:41:38,714: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : put message: [log.pubsub.bridge.0000.child.watch.thread] alive
+2018-04-22 16:41:38,716: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : INFO    : get msg: alive
+2018-04-22 16:41:38,716: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,717: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:38,717: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : DEBUG   : child thread log.pubsub.bridge.0000.child.watch started
+2018-04-22 16:41:38,717: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : INFO    : child (me) is alive
+2018-04-22 16:41:38,718: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : INFO    : send alive
+2018-04-22 16:41:38,718: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : MainThread     : INFO    : send message: [log.pubsub.bridge.0000.child] alive
+2018-04-22 16:41:38,718: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : recv message: alive
+2018-04-22 16:41:38,719: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,719: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:38,719: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : parent name: log.pubsub.bridge.0000.watch
+2018-04-22 16:41:38,720: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : start thread
+2018-04-22 16:41:38,720: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: DEBUG   : child name: log.pubsub.bridge.0000.watch.thread
+2018-04-22 16:41:38,720: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: INFO    : child (me) initializing
+2018-04-22 16:41:38,720: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,720: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: DEBUG   : ru_initialize_child (NOOP)
+2018-04-22 16:41:38,721: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: INFO    : send alive
+2018-04-22 16:41:38,721: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: INFO    : put message: [log.pubsub.bridge.0000.watch.thread] alive
+2018-04-22 16:41:38,721: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : get msg: alive
+2018-04-22 16:41:38,722: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:38,722: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:38,722: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : child thread log.pubsub.bridge.0000.watch started
+2018-04-22 16:41:38,722: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : child is alive
+2018-04-22 16:41:38,722: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : process class started child
+2018-04-22 16:41:47,135: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : parent stops child  2571 -> 2584 [log.pubsub.bridge.0000]
+2018-04-22 16:41:47,135: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : send message: [log.pubsub.bridge.0000] STOP
+2018-04-22 16:41:47,135: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2018-04-22 16:41:47,135: log.pubsub.bridge.0000: MainProcess                     : MainThread     : INFO    : parent stops child
+2018-04-22 16:41:47,135: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2018-04-22 16:41:47,135: log.pubsub.bridge.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_common (NOOP)
+2018-04-22 16:41:47,237: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: INFO    : watcher closes
+2018-04-22 16:41:47,237: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : recv message: STOP
+2018-04-22 16:41:47,237: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: INFO    : put message: [log.pubsub.bridge.0000.watch.thread] work finished
+2018-04-22 16:41:47,237: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: DEBUG   : ru_finalize_child (NOOP)
+2018-04-22 16:41:47,238: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: DEBUG   : ru_finalize_common (NOOP)
+2018-04-22 16:41:47,237: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : message received: STOP
+2018-04-22 16:41:47,238: log.pubsub.bridge.0000: MainProcess                     : log.pubsub.bridge.0000.watch: INFO    : put message: [log.pubsub.bridge.0000.watch.thread] terminating
+2018-04-22 16:41:47,238: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : STOP received: STOP
+2018-04-22 16:41:47,238: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : watcher closes
+2018-04-22 16:41:47,238: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: ERROR   : abort: error(57, 'Socket is not connected')
+Traceback (most recent call last):
+  File "/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla/myenv/lib/python2.7/site-packages/radical/utils/threads.py", line 375, in _run
+    if not self.work_cb():
+  File "/Users/WillC/Documents/Rutgers/Research/RADICAL/watershed/midas/watershed/Vanilla/myenv/lib/python2.7/site-packages/radical/utils/process.py", line 300, in _ru_watch
+    self._ru_endpoint.shutdown(socket.SHUT_RDWR)
+error: [Errno 57] Socket is not connected
+2018-04-22 16:41:47,240: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : put message: [log.pubsub.bridge.0000.child.watch.thread] error(57, 'Socket is not connected')
+2018-04-22 16:41:47,240: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: DEBUG   : ru_finalize_child (NOOP)
+2018-04-22 16:41:47,240: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: DEBUG   : ru_finalize_common (NOOP)
+2018-04-22 16:41:47,240: log.pubsub.bridge.0000: log.pubsub.bridge.0000.child    : log.pubsub.bridge.0000.child.watch: INFO    : put message: [log.pubsub.bridge.0000.child.watch.thread] terminating
+2018-04-22 16:41:49,260: log.pubsub.bridge.0000: MainProcess                     : MainThread     : WARNING : failed to stop child - terminate: 2571 -> 2584 [log.pubsub.bridge.0000]

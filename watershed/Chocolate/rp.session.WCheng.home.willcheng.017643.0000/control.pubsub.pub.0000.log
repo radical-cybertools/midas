@@ -1,0 +1,22 @@
+2018-04-22 16:41:27,245: control.pubsub.pub.0000: update.0                        : MainThread     : INFO    : python.interpreter   version: 2.7.14 |Anaconda, Inc.| (default, Mar 27 2018, 12:28:59) [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+2018-04-22 16:41:27,245: control.pubsub.pub.0000: update.0                        : MainThread     : INFO    :                      pid: 2552
+2018-04-22 16:41:27,246: control.pubsub.pub.0000: update.0                        : MainThread     : INFO    :                      tid: MainThread
+2018-04-22 16:41:27,246: control.pubsub.pub.0000: update.0                        : MainThread     : INFO    : radical.pilot        version: 0.47.5-v0.47.5-153-g5bd2455@devel
+2018-04-22 16:41:27,246: control.pubsub.pub.0000: update.0                        : MainThread     : INFO    : create control_pubsub - pub - tcp://192.168.1.16:51515
+2018-04-22 16:41:27,247: control.pubsub.pub.0000: update.0                        : MainThread     : DEBUG   : start process
+2018-04-22 16:41:27,247: control.pubsub.pub.0000: update.0                        : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:27,248: control.pubsub.pub.0000: update.0                        : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:27,248: control.pubsub.pub.0000: update.0                        : MainThread     : DEBUG   : process class started (no child)
+2018-04-22 16:41:27,412: control.pubsub.pub.0000: MainProcess                     : MainThread     : INFO    : python.interpreter   version: 2.7.14 |Anaconda, Inc.| (default, Mar 27 2018, 12:28:59) [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+2018-04-22 16:41:27,412: control.pubsub.pub.0000: MainProcess                     : MainThread     : INFO    :                      pid: 2538
+2018-04-22 16:41:27,412: control.pubsub.pub.0000: MainProcess                     : MainThread     : INFO    :                      tid: MainThread
+2018-04-22 16:41:27,413: control.pubsub.pub.0000: MainProcess                     : MainThread     : INFO    : radical.pilot        version: 0.47.5-v0.47.5-153-g5bd2455@devel
+2018-04-22 16:41:27,413: control.pubsub.pub.0000: MainProcess                     : MainThread     : INFO    : create control_pubsub - pub - tcp://192.168.1.16:51515
+2018-04-22 16:41:27,413: control.pubsub.pub.0000: MainProcess                     : MainThread     : DEBUG   : start process
+2018-04-22 16:41:27,413: control.pubsub.pub.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_common (NOOP)
+2018-04-22 16:41:27,413: control.pubsub.pub.0000: MainProcess                     : MainThread     : DEBUG   : ru_initialize_parent (NOOP)
+2018-04-22 16:41:27,414: control.pubsub.pub.0000: MainProcess                     : MainThread     : DEBUG   : process class started (no child)
+2018-04-22 16:41:27,517: control.pubsub.pub.0000: MainProcess                     : MainThread     : INFO    : parent stops child  2538 -> None [control.pubsub.pub.0000]
+2018-04-22 16:41:27,517: control.pubsub.pub.0000: MainProcess                     : MainThread     : DEBUG   : ru_finalize_parent (NOOP)
+2018-04-22 16:41:27,845: control.pubsub.pub.0000: update.0                        : MainThread     : INFO    : parent stops child  2552 -> None [control.pubsub.pub.0000]
+2018-04-22 16:41:27,845: control.pubsub.pub.0000: update.0                        : MainThread     : DEBUG   : ru_finalize_parent (NOOP)

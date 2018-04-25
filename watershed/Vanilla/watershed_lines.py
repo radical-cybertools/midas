@@ -72,14 +72,6 @@ path_for_output =  os.path.join(path, outputs)
 while read_from <= read_until:
     
     image = os.path.join(path_for_input, str(read_from) + '.jpg')
-    
-    # catch error when image does not exit
-    try:
-        img = io.imread(image)                          # read image as a 2D numpy array
-    except Exception as e:
-        print e
-        read_from += 1
-        continue
 
     img_gray = rgb2gray(img)
 

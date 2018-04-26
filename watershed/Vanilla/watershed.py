@@ -119,7 +119,7 @@ if __name__ == '__main__':
         pdesc.project   = project
         pdesc.runtime   = walltime
         pdesc.cores     = pilot_cores
-	    pdesc.queue 	= queue
+        pdesc.queue     = queue
 
         pilot = pmgr.submit_pilots(pdesc)
 

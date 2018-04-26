@@ -11,18 +11,6 @@ pp = pprint.PrettyPrinter().pprint
 #
 if __name__ == '__main__':
 
-    '''
-    Add arguments through argparse
-    The following arguments are required:
-    - pilot cores
-    - number compute units
-    - number images
-
-    The following arguments will default if no args given:
-    - report name (default: watershed_report)
-    - resource    (default: local.localhost_anaconda)
-    '''
-
     parser = argparse.ArgumentParser()
 
     # pilot cores
@@ -52,7 +40,7 @@ if __name__ == '__main__':
     # data path to input and output folders
     parser.add_argument('path',
                         type=str,
-                        help='path of data input and output folders (defaults to cwd)')
+                        help='path of data input and output folders')
     # walltime
     parser.add_argument('-w', '--walltime',
                         type=int,
@@ -91,6 +79,7 @@ if __name__ == '__main__':
     path                = args.path
     verbosity           = args.verbosity
 
+    # FIXME: quick fix to bypass Saga Layer Error when project not None and resource not local
     if 'local' in resource:
         project = None
 
@@ -125,12 +114,12 @@ if __name__ == '__main__':
 
         # Provide the Pilot Description
         #
-        pdesc = rp.ComputePilotDescription()
+        pdesc           = rp.ComputePilotDescription()
         pdesc.resource  = resource
         pdesc.project   = project
         pdesc.runtime   = walltime
         pdesc.cores     = pilot_cores
-	pdesc.queue 	= queue
+	    pdesc.queue 	= queue
 
         pilot = pmgr.submit_pilots(pdesc)
 
@@ -141,7 +130,7 @@ if __name__ == '__main__':
         umgr.add_pilots(pilot) 
         
         images_in_each_CU = number_of_images / number_of_CUs
-        additional_load = number_of_images % number_of_CUs
+        additional_load   = number_of_images % number_of_CUs
 
         step = 0
         cu_list     = list()
@@ -150,11 +139,7 @@ if __name__ == '__main__':
 
             cudesc = rp.ComputeUnitDescription()
             
-            # $USER = statho
-            # FIXME
-            # appropriate arguments?
             # cudesc.pre_exec = ['module load python', 'module load scipy', '. /oasis/scratch/comet/$USER/temp_project/ve/bin/activate']
-            # cudesc.pre_exec = ['module load python', 'module load scipy']
             cudesc.executable  = 'python'
             
             if (additional_load == 0):
@@ -188,10 +173,6 @@ if __name__ == '__main__':
 
             cudesc_list.append(cudesc)
             
-            
-        # FIXME
-        # cu_list is empty already
-        # why not do this -> cu_list = umgr.submit_units(cudesc_list)
         cu_set = umgr.submit_units(cudesc_list)        
         cu_list.extend(cu_set)
 

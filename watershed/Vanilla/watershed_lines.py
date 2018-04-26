@@ -10,6 +10,7 @@ from skimage.feature import peak_local_max
 from skimage.morphology import watershed
 
 from skimage import io
+from skimage.external.tifffile import imread
 io.use_plugin('pil')
 
 import argparse
@@ -66,12 +67,14 @@ if args.verbosity >= 1:
 inputs  = 'inputs'
 outputs = 'outputs'
 path_for_input = os.path.join(path, inputs)
-path_for_output =  os.path.join(path, outputs)
+path_for_output = os.path.join(path, outputs)
 
 
 while read_from <= read_until:
     
-    image = os.path.join(path_for_input, str(read_from) + '.jpg')
+    image_name = os.path.join(path_for_input, str(read_from) + '.tif')
+
+    img = imread(image_name)
 
     img_gray = rgb2gray(img)
 
@@ -97,7 +100,7 @@ while read_from <= read_until:
     # apply the Watershed algorithm
     labels = watershed(-distance, markers, mask=foreground_mask)
 
-    print ' [x] In image %s' % (image)
+    print ' [x] Analyzing image %s' % (image_name)
     print ' [x] there are %d segments found' % (len(np.unique(labels)) - 1)
 
 
@@ -118,7 +121,7 @@ while read_from <= read_until:
             # make all the pixel, which correspond to label's edges, green in the image                 
             img[edge_sobel > 0] = [0,255,0]
 
-    name_out_image = os.path.join(path_for_output, 'out' + str(read_from) + '.jpg')
+    name_out_image = os.path.join(path_for_output, 'out' + str(read_from) + '.tif')
     io.imsave(name_out_image, img)
 
     print ' [x] saved to %s' % name_out_image

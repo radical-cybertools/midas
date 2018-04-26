@@ -89,7 +89,7 @@ if __name__ == '__main__':
     walltime            = args.walltime
     bright_background   = args.brightness
     report              = args.report
-    path                = os.path.abspath(args.path)
+    path                = args.path
     verbosity           = args.verbosity
 
     if 'local' in resource:

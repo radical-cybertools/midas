@@ -46,7 +46,7 @@ parser.add_argument('-v', '--verbosity',
 # retrieve arguments
 args = parser.parse_args()
 
-path                = args.path
+path                = os.path.abspath(args.path)
 read_from           = args.from_image
 read_until          = args.to_image
 bright_background   = args.brightness
@@ -75,7 +75,7 @@ while read_from <= read_until:
 
     img_gray = rgb2gray(img)
 
-    thresh = threshold_otsu(img_gray)               # return threshold value based on on otsu's method
+    thresh = threshold_otsu(img_gray)                   # return threshold value based on on otsu's method
 
     if bright_background:
         foreground_mask = img_gray <= thresh            # for bright background

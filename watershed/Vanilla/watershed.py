@@ -28,27 +28,31 @@ if __name__ == '__main__':
     # pilot cores
     parser.add_argument('cores',
                         type=int,
-                        help='pilot cores: specify the number of cores to use')
+                        help='number of cores to use')
     # num compute units
     parser.add_argument('cu',
                         type=int,
-                        help='compute units: specify the number of CUs to use')
+                        help='number of CUs to use')
     # number images
     parser.add_argument('images',
                         type=int,
-                        help='specify the number of images to analyze')
+                        help='number of images to analyze')
     # project
     parser.add_argument('project',
                         type=str,
-                        help='specify the project to use')
+                        help='project to obtain allocations from')
     # resource
     parser.add_argument('resource',
                         type=str,
-                        help='specify the resource to use')
+                        help='resource to use')
     # queue
     parser.add_argument('queue',
                         type=str,
-                        help='specify the queue to use')
+                        help='queue to use')
+    # data path to input and output folders
+    parser.add_argument('path',
+                        type=str,
+                        help='path of data input and output folders (defaults to cwd)')
     # walltime
     parser.add_argument('-w', '--walltime',
                         type=int,
@@ -65,11 +69,6 @@ if __name__ == '__main__':
                         type=str,       
                         default='watershed_report',
                         help='report name (defaults to "watershed_report")')
-    # data path to input and output folders
-    parser.add_argument('-p', '--path',
-                        type=str,
-                        default='./',
-                        help='path of data input and output folders (defaults to cwd)')
     # verbosity
     parser.add_argument('-v', '--verbosity',
                         action='count', 

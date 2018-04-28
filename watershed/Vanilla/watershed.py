@@ -41,12 +41,17 @@ if __name__ == '__main__':
     parser.add_argument('path',
                         type=str,
                         help='path of data input and output folders')
+    # image extension
+    parser.add_argument('-i', '--imgext',
+                        type=str,
+                        default='.jpg',
+                        help='extension of image files being read in')
     # walltime
     parser.add_argument('-w', '--walltime',
                         type=int,
                         default=15,
                         help='specify the walltime in minutes (defaults to 15)')
-    # brightness
+    # brightness background
     parser.add_argument('-b', '--brightness',
                         type=int,
                         default=0, 
@@ -60,8 +65,8 @@ if __name__ == '__main__':
     # verbosity
     parser.add_argument('-v', '--verbosity',
                         action='count', 
-                        default=0,
-                        help='increase output verbosity (defaults to 0)')
+                        default=2,
+                        help='increase output verbosity (defaults to 2)')
 
     # retrieve arguments
     args = parser.parse_args()
@@ -73,6 +78,10 @@ if __name__ == '__main__':
     project             = args.project
     resource            = args.resource
     queue               = args.queue
+    if args.imgext[0] == '.': 
+        imgext = args.imgext
+    else :               
+        imgext = '.' + args.imgext
     walltime            = args.walltime
     bright_background   = args.brightness
     report              = args.report
@@ -82,9 +91,10 @@ if __name__ == '__main__':
     # FIXME: quick fix to bypass Saga Layer Error when project not None and resource not local
     if 'local' in resource:
         project = None
+        queue   = None
 
     if verbosity >= 2:
-        print('Input Arguments')
+        print('Input Arguments:')
         pp([   ['pilot_cores      ' , pilot_cores       ],
                ['number_of_CUs    ' , number_of_CUs     ],
                ['number_of_images ' , number_of_images  ],
@@ -123,7 +133,6 @@ if __name__ == '__main__':
 
         pilot = pmgr.submit_pilots(pdesc)
 
-
         # Combine the ComputePilot, the ComputeUnits and a scheduler via a UnitManager object.
         umgr = rp.UnitManager(session=session)
 
@@ -138,8 +147,7 @@ if __name__ == '__main__':
         for i in xrange(number_of_CUs):
 
             cudesc = rp.ComputeUnitDescription()
-            
-            # cudesc.pre_exec = ['module load python', 'module load scipy', '. /oasis/scratch/comet/$USER/temp_project/ve/bin/activate']
+
             cudesc.executable  = 'python'
             
             if (additional_load == 0):
@@ -147,29 +155,28 @@ if __name__ == '__main__':
                                     path, 
                                     step, 
                                     step+images_in_each_CU-1, 
-                                    bright_background]
+                                    bright_background,
+                                    imgext]
                 step += images_in_each_CU
             else:
                 cudesc.arguments = ['watershed_lines.py', 
                                     path,
                                     step, 
                                     step+images_in_each_CU, 
-                                    bright_background]
+                                    bright_background,
+                                    imgext]
                 step += images_in_each_CU + 1
                 additional_load -= 1
 
-            cudesc.input_staging = ['watershed_lines.py']
+            staging_directive = {
+                'source'  : 'client://watershed_lines.py',
+                'target'  : 'unit://watershed_lines.py',
+                'action'  : rp.TRANSFER,
+                # 'flags'   : None,
+                # 'priority': 0
+            }
 
-            # staging_directive = {
-            #     'source'  : 'client://watershed_lines.py', # see 'Location' below
-            #     'target'  : 'unit://watershed_lines.py', # see 'Location' below
-            #     'action'  : rp.TRANSFER, # See 'Action operators' below
-            #     'flags'   : None, # See 'Flags' below
-            #     'priority': 0     # Control ordering of actions (unused)
-
-            # }
-
-            #cudesc.input_staging = [staging_directive]
+            cudesc.input_staging = [staging_directive]
 
             cudesc_list.append(cudesc)
             

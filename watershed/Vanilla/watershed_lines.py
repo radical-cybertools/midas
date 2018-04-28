@@ -9,8 +9,9 @@ from skimage.filters import threshold_otsu, sobel
 from skimage.feature import peak_local_max
 from skimage.morphology import watershed
 
+from matplotlib import pyplot
+
 from skimage import io
-from skimage.external.tifffile import imread
 io.use_plugin('pil')
 
 import argparse
@@ -29,8 +30,8 @@ parser.add_argument('path',
 parser.add_argument('from_image',
                     type=int,
                     help='start from this image number')
-# stop at this image #f.jpg
-parser.add_argument('to_image',
+# stop after this image #f.jpg
+parser.add_argument('until_image',
                     type=int,
                     help='go until this image number')
 # background brightness
@@ -38,27 +39,32 @@ parser.add_argument('brightness',
                     type=int, 
                     choices=[0, 1],
                     help='set brightness of image background')
+# image extension
+parser.add_argument('imgext',
+                    type=str, 
+                    help='extension of image files being read in')
 # verbosity
 parser.add_argument('-v', '--verbosity',
                     action='count', 
-                    default=0,
-                    help='increase output verbosity')
+                    default=2,
+                    help='increase output verbosity (defaults to 2)')
 
 # retrieve arguments
 args = parser.parse_args()
 
 path                = os.path.abspath(args.path)
 read_from           = args.from_image
-read_until          = args.to_image
+read_until          = args.until_image
 bright_background   = args.brightness
-
+imgext              = args.imgext
 
 if args.verbosity >= 2:
     print('Input Arguments')
     pp([   ['path             ' , path],
            ['read_from        ' , read_from],
-           ['read_to          ' , read_to],
-           ['bright_background' , bright_background]
+           ['read_unti        ' , read_until],
+           ['bright_background' , bright_background],
+           ['imgext           ' , imgext]
        ])
 if args.verbosity >= 1:
     print 'Arguments are valid'
@@ -72,9 +78,11 @@ path_for_output = os.path.join(path, outputs)
 
 while read_from <= read_until:
     
-    image_name = os.path.join(path_for_input, str(read_from) + '.tif')
+    image_name = os.path.join(path_for_input, str(read_from) + imgext)
 
-    img = imread(image_name)
+    # img = io.imread(image_name)
+    img = pyplot.imread(image_name)
+
 
     img_gray = rgb2gray(img)
 
@@ -106,7 +114,7 @@ while read_from <= read_until:
 
     # loop over the unique labels returned by the Watershed algorithm
     # each label is a unique object
-
+    img.setflags(write=1)
     for label in np.unique(labels):
     
         # if the label is zero, we are examining the 'background' so ignore it
@@ -121,7 +129,7 @@ while read_from <= read_until:
             # make all the pixel, which correspond to label's edges, green in the image                 
             img[edge_sobel > 0] = [0,255,0]
 
-    name_out_image = os.path.join(path_for_output, 'out' + str(read_from) + '.tif')
+    name_out_image = os.path.join(path_for_output, 'out' + str(read_from) + imgext)
     io.imsave(name_out_image, img)
 
     print ' [x] saved to %s' % name_out_image

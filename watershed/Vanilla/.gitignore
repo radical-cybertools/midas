@@ -1,2 +1,4 @@
 rp.session*
-
+./outputs/*
+./inputs/*
+*.jpg

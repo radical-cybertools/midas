@@ -45,7 +45,7 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--imgext',
                         type=str,
                         default='.jpg',
-                        help='extension of image files being read in')
+                        help='extension of image files being read in (defaults to .jpg)')
     # walltime
     parser.add_argument('-w', '--walltime',
                         type=int,

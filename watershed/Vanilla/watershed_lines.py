@@ -90,7 +90,11 @@ if not os.path.isdir(path_for_input):
 
 # outputs folder can be created
 if not os.path.isdir(path_for_output):
-    os.mkdir(path_for_output)
+    try:
+        os.mkdir(path_for_output)
+    except OSError:
+        # needs to catch this error due to concurrency
+        pass
 
 
 while read_from <= read_until:

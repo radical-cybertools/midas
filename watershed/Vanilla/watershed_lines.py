@@ -43,6 +43,14 @@ parser.add_argument('brightness',
 parser.add_argument('imgext',
                     type=str, 
                     help='extension of image files being read in')
+# inputs folder name
+parser.add_argument('inputs',
+                    type=str,       
+                    help='inputs folder name')
+# outputs folder name
+parser.add_argument('outputs',
+                    type=str,       
+                    help='outputs folder name')
 # verbosity
 parser.add_argument('-v', '--verbosity',
                     action='count', 
@@ -57,23 +65,32 @@ read_from           = args.from_image
 read_until          = args.until_image
 bright_background   = args.brightness
 imgext              = args.imgext
+outputs             = args.outputs
+inputs              = args.inputs
 
 if args.verbosity >= 2:
     print('Input Arguments')
-    pp([   ['path             ' , path],
-           ['read_from        ' , read_from],
-           ['read_unti        ' , read_until],
-           ['bright_background' , bright_background],
-           ['imgext           ' , imgext]
+    pp([   ['path             ' , path              ],
+           ['read_from        ' , read_from         ],
+           ['read_until       ' , read_until        ],
+           ['bright_background' , bright_background ],
+           ['imgext           ' , imgext            ],
+           ['outputs          ' , outputs           ],
+           ['inputs           ' , inputs            ]
        ])
 if args.verbosity >= 1:
     print 'Arguments are valid'
 
-
-inputs  = 'inputs'
-outputs = 'outputs'
 path_for_input = os.path.join(path, inputs)
 path_for_output = os.path.join(path, outputs)
+
+# inputs folder must exist
+if not os.path.isdir(path_for_input):
+    raise Exception('path does not exist ' + path_for_input)
+
+# outputs folder can be created
+if not os.path.isdir(path_for_output):
+    os.mkdir(path_for_output)
 
 
 while read_from <= read_until:
@@ -129,7 +146,7 @@ while read_from <= read_until:
             # make all the pixel, which correspond to label's edges, green in the image                 
             img[edge_sobel > 0] = [0,255,0]
 
-    name_out_image = os.path.join(path_for_output, 'out' + str(read_from) + imgext)
+    name_out_image = os.path.join(path_for_output, str(read_from) + imgext)
     io.imsave(name_out_image, img)
 
     print ' [x] saved to %s' % name_out_image

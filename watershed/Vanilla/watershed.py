@@ -37,12 +37,12 @@ if __name__ == '__main__':
     parser.add_argument('queue',
                         type=str,
                         help='queue to use')
-    # data path to input and output folders
+    # data path to input and outputs folders
     parser.add_argument('path',
                         type=str,
-                        help='path of data input and output folders')
+                        help='path of data input and outputs folders')
     # image extension
-    parser.add_argument('-i', '--imgext',
+    parser.add_argument('-e', '--imgext',
                         type=str,
                         default='.jpg',
                         help='extension of image files being read in (defaults to .jpg)')
@@ -62,11 +62,21 @@ if __name__ == '__main__':
                         type=str,       
                         default='watershed_report',
                         help='report name (defaults to "watershed_report")')
+    # outputs folder name
+    parser.add_argument('-i', '--inputs',
+                        type=str,       
+                        default='inputs',
+                        help='inputs folder name (defaults to "inputs")')
+    # outputs folder name
+    parser.add_argument('-o', '--outputs',
+                        type=str,       
+                        default='outputs',
+                        help='outputs folder name (defaults to "outputs")')
     # verbosity
     parser.add_argument('-v', '--verbosity',
                         action='count', 
                         default=2,
-                        help='increase output verbosity (defaults to 2)')
+                        help='increase outputs verbosity (defaults to 2)')
 
     # retrieve arguments
     args = parser.parse_args()
@@ -78,15 +88,17 @@ if __name__ == '__main__':
     project             = args.project
     resource            = args.resource
     queue               = args.queue
-    if args.imgext[0] == '.': 
-        imgext = args.imgext
-    else :               
-        imgext = '.' + args.imgext
     walltime            = args.walltime
     bright_background   = args.brightness
     report              = args.report
     path                = args.path
+    inputs              = args.inputs
+    outputs             = args.outputs
     verbosity           = args.verbosity
+    if args.imgext[0] == '.': 
+        imgext = args.imgext
+    else :               
+        imgext = '.' + args.imgext
 
     # FIXME: quick fix to bypass Saga Layer Error when project not None and resource not local
     if 'local' in resource:
@@ -105,6 +117,8 @@ if __name__ == '__main__':
                ['bright_background' , bright_background ],
                ['report           ' , report            ],
                ['path             ' , path              ],
+               ['inputs           ' , inputs            ],
+               ['outputs          ' , outputs           ]
            ])
     if verbosity >= 1:
         print 'Arguments are valid'
@@ -156,7 +170,9 @@ if __name__ == '__main__':
                                     step, 
                                     step+images_in_each_CU-1, 
                                     bright_background,
-                                    imgext]
+                                    imgext,
+                                    inputs,
+                                    outputs]
                 step += images_in_each_CU
             else:
                 cudesc.arguments = ['watershed_lines.py', 
@@ -164,7 +180,9 @@ if __name__ == '__main__':
                                     step, 
                                     step+images_in_each_CU, 
                                     bright_background,
-                                    imgext]
+                                    imgext,
+                                    inputs,
+                                    outputs]
                 step += images_in_each_CU + 1
                 additional_load -= 1
 

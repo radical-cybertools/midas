@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # num compute units
     parser.add_argument('cu',
                         type=int,
-                        help='number of CUs to use')
+                        help='number of CUs to submit')
     # number images
     parser.add_argument('images',
                         type=int,
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--report',
                         type=str,       
                         default='watershed_report',
-                        help='report name (defaults to "watershed_report")')
+                        help='report name used as name of session folder (defaults to "watershed_report")')
     # outputs folder name
     parser.add_argument('-i', '--inputs',
                         type=str,       

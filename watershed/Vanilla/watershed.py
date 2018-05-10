@@ -60,7 +60,7 @@ if __name__ == '__main__':
     # report name
     parser.add_argument('-r', '--report',
                         type=str,       
-                        default='watershed_report',
+                        default=None,
                         help='report name used as name of session folder (defaults to "watershed_report")')
     # outputs folder name
     parser.add_argument('-i', '--inputs',
@@ -125,7 +125,7 @@ if __name__ == '__main__':
 
     # Create a new session. No need to try/except this: if session creation fails, there is not much we can do anyways...
     #
-    session = rp.Session()
+    session = rp.Session(uid=report)
 
     # all other pilot code is now tried/excepted.  If an exception is caught, we
     # can rely on the session object to exist and be valid, and we can thus tear

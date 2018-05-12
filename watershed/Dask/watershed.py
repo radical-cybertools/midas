@@ -17,7 +17,7 @@ io.use_plugin('pil')
 import pprint
 pp = pprint.PrettyPrinter().pprint
 
-import dask
+from dask.delayed import delayed
 
 def watershed_analyze(image_path, brightness):
     """
@@ -90,7 +90,7 @@ def watershed_analyze(image_path, brightness):
     return img
 
 
-@dask.delayed
+@delayed
 def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, outputs):
     """
     DOCSTRING

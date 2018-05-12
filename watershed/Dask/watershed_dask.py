@@ -3,25 +3,41 @@ import sys
 import time
 import argparse 
 import datetime
+import glob
 
 import pprint
 pp = pprint.PrettyPrinter().pprint
 
 import dask
-from dask.distributed import Client, LocalCluster
-from dask_jobqueue import SLURMCluster
+from dask.distributed import Client
+from distributed.diagnostics.plugin import SchedulerPlugin
 
 from watershed import watershed_multi
 
+def submitCustomProfiler(profname,dask_scheduler):
+    prof = MyProfiler(profname)
+    dask_scheduler.add_plugin(prof)
+
+def removeCustomProfiler(dask_scheduler):
+    dask_scheduler.remove_plugin(dask_scheduler.plugins[-1])
+
+class MyProfiler(SchedulerPlugin):
+    def __init__(self,profname):
+        self.profile = profname
+
+    def transition(self,key,start,finish,*args,**kargs):
+        if start == 'processing' and finish == 'memory':
+            with open(self.profile,'a') as ProFile:
+                ProFile.write('{}\n'.format([key,start,finish,kargs['worker'],kargs['thread'],kargs['startstops']]))
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
     # pilot cores
-    parser.add_argument('cores',
-                        type=int,
-                        help='number of cores to use')
+    parser.add_argument('scheduler',
+                        type=str,
+                        help='Dask Distributed Scheduler URL')
     # num compute units
     parser.add_argument('tasks',
                         type=int,
@@ -30,19 +46,7 @@ if __name__ == "__main__":
     parser.add_argument('images',
                         type=int,
                         help='number of images to analyze')
-    # project
-    parser.add_argument('project',
-                        type=str,
-                        help='project to obtain allocations from')
-    # resource
-    parser.add_argument('resource',
-                        type=str,
-                        choices=['local', 'slurm'],
-                        help='resource to use')
-    # queue
-    parser.add_argument('queue',
-                        type=str,
-                        help='queue to use')
+    
     # data path to input and outputs folders
     parser.add_argument('path',
                         type=str,
@@ -52,11 +56,7 @@ if __name__ == "__main__":
                         type=str,
                         default='.jpg',
                         help='extension of image files being read in (defaults to .jpg)')
-    # walltime
-    parser.add_argument('-w', '--walltime',
-                        type=int,
-                        default=15,
-                        help='specify the walltime in minutes (defaults to 15)')
+    
     # brightness background
     parser.add_argument('-b', '--brightness',
                         type=int,
@@ -68,7 +68,7 @@ if __name__ == "__main__":
                         type=str,       
                         default='watershed_report',
                         help='report name used as name of session folder (defaults to "watershed_report")')
-    # outputs folder name
+    # inputs folder name
     parser.add_argument('-i', '--inputs',
                         type=str,       
                         default='inputs',
@@ -88,13 +88,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # set variables
-    cores               = args.cores
+    scheduler           = args.scheduler
     number_of_tasks     = args.tasks
     number_of_images    = args.images
-    project             = args.project
-    resource            = args.resource
-    queue               = args.queue
-    walltime            = str(datetime.timedelta(minutes=args.walltime))
     bright_background   = args.brightness
     report              = args.report
     path                = args.path
@@ -108,13 +104,9 @@ if __name__ == "__main__":
 
     if verbosity >= 2:
         print('Input Arguments:')
-        pp([   ['number_of_cores  ' , cores             ],
+        pp([   ['Scheduler        ' , scheduler         ],
                ['number_of_tasks  ' , number_of_tasks   ],
                ['number_of_images ' , number_of_images  ],
-               ['project          ' , project           ],
-               ['resource         ' , resource          ],
-               ['queue            ' , queue             ],
-               ['walltime         ' , walltime          ],
                ['bright_background' , bright_background ],
                ['report           ' , report            ],
                ['path             ' , path              ],
@@ -125,23 +117,9 @@ if __name__ == "__main__":
         print 'Arguments are valid'
 
 
-    """
-    Create a client server using the appropriate cluster
-    specified by the user
-    """
+    client = Client(scheduler)
 
-    # TODO: submit tasks to HPC using cluster
-    # not obvious how to do this with delayed
-
-    # if resource == "slurm":
-    #     cluster = SLURMCluster(queue=queue,
-    #                            project=project,
-    #                            walltime=walltime,
-    #                            job_cpu=number_of_cores)
-    # else:
-    #     cluster = LocalCluster()
-
-    # client = Client(cluster)
+    client.run_on_scheduler(submitCustomProfiler,os.getcwd()+report)
 
     """
     Create list of arguments to submit to watershed_multi
@@ -180,5 +158,6 @@ if __name__ == "__main__":
 
     tasks = [watershed_multi(*args) for args in task_args]
 
-    dask.compute(tasks)
-
+    res_stacked = tasks.compute(get=client.get)
+    client.run_on_scheduler(removeCustomProfiler)
+    client.shutdown()

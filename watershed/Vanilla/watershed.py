@@ -144,6 +144,7 @@ if __name__ == '__main__':
         pdesc.runtime   = walltime
         pdesc.cores     = pilot_cores
         pdesc.queue     = queue
+        pdesc.cleanup   = False
 
         pilot = pmgr.submit_pilots(pdesc)
 
@@ -222,7 +223,7 @@ if __name__ == '__main__':
         # always clean up the session, no matter if we caught an exception or not.
         #
         
-        session.close ()
+        session.close(cleanup=False)
 
         # the above is equivalent to session.close (cleanup=True, terminate=True)
         # it will thus both clean out the session's database record, and kill

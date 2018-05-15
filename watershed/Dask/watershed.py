@@ -19,11 +19,9 @@ pp = pprint.PrettyPrinter().pprint
 
 from dask.delayed import delayed
 
+
 def watershed_analyze(image_path, brightness):
-    """
-    DOCSTRING
-    ----------
-    Runs the watershed algorithm on the image at image_path
+    """Runs the watershed algorithm on the image at image_path
     
     PARAMETERS
     -----------
@@ -92,10 +90,7 @@ def watershed_analyze(image_path, brightness):
 
 @delayed
 def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, outputs):
-    """
-    DOCSTRING
-    ----------
-    From the inputs and ouputs folder located in path, we retrieve images
+    """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the watershed algorithm on it, then save it
     to the outputs folder
     

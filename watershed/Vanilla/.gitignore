@@ -2,3 +2,4 @@ rp.session*
 ./outputs/*
 ./inputs/*
 *.jpg
+*.csv

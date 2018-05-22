@@ -17,8 +17,6 @@ io.use_plugin('pil')
 import pprint
 pp = pprint.PrettyPrinter().pprint
 
-from dask.delayed import delayed
-
 
 def watershed_analyze(image_path, brightness):
     """Runs the watershed algorithm on the image at image_path
@@ -88,7 +86,6 @@ def watershed_analyze(image_path, brightness):
     return img
 
 
-@delayed
 def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, outputs):
     """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the watershed algorithm on it, then save it

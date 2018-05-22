@@ -5,9 +5,6 @@ import argparse
 import datetime
 import glob
 
-import pprint
-pp = pprint.PrettyPrinter().pprint
-
 import dask
 from dask.delayed import delayed
 from dask.distributed import Client
@@ -21,6 +18,7 @@ from skimage.feature import peak_local_max
 from skimage.morphology import watershed
 
 import numpy as np
+
 from matplotlib import pyplot
 
 from skimage import io
@@ -117,7 +115,6 @@ def watershed_analyze(image_path, brightness):
     return img
 
 
-@delayed
 def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, outputs):
     """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the watershed algorithm on it, then save it
@@ -323,8 +320,8 @@ if __name__ == "__main__":
 
         task_args.append(args)
 
-    tasks = [watershed_multi(*args) for args in task_args]
+    tasks = [delayed(watershed_multi(*args)) for args in task_args]
 
-    res_stacked = dask.compute(tasks, get=client.get)
+    dask.compute(tasks, get=client.get)
     client.run_on_scheduler(removeCustomProfiler)
     client.close()

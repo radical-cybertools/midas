@@ -4,6 +4,7 @@ import time
 import argparse 
 import datetime
 import glob
+import numpy as np
 
 from scipy import ndimage
 from skimage import feature
@@ -91,8 +92,7 @@ def watershed_analyze(image_path, brightness):
     return img
 
 
-@delayed
-def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, outputs):
+def watershed_multi((path, from_image, until_image, brightness, imgext, inputs, outputs)):
     """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the watershed algorithm on it, then save it
     to the outputs folder
@@ -174,11 +174,6 @@ def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, o
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-
-    # pilot cores
-    parser.add_argument('scheduler',
-                        type=str,
-                        help='Dask Distributed Scheduler URL')
     # num compute units
     parser.add_argument('tasks',
                         type=int,
@@ -229,11 +224,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # set variables
-    scheduler           = args.scheduler
     number_of_tasks     = args.tasks
     number_of_images    = args.images
     bright_background   = args.brightness
-    report              = args.report
     path                = args.path
     inputs              = args.inputs
     outputs             = args.outputs
@@ -245,11 +238,9 @@ if __name__ == "__main__":
 
     if verbosity >= 2:
         print('Input Arguments:')
-        pp([   ['Scheduler        ' , scheduler         ],
-               ['number_of_tasks  ' , number_of_tasks   ],
+        pp([   ['number_of_tasks  ' , number_of_tasks   ],
                ['number_of_images ' , number_of_images  ],
                ['bright_background' , bright_background ],
-               ['report           ' , report            ],
                ['path             ' , path              ],
                ['inputs           ' , inputs            ],
                ['outputs          ' , outputs           ]
@@ -258,8 +249,6 @@ if __name__ == "__main__":
         print 'Arguments are valid'
 
     sc = SparkContext(appName="PythonHausdorffDistance")
-
-    TrajSize = sc.broadcast(Size)
 
     images_in_each_task = number_of_images / number_of_tasks
     additional_load     = number_of_images % number_of_tasks
@@ -291,4 +280,4 @@ if __name__ == "__main__":
 
     tasks = sc.parallelize(task_args,len(task_args)).map(watershed_multi)
 
-    res_stacked = tasks.compute()
+    res_stacked = tasks.collect()

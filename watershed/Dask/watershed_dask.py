@@ -20,6 +20,7 @@ from skimage.filters import threshold_otsu, sobel
 from skimage.feature import peak_local_max
 from skimage.morphology import watershed
 
+import numpy as np
 from matplotlib import pyplot
 
 from skimage import io
@@ -284,8 +285,7 @@ if __name__ == "__main__":
 
 
     client = Client(scheduler)
-
-    client.run_on_scheduler(submitCustomProfiler,os.getcwd()+report)
+    client.run_on_scheduler(submitCustomProfiler,os.getcwd()+'/'+report)
 
     """
     Create list of arguments to submit to watershed_multi
@@ -309,6 +309,7 @@ if __name__ == "__main__":
                     imgext,
                     inputs,
                     outputs)
+            step += images_in_each_task
         else:
             args = (path,
                     step,
@@ -324,6 +325,6 @@ if __name__ == "__main__":
 
     tasks = [watershed_multi(*args) for args in task_args]
 
-    res_stacked = tasks.compute(get=client.get)
+    res_stacked = dask.compute(tasks, get=client.get)
     client.run_on_scheduler(removeCustomProfiler)
-    client.shutdown()
+    client.close()

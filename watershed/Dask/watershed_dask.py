@@ -6,7 +6,6 @@ import datetime
 import glob
 
 import dask
-from dask.delayed import delayed
 from dask.distributed import Client
 from distributed.diagnostics.plugin import SchedulerPlugin
 
@@ -256,7 +255,7 @@ if __name__ == "__main__":
     number_of_tasks     = args.tasks
     number_of_images    = args.images
     bright_background   = args.brightness
-    report              = args.report
+    report              = args.report+'.txt'
     path                = args.path
     inputs              = args.inputs
     outputs             = args.outputs
@@ -279,7 +278,6 @@ if __name__ == "__main__":
            ])
     if verbosity >= 1:
         print 'Arguments are valid'
-
 
     client = Client(scheduler)
     client.run_on_scheduler(submitCustomProfiler,os.getcwd()+'/'+report)
@@ -320,8 +318,8 @@ if __name__ == "__main__":
 
         task_args.append(args)
 
-    tasks = [delayed(watershed_multi(*args)) for args in task_args]
+    tasks = [dask.delayed(watershed_multi)(*args) for args in task_args]
 
-    dask.compute(tasks, get=client.get)
+    res_stacked = dask.compute(tasks, get=client.get)
     client.run_on_scheduler(removeCustomProfiler)
     client.close()

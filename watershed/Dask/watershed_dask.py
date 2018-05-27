@@ -46,74 +46,6 @@ class MyProfiler(SchedulerPlugin):
                 ProFile.write('{}\n'.format([key,start,finish,kargs['worker'],kargs['thread'],kargs['startstops']]))
 
 
-def watershed_analyze(image_path, brightness):
-    """Runs the watershed algorithm on the image at image_path
-    
-    PARAMETERS
-    -----------
-    image_path : string
-        absolute path to the image
-    
-    brightness : integer
-        defines the background color using values [0, 1]
-        
-    RETURN
-    -------
-    numpy.array
-    
-    """
-    img = pyplot.imread(image_path)
-
-    img_gray = rgb2gray(img)
-
-    # return threshold value based on on otsu's method
-    thresh = threshold_otsu(img_gray)                   
-
-    if brightness:
-        foreground_mask = img_gray <= thresh            # for bright background
-    else:
-        foreground_mask = img_gray > thresh             # for dark background
-
-
-    # compute the Euclidean distance from every binary pixel to the nearest zero pixel 
-    # and then find peaks in this distance map
-    distance = ndimage.distance_transform_edt(foreground_mask)
-
-    # return a boolean array shaped like image, with peaks represented by True values
-    localMax = peak_local_max(distance, indices=False, min_distance=30, labels=foreground_mask)
-
-    # perform a connected component analysis on the local peaks using 8-connectivity 
-    markers = ndimage.label(localMax, structure=np.ones((3, 3)))[0]
-
-    # apply the Watershed algorithm
-    labels = watershed(-distance, markers, mask=foreground_mask)
-
-    print ' [x] Analyzing image %s' % (image_path)
-    print ' [x] there are %d segments found' % (len(np.unique(labels)) - 1)
-
-    # loop over the unique labels returned by the Watershed algorithm
-    # each label is a unique object
-    img.setflags(write=1)
-    for label in np.unique(labels):
-
-        # if the label is zero, we are examining the 'background' so ignore it
-        if label != 0:
-
-            # create a black mask  
-            mask = np.zeros(img_gray.shape, dtype="uint8")
-
-            # it make the pixels that correspond to the label-object white
-            mask[labels == label] = 255         
-
-            # compute the sobel transform of the mask to detect the label's-object's edges
-            edge_sobel = sobel(mask)
-
-            # make all the pixel, which correspond to label's edges, green in the image                 
-            img[edge_sobel > 0] = [0,255,0]
-
-    return img
-
-
 def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, outputs):
     """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the watershed algorithm on it, then save it
@@ -145,6 +77,74 @@ def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, o
     -------
     None
     """
+
+    def watershed_analyze(image_path, brightness):
+        """Runs the watershed algorithm on the image at image_path
+        
+        PARAMETERS
+        -----------
+        image_path : string
+            absolute path to the image
+        
+        brightness : integer
+            defines the background color using values [0, 1]
+            
+        RETURN
+        -------
+        numpy.array
+        
+        """
+        img = pyplot.imread(image_path)
+
+        img_gray = rgb2gray(img)
+
+        # return threshold value based on on otsu's method
+        thresh = threshold_otsu(img_gray)                   
+
+        if brightness:
+            foreground_mask = img_gray <= thresh            # for bright background
+        else:
+            foreground_mask = img_gray > thresh             # for dark background
+
+
+        # compute the Euclidean distance from every binary pixel to the nearest zero pixel 
+        # and then find peaks in this distance map
+        distance = ndimage.distance_transform_edt(foreground_mask)
+
+        # return a boolean array shaped like image, with peaks represented by True values
+        localMax = peak_local_max(distance, indices=False, min_distance=30, labels=foreground_mask)
+
+        # perform a connected component analysis on the local peaks using 8-connectivity 
+        markers = ndimage.label(localMax, structure=np.ones((3, 3)))[0]
+
+        # apply the Watershed algorithm
+        labels = watershed(-distance, markers, mask=foreground_mask)
+
+        print ' [x] Analyzing image %s' % (image_path)
+        print ' [x] there are %d segments found' % (len(np.unique(labels)) - 1)
+
+        # loop over the unique labels returned by the Watershed algorithm
+        # each label is a unique object
+        img.setflags(write=1)
+        for label in np.unique(labels):
+
+            # if the label is zero, we are examining the 'background' so ignore it
+            if label != 0:
+
+                # create a black mask  
+                mask = np.zeros(img_gray.shape, dtype="uint8")
+
+                # it make the pixels that correspond to the label-object white
+                mask[labels == label] = 255         
+
+                # compute the sobel transform of the mask to detect the label's-object's edges
+                edge_sobel = sobel(mask)
+
+                # make all the pixel, which correspond to label's edges, green in the image                 
+                img[edge_sobel > 0] = [0,255,0]
+
+        return img
+    
     print('Input Arguments')
     pp([   ['path             ' , path              ],
            ['from_image       ' , from_image        ],

@@ -55,7 +55,7 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--report',
                         type=str,       
                         default=None,
-                        help='report name used as name of session folder (defaults to "watershed_report")')
+                        help='report name used as name of session folder (defaults to "blobDetector_report")')
     # inputs folder name
     parser.add_argument('-i', '--inputs',
                         type=str,       
@@ -158,7 +158,7 @@ if __name__ == '__main__':
             cudesc.executable  = 'python'
             
             if (additional_load == 0):
-                cudesc.arguments = ['watershed_lines.py', 
+                cudesc.arguments = ['blobDetector.py', 
                                     path, 
                                     step, 
                                     step+images_in_each_CU-1,
@@ -167,7 +167,7 @@ if __name__ == '__main__':
                                     outputs]
                 step += images_in_each_CU
             else:
-                cudesc.arguments = ['watershed_lines.py', 
+                cudesc.arguments = ['blobDetector.py', 
                                     path,
                                     step, 
                                     step+images_in_each_CU,
@@ -178,8 +178,8 @@ if __name__ == '__main__':
                 additional_load -= 1
 
             staging_directive = {
-                'source'  : 'client://watershed_lines.py',
-                'target'  : 'unit://watershed_lines.py',
+                'source'  : 'client://blobDetector.py',
+                'target'  : 'unit://blobDetector.py',
                 'action'  : rp.TRANSFER,
                 # 'flags'   : None,
                 # 'priority': 0

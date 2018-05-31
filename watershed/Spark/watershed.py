@@ -265,6 +265,7 @@ if __name__ == "__main__":
                     imgext,
                     inputs,
                     outputs)
+            step += images_in_each_task
         else:
             args = (path,
                     step,

@@ -7,3 +7,4 @@ rp_watershed_*
 *.sh
 *.csv
 profile_*.py
+*.csv

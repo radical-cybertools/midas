@@ -2,3 +2,8 @@ rp.session*
 ./outputs/*
 ./inputs/*
 *.jpg
+rp_watershed_*
+*.sh
+*.sh
+*.csv
+profile_*.py

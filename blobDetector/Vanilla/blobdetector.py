@@ -1,3 +1,4 @@
+print 'beginning program'
 import os
 import sys
 import numpy as np
@@ -9,18 +10,19 @@ from skimage.color import rgb2gray
 from skimage.filters import threshold_otsu, sobel
 from skimage.feature import peak_local_max
 from skimage.morphology import watershed
-from skimage import data
 
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 from skimage import io
-io.use_plugin('pil')
 
 import argparse
 import pprint
 pp = pprint.PrettyPrinter().pprint
 
+print 'imported all'
 
 def blobDetector_analyze(image_path):
     """Runs the blob detector algorithm on the image at image_path
@@ -45,7 +47,7 @@ def blobDetector_analyze(image_path):
     def blob_detection(image):
         threshhold=0.1
         overlap=0
-        blobs_dog = blob_dog(image, max_sigma=30, threshold=threshhold, overlap=overlap)
+        blobs_dog = feature.blob_dog(image, max_sigma=30, threshold=threshhold, overlap=overlap)
         return blobs_dog
 
 
@@ -116,6 +118,9 @@ def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
     
     path_for_input = os.path.join(path, inputs)
     path_for_output = os.path.join(path, outputs)
+
+    print 'input path %s' % path_for_input
+    print 'output path %s' % path_for_output
     
     # check extension validity
     if imgext[0] != '.':
@@ -147,8 +152,70 @@ def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
         
         fig.savefig(image_path)
 
+        plt.close('all')
+
         print ' [x] saved to %s' % image_path
 
         from_image += 1
 
     return
+
+
+#-------------------------------------------------------------------------------
+parser = argparse.ArgumentParser()
+
+# data path
+parser.add_argument('path',
+                    type=str,
+                    help='path of data input and output folders')
+# start from this image #i.jpg
+parser.add_argument('from_image',
+                    type=int,
+                    help='start from this image number')
+# stop after this image #f.jpg
+parser.add_argument('until_image',
+                    type=int,
+                    help='go until this image number')
+# image extension
+parser.add_argument('imgext',
+                    type=str, 
+                    help='extension of image files being read in')
+# inputs folder name
+parser.add_argument('inputs',
+                    type=str,       
+                    help='inputs folder name')
+# outputs folder name
+parser.add_argument('outputs',
+                    type=str,       
+                    help='outputs folder name')
+# verbosity
+parser.add_argument('-v', '--verbosity',
+                    action='count', 
+                    default=2,
+                    help='increase output verbosity (defaults to 2)')
+
+# retrieve arguments
+args = parser.parse_args()
+
+path                = os.path.abspath(args.path)
+read_from           = args.from_image
+read_until          = args.until_image
+imgext              = args.imgext
+inputs              = args.inputs
+outputs             = args.outputs
+
+if args.verbosity >= 2:
+    print('Input Arguments')
+    pp([   ['path             ' , path              ],
+           ['read_from        ' , read_from         ],
+           ['read_until       ' , read_until        ],
+           ['imgext           ' , imgext            ],
+           ['inputs           ' , inputs            ],
+           ['outputs          ' , outputs           ]
+           
+       ])
+if args.verbosity >= 1:
+    print 'Arguments are valid'
+
+if __name__ == '__main__':
+    blobDetector_multi(path, read_from, read_until, imgext, inputs, outputs)

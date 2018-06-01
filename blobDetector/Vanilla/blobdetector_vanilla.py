@@ -158,7 +158,7 @@ if __name__ == '__main__':
             cudesc.executable  = 'python'
             
             if (additional_load == 0):
-                cudesc.arguments = ['blobDetector.py', 
+                cudesc.arguments = ['blobdetector.py', 
                                     path, 
                                     step, 
                                     step+images_in_each_CU-1,
@@ -167,7 +167,7 @@ if __name__ == '__main__':
                                     outputs]
                 step += images_in_each_CU
             else:
-                cudesc.arguments = ['blobDetector.py', 
+                cudesc.arguments = ['blobdetector.py', 
                                     path,
                                     step, 
                                     step+images_in_each_CU,
@@ -178,8 +178,8 @@ if __name__ == '__main__':
                 additional_load -= 1
 
             staging_directive = {
-                'source'  : 'client://blobDetector.py',
-                'target'  : 'unit://blobDetector.py',
+                'source'  : 'client://blobdetector.py',
+                'target'  : 'unit://blobdetector.py',
                 'action'  : rp.TRANSFER,
                 # 'flags'   : None,
                 # 'priority': 0

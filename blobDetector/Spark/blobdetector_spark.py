@@ -15,8 +15,6 @@ from skimage.feature import blob_dog, blob_log, blob_doh
 
 import numpy as np
 
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 
 from skimage import io
 io.use_plugin('pil')
@@ -26,7 +24,7 @@ pp = pprint.PrettyPrinter().pprint
 
 
 
-def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
+def blobDetector_multi((path, from_image, until_image, imgext, inputs, outputs)):
     """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the blob detector algorithm on it, then save it
     to the outputs folder
@@ -54,6 +52,14 @@ def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
     -------
     None
     """
+
+    import matplotlib
+
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import matplotlib.cm as cm
+
+    
     def blobDetector_analyze(image_path):
         """Runs the blob detector algorithm on the image at image_path
         

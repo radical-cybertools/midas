@@ -1,3 +1,7 @@
+# plt.switch_backend('agg')
+
+import matplotlib.cm as cm
+
 import os
 import sys
 import time
@@ -5,23 +9,11 @@ import argparse
 import datetime
 import glob
 
+import numpy as np
+
 import dask
 from dask.distributed import Client
 from distributed.diagnostics.plugin import SchedulerPlugin
-
-from scipy import ndimage
-from skimage import feature
-from skimage.color import rgb2gray
-from skimage.filters import threshold_otsu
-from skimage.feature import blob_dog, blob_log, blob_doh
-
-import numpy as np
-
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-
-from skimage import io
-io.use_plugin('pil')
 
 import pprint
 pp = pprint.PrettyPrinter().pprint
@@ -74,61 +66,20 @@ def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
     -------
     None
     """
-    def blobDetector_analyze(image_path):
-        """Runs the blob detector algorithm on the image at image_path
-        
-        PARAMETERS
-        -----------
-        image_path : string
-            absolute path to the image
-            
-        RETURN
-        -------
-        numpy.array
-        
-        """
-        def otsu_thresholding(image):
-            block_size=35
-            thresh = threshold_otsu(image,block_size)
-            binary = image > thresh
-            return binary
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
 
+    from scipy import ndimage
+    from skimage import feature
+    from skimage.color import rgb2gray
+    from skimage.filters import threshold_otsu
+    from skimage.feature import blob_dog, blob_log, blob_doh
 
-        def blob_detection(image):
-            threshhold=0.1
-            overlap=0
-            blobs_dog = blob_dog(image, max_sigma=30, threshold=threshhold, overlap=overlap)
-            return blobs_dog
+    from skimage import io
+    io.use_plugin('pil')
 
-
-        # read in image file
-        image = rgb2gray(plt.imread(image_path))
-
-        # create a threshhold of the image
-        thresh = otsu_thresholding(image)
-
-        # convert the image to a threshholded version
-        binary = image > thresh
-
-        # # find blobds in the binary image
-        blobs = blob_detection(binary)
-
-        fig, ax = plt.subplots(1, 1)
-
-        # map projected blobs onto image
-        for blob in blobs:
-            y, x, r = blob
-            c = plt.Circle((x, y), r, color="red", linewidth=1, fill=False)
-            ax.add_patch(c)
-            
-        ax.set_axis_off()
-
-        fig.tight_layout()
-
-        return fig
-
-    
-    print('Input Arguments')
+    print('blobDetector_analyze Input Arguments')
     pp([   ['path             ' , path              ],
            ['from_image       ' , from_image        ],
            ['until_image      ' , until_image       ],
@@ -163,7 +114,50 @@ def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
         # absolute input image path
         image_path = os.path.join(path_for_input, str(from_image) + imgext)
 
-        fig = blobDetector_analyze(image_path)
+        print('Analyzing image %s' % (str(from_image) + imgext))
+
+        def otsu_thresholding(image):
+            block_size=35
+            thresh = threshold_otsu(image,block_size)
+            binary = image > thresh
+            return binary
+
+
+        def blob_detection(image):
+            threshhold=0.1
+            overlap=0
+            blobs_dog = blob_dog(image, max_sigma=30, threshold=threshhold, overlap=overlap)
+            return blobs_dog
+
+
+        # read in image file
+        image = rgb2gray(plt.imread(image_path))
+
+        # create a threshhold of the image
+        thresh = otsu_thresholding(image)
+
+        # convert the image to a threshholded version
+        binary = image > thresh
+
+        # find blobds in the binary image
+        blobs = blob_detection(binary)
+
+        # for blob in blobs:
+        #     y, x, r = blob
+        #     c = plt.Circle((x, y), r, color="red", linewidth=1, fill=False)
+        #     plt.gca().add_patch(c)
+
+        fig, ax = plt.subplots(1, 1)
+
+        # map projected blobs onto image
+        for blob in blobs:
+            y, x, r = blob
+            c = plt.Circle((x, y), r, color="red", linewidth=1, fill=False)
+            ax.add_patch(c)
+            
+        ax.set_axis_off()
+
+        fig.tight_layout()
         
         # absolute output image path
         image_path = os.path.join(path_for_output, str(from_image) + imgext)
@@ -171,6 +165,8 @@ def blobDetector_multi(path, from_image, until_image, imgext, inputs, outputs):
         fig.savefig(image_path)
 
         print ' [x] saved to %s' % image_path
+
+        plt.close(fig)
 
         from_image += 1
 
@@ -252,10 +248,15 @@ if __name__ == "__main__":
                ['outputs          ' , outputs           ]
            ])
     if verbosity >= 1:
-        print 'Arguments are valid'
+        print 'Arguments are valids'
+
+
+    print("Connecting to schedule")
 
     client = Client(scheduler)
-    client.run_on_scheduler(submitCustomProfiler,os.getcwd()+'/'+report)
+    client.run_on_scheduler(submitCustomProfiler,os.path.join(os.getcwd(),report))
+
+    print("Successfuly connected to schedule %s" % (scheduler))
 
     """
     Create list of arguments to submit to blobDetector_multi
@@ -263,6 +264,8 @@ if __name__ == "__main__":
     accounts for nonhomogenous images per task through an
     taking the additional load and distributing it evenly
     """
+
+    print("Creating tasks for Dask scheduler")
 
     images_in_each_task = number_of_images / number_of_tasks
     additional_load     = number_of_images % number_of_tasks
@@ -290,9 +293,14 @@ if __name__ == "__main__":
             additional_load -= 1
 
         task_args.append(args)
+        print args
+
+    print("Successfuly created tasks for Dask scheduler")
+    tasks = [dask.delayed(blobDetector_multi(*args)) for args in task_args]
 
     tasks = [dask.delayed(blobDetector_multi)(*args) for args in task_args]
-
     res_stacked = dask.compute(tasks, get=client.get)
     client.run_on_scheduler(removeCustomProfiler)
     client.close()
+
+    print("Finished pipeline")

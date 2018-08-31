@@ -66,10 +66,10 @@ if __name__ == "__main__":
         num_elements_per_centroid.append(0)
 
     for i in range(0,len(elements)):
-        minDist = euclidean_distances(elements[i], centroid[0])  # sklearn.metrics distance
+        minDist = euclidean_distances(elements[i].reshape(1,DIMENSIONS), centroid[0].reshape(1,DIMENSIONS))  # sklearn.metrics distance
         cluster = 0
         for j in range(1,k):
-            curDist = euclidean_distances(elements[i], centroid[j])
+            curDist = euclidean_distances(elements[i].reshape(1,DIMENSIONS), centroid[j].reshape(1,DIMENSIONS))
             if minDist != min(minDist,curDist):
                 cluster = j  # closest centroid is centroid No: j
                 minDist = curDist

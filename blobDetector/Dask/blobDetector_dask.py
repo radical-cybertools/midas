@@ -15,6 +15,9 @@ import dask
 from dask.distributed import Client
 from distributed.diagnostics.plugin import SchedulerPlugin
 
+import time
+import csv
+
 import pprint
 pp = pprint.PrettyPrinter().pprint
 
@@ -253,8 +256,14 @@ if __name__ == "__main__":
 
     print("Connecting to schedule")
 
+    # Client timestamp start
+    start_client = time.time()
+
     client = Client(scheduler)
     client.run_on_scheduler(submitCustomProfiler,os.path.join(os.getcwd(),report))
+
+    # Task creation start
+    start_create_tasks = time.time()
 
     print("Successfuly connected to schedule %s" % (scheduler))
 
@@ -293,14 +302,39 @@ if __name__ == "__main__":
             additional_load -= 1
 
         task_args.append(args)
-        print args
 
+    # Task creation stop
+    stop_create_tasks = time.time()
+    
     print("Successfuly created tasks for Dask scheduler")
-    tasks = [dask.delayed(blobDetector_multi(*args)) for args in task_args]
-
+   
     tasks = [dask.delayed(blobDetector_multi)(*args) for args in task_args]
+    
+    # Compute timstamp start
+    start_compute = time.time()
+   
     res_stacked = dask.compute(tasks, get=client.get)
+   
+    # Compute timestamp stop
+    stop_compute = time.time()
+   
     client.run_on_scheduler(removeCustomProfiler)
     client.close()
-
+   
+    # Client timestamp stop
+    stop_client = time.time()
+   
     print("Finished pipeline")
+
+    profile_headers = ['start_client', 'stop_client', 'start_create_tasks', 'stop_create_tasks', 'start_compute', 'stop_compute']
+    profile_times  = [start_client, stop_client, start_create_tasks, stop_create_tasks, start_compute, stop_compute]
+
+    profile_file_path = os.path.join(os.getcwd(), 'profiles_' + report[:-4]  + '.csv')
+    
+    with open(profile_file_path, mode='w') as profile_file:
+        profile_writer = csv.writer(profile_file, delimiter=',')
+
+        profile_writer.writerow(['headers', 'times'])
+        for header, time in zip(profile_headers, profile_times):
+            profile_writer.writerow([header, time])
+

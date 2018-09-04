@@ -24,23 +24,6 @@ For every task A_n (mapper)  is started
 # Try running this example with RADICAL_PILOT_VERBOSE=debug set if 
 # you want to see what happens behind the scenes!
 
-#------------------------------------------------------------------------------
-#
-def pilot_state_cb (pilot, state) :
-    """ this callback is invoked on all pilot state changes """
-
-    print "[Callback]: ComputePilot '%s' state: %s." % (pilot.uid, state)
-
-    if  state == rp.FAILED :
-        sys.exit (1)
-
-
-#------------------------------------------------------------------------------
-#
-def unit_state_cb (unit, state) :
-    """ this callback is invoked on all unit state changes """
-
-    print "[Callback]: ComputeUnit  '%s' state: %s." % (unit.uid, state)
 
 # ------------------------------------------------------------------------------
 #
@@ -52,7 +35,7 @@ def get_distance(dataPoint, centroid):
 if __name__ == "__main__":
 
     # Read the number of the divisions you want to create
-    args = sys.argv[1:]
+    args = sys.argv
     if len(args) < 7:
         print "Usage: Give the number of the divisions you want to create Try:"
         print "python k-means k dim #tasks #cores <input file name> <queue>"
@@ -151,12 +134,12 @@ if __name__ == "__main__":
         # 
         # define the resources you need
         pdesc = rp.ComputePilotDescription()
-        pdesc.resource = "xsede.stampede"  # NOTE: This is a "label", not a hostname
+        pdesc.resource = "local.localhost_anaconda"  # NOTE: This is a "label", not a hostname
         pdesc.runtime  = 180 # minutes
-        pdesc.cores    = CPUs  # define cores 
+        pdesc.cores     = 4  # define cores 
         pdesc.cleanup  = False
-        pdesc.project  = 'TG-MCB090174'
-        pdesc.queue    = queue
+#        pdesc.project  = 'TG-MCB090174'
+#        pdesc.queue    = queue
 
         # submit the pilot.
         pilot = pmgr.submit_pilots(pdesc)
@@ -180,7 +163,7 @@ if __name__ == "__main__":
 
         # Combine the ComputePilot, the ComputeUnits and a scheduler via
         # a UnitManager object.
-        umgr = rp.UnitManager(session, rp.SCHED_DIRECT_SUBMISSION)
+        umgr = rp.UnitManager(session)
         # Register our callback with the UnitManager. This callback will get
         # called every time any of the units managed by the UnitManager
         # change their state.
@@ -224,9 +207,8 @@ if __name__ == "__main__":
             mylist = []
             for i in range(1,CUs+1):
                 cudesc = rp.ComputeUnitDescription()
-                cudesc.pre_exec    = ["module load python/2.7.3-epd-7.3.2"]
                 cudesc.name="Mapper-{0}-{1}".format(m,i)
-                cudesc.executable = "/opt/apps/intel15/python/2.7.9/bin/python"
+                cudesc.executable = "python"
                 cudesc.arguments = ['mapper.py', i, k, chunk_size, CUs, DIMENSIONS, offsets[i-1], offsets[i]]
                 if m==0:  # m is the number of k-means iteration - the first iteration centroids are localhost
                     cudesc.input_staging = ['mapper.py', sd_shared, 'centroids.data']
@@ -244,9 +226,8 @@ if __name__ == "__main__":
             # here i will launch a cu
             # -------- BEGIN USER DEFINED CU DESCRIPTION --------- #
             cudesc = rp.ComputeUnitDescription()
-            cudesc.pre_exec    = ["module load python/2.7.3-epd-7.3.2"]
             cudesc.name = "Reducer-{0}".format(m)
-            cudesc.executable  = "/opt/apps/intel15/python/2.7.9/bin/python"
+            cudesc.executable  = "python"
             cudesc.arguments   = ['reducer.py',convergence,k,DIMENSIONS,CUs]
             cudesc.input_staging = staged_combiner_files_list_input
             if m==0:

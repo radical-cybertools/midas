@@ -69,11 +69,11 @@ if __name__ == '__main__':
     centroid = np.asfarray(centroid)
 
     centroid = np.reshape(centroid,(-1,DIMENSIONS))
-    arr = np.zeros(DIMENSIONS)
+    arr = np.zeros((1,DIMENSIONS))
 
     # check convergence and update centroids
     for i in range(0,k):
-        if total_nums[i]!=0 and abs(euclidean_distances(centroid[i],arr) - euclidean_distances(new_centroids[i],arr))>=0.1*euclidean_distances(centroid[i],arr):
+        if total_nums[i]!=0 and abs(euclidean_distances(centroid[i].reshape(1,DIMENSIONS),arr) - euclidean_distances(new_centroids[i].reshape(1,DIMENSIONS),arr))>=0.1*euclidean_distances(centroid[i].reshape(1,DIMENSIONS),arr):
             convergence = False
             if total_nums[i]!=0:
                 centroid[i] = new_centroids[i]

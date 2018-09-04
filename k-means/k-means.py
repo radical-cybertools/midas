@@ -5,11 +5,10 @@ __license__ = "MIT"
 import sys
 import os
 import radical.pilot as rp
-import time
 import copy
 import numpy as np
 import mmap
-from datetime import datetime
+import argparse
 
 #SHARED_INPUT_FILE = 'dataset.in'
 MY_STAGING_AREA = 'staging:///'
@@ -17,13 +16,6 @@ MY_STAGING_AREA = 'staging:///'
 """ DESCRIPTION:  k-means
 For every task A_n (mapper)  is started
 """
-
-# READ: The RADICAL-Pilot documentation: 
-#   http://radicalpilot.readthedocs.org/en/latest
-#
-# Try running this example with RADICAL_PILOT_VERBOSE=debug set if 
-# you want to see what happens behind the scenes!
-
 
 # ------------------------------------------------------------------------------
 #
@@ -35,18 +27,22 @@ def get_distance(dataPoint, centroid):
 if __name__ == "__main__":
 
     # Read the number of the divisions you want to create
-    args = sys.argv
-    if len(args) < 7:
-        print "Usage: Give the number of the divisions you want to create Try:"
-        print "python k-means k dim #tasks #cores <input file name> <queue>"
-        sys.exit(-1)
-    k = int(sys.argv[1])  # number of the divisions - clusters
-    dim = int(sys.argv[2])
-    tasks = int(sys.argv[3])
-    CPUs = int(sys.argv[4]) # number of cores
-    SHARED_INPUT_FILE = sys.argv[5]
-    report_name = sys.argv[6]
-    queue=sys.argv[7]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("k", help="Number of Clusters")
+    parser.add_argument("dim", help="The data dimensionality")
+    parser.add_argument("tasks", help="Total Number of tasks")
+    parser.add_argument("cores",help="Number of cores to be used")
+    parser.add_argument("input_file",help="Name of the input file")
+    parser.add_argument("queue", help='Queue to submit the execution')
+    parser.add_argument("resource", help='Resource label')
+    parser.add_argument("walltime", help='Walltime')
+    parser.add_argument("project", help='Project ID')
+    args = parser.parse_args()
+    k = int(args.k)  # number of the divisions - clusters
+    dim = int(args.dim)
+    tasks = int(args.tasks)
+    CPUs = int(args.cores) # number of cores
+    SHARED_INPUT_FILE = args.input_file
     DIMENSIONS = dim
 
     print 'Clusters: {0}, Dimensions: {1}, Tasks: {2}, Cores: {3}, Input File: {4}'.format(k,dim,tasks,CPUs,SHARED_INPUT_FILE)
@@ -134,12 +130,12 @@ if __name__ == "__main__":
         # 
         # define the resources you need
         pdesc = rp.ComputePilotDescription()
-        pdesc.resource = "local.localhost_anaconda"  # NOTE: This is a "label", not a hostname
-        pdesc.runtime  = 180 # minutes
-        pdesc.cores     = 4  # define cores 
+        pdesc.resource = resource  # NOTE: This is a "label", not a hostname
+        pdesc.runtime  = int(args.walltime) # minutes
+        pdesc.cores    = CPUs  # define cores 
         pdesc.cleanup  = False
-#        pdesc.project  = 'TG-MCB090174'
-#        pdesc.queue    = queue
+        pdesc.project  = args.project
+        pdesc.queue    = args.queue
 
         # submit the pilot.
         pilot = pmgr.submit_pilots(pdesc)
@@ -251,10 +247,6 @@ if __name__ == "__main__":
         #--------------------END OF K-MEANS ALGORITHM --------------------------#
         # K - MEANS ended successfully - print total times and centroids
         print 'K-means algorithm ended successfully after %d iterations' % m
-        total_time = (int(time.time()) - pilot.start_time)  # total execution time
-        print 'The total execution time is: %f seconds' % total_time
-        total_time /= 60
-        print 'Which is: %f minutes' % total_time
         print 'Converge: ',convergence
         #print 'Centroids:'
         #print units.stdout

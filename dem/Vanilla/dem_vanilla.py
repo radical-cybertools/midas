@@ -115,6 +115,9 @@ if __name__ == '__main__':
     if verbosity >= 1:
         print 'Arguments are valid'
 
+    
+    print 'Create new session'
+
     # Create a new session. No need to try/except this: if session creation fails, there is not much we can do anyways...
     #
     session = rp.Session(uid=report)
@@ -125,6 +128,8 @@ if __name__ == '__main__':
     # 
     try:
         
+        print 'Create pilot'
+
         # Add a Pilot Manager
         pmgr = rp.PilotManager(session=session)
 
@@ -187,6 +192,8 @@ if __name__ == '__main__':
 
             cudesc_list.append(cudesc)
             
+        print 'Units created'
+  
         cu_set = umgr.submit_units(cudesc_list)        
         cu_list.extend(cu_set)
 

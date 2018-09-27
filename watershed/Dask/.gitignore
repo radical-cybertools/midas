@@ -1,6 +1,0 @@
-# no pyc files
-*.pyc
-
-# no dask worker space folder
-# input later
-

@@ -4,24 +4,11 @@ import time
 import argparse 
 import datetime
 import glob
+import csv
 
 import dask
 from dask.distributed import Client
 from distributed.diagnostics.plugin import SchedulerPlugin
-
-from scipy import ndimage
-from skimage import feature
-from skimage.color import rgb2gray
-from skimage.filters import threshold_otsu, sobel
-from skimage.feature import peak_local_max
-from skimage.morphology import watershed
-
-import numpy as np
-
-from matplotlib import pyplot
-
-from skimage import io
-io.use_plugin('pil')
 
 import pprint
 pp = pprint.PrettyPrinter().pprint
@@ -77,6 +64,20 @@ def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, o
     -------
     None
     """
+
+    from scipy import ndimage
+    from skimage import feature
+    from skimage.color import rgb2gray
+    from skimage.filters import threshold_otsu, sobel
+    from skimage.feature import peak_local_max
+    from skimage.morphology import watershed
+
+    import numpy as np
+
+    from matplotlib import pyplot
+
+    from skimage import io
+    io.use_plugin('pil')
 
     def watershed_analyze(image_path, brightness):
         """Runs the watershed algorithm on the image at image_path
@@ -279,8 +280,14 @@ if __name__ == "__main__":
     if verbosity >= 1:
         print 'Arguments are valid'
 
+    # Client timestamp start
+    start_client = time.time()
+
     client = Client(scheduler)
     client.run_on_scheduler(submitCustomProfiler,os.getcwd()+'/'+report)
+
+    # Task creation start
+    start_create_tasks = time.time()
 
     """
     Create list of arguments to submit to watershed_multi
@@ -318,8 +325,35 @@ if __name__ == "__main__":
 
         task_args.append(args)
 
+    # Task creation stop
+    stop_create_tasks = time.time()
+
     tasks = [dask.delayed(watershed_multi)(*args) for args in task_args]
 
+    # Compute timestamp start
+    start_compute = time.time()
+
     res_stacked = dask.compute(tasks, get=client.get)
+
+    # Compute timestamp stop
+    stop_compute = time.time()
+
     client.run_on_scheduler(removeCustomProfiler)
     client.close()
+
+    # Client timestamp stop
+    stop_client = time.time()
+
+    print("Finished pipeline")
+
+    profile_headers = ['start_client', 'stop_client', 'start_create_tasks', 'stop_create_tasks', 'start_compute', 'stop_compute']
+    profile_times  = [start_client, stop_client, start_create_tasks, stop_create_tasks, start_compute, stop_compute]
+
+    profile_file_path = os.path.join(os.getcwd(), 'profiles_' + report[:-4]  + '.csv')
+    
+    with open(profile_file_path, mode='w') as profile_file:
+        profile_writer = csv.writer(profile_file, delimiter=',')
+
+        profile_writer.writerow(['headers', 'times'])
+        for header, time in zip(profile_headers, profile_times):
+            profile_writer.writerow([header, time])

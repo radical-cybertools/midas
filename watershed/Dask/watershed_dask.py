@@ -44,6 +44,7 @@ def watershed_multi(path, from_image, until_image, brightness, imgext, inputs, o
     -----------
     path : string
         absolute path to the inputs and outputs folder
+        
     from_image : int
         images are named as %d.imgext so we start analyzing file from_image.imgext
 

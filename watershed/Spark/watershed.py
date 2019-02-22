@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-import argparse 
+import argparse
 import datetime
 import glob
 import numpy as np
@@ -16,6 +16,7 @@ from skimage.morphology import watershed
 from matplotlib import pyplot
 
 from pyspark import SparkContext
+from pyspark import SparkConf
 
 from skimage import io
 io.use_plugin('pil')
@@ -26,26 +27,26 @@ pp = pprint.PrettyPrinter().pprint
 
 def watershed_analyze(image_path, brightness):
     """Runs the watershed algorithm on the image at image_path
-    
+
     PARAMETERS
     -----------
     image_path : string
         absolute path to the image
-    
+
     brightness : integer
         defines the background color using values [0, 1]
-        
+
     RETURN
     -------
     numpy.array
-    
+
     """
     img = pyplot.imread(image_path)
 
     img_gray = rgb2gray(img)
 
     # return threshold value based on on otsu's method
-    thresh = threshold_otsu(img_gray)                   
+    thresh = threshold_otsu(img_gray)
 
     if brightness:
         foreground_mask = img_gray <= thresh            # for bright background
@@ -53,14 +54,14 @@ def watershed_analyze(image_path, brightness):
         foreground_mask = img_gray > thresh             # for dark background
 
 
-    # compute the Euclidean distance from every binary pixel to the nearest zero pixel 
+    # compute the Euclidean distance from every binary pixel to the nearest zero pixel
     # and then find peaks in this distance map
     distance = ndimage.distance_transform_edt(foreground_mask)
 
     # return a boolean array shaped like image, with peaks represented by True values
     localMax = peak_local_max(distance, indices=False, min_distance=30, labels=foreground_mask)
 
-    # perform a connected component analysis on the local peaks using 8-connectivity 
+    # perform a connected component analysis on the local peaks using 8-connectivity
     markers = ndimage.label(localMax, structure=np.ones((3, 3)))[0]
 
     # apply the Watershed algorithm
@@ -77,16 +78,16 @@ def watershed_analyze(image_path, brightness):
         # if the label is zero, we are examining the 'background' so ignore it
         if label != 0:
 
-            # create a black mask  
+            # create a black mask
             mask = np.zeros(img_gray.shape, dtype="uint8")
 
             # it make the pixels that correspond to the label-object white
-            mask[labels == label] = 255         
+            mask[labels == label] = 255
 
             # compute the sobel transform of the mask to detect the label's-object's edges
             edge_sobel = sobel(mask)
 
-            # make all the pixel, which correspond to label's edges, green in the image                 
+            # make all the pixel, which correspond to label's edges, green in the image
             img[edge_sobel > 0] = [0,255,0]
 
     return img
@@ -96,29 +97,29 @@ def watershed_multi((path, from_image, until_image, brightness, imgext, inputs, 
     """From the inputs and ouputs folder located in path, we retrieve images
     from inputs folder, run the watershed algorithm on it, then save it
     to the outputs folder
-    
+
     PARAMETERS
     -----------
     path : string
         absolute path to the inputs and outputs folder
     from_image : int
         images are named as %d.imgext so we start analyzing file from_image.imgext
-    
+
     until_image : int
         images are named as %d.imgext so we stop analyzing until_image.imgext
-    
-    brightness : int 
+
+    brightness : int
         defines the background color using values [0, 1]
-    
+
     imgext : string
         specifies the extension of the images
-        
+
     inputs : string
         name of the inputs folder inside path
-        
+
     outputs : string
         name of the outputs folder inside path
-        
+
     RETURN
     -------
     None
@@ -132,14 +133,14 @@ def watershed_multi((path, from_image, until_image, brightness, imgext, inputs, 
            ['outputs          ' , outputs           ],
            ['inputs           ' , inputs            ]
        ])
-    
+
     path_for_input = os.path.join(path, inputs)
     path_for_output = os.path.join(path, outputs)
-    
+
     # check extension validity
     if imgext[0] != '.':
         imgext = '.' + imgext
-    
+
 
     # inputs folder must exist
     if not os.path.isdir(path_for_input):
@@ -160,7 +161,7 @@ def watershed_multi((path, from_image, until_image, brightness, imgext, inputs, 
         image_path = os.path.join(path_for_input, str(from_image) + imgext)
 
         img = watershed_analyze(image_path, brightness)
-        
+
         name_out_image = os.path.join(path_for_output, str(from_image) + imgext)
         io.imsave(name_out_image, img)
 
@@ -169,11 +170,15 @@ def watershed_multi((path, from_image, until_image, brightness, imgext, inputs, 
         from_image += 1
 
     return
-    
+
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
+    # master node
+    parser.add_argument('scheduler',
+                        type=str,
+                        help='master node')
     # num compute units
     parser.add_argument('tasks',
                         type=int,
@@ -182,7 +187,7 @@ if __name__ == "__main__":
     parser.add_argument('images',
                         type=int,
                         help='number of images to analyze')
-    
+
     # data path to input and outputs folders
     parser.add_argument('path',
                         type=str,
@@ -192,31 +197,31 @@ if __name__ == "__main__":
                         type=str,
                         default='.jpg',
                         help='extension of image files being read in (defaults to .jpg)')
-    
+
     # brightness background
     parser.add_argument('-b', '--brightness',
                         type=int,
-                        default=0, 
+                        default=0,
                         choices=[0, 1],
                         help='set image background brightness (defaults to 0)')
     # report name
     parser.add_argument('-r', '--report',
-                        type=str,       
+                        type=str,
                         default='watershed_report',
                         help='report name used as name of session folder (defaults to "watershed_report")')
     # inputs folder name
     parser.add_argument('-i', '--inputs',
-                        type=str,       
+                        type=str,
                         default='inputs',
                         help='inputs folder name (defaults to "inputs")')
     # outputs folder name
     parser.add_argument('-o', '--outputs',
-                        type=str,       
+                        type=str,
                         default='outputs',
                         help='outputs folder name (defaults to "outputs")')
     # verbosity
     parser.add_argument('-v', '--verbosity',
-                        action='count', 
+                        action='count',
                         default=2,
                         help='increase outputs verbosity (defaults to 2)')
 
@@ -224,6 +229,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # set variables
+    scheduler           = args.scheduler
     number_of_tasks     = args.tasks
     number_of_images    = args.images
     bright_background   = args.brightness
@@ -231,14 +237,15 @@ if __name__ == "__main__":
     inputs              = args.inputs
     outputs             = args.outputs
     verbosity           = args.verbosity
-    if args.imgext[0] == '.': 
+    if args.imgext[0] == '.':
         imgext = args.imgext
-    else :               
+    else :
         imgext = '.' + args.imgext
 
     if verbosity >= 2:
         print('Input Arguments:')
-        pp([   ['number_of_tasks  ' , number_of_tasks   ],
+        pp([   ['scheduler        ' , scheduler         ],
+               ['number_of_tasks  ' , number_of_tasks   ],
                ['number_of_images ' , number_of_images  ],
                ['bright_background' , bright_background ],
                ['path             ' , path              ],
@@ -248,7 +255,7 @@ if __name__ == "__main__":
     if verbosity >= 1:
         print 'Arguments are valid'
 
-    sc = SparkContext(appName="PythonHausdorffDistance")
+    sc = SparkContext(appName="watershed")
 
     images_in_each_task = number_of_images / number_of_tasks
     additional_load     = number_of_images % number_of_tasks

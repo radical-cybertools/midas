@@ -1,14 +1,74 @@
-Dask implementation of the watershed algorithm using miniconda's python2.7 installation
-This implementation is used to run on distributed systems
+<h1>Watershed Dask Installation Instructions</h1>
 
-1. Install miniconda python 2.7
+We use the anaconda package manager for this part of the project.
 
-2. Go to your desired working directory
+1. [Install Anaconda Instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
 
-3. type 'conda env create -f environment.yml'
+2. Install and activate the conda environment from the environment.yml file
 
-4. type 'source activate watershed_Dask' to activate this environment to run watershed_dask.py
+    ```
+    conda env create -f environment.yml
+    ```
 
-5. type' python watershed_dask.py -h' to view the required and optional arguments
+    ```
+    . activate watershed_Dask
 
-6. type 'source deactivate' to deactivate this environment
+    or
+
+    conda activate watershed_Dask
+    ```
+
+3. Retrieve hostnames of nodes assigned to you
+
+    For systems with the slurm workload manager
+    ```
+    hostnodes=`scontrol show hostnames $SLURM_NODELIST`
+    ```
+
+4. Start the dask-ssh server that will allow for interconnectivity between nodes
+
+    ```
+    dask-ssh --nprocs 24 --nthreads 1 $log_dir $hostnodes &
+    sleep 10
+    ```
+
+5. Set environment variables
+
+    ```
+    SCHEDULER=`hostname`
+    scheduler="$SCHEDULER:8786"
+    ```
+
+6. Run the experiment
+
+    ```
+    example:
+
+    python watershed_dask.py $scheduler $tasks $images $path -i $input_folder -o $output_folder -r $report_name
+
+    usage: watershed_dask.py [-h] [-e IMGEXT] [-b {0,1}] [-r REPORT] [-i INPUTS]
+                            [-o OUTPUTS] [-v]
+                            scheduler tasks images path
+
+    positional arguments:
+    scheduler             Dask Distributed Scheduler URL
+    tasks                 number of tasks to submit
+    images                number of images to analyze
+    path                  path of data input and outputs folders
+
+    optional arguments:
+    -h, --help            show this help message and exit
+    -e IMGEXT, --imgext IMGEXT
+                            extension of image files being read in (defaults to
+                            .jpg)
+    -b {0,1}, --brightness {0,1}
+                            set image background brightness (defaults to 0)
+    -r REPORT, --report REPORT
+                            report name used as name of session folder (defaults
+                            to "watershed_report")
+    -i INPUTS, --inputs INPUTS
+                            inputs folder name (defaults to "inputs")
+    -o OUTPUTS, --outputs OUTPUTS
+                            outputs folder name (defaults to "outputs")
+    -v, --verbosity       increase outputs verbosity (defaults to 2)
+    ```
